@@ -2,7 +2,7 @@ import makeStyles from '@mui/styles/makeStyles';
 const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
-    width: 'auto',
+    width: '80%',
     height: 'auto',
     justifyContent: 'center',
     alignItems:'center'

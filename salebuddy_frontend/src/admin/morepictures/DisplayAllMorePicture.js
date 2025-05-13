@@ -54,7 +54,7 @@ export default function DisplayAllMorePictures() {
                         icon: 'add',
                         tooltip: 'Add More Product Pictures',
                         isFreeAction: true,
-                        onClick: (event) => navigate("/morepictureinterface")
+                        onClick: (event) => navigate("/dashboard/morepictureinterface")
                     }
                 ]}
             />

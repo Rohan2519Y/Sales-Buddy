@@ -656,7 +656,7 @@ export default function DisplayAllProducts() {
 
     function displayAll() {
         return (
-            <MaterialTable
+            <MaterialTable 
                 title="List Of Product Details"
                 columns={[
                     { title: 'ID', field: 'productdetailsid', width: '3%' },

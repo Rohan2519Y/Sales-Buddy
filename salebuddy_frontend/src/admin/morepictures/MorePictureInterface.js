@@ -183,7 +183,7 @@ export default function MorePictureInterface() {
                     <div className={classes.title_style}>
                         Add New Product Pictures
                     </div>
-                    <div style={{ cursor: 'pointer' }} onClick={() => navigate("/displayallmorepicture")}>
+                    <div style={{ cursor: 'pointer' }} onClick={() => navigate("/dashboard/displayallmorepicture")}>
                         <img src="/report.png" className={classes.report_style} />
                     </div>
                 </div>
