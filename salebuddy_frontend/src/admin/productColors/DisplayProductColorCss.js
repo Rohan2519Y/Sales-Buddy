@@ -2,8 +2,8 @@ import makeStyles from '@mui/styles/makeStyles';
 const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
-    width: '100%',
-    height: '100%',
+    width: '80%',
+    height: 'auto',
     justifyContent: 'center',
     marginTop: 70
 
@@ -21,7 +21,6 @@ const useStyles = makeStyles(() => ({
     height: 'auto',
     border: '2px solid #38ada9',
     borderRadius: 5,
-    padding: 10,
   },
   title: {
     width: '100%',
@@ -46,7 +45,8 @@ const useStyles = makeStyles(() => ({
   title_style: {
     fontSize: 22,
     color: '#ffff',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginRight:10
   },
   center: {
     display: 'flex',

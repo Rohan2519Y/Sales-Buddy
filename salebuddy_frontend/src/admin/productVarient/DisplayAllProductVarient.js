@@ -202,7 +202,7 @@ export default function DisplayAllVarients() {
   }
 
   const productVarientForm = () => {
-    return (<div className={classes.root}>
+    return (
       <div className={classes.box2}>
         <div className={classes.title}>
           <div>
@@ -258,7 +258,6 @@ export default function DisplayAllVarients() {
           </Grid2>
         </div>
       </div>
-    </div>
     )
   }
   const handleOpenDialog = (rowData, state) => {
@@ -302,7 +301,7 @@ export default function DisplayAllVarients() {
             icon: 'add',
             tooltip: 'Add Product Varients',
             isFreeAction: true,
-            onClick: (event) => navigate("/productvarientinterface")
+            onClick: (event) => navigate("/dashboard/productvarientinterface")
           }
         ]}
       />

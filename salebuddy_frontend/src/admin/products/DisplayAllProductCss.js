@@ -2,13 +2,13 @@ import makeStyles from '@mui/styles/makeStyles';
 const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
-    width: 'auto',
+    width: '80%',
     height: 'auto',
     justifyContent: 'center',
     alignItems:'center'
   },
   box: {
-    width: '75vw',
+    width: 'auto',
     height: 'auto',
     border: '2px solid #38ada9',
     borderRadius: 5,
@@ -16,8 +16,8 @@ const useStyles = makeStyles(() => ({
     marginTop:80
   },
   box2: {
-    width: '75vw',
-    height: '40vh',
+    width: 'auto',
+    height: 'auto',
     border: '2px solid #38ada9',
     borderRadius: 5,
     padding: 10,

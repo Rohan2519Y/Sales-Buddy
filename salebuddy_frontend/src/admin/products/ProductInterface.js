@@ -126,7 +126,7 @@ export default function ProductInterface() {
                     <div className={classes.title_style}>
                         Add New Products
                     </div>
-                    <div style={{ cursor: 'pointer' }} onClick={() => navigate("/displayallproducts")}>
+                    <div style={{ cursor: 'pointer' }} onClick={() => navigate("/dashboard/displayallproducts")}>
                         <img src="/report.png" className={classes.report_style} />
                     </div>
                 </div>

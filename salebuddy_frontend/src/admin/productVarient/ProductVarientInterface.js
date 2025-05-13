@@ -139,7 +139,7 @@ export default function ProductVarientInterface() {
                     <div className={classes.title_style}>
                         Add New Product Varients
                     </div>
-                    <div style={{ cursor: 'pointer' }} onClick={() => navigate("/DisplayAllProductVarient")}>
+                    <div style={{ cursor: 'pointer' }} onClick={() => navigate("/dashboard/DisplayAllProductVarient")}>
                         <img src="/report.png" className={classes.report_style} />
                     </div>
                 </div>

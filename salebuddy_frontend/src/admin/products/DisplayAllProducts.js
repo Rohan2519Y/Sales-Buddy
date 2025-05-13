@@ -171,7 +171,7 @@ export default function DisplayAllProducts() {
         setOpen(false)
     }
     const productForm = () => {
-        return (<div className={classes.root}>
+        return (
             <div className={classes.box2}>
                 <div className={classes.title}>
                     <div>
@@ -215,7 +215,7 @@ export default function DisplayAllProducts() {
                     </Grid2>
                 </div>
             </div>
-        </div>)
+        )
     }
     const handleImageSave = async () => {
         var formData = new FormData()
@@ -242,8 +242,8 @@ export default function DisplayAllProducts() {
         }
     }
     const pictureForm = () => {
-        return (<div className={classes.root}>
-            <div className={classes.box}>
+        return (
+            <div className={classes.box2}>
                 <div className={classes.title}>
                     <div>
                         <img src="/logo.png" className={classes.logo_style} />
@@ -275,7 +275,7 @@ export default function DisplayAllProducts() {
                     </Grid2>
                 </div>
             </div>
-        </div >)
+        )
     }
     const openDialog = () => {
         return <Dialog open={open}>
@@ -331,7 +331,7 @@ export default function DisplayAllProducts() {
                         icon: 'add',
                         tooltip: 'Add Products',
                         isFreeAction: true,
-                        onClick: (event) => navigate("/productinterface")
+                        onClick: (event) => navigate("/dashboard/productinterface")
                     }
                 ]}
             />

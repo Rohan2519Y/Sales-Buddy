@@ -2,11 +2,11 @@ import makeStyles from '@mui/styles/makeStyles';
 const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
-    width: '100%',
-    height: '100%',
+    width: '80%',
+    height: 'auto',
     justifyContent: 'center',
     alignItems:'center',
-    marginTop:'50px'
+    marginTop:'30px'
   },
   box: {
     width: '65vw',

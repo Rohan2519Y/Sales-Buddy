@@ -93,7 +93,7 @@ export default function BrandInterface() {
                     <div className={classes.title_style}>
                         Add New Brands
                     </div>
-                    <div style={{ cursor: 'pointer' }} onClick={() => navigate("/displayallbrands")}>
+                    <div style={{ cursor: 'pointer' }} onClick={() => navigate("/dashboard/displayallbrands")}>
                         <img src="/report.png" className={classes.report_style} />
                     </div>
                 </div>

@@ -139,7 +139,7 @@ export default function ColourInterface() {
                     <div className={classes.title_style}>
                         Add New Colours
                     </div>
-                    <div style={{ cursor: 'pointer' }} onClick={() => navigate("/displayallproductcolor")}>
+                    <div style={{ cursor: 'pointer' }} onClick={() => navigate("/dashboard/displayallproductcolor")}>
                         <img src="/report.png" className={classes.report_style} />
                     </div>
                 </div>

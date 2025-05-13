@@ -81,7 +81,7 @@ export default function ServicesInterface() {
                 <div className={classes.title_style}>
                     Add New Services
                 </div>
-                <div style={{ cursor: 'pointer' }} onClick={() => navigate("/displayallservices")}>
+                <div style={{ cursor: 'pointer' }} onClick={() => navigate("/dashboard/displayallservices")}>
                     <img src="/report.png" className={classes.report_style} />
                 </div>
             </div>

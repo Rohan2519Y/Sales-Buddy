@@ -13,8 +13,25 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Avatar from '@mui/material/Avatar';
+import ServicesInterface from "../../admin/services/ServicesInterface";
+import BrandInterface from "../../admin/brands/BrandInterface";
+import ProductInterface from "../../admin/products/ProductInterface";
+import ProductColorInterface from "../../admin/productColors/ProductColorInterface";
+import ProductVarientInterface from "../../admin/productVarient/ProductVarientInterface";
+import ProductDetailsInterface from "../../admin/productdetails/ProductDetailsInterface";
+import MorePictureInterface from "../../admin/morepictures/MorePictureInterface";
+import DisplayAllServices from "../../admin/services/DisplayAllServices";
+import DisplayAllProducts from "../../admin/products/DisplayAllProducts";
+import DisplayAllBrands from "../../admin/brands/DisplayAllBrands";
+import DisplayAllProductColor from "../../admin/productColors/DisplayAllProductColor";
+import DisplayAllProductVarient from "../../admin/productVarient/DisplayAllProductVarient";
+import DisplayAllProductDetails from "../../admin/productdetails/DisplayAllProductDetails";
+import DisplayAllMorePicture from "../../admin/morepictures/DisplayAllMorePicture";
+import { BrowserRouter as Router, Routes, Route } from "react-router";
 
 export default function DenseAppBar() {
+
+
     return (
         <div>
             <Box sx={{ flexGrow: 1 }}>
@@ -28,10 +45,10 @@ export default function DenseAppBar() {
             </Box>
             <Grid2 container spacing={2} style={{ marginTop: 10 }}>
                 <Grid2 size={3}>
-                    <Paper style={{ width: "70%", height: 200, margin: 20 }}>
+                    <Paper style={{ width: "50%", height: 'auto', margin: 20 }}>
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
-                                <img src={`${serverURL}/images/varun.jpeg`} style={{ width: 120, height: 120, borderRadius: 60 }} />
+                                <img src={`${serverURL}/images/varun.jpeg`} style={{ width: 90, height: 90, borderRadius: 45 }} />
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 10, flexDirection: 'column' }}>
                                 <div style={{ fontSize: 14, fontWeight: 'bold' }}>Varun Dhawan</div>
@@ -39,7 +56,7 @@ export default function DenseAppBar() {
                                 <div style={{ fontSize: 10, fontWeight: 700, marginTop: 4 }}>9300003085</div>
                             </div>
                             <Divider style={{ marginTop: 5 }}></Divider>
-                            <div>
+                            <div style={{ padding: 5 }}>
                                 <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                                     <ListItem disablePadding>
                                         <ListItemButton>
@@ -65,12 +82,69 @@ export default function DenseAppBar() {
                                             <ListItemText primary='Products' />
                                         </ListItemButton>
                                     </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemButton>
+                                            <ListItemIcon>
+                                                <img src='/colors.png' style={{ width: 30 }} />
+                                            </ListItemIcon>
+                                            <ListItemText primary='Colors' />
+                                        </ListItemButton>
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemButton>
+                                            <ListItemIcon>
+                                                <img src='/variants.png' style={{ width: 30 }} />
+                                            </ListItemIcon>
+                                            <ListItemText primary='Variants' />
+                                        </ListItemButton>
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemButton>
+                                            <ListItemIcon>
+                                                <img src='/products-details.png' style={{ width: 30 }} />
+                                            </ListItemIcon>
+                                            <ListItemText primary='Details' />
+                                        </ListItemButton>
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemButton>
+                                            <ListItemIcon>
+                                                <img src='/images.png' style={{ width: 30 }} />
+                                            </ListItemIcon>
+                                            <ListItemText primary='More Picture' />
+                                        </ListItemButton>
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <ListItemButton>
+                                            <ListItemIcon>
+                                                <img src='/switch.png' style={{ width: 30 }} />
+                                            </ListItemIcon>
+                                            <ListItemText primary='Logout' />
+                                        </ListItemButton>
+                                    </ListItem>
                                 </List>
                             </div>
                         </div>
                     </Paper>
                 </Grid2>
-                <Grid2 size={9}></Grid2>
+                <Grid2 size={9}>
+                    <Routes>
+                        <Route element={<ServicesInterface />} path="/serviceinterface" />
+                        <Route element={<BrandInterface />} path="/brandinterface" />
+                        <Route element={<ProductInterface />} path="/productinterface" />
+                        <Route element={<ProductColorInterface />} path="/productcolorinterface" />
+                        <Route element={<ProductVarientInterface />} path="/productvarientinterface" />
+                        <Route element={<ProductDetailsInterface />} path="/productdetailsinterface" />
+                        <Route element={<MorePictureInterface />} path="/morepictureinterface" />
+                        <Route element={<DisplayAllServices />} path="/displayallservices" />
+                        <Route element={<DisplayAllProducts />} path="/displayallproducts" />
+                        <Route element={<DisplayAllBrands />} path="/displayallbrands" />
+                        <Route element={<DisplayAllProductColor />} path="/displayallproductcolor" />
+                        <Route element={<DisplayAllProductVarient />} path="/displayallproductvarient" />
+                        <Route element={<DisplayAllProductDetails />} path="/displayallproductdetails" />
+                        <Route element={<DisplayAllMorePicture />} path="/displayallmorepicture" />
+                    </Routes>
+                </Grid2>
             </Grid2>
         </div>
     );

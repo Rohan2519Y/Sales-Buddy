@@ -202,7 +202,7 @@ export default function DisplayAllColours() {
   }
 
   const colourForm = () => {
-    return (<div className={classes.root}>
+    return (
       <div className={classes.box2}>
         <div className={classes.title}>
           <div>
@@ -247,7 +247,7 @@ export default function DisplayAllColours() {
               <TextField label="Product Color Code" variant="outlined" fullWidth value={productColor} onChange={(e) => setProductColor(e.target.value)} />
             </Grid2>
             <Grid2 size={6}>
-            <TextField label="Product Color Name" variant="outlined" fullWidth value={productColorName} onChange={(e) => setProductColorName(e.target.value)}/>
+              <TextField label="Product Color Name" variant="outlined" fullWidth value={productColorName} onChange={(e) => setProductColorName(e.target.value)} />
             </Grid2>
             <Grid2 size={6} className={classes.center} >
               <Button className={classes.button_style} variant="contained" onClick={handleClick}>Save</Button>
@@ -258,7 +258,6 @@ export default function DisplayAllColours() {
           </Grid2>
         </div>
       </div>
-    </div>
     )
   }
   const handleOpenDialog = (rowData, state) => {
@@ -283,7 +282,7 @@ export default function DisplayAllColours() {
           { title: 'Service', render: (rowData) => <div>{rowData.servicetype} {rowData.servicename}</div> },
           { title: 'Brand', field: 'brandname' },
           { title: 'Product', field: 'productname' },
-          { title: 'Color Code', render:rowData=><div style={{display:'flex',alignItems:'center',justifyContent:'center',width:34,height:34,borderRadius:20,border:"3px solid #0a3d62"}}><div style={{width:30,height:30,borderRadius:15,background:`${rowData.productcolor}`}}></div></div> },
+          { title: 'Color Code', render: rowData => <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 34, height: 34, borderRadius: 20, border: "3px solid #0a3d62" }}><div style={{ width: 30, height: 30, borderRadius: 15, background: `${rowData.productcolor}` }}></div></div> },
           { title: 'Colour', field: 'productcolorname' }
         ]}
         data={listColours.sort((a, b) => a.productcolorid - b.productcolorid)}
@@ -302,7 +301,7 @@ export default function DisplayAllColours() {
             icon: 'add',
             tooltip: 'Add Colours',
             isFreeAction: true,
-            onClick: (event) => navigate("/productcolorinterface")
+            onClick: (event) => navigate("/dashboard/productcolorinterface")
           }
         ]}
       />

@@ -138,7 +138,7 @@ export default function DisplayAllBrands() {
         setOpen(false)
     }
     const brandForm = () => {
-        return (<div className={classes.root}>
+        return (
             <div className={classes.box2}>
                 <div className={classes.title}>
                     <div>
@@ -170,7 +170,7 @@ export default function DisplayAllBrands() {
                     </Grid2>
                 </div>
             </div>
-        </div>)
+        )
     }
     const handleImageSave = async () => {
         var formData = new FormData()
@@ -197,8 +197,8 @@ export default function DisplayAllBrands() {
         }
     }
     const pictureForm = () => {
-        return (<div className={classes.root}>
-            <div className={classes.box}>
+        return (
+            <div className={classes.box2}>
                 <div className={classes.title}>
                     <div>
                         <img src="/logo.png" className={classes.logo_style} />
@@ -230,7 +230,7 @@ export default function DisplayAllBrands() {
                     </Grid2>
                 </div>
             </div>
-        </div >)
+        )
     }
     const openDialog = () => {
         return <Dialog open={open}>
@@ -284,7 +284,7 @@ export default function DisplayAllBrands() {
                         icon: 'add',
                         tooltip: 'Add Brands',
                         isFreeAction: true,
-                        onClick: (event) => navigate("/brandinterface")
+                        onClick: (event) => navigate("/dashboard/brandinterface")
                     }
                 ]}
             />

@@ -129,7 +129,7 @@ export default function DisplayAllServices() {
         setOpen(false)
     }
     const serviceForm = () => {
-        return (<div className={classes.root}>
+        return (
             <div className={classes.box2}>
                 <div className={classes.title}>
                     <div>
@@ -174,7 +174,7 @@ export default function DisplayAllServices() {
                     </Grid2>
                 </div>
             </div>
-        </div>)
+        )
     }
     const handleImageSave = async () => {
         var formData = new FormData()
@@ -201,8 +201,8 @@ export default function DisplayAllServices() {
         }
     }
     const pictureForm = () => {
-        return (<div className={classes.root}>
-            <div className={classes.box}>
+        return (
+            <div className={classes.box2}>
                 <div className={classes.title}>
                     <div>
                         <img src="/logo.png" className={classes.logo_style} />
@@ -235,7 +235,7 @@ export default function DisplayAllServices() {
                     </Grid2>
                 </div>
             </div>
-        </div >)
+        )
     }
     const openDialog = () => {
         return <Dialog open={open}>
@@ -291,7 +291,7 @@ export default function DisplayAllServices() {
                         icon: 'add',
                         tooltip: 'Add Services',
                         isFreeAction: true,
-                        onClick: (event) => navigate("/serviceinterface")
+                        onClick: (event) => navigate("/dashboard/serviceinterface")
                     }
                 ]}
             />

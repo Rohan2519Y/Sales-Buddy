@@ -285,7 +285,7 @@ export default function ProductDetailInterface() {
                     <div className={classes.title_style}>
                         Add New Product Details
                     </div>
-                    <div style={{ cursor: 'pointer' }} onClick={() => navigate("/displayallproductdetails")}>
+                    <div style={{ cursor: 'pointer' }} onClick={() => navigate("/dashboard/displayallproductdetails")}>
                         <img src="/report.png" className={classes.report_style} />
                     </div>
                 </div>
