@@ -28,9 +28,10 @@ import DisplayAllProductVarient from "../../admin/productVarient/DisplayAllProdu
 import DisplayAllProductDetails from "../../admin/productdetails/DisplayAllProductDetails";
 import DisplayAllMorePicture from "../../admin/morepictures/DisplayAllMorePicture";
 import { BrowserRouter as Router, Routes, Route } from "react-router";
+import { useNavigate } from 'react-router';
+export default function Dashboard() {
 
-export default function DenseAppBar() {
-
+    const navigate=useNavigate()
 
     return (
         <div>
@@ -44,8 +45,8 @@ export default function DenseAppBar() {
                 </AppBar>
             </Box>
             <Grid2 container spacing={2} style={{ marginTop: 10 }}>
-                <Grid2 size={3}>
-                    <Paper style={{ width: "50%", height: 'auto', margin: 20 }}>
+                <Grid2 size={2}>
+                    <Paper style={{ width: "80%", height: 'auto', margin: 20 }}>
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
                                 <img src={`${serverURL}/images/varun.jpeg`} style={{ width: 90, height: 90, borderRadius: 45 }} />
@@ -55,69 +56,85 @@ export default function DenseAppBar() {
                                 <div style={{ fontSize: 12, fontWeight: 700, marginTop: 4 }}>varundhawan@gmail.com</div>
                                 <div style={{ fontSize: 10, fontWeight: 700, marginTop: 4 }}>9300003085</div>
                             </div>
-                            <Divider style={{ marginTop: 5 }}></Divider>
+                            <Divider ></Divider>
                             <div style={{ padding: 5 }}>
                                 <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                                     <ListItem disablePadding>
-                                        <ListItemButton>
+                                        <ListItemButton onClick={()=>navigate('/dashboard/displayallservices')}>
                                             <ListItemIcon>
-                                                <img src='/ticket.png' style={{ width: 30 }} />
+                                                <img src='/dashboard.png' style={{ height: 30 }} />
+                                            </ListItemIcon>
+                                            <ListItemText primary='Dashboard' />
+                                        </ListItemButton>
+                                    </ListItem>
+                                    <Divider ></Divider>
+                                    <ListItem disablePadding>
+                                        <ListItemButton onClick={()=>navigate('/dashboard/displayallservices')}>
+                                            <ListItemIcon>
+                                                <img src='/ticket.png' style={{ height: 30 }} />
                                             </ListItemIcon>
                                             <ListItemText primary='Services' />
                                         </ListItemButton>
                                     </ListItem>
+                                    <Divider ></Divider>
                                     <ListItem disablePadding>
-                                        <ListItemButton>
+                                        <ListItemButton onClick={()=>navigate('/dashboard/displayallbrands')}>
                                             <ListItemIcon>
-                                                <img src='/brands.png' style={{ width: 30 }} />
+                                                <img src='/brands.png' style={{ height: 30 }} />
                                             </ListItemIcon>
                                             <ListItemText primary='Brands' />
                                         </ListItemButton>
                                     </ListItem>
+                                    <Divider ></Divider>
                                     <ListItem disablePadding>
-                                        <ListItemButton>
+                                        <ListItemButton onClick={()=>navigate('/dashboard/displayallproducts')}>
                                             <ListItemIcon>
-                                                <img src='/user-interface.png' style={{ width: 30 }} />
+                                                <img src='/user-interface.png' style={{ height: 30 }} />
                                             </ListItemIcon>
                                             <ListItemText primary='Products' />
                                         </ListItemButton>
                                     </ListItem>
+                                    <Divider ></Divider>
                                     <ListItem disablePadding>
-                                        <ListItemButton>
+                                        <ListItemButton onClick={()=>navigate('/dashboard/displayallproductcolor')}>
                                             <ListItemIcon>
-                                                <img src='/colors.png' style={{ width: 30 }} />
+                                                <img src='/colors.png' style={{ height: 30 }} />
                                             </ListItemIcon>
                                             <ListItemText primary='Colors' />
                                         </ListItemButton>
                                     </ListItem>
+                                    <Divider ></Divider>
                                     <ListItem disablePadding>
-                                        <ListItemButton>
+                                        <ListItemButton onClick={()=>navigate('/dashboard/displayallproductvarient')}>
                                             <ListItemIcon>
-                                                <img src='/variants.png' style={{ width: 30 }} />
+                                                <img src='/variants.png' style={{ height: 30 }} />
                                             </ListItemIcon>
                                             <ListItemText primary='Variants' />
                                         </ListItemButton>
                                     </ListItem>
+                                    <Divider ></Divider>
                                     <ListItem disablePadding>
-                                        <ListItemButton>
+                                        <ListItemButton onClick={()=>navigate('/dashboard/displayallproductdetails')}>
                                             <ListItemIcon>
-                                                <img src='/products-details.png' style={{ width: 30 }} />
+                                                <img src='/products-details.png' style={{ height: 30 }} />
                                             </ListItemIcon>
                                             <ListItemText primary='Details' />
                                         </ListItemButton>
                                     </ListItem>
+                                    <Divider ></Divider>
                                     <ListItem disablePadding>
-                                        <ListItemButton>
+                                        <ListItemButton onClick={()=>navigate('/dashboard/morepictureinterface')}>
                                             <ListItemIcon>
-                                                <img src='/images.png' style={{ width: 30 }} />
+                                                <img src='/images.png' style={{ height: 30 }} />
                                             </ListItemIcon>
                                             <ListItemText primary='More Picture' />
                                         </ListItemButton>
                                     </ListItem>
+                                    <Divider ></Divider>
                                     <ListItem disablePadding>
                                         <ListItemButton>
                                             <ListItemIcon>
-                                                <img src='/switch.png' style={{ width: 30 }} />
+                                                <img src='/switch.png' style={{ height: 30 }} />
                                             </ListItemIcon>
                                             <ListItemText primary='Logout' />
                                         </ListItemButton>
@@ -127,7 +144,7 @@ export default function DenseAppBar() {
                         </div>
                     </Paper>
                 </Grid2>
-                <Grid2 size={9}>
+                <Grid2 size={10}>
                     <Routes>
                         <Route element={<ServicesInterface />} path="/serviceinterface" />
                         <Route element={<BrandInterface />} path="/brandinterface" />

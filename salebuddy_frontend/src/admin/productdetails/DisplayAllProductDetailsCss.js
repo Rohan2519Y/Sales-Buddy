@@ -8,15 +8,14 @@ const useStyles = makeStyles(() => ({
    
   },
   box: {
-    width: '80vw',
+    width: '82vw',
     height: '80vh',
     border: '2px solid #38ada9',
     borderRadius: 5,
     padding: 10,
-    marginRight:150,
+    marginRight:30,
     position:'absolute',
-    overflowY:'auto',
-    scrollbarWidth:'none'
+    overflowY:'auto'
   },
   box2: {
     width: 'auto',
