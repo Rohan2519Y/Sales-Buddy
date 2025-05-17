@@ -8,7 +8,7 @@ export default function Header() {
     return (
         <div style={{ width: '100%', display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', height: '9vh', background: '#000', boxShadow: '0 3px 10px rgba(0, 0, 0, 0.3)' }}>
             <Menu />
-            <div style={{ color: 'white', width: "15%",display:'flex', justifyContent:'center',alignItems:'center',fontSize: 22}}><div style={{marginRight:'20%'}}><img src="/mainlogo.png" width={120}/></div></div>
+            <div style={{ color: 'white', width: "15%",display:'flex', justifyContent:'center',alignItems:'center',fontSize: 22}}><div style={{marginRight:'20%'}}>SalesBuddy</div></div>
             <Search />
             <div style={{ display: 'flex', alignItems: 'center', width: '20%' }}>
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin:2 }}>
