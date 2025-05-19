@@ -4,21 +4,31 @@ import EditIcon from '@mui/icons-material/Edit';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Menu from "./Menu"
 import Search from "./Search"
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 export default function Header() {
-    return (
-        <div style={{ width: '100%', display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', height: '9vh', background: '#000', boxShadow: '0 3px 10px rgba(0, 0, 0, 0.3)' }}>
-            <Menu />
-            <div style={{ color: 'white', width: "15%",display:'flex', justifyContent:'center',alignItems:'center',fontSize: 22}}><div style={{marginRight:'20%'}}>SalesBuddy</div></div>
-            <Search />
-            <div style={{ display: 'flex', alignItems: 'center', width: '20%' }}>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin:2 }}>
-                    <RoomIcon style={{ color: 'white', fontSize: 20, margin: 2 }} />
-                    <div style={{ color: 'white', fontSize: 13 }}>Gwalior,474011</div>
-                    <EditIcon style={{ color: 'white', fontSize: 13 }} />
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.down('md'));
+    return (<>
+        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center', height:matches?'11vh': '10vh', background: '#000', boxShadow: '0 3px 10px rgba(0, 0, 0, 0.3)' }}>
+            <div style={{display:'flex',alignItems:'center',justifyContent:'space-evenly',flexDirection:'row',width:'100%'}}>
+                <Menu />
+                <div style={{ color: 'white', width: "15%", display: 'flex', alignItems: 'center', fontSize: 22, flexGrow: 1 }}><div style={{ marginRight: '40%', fontSize: 25 }}>SalesBuddy</div></div>
+                {matches ? <></> : <Search />}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '22%' }}>
+                    {matches ? <></> : <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 2 }}>
+                        <RoomIcon style={{ color: 'white', fontSize: 20, margin: 2 }} />
+                        <div style={{ color: 'white', fontSize: 13 }}>Gwalior,474011</div>
+                        <EditIcon style={{ color: 'white', fontSize: 13 }} />
+                    </div>}
+                    <div style={{ marginLeft: matches ? 'auto' : 0, marginRight: 10 }}>
+                        <PersonIcon style={{ color: 'white', fontSize: 20, margin: '0 5 0 5' }} />
+                        <ShoppingCartIcon style={{ color: 'white', fontSize: 20, margin: '0 5 0 5' }} />
+                    </div>
                 </div>
-                <PersonIcon style={{ color: 'white', fontSize: 20, margin:5 }} />
-                <ShoppingCartIcon style={{ color: 'white', fontSize: 20 , margin:5}} />
             </div>
+            {matches ? <Search /> : <></>}
         </div>
+    </>
     )
 }
