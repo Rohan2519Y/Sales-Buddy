@@ -2,7 +2,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-export default function Search() {
+export default function SearchBar() {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     return (
