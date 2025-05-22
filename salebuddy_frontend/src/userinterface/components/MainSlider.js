@@ -1,6 +1,7 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import {serverURL} from "../../backendservices/FetchNodeServices"
 
 export default function MainSlider() {
    
@@ -11,9 +12,20 @@ export default function MainSlider() {
     slidesToScroll: 1
   };
     var data={id:1,images:'b1.webp,b2.webp,b3.webp,b4.webp,b5.webp,b6.webp,b7.webp,b8.webp'}
+    var images=data?.images?.split(',')
+    const showImages=()=>{
+        return images.map((item,i)=>{
+        return<div>
+            <img src={`${serverURL}/images/${item}`} style={{width:'100%'}}/>
+        </div>
+
+        })
+    }
     return (
-        <div style={{margin:3 , width: '100%', display: 'flex', alignItems: 'center',justifyContent:'center'}}>
-            
+        <div >
+            <Slider {...settings} style={{width:'100%'}}>
+                {showImages()}
+            </Slider>
         </div>
     )
 }
