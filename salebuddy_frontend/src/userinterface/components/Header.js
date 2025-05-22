@@ -10,10 +10,10 @@ export default function Header() {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     return (<>
-        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center', height:matches?'11vh': '10vh', background: '#000', boxShadow: '0 3px 10px rgba(0, 0, 0, 0.3)' }}>
+        <div style={{padding:3, width: '99%', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center', height:matches?'11vh': '9vh', background: '#000', boxShadow: '0 5px 15px rgba(0, 0, 0, 0.3)' }}>
             <div style={{display:'flex',alignItems:'center',justifyContent:'space-evenly',flexDirection:'row',width:'100%'}}>
                 <Menu />
-                <div style={{ color: 'white', width: "15%", display: 'flex', alignItems: 'center', fontSize: 22, flexGrow: 1 }}><div style={{ marginRight: '40%', fontSize: 25 }}>SalesBuddy</div></div>
+                <div style={{ color: 'white', width: "15%", display: 'flex', alignItems: 'center', fontSize: 22, flexGrow: 1 }}><div style={{ marginRight: '40%', fontSize: matches?25:30 }}>SalesBuddy</div></div>
                 {matches ? <></> : <Search />}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '22%' }}>
                     {matches ? <></> : <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 2 }}>
