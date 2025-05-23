@@ -171,6 +171,7 @@ export default function Dashboard() {
                         <Route element={<DisplayAllProductVarient />} path="/displayallproductvarient" />
                         <Route element={<DisplayAllProductDetails />} path="/displayallproductdetails" />
                         <Route element={<DisplayAllMorePicture />} path="/displayallmorepicture" />
+                        <Route element={<DisplayAllMainslider />} path="/displayallmainslider" />
                     </Routes>
                 </Grid2>
             </Grid2>

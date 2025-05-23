@@ -2,13 +2,14 @@ import MaterialTable from "@material-table/core";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { getData, serverURL } from "../../backendservices/FetchNodeServices";
+import { getData, serverURL, postData } from "../../backendservices/FetchNodeServices";
 import { useStyles } from "./DisplayAllMainsliderCss";
 
 export default function DisplayAllMainslider() {
     const classes = useStyles()
     const navigate = useNavigate()
-    const [listMorePicture, setListMainslider] = useState([])
+    const [mainsliderId, setMainsliderId] = useState('')
+    const [listMainslider, setListMainslider] = useState([])
 
     const fetchAllMainslider = async () => {
         var response = await getData('mainslider/fetch_mainslider')
@@ -28,15 +29,58 @@ export default function DisplayAllMainslider() {
         fetchAllMainslider()
     }, [])
 
+    const handleDelete = async (id) => {
+        {
+            var body = { 'mainsliderid': id }
+            var result = await postData('mainslider/delete_mainslider', body)
+            if (result.status) {
+                Swal.fire({
+                    icon: "success",
+                    title: "Mainslider Register",
+                    text: result.message,
+                    toast: true
+                });
+                fetchAllMainslider()
+            }
+        }
+    }
+    const deleteUsingIcon = (rowData) => {
+        setMainsliderId(rowData.mainsliderid)
+        Swal.fire({
+            title: "Are you sure to delete selected Mainslider",
+            showCancelButton: true,
+            confirmButtonText: 'Delete'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                handleDelete(rowData.mainsliderid)
+            }
+        })
+    }
+
     function displayAll() {
         return (
             <MaterialTable
                 title="List Of Product Pictures"
                 columns={[
-                    { title: 'ID', field: 'pictureid' },
-                    { title: 'Images', render: (rowData) => <div ><img src={`${serverURL}/images/${rowData.images}`} style={{ width: 60, height: 50, borderRadius: 15 }} /></div> }
+                    { title: 'ID', field: 'mainsliderid' },
+                    {
+                        title: 'Images',
+                        render: (rowData) => {
+                            return (
+                                <div style={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+                                    {rowData.images.split(',').map(item => item.trim()).map((item) => (
+                                        <img
+                                            src={`${serverURL}/images/${item}`}
+                                            style={{ width: 40, height: 40, borderRadius: 10 }}
+                                        />
+                                    ))}
+                                </div>
+
+                            );
+                        }
+                    }
                 ]}
-                data={listMorePicture}
+                data={listMainslider}
                 actions={[
                     {
                         icon: 'add',
@@ -47,8 +91,7 @@ export default function DisplayAllMainslider() {
                     {
                         icon: 'delete',
                         tooltip: 'Delete Mainslider',
-                        isFreeAction: true,
-                        onClick: (event) => navigate("/dashboard/mainsliderinterface")
+                        onClick: (event,rowData) =>deleteUsingIcon(rowData) 
                     }
                 ]}
             />

@@ -39,5 +39,21 @@ router.get('/fetch_mainslider',function (req, res, next) {
         res.status(200).json({status:false,message:'Critical Error,Pls Contact Server Administrator'})
     }
 });
+router.post('/delete_mainslider', function (req, res, next) {
+    try {
+        pool.query("delete from mainslider where mainsliderid=?", [ req.body.mainsliderid], function (error, result) {
+            if (error) {
+                res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
+            }
+            else {
+                res.status(200).json({ status: true, message: 'Mainslider Deleted Successfully..' })
+            }
+        })
+    }
+    catch(e)
+    {
+        res.status(200).json({status:false,message:'Critical Error,Pls Contact Server Administrator'})
+    }
+});
  
 module.exports=router;
