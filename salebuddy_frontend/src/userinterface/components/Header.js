@@ -15,7 +15,7 @@ export default function Header() {
                 <Menu />
                 <div style={{ color: 'white', width: "15%", display: 'flex', alignItems: 'center', fontSize: 22, flexGrow: 1 }}><div style={{ marginRight: '40%', fontSize: matches?25:30 }}>SalesBuddy</div></div>
                 {matches ? <></> : <Search />}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '22%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '23%' }}>
                     {matches ? <></> : <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 2 }}>
                         <RoomIcon style={{ color: 'white', fontSize: 20, margin: 2 }} />
                         <div style={{ color: 'white', fontSize: 13 }}>Gwalior,474011</div>
