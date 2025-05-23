@@ -1,14 +1,13 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { serverURL } from "../../backendservices/FetchNodeServices"
-import { useState } from "react";
+import MainsliderForward from "./MainsliderForward";
+import MainsliderBack from "./MainsliderBack";
+import { useState,useRef } from "react";
 
 export default function MainSlider() {
-    const [isHovered, setIsHovered] = useState(false);
-    const [isHovered2, setIsHovered2] = useState(false);
+    const ref=useRef()
     var settings = {
         infinite: true,
         speed: 500,
@@ -29,15 +28,11 @@ export default function MainSlider() {
     }
     return (
         <div style={{ position: 'relative' }}>
-            <div style={{ width: '3%', height: '8%', background: isHovered ? '#2d3436' : '#576574', opacity: 0.7, cursor: 'pointer', transition: 'background 0.3s ease', position: 'absolute', zIndex: 2, top: '40%',left:2 ,borderTopRightRadius: 15, borderBottomRightRadius: 15, display: 'flex', justifyContent: 'center', alignItems: 'center' }} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-                <div style={{ display: 'flex', width: '100%' }}><ArrowBackIosNewIcon style={{ width: '100%', fontSize: '230%', color: 'white' }} /></div>
-            </div>
-            <div style={{ width: '3%', height: '8%', background: isHovered2 ? '#2d3436' : '#576574', opacity: 0.7, cursor: 'pointer', transition: 'background 0.3s ease', position: 'absolute', zIndex: 2, top: '40%', borderTopLeftRadius: 15, borderBottomLeftRadius: 15, display: 'flex', justifyContent: 'center', alignItems: 'center',left:'97%',right:2 }} onMouseEnter={() => setIsHovered2(true)} onMouseLeave={() => setIsHovered2(false)}>
-                <div style={{ display: 'flex', width: '100%' }}><ArrowForwardIosIcon style={{ width: '100%', fontSize: '230%', color: 'white' }} /></div>
-            </div>
-            <Slider {...settings} style={{ width: '100%' }}>
+            <MainsliderForward mainslider={ref}/> 
+            <Slider ref={ref} {...settings} style={{ width: '100%' }}>
                 {showImages()}
             </Slider>
+            <MainsliderBack mainslider={ref}/> 
         </div>
     )
 }

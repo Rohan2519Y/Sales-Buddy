@@ -33,7 +33,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router";
 import { useNavigate } from 'react-router';
 export default function Dashboard() {
 
-    const navigate=useNavigate()
+    const navigate = useNavigate()
 
     return (
         <div>
@@ -62,7 +62,7 @@ export default function Dashboard() {
                             <div style={{ padding: 5 }}>
                                 <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                                     <ListItem disablePadding>
-                                        <ListItemButton onClick={()=>navigate('/dashboard/displayallservices')}>
+                                        <ListItemButton onClick={() => navigate('/dashboard/displayallservices')}>
                                             <ListItemIcon>
                                                 <img src='/dashboard.png' style={{ height: 30 }} />
                                             </ListItemIcon>
@@ -71,7 +71,7 @@ export default function Dashboard() {
                                     </ListItem>
                                     <Divider ></Divider>
                                     <ListItem disablePadding>
-                                        <ListItemButton onClick={()=>navigate('/dashboard/displayallservices')}>
+                                        <ListItemButton onClick={() => navigate('/dashboard/displayallservices')}>
                                             <ListItemIcon>
                                                 <img src='/ticket.png' style={{ height: 30 }} />
                                             </ListItemIcon>
@@ -80,7 +80,7 @@ export default function Dashboard() {
                                     </ListItem>
                                     <Divider ></Divider>
                                     <ListItem disablePadding>
-                                        <ListItemButton onClick={()=>navigate('/dashboard/displayallbrands')}>
+                                        <ListItemButton onClick={() => navigate('/dashboard/displayallbrands')}>
                                             <ListItemIcon>
                                                 <img src='/brands.png' style={{ height: 30 }} />
                                             </ListItemIcon>
@@ -89,7 +89,7 @@ export default function Dashboard() {
                                     </ListItem>
                                     <Divider ></Divider>
                                     <ListItem disablePadding>
-                                        <ListItemButton onClick={()=>navigate('/dashboard/displayallproducts')}>
+                                        <ListItemButton onClick={() => navigate('/dashboard/displayallproducts')}>
                                             <ListItemIcon>
                                                 <img src='/user-interface.png' style={{ height: 30 }} />
                                             </ListItemIcon>
@@ -98,7 +98,7 @@ export default function Dashboard() {
                                     </ListItem>
                                     <Divider ></Divider>
                                     <ListItem disablePadding>
-                                        <ListItemButton onClick={()=>navigate('/dashboard/displayallproductcolor')}>
+                                        <ListItemButton onClick={() => navigate('/dashboard/displayallproductcolor')}>
                                             <ListItemIcon>
                                                 <img src='/colors.png' style={{ height: 30 }} />
                                             </ListItemIcon>
@@ -107,7 +107,7 @@ export default function Dashboard() {
                                     </ListItem>
                                     <Divider ></Divider>
                                     <ListItem disablePadding>
-                                        <ListItemButton onClick={()=>navigate('/dashboard/displayallproductvarient')}>
+                                        <ListItemButton onClick={() => navigate('/dashboard/displayallproductvarient')}>
                                             <ListItemIcon>
                                                 <img src='/variants.png' style={{ height: 30 }} />
                                             </ListItemIcon>
@@ -116,7 +116,7 @@ export default function Dashboard() {
                                     </ListItem>
                                     <Divider ></Divider>
                                     <ListItem disablePadding>
-                                        <ListItemButton onClick={()=>navigate('/dashboard/displayallproductdetails')}>
+                                        <ListItemButton onClick={() => navigate('/dashboard/displayallproductdetails')}>
                                             <ListItemIcon>
                                                 <img src='/products-details.png' style={{ height: 30 }} />
                                             </ListItemIcon>
@@ -125,19 +125,20 @@ export default function Dashboard() {
                                     </ListItem>
                                     <Divider ></Divider>
                                     <ListItem disablePadding>
-                                        <ListItemButton onClick={()=>navigate('/dashboard/morepictureinterface')}>
+                                        <ListItemButton onClick={() => navigate('/dashboard/morepictureinterface')}>
                                             <ListItemIcon>
                                                 <img src='/images.png' style={{ height: 30 }} />
                                             </ListItemIcon>
                                             <ListItemText primary='More Picture' />
                                         </ListItemButton>
                                     </ListItem>
+                                    <Divider ></Divider>
                                     <ListItem disablePadding>
-                                        <ListItemButton onClick={()=>navigate('/dashboard/mainsliderinterface')}>
+                                        <ListItemButton onClick={() => navigate('/dashboard/mainsliderinterface')}>
                                             <ListItemIcon>
-                                                <img src='/images.png' style={{ height: 30 }} />
+                                                <img src='/slideshow.png' style={{ height: 30 }} />
                                             </ListItemIcon>
-                                            <ListItemText primary='More Picture' />
+                                            <ListItemText primary='Main Slider' />
                                         </ListItemButton>
                                     </ListItem>
                                     <Divider ></Divider>
