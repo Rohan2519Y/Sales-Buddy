@@ -14,6 +14,7 @@ var productColorsRouter=require('./routes/productColors')
 var productVarientsRouter=require('./routes/productVarients')
 var productDetailsRouter=require('./routes/productDetails')
 var morePicturesRouter=require('./routes/morepictures')
+var mainsliderRouter=require('./routes/mainslider')
 var adminRouter=require('./routes/admin')
 
 var app = express();
@@ -37,6 +38,7 @@ app.use('/productColors',productColorsRouter)
 app.use('/productVarients',productVarientsRouter)
 app.use('/productDetails',productDetailsRouter)
 app.use('/morePictures',morePicturesRouter)
+app.use('/mainslider',mainsliderRouter)
 app.use('/admin',adminRouter)
 
 // catch 404 and forward to error handler
