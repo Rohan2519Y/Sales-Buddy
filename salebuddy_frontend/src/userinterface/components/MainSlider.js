@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import { serverURL } from "../../backendservices/FetchNodeServices"
 import MainsliderForward from "./MainsliderForward";
 import MainsliderBack from "./MainsliderBack";
-import { useState,useRef } from "react";
+import { useRef } from "react";
 
 export default function MainSlider() {
     const ref=useRef()
@@ -23,7 +23,6 @@ export default function MainSlider() {
             return <div>
                 <img src={`${serverURL}/images/${item}`} style={{ width: '100%' }} />
             </div>
-
         })
     }
     return (
