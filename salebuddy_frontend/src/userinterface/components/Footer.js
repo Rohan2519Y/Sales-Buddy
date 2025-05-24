@@ -33,8 +33,8 @@ export default function Footer() {
                 <div style={{ color: 'white', fontFamily: '"Archivo", sans-serif', fontWeight: 600, fontSize: '120%', height: '10%', width: '100%' }}>
                     Useful Links
                 </div>
-                <div style={{ display: 'flex', height: '90%', width: '100%', justifyContent: 'flex-start', marginTop: 1, fontFamily: '"Archivo", sans-serif' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', marginRight: 10, gap: '5%', fontWeight: 550, fontSize: 16 }}>
+                <div style={{ display: 'flex', height: '90%', width: '100%', justifyContent: "space-evenly", marginTop: 1, fontFamily: '"Archivo", sans-serif' }}>
+                    <div style={{ display: 'flex', justifyContent:'flex-start',flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', marginRight: 10, gap: '5%', fontWeight: 550, fontSize: 15 }}>
                         <div>About SalesBuddy</div>
                         <div>Help And Support</div>
                         <div>FAQs</div>
@@ -45,7 +45,7 @@ export default function Footer() {
                         <div>E-Waste</div>
                         <div>Franchise Opportunity</div>
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', gap: '5%', fontWeight: 550, fontSize: 16 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', gap: '5%', fontWeight: 550, fontSize: 15 }}>
                         <div>Site Map</div>
                         <div>Careers At Croma</div>
                         <div>Term Of Use</div>
@@ -62,17 +62,17 @@ export default function Footer() {
                 <div style={{ color: 'white', fontFamily: '"Archivo", sans-serif', fontWeight: 600, fontSize: '120%', height: '10%', width: '100%' }}>
                     Products
                 </div>
-                <div style={{ display: 'flex', height: '90%', width: '100%', justifyContent: 'flex-start', marginTop: 1, fontFamily: '"Archivo", sans-serif' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', marginRight: 10, gap: '5%', fontWeight: 550, fontSize: 15 }}>
+                <div style={{ display: 'flex', height: '90%', width: '100%', justifyContent: 'space-evenly', marginTop: 1, fontFamily: '"Archivo", sans-serif' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '45%', alignItems: 'flex-start',justifyContent: 'flex-start', marginRight: 10, gap: '5%', fontWeight: 550, fontSize: 15 }}>
                         <div>Televisions & Accessories</div>
                         <div>Home Appliances</div>
                         <div>Phone & Wearables</div>
                         <div>Computers & Tablets</div>
                         <div>Kitchen Appliances</div>
                         <div>Audio & Video</div>
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', gap: '5%', fontWeight: 550, fontSize: 15 }}>
                         <div>Health & Fitness</div>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '44%', alignItems: 'flex-start', gap: '5%', fontWeight: 550, fontSize: 15 }}>
                         <div>Grooming & Personal Care</div>
                         <div>Cameras & Accessories</div>
                         <div>Smart Devices</div>
