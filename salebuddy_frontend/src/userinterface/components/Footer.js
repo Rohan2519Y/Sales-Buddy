@@ -11,9 +11,9 @@ export default function Footer() {
 
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'));
-    return (<div style={{ width: '100%', height: matches ? '40vh' : '62vh', background: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    return (<div style={{ width: '100%', height: matches ? '70vh' : '62vh', background: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
         <div style={{ width: '80%', height: '90%', display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
-            <div style={{ width: '30%', height: '85%' }}>
+            {matches ? <></> : <><div style={{ width: '30%', height: '85%' }}>
                 <div style={{ color: 'white', fontSize: '130%', fontFamily: '"Roboto Condensed", sans-serif', fontWeight: 500, height: 27 }}>Connect With Us</div>
                 <div style={{ width: '80%', height: 40, background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 10, marginTop: 1 }}>
                     <input type='text' placeholder='Enter Your Email' style={{ width: '80%', margin: 1, height: '80%', outline: 'none', border: '0px solid transparent' }} />
@@ -28,13 +28,13 @@ export default function Footer() {
                 </div>
                 <div style={{ width: '90%', marginTop: 30, color: 'white', fontFamily: '"Roboto Condensed", sans-serif' }}>© Copyright 2025 SalesBuddy. All rights reserved</div>
             </div>
-            <div style={{ width: 0.1, height: '85%', background: 'white' }}></div>
+                <div style={{ width: 0.1, height: '85%', background: 'white' }}></div></>}
             <div style={{ width: '30%', height: '85%', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ color: 'white', fontFamily: '"Archivo", sans-serif', fontWeight: 600, fontSize: '120%', height: '10%', width: '100%' }}>
                     Useful Links
                 </div>
                 <div style={{ display: 'flex', height: '90%', width: '100%', justifyContent: 'flex-start', marginTop: 1, fontFamily: '"Archivo", sans-serif' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', marginRight: 3, gap: '5%', fontWeight: 550, fontSize: 16 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', marginRight: 10, gap: '5%', fontWeight: 550, fontSize: 16 }}>
                         <div>About SalesBuddy</div>
                         <div>Help And Support</div>
                         <div>FAQs</div>
@@ -60,10 +60,10 @@ export default function Footer() {
             <div style={{ width: 0.1, height: '85%', background: 'white' }}></div>
             <div style={{ width: '30%', height: '85%', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ color: 'white', fontFamily: '"Archivo", sans-serif', fontWeight: 600, fontSize: '120%', height: '10%', width: '100%' }}>
-                   Products
+                    Products
                 </div>
                 <div style={{ display: 'flex', height: '90%', width: '100%', justifyContent: 'flex-start', marginTop: 1, fontFamily: '"Archivo", sans-serif' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', marginRight: 3, gap: '5%', fontWeight: 550, fontSize: 16 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', marginRight: 10, gap: '5%', fontWeight: 550, fontSize: 15 }}>
                         <div>Televisions & Accessories</div>
                         <div>Home Appliances</div>
                         <div>Phone & Wearables</div>
@@ -71,7 +71,7 @@ export default function Footer() {
                         <div>Kitchen Appliances</div>
                         <div>Audio & Video</div>
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', gap: '5%', fontWeight: 550, fontSize: 16 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', gap: '5%', fontWeight: 550, fontSize: 15 }}>
                         <div>Health & Fitness</div>
                         <div>Grooming & Personal Care</div>
                         <div>Cameras & Accessories</div>
@@ -82,6 +82,8 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
+
         </div>
+        {matches?<div style={{display:'flex', alignItems:'center',height:60,width: 'auto', marginTop: 20,marginBottom:10, color: 'white', fontFamily: '"Roboto Condensed", sans-serif' }}>© Copyright 2025 SalesBuddy. All rights reserved</div>:<></>}
     </div>)
 }
