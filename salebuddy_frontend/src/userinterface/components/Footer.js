@@ -13,9 +13,9 @@ export default function Footer() {
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     return (<div style={{ width: '100%', height: matches ? '40vh' : '62vh', background: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <div style={{ width: '80%', height: '90%', display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
-            <div style={{ width: '30%', height: '80%' }}>
+            <div style={{ width: '30%', height: '85%' }}>
                 <div style={{ color: 'white', fontSize: '130%', fontFamily: '"Roboto Condensed", sans-serif', fontWeight: 500, height: 27 }}>Connect With Us</div>
-                <div style={{ width: '85%', height: '15%', background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 10 }}>
+                <div style={{ width: '80%', height: 40, background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 10,marginTop:5 }}>
                     <input type='text' placeholder='Enter Your Email' style={{ width: '80%',margin:1, height: '80%', outline: 'none', border: '0px solid transparent' }} />
                     <EastIcon />
                 </div>
