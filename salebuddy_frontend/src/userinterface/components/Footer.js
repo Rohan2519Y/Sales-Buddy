@@ -29,8 +29,31 @@ export default function Footer() {
                 <div style={{ width: '90%', marginTop: 30, color: 'white', fontFamily: '"Roboto Condensed", sans-serif' }}>© Copyright 2025 SalesBuddy. All rights reserved</div>
             </div>
             <div style={{ width: 0.1, height: '85%', background: 'white' }}></div>
-            <div style={{ width: '30%', height: '87%' }}>
-                <div style={{ color: 'white',  fontFamily: '"Archivo", sans-serif', fontWeight: 600, fontSize: '120%' }}>Usefull Links</div>
+            <div style={{ width: '30%', height: '87%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ color: 'white', fontFamily: '"Archivo", sans-serif', fontWeight: 600, fontSize: '120%' }}>Useful Links</div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+                        <div>About SalesBuddy</div>
+                        <div>Help And Support</div>
+                        <div>FAQs</div>
+                        <div>Buying Guide</div>
+                        <div>Return Policy</div>
+                        <div>B2B Orders</div>
+                        <div>Store Locator</div>
+                        <div>E-Waste</div>
+                        <div>Franchise Opportunity</div>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+                        <div>Site Map</div>
+                        <div>Careers At Croma</div>
+                        <div>Term Of Use</div>
+                        <div>Disclaimer</div>
+                        <div>Privacy Policy</div>
+                        <div>Unboxed</div>
+                        <div>Gift Card</div>
+                        <div>Croma E-Star</div>
+                    </div>
+                </div>
             </div>
             <div style={{ width: 0.1, height: '85%', background: 'white' }}></div>
             <div style={{ width: '30%', height: '100%' }}></div>
