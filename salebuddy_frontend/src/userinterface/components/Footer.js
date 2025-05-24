@@ -33,7 +33,7 @@ export default function Footer() {
                 <div style={{ color: 'white', fontFamily: '"Archivo", sans-serif', fontWeight: 600, fontSize: '120%', height: '10%', width: '100%' }}>
                     Useful Links
                 </div>
-                <div style={{ display: 'flex', height: '90%', width: '100%', justifyContent: 'flex-start', marginTop: 1,fontFamily: '"Archivo", sans-serif' }}>
+                <div style={{ display: 'flex', height: '90%', width: '100%', justifyContent: 'flex-start', marginTop: 1, fontFamily: '"Archivo", sans-serif' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', marginRight: 3, gap: '5%', fontWeight: 550, fontSize: 16 }}>
                         <div>About SalesBuddy</div>
                         <div>Help And Support</div>
@@ -57,9 +57,31 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-
             <div style={{ width: 0.1, height: '85%', background: 'white' }}></div>
-            <div style={{ width: '30%', height: '100%' }}></div>
+            <div style={{ width: '30%', height: '85%', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ color: 'white', fontFamily: '"Archivo", sans-serif', fontWeight: 600, fontSize: '120%', height: '10%', width: '100%' }}>
+                   Products
+                </div>
+                <div style={{ display: 'flex', height: '90%', width: '100%', justifyContent: 'flex-start', marginTop: 1, fontFamily: '"Archivo", sans-serif' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', marginRight: 3, gap: '5%', fontWeight: 550, fontSize: 16 }}>
+                        <div>Televisions & Accessories</div>
+                        <div>Home Appliances</div>
+                        <div>Phone & Wearables</div>
+                        <div>Computers & Tablets</div>
+                        <div>Kitchen Appliances</div>
+                        <div>Audio & Video</div>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', gap: '5%', fontWeight: 550, fontSize: 16 }}>
+                        <div>Health & Fitness</div>
+                        <div>Grooming & Personal Care</div>
+                        <div>Cameras & Accessories</div>
+                        <div>Smart Devices</div>
+                        <div>Gaming</div>
+                        <div>Accessories</div>
+                        <div>Top Brands</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>)
 }
