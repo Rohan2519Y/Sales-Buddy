@@ -15,21 +15,23 @@ export default function Footer() {
         <div style={{ width: '80%', height: '90%', display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
             <div style={{ width: '30%', height: '85%' }}>
                 <div style={{ color: 'white', fontSize: '130%', fontFamily: '"Roboto Condensed", sans-serif', fontWeight: 500, height: 27 }}>Connect With Us</div>
-                <div style={{ width: '80%', height: 40, background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 10,marginTop:5 }}>
-                    <input type='text' placeholder='Enter Your Email' style={{ width: '80%',margin:1, height: '80%', outline: 'none', border: '0px solid transparent' }} />
+                <div style={{ width: '80%', height: 40, background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 10, marginTop: 1 }}>
+                    <input type='text' placeholder='Enter Your Email' style={{ width: '80%', margin: 1, height: '80%', outline: 'none', border: '0px solid transparent' }} />
                     <EastIcon />
                 </div>
-                <div style={{ width: '85%', height: '15%',marginTop:3, alignItems: 'center', justifyContent: 'space-evenly', display: 'flex' }}>
+                <div style={{ width: '85%', height: '15%', marginTop: 3, alignItems: 'center', justifyContent: 'space-evenly', display: 'flex' }}>
                     <YouTubeIcon style={{ color: 'white', fontSize: 35 }} />
                     <FacebookIcon style={{ color: 'white', fontSize: 35 }} />
                     <InstagramIcon style={{ color: 'white', fontSize: 35 }} />
                     <LinkedInIcon style={{ color: 'white', fontSize: 35 }} />
                     <TwitterIcon style={{ color: 'white', fontSize: 35 }} />
                 </div>
-                <div style={{width:'90%',marginTop:30,color:'white',fontFamily: '"Roboto Condensed", sans-serif'}}>© Copyright 2025 SalesBuddy. All rights reserved</div>
+                <div style={{ width: '90%', marginTop: 30, color: 'white', fontFamily: '"Roboto Condensed", sans-serif' }}>© Copyright 2025 SalesBuddy. All rights reserved</div>
             </div>
             <div style={{ width: 0.1, height: '85%', background: 'white' }}></div>
-            <div style={{ width: '30%', height: '100%' }}></div>
+            <div style={{ width: '30%', height: '87%' }}>
+                <div style={{ color: 'white',  fontFamily: '"Archivo", sans-serif', fontWeight: 600, fontSize: '120%' }}>Usefull Links</div>
+            </div>
             <div style={{ width: 0.1, height: '85%', background: 'white' }}></div>
             <div style={{ width: '30%', height: '100%' }}></div>
         </div>
