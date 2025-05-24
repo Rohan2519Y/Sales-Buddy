@@ -29,10 +29,12 @@ export default function Footer() {
                 <div style={{ width: '90%', marginTop: 30, color: 'white', fontFamily: '"Roboto Condensed", sans-serif' }}>© Copyright 2025 SalesBuddy. All rights reserved</div>
             </div>
             <div style={{ width: 0.1, height: '85%', background: 'white' }}></div>
-            <div style={{ width: '30%', height: '87%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <div style={{ color: 'white', fontFamily: '"Archivo", sans-serif', fontWeight: 600, fontSize: '120%' }}>Useful Links</div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+            <div style={{ width: '30%', height: '85%', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ color: 'white', fontFamily: '"Archivo", sans-serif', fontWeight: 600, fontSize: '120%', height: '10%', width: '100%' }}>
+                    Useful Links
+                </div>
+                <div style={{ display: 'flex', height: '90%', width: '100%', justifyContent: 'flex-start', marginTop: 1,fontFamily: '"Archivo", sans-serif' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', marginRight: 3, gap: '5%', fontWeight: 550, fontSize: 16 }}>
                         <div>About SalesBuddy</div>
                         <div>Help And Support</div>
                         <div>FAQs</div>
@@ -43,7 +45,7 @@ export default function Footer() {
                         <div>E-Waste</div>
                         <div>Franchise Opportunity</div>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', gap: '5%', fontWeight: 550, fontSize: 16 }}>
                         <div>Site Map</div>
                         <div>Careers At Croma</div>
                         <div>Term Of Use</div>
@@ -55,6 +57,7 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
+
             <div style={{ width: 0.1, height: '85%', background: 'white' }}></div>
             <div style={{ width: '30%', height: '100%' }}></div>
         </div>
