@@ -30,7 +30,7 @@ const Accordion = styled((props) => (
 
 const AccordionSummary = styled((props) => (
     <MuiAccordionSummary
-        expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '1rem', transform: 'rotate(90deg)', color: 'white' }} />}
+        expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '1rem', transform: 'rotate(90deg)', color: 'white',width:'100%' }} />}
         {...props}
     />
 ))(({ theme }) => ({
@@ -52,6 +52,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
     padding: theme.spacing(2),
     borderTop: '0px solid transparent',
     backgroundColor: 'black',
+    width:'100%'
 }));
 export default function Footer() {
 
@@ -81,15 +82,15 @@ export default function Footer() {
                 </div>
             </div>
             <div style={{ width: '95%', height: 0.5, background: 'white' }}></div>
-            <div style={{ backgroundColor: 'transparent', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-                    <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+            <div style={{ backgroundColor: 'transparent', display: 'flex', alignItems: 'center', flexDirection: 'column',width:'100%' }}>
+                <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')} style={{width:'100%'}}>
+                    <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" style={{width:'100%'}}>
                         <Typography component="span" style={{ color: 'white' ,width:'100%'}}>Useful Links</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Typography style={{ color: 'white',width:'100%' }}>
-                            <div style={{ display: 'flex', height: '90%', marginLeft: 'auto', width: '100%', justifyContent: "center", marginTop: 1, fontFamily: '"Archivo", sans-serif' }}>
-                                <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', marginRight: 10, gap: matches ? '4%' : '5%', fontWeight: 550, fontSize: 15 }}>
+                        <Typography style={{ color: 'white',width:'100%'}}>
+                            <div style={{ display: 'flex', height: '90%', width: '100%', justifyContent: "center",  marginTop: 5, fontFamily: '"Archivo", sans-serif' }}>
+                                <div style={{ display: 'flex', justifyContent: 'flex-start',flexDirection: 'column',marginLeft:10, color: 'white', width: '50%', alignItems: 'flex-start', marginRight: 10, gap: matches ? '4%' : '5%', fontWeight: 550, fontSize: 15 }}>
                                     <div>About SalesBuddy</div>
                                     <div>Help And Support</div>
                                     <div>FAQs</div>
