@@ -30,11 +30,11 @@ const Accordion = styled((props) => (
 
 const AccordionSummary = styled((props) => (
     <MuiAccordionSummary
-        expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem', transform: 'rotate(90deg)' }} />}
+        expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '1rem', transform: 'rotate(90deg)', color: 'white' }} />}
         {...props}
     />
 ))(({ theme }) => ({
-    backgroundColor: 'transparent',
+    backgroundColor: 'black',
     flexDirection: 'row',
     [`& .${accordionSummaryClasses.expandIconWrapper}.${accordionSummaryClasses.expanded}`]:
     {
@@ -65,24 +65,59 @@ export default function Footer() {
     }
 
     return (<>{smallmatches ? <>
-        <div style={{ display: 'flex', width: '100%', height: '50vh', background: 'black', flexDirection: 'column' }}>
-            <div style={{ backgroundColor: 'transparent' }}>
+        <div style={{ display: 'flex', width: '100%', height: 'auto', background: 'black', flexDirection: 'column', alignItems: 'center' }}>
+            <div style={{ width: '90%', display: 'flex', justifyContent: 'flex-end', flexDirection: 'column', alignItems: 'flex-start', height: 130 }}>
+                <div style={{ color: 'white', fontSize: '120%', fontFamily: '"Roboto Condensed", sans-serif', fontWeight: 500, height: 27, display: 'flex', justifyContent: 'center' }}>Connect With Us</div>
+                <div style={{ width: '100%', height: 40, background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 7, marginTop: 1 }}>
+                    <input type='text' placeholder='Enter Your Email' style={{ width: '85%', margin: 1, height: '80%', outline: 'none', border: '0px solid transparent' }} />
+                    <EastIcon />
+                </div>
+                <div style={{ width: '70%', height: 40, marginTop: 3, alignItems: 'center', justifyContent: 'space-between', display: 'flex' }}>
+                    <YouTubeIcon style={{ color: 'white', fontSize: 35 }} />
+                    <FacebookIcon style={{ color: 'white', fontSize: 35 }} />
+                    <InstagramIcon style={{ color: 'white', fontSize: 35 }} />
+                    <LinkedInIcon style={{ color: 'white', fontSize: 35 }} />
+                    <TwitterIcon style={{ color: 'white', fontSize: 35 }} />
+                </div>
+            </div>
+            <div style={{ width: '95%', height: 0.5, background: 'white' }}></div>
+            <div style={{ backgroundColor: 'transparent', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
                 <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                     <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                        <Typography component="span" style={{ color: 'white' }}>Collapsible Group Item #1</Typography>
+                        <Typography component="span" style={{ color: 'white' ,width:'100%'}}>Useful Links</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Typography style={{ color: 'white' }}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-                            sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                            sit amet blandit leo lobortis eget.
+                        <Typography style={{ color: 'white',width:'100%' }}>
+                            <div style={{ display: 'flex', height: '90%', marginLeft: 'auto', width: '100%', justifyContent: "center", marginTop: 1, fontFamily: '"Archivo", sans-serif' }}>
+                                <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', marginRight: 10, gap: matches ? '4%' : '5%', fontWeight: 550, fontSize: 15 }}>
+                                    <div>About SalesBuddy</div>
+                                    <div>Help And Support</div>
+                                    <div>FAQs</div>
+                                    <div>Buying Guide</div>
+                                    <div>Return Policy</div>
+                                    <div>B2B Orders</div>
+                                    <div>Store Locator</div>
+                                    <div>E-Waste</div>
+                                    <div>Franchise Opportunity</div>
+                                </div>
+                                <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', gap: matches ? '4%' : '5%', fontWeight: 550, fontSize: 15 }}>
+                                    <div>Site Map</div>
+                                    <div>Careers At Croma</div>
+                                    <div>Term Of Use</div>
+                                    <div>Disclaimer</div>
+                                    <div>Privacy Policy</div>
+                                    <div>Unboxed</div>
+                                    <div>Gift Card</div>
+                                    <div>Croma E-Star</div>
+                                </div>
+                            </div>
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
+                <div style={{ width: '95%', height: 0.5, background: 'white' }}></div>
                 <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
                     <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-                        <Typography style={{ color: 'white' }} component="span">Collapsible Group Item #2</Typography>
+                        <Typography style={{ color: 'white' }} component="span">Products</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography style={{ color: 'white' }}>
@@ -93,7 +128,9 @@ export default function Footer() {
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
+                <div style={{ width: '95%', height: 0.5, background: 'white' }}></div>
             </div>
+            <div style={{ display: 'flex', alignItems: 'center', height: 50, width: 'auto', marginTop: 20, marginBottom: 10, color: 'white', fontFamily: '"Roboto Condensed", sans-serif' }}>© Copyright 2025 SalesBuddy. All rights reserved</div>
         </div>
     </> : <>
         <div style={{ width: '100%', height: matches ? '70vh' : '62vh', background: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
