@@ -6,20 +6,104 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import { Margin } from '@mui/icons-material';
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
+import MuiAccordion from '@mui/material/Accordion';
+import MuiAccordionSummary, {
+    accordionSummaryClasses,
+} from '@mui/material/AccordionSummary';
+import MuiAccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+
+const Accordion = styled((props) => (
+    <MuiAccordion disableGutters elevation={0} square {...props} />
+))(({ theme }) => ({
+    border: `0px solid transparent`,
+    '&:not(:last-child)': {
+        borderBottom: 0,
+    },
+    '&::before': {
+        display: 'none',
+    },
+}));
+
+const AccordionSummary = styled((props) => (
+    <MuiAccordionSummary
+        expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem', transform: 'rotate(90deg)' }} />}
+        {...props}
+    />
+))(({ theme }) => ({
+    backgroundColor: 'transparent',
+    flexDirection: 'row',
+    [`& .${accordionSummaryClasses.expandIconWrapper}.${accordionSummaryClasses.expanded}`]:
+    {
+        transform: 'rotate(0deg)',
+    },
+    [`& .${accordionSummaryClasses.content}`]: {
+        marginLeft: theme.spacing(1),
+    },
+    ...theme.applyStyles('dark', {
+        backgroundColor: 'transparent'
+    }),
+}));
+
+const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+    padding: theme.spacing(2),
+    borderTop: '0px solid transparent',
+    backgroundColor: 'black',
+}));
 export default function Footer() {
 
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'));
-    return (
+    const smallmatches = useMediaQuery(theme.breakpoints.down('sm'));
+    const [expanded, setExpanded] = React.useState(false);
+
+    const handleChange = (panel) => (event, newExpanded) => {
+        setExpanded(newExpanded ? panel : false);
+    }
+
+    return (<>{smallmatches ? <>
+        <div style={{ display: 'flex', width: '100%', height: '50vh', background: 'black', flexDirection: 'column' }}>
+            <div style={{ backgroundColor: 'transparent' }}>
+                <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                    <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+                        <Typography component="span" style={{ color: 'white' }}>Collapsible Group Item #1</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography style={{ color: 'white' }}>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
+                            sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                            sit amet blandit leo lobortis eget.
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+                <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+                    <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
+                        <Typography style={{ color: 'white' }} component="span">Collapsible Group Item #2</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography style={{ color: 'white' }}>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
+                            sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                            sit amet blandit leo lobortis eget.
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+            </div>
+        </div>
+    </> : <>
         <div style={{ width: '100%', height: matches ? '70vh' : '62vh', background: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-            {matches ? <div style={{ width: '70%',display:'flex',justifyContent:'center' }}>
-                <div style={{ color: 'white', fontSize: '130%', fontFamily: '"Roboto Condensed", sans-serif', fontWeight: 500, height: 27 }}>Connect With Us</div>
-                <div style={{ width: '80%', height: 40, background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 10, marginTop: 1 }}>
+            {matches ? <div style={{ width: '40%', display: 'flex', justifyContent: 'center', flexDirection: 'column', height: "30%" }}>
+                <div style={{ color: 'white', fontSize: '130%', fontFamily: '"Roboto Condensed", sans-serif', fontWeight: 500, height: 27, display: 'flex', justifyContent: 'center' }}>Connect With Us</div>
+                <div style={{ width: '100%', height: 40, background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 10, marginTop: 1 }}>
                     <input type='text' placeholder='Enter Your Email' style={{ width: '80%', margin: 1, height: '80%', outline: 'none', border: '0px solid transparent' }} />
                     <EastIcon />
                 </div>
-                <div style={{ width: '85%', height: '15%', marginTop: 3, alignItems: 'center', justifyContent: 'space-evenly', display: 'flex' }}>
+                <div style={{ width: '100%', height: 40, marginTop: 3, alignItems: 'center', justifyContent: 'space-evenly', display: 'flex' }}>
                     <YouTubeIcon style={{ color: 'white', fontSize: 35 }} />
                     <FacebookIcon style={{ color: 'white', fontSize: 35 }} />
                     <InstagramIcon style={{ color: 'white', fontSize: 35 }} />
@@ -29,28 +113,28 @@ export default function Footer() {
             </div> : <></>}
             <div style={{ width: '80%', height: '90%', display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
                 {matches ? <></> : <>
-                <div style={{ width: '30%', height: '85%' }}>
-                    <div style={{ color: 'white', fontSize: '130%', fontFamily: '"Roboto Condensed", sans-serif', fontWeight: 500, height: 27 }}>Connect With Us</div>
-                    <div style={{ width: '80%', height: 40, background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 10, marginTop: 1 }}>
-                        <input type='text' placeholder='Enter Your Email' style={{ width: '80%', margin: 1, height: '80%', outline: 'none', border: '0px solid transparent' }} />
-                        <EastIcon />
+                    <div style={{ width: '30%', height: '85%' }}>
+                        <div style={{ color: 'white', fontSize: '130%', fontFamily: '"Roboto Condensed", sans-serif', fontWeight: 500, height: 27 }}>Connect With Us</div>
+                        <div style={{ width: '80%', height: 40, background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 10, marginTop: 1 }}>
+                            <input type='text' placeholder='Enter Your Email' style={{ width: '80%', margin: 1, height: '80%', outline: 'none', border: '0px solid transparent' }} />
+                            <EastIcon />
+                        </div>
+                        <div style={{ width: '85%', height: '15%', marginTop: 3, alignItems: 'center', justifyContent: 'space-evenly', display: 'flex' }}>
+                            <YouTubeIcon style={{ color: 'white', fontSize: 35 }} />
+                            <FacebookIcon style={{ color: 'white', fontSize: 35 }} />
+                            <InstagramIcon style={{ color: 'white', fontSize: 35 }} />
+                            <LinkedInIcon style={{ color: 'white', fontSize: 35 }} />
+                            <TwitterIcon style={{ color: 'white', fontSize: 35 }} />
+                        </div>
+                        <div style={{ width: '90%', marginTop: 30, color: 'white', fontFamily: '"Roboto Condensed", sans-serif' }}>© Copyright 2025 SalesBuddy. All rights reserved</div>
                     </div>
-                    <div style={{ width: '85%', height: '15%', marginTop: 3, alignItems: 'center', justifyContent: 'space-evenly', display: 'flex' }}>
-                        <YouTubeIcon style={{ color: 'white', fontSize: 35 }} />
-                        <FacebookIcon style={{ color: 'white', fontSize: 35 }} />
-                        <InstagramIcon style={{ color: 'white', fontSize: 35 }} />
-                        <LinkedInIcon style={{ color: 'white', fontSize: 35 }} />
-                        <TwitterIcon style={{ color: 'white', fontSize: 35 }} />
-                    </div>
-                    <div style={{ width: '90%', marginTop: 30, color: 'white', fontFamily: '"Roboto Condensed", sans-serif' }}>© Copyright 2025 SalesBuddy. All rights reserved</div>
-                </div>
                     <div style={{ width: 0.1, height: '85%', background: 'white' }}></div></>}
-                <div style={{ width: '30%', height: '85%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                    <div style={{ color: 'white', fontFamily: '"Archivo", sans-serif', fontWeight: 600, fontSize: '120%', height: '10%', marginLeft: 'auto', width: matches ? '100%' : '90%' }}>
+                <div style={{ width: matches ? '40%' : '30%', height: '85%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                    <div style={{ color: 'white', fontFamily: '"Archivo", sans-serif', fontWeight: 600, fontSize: '120%', height: '10%', marginLeft: 'auto', width: '90%' }}>
                         Useful Links
                     </div>
-                    <div style={{ display: 'flex', height: '90%', marginLeft: 'auto', width: matches ? '100%' : '90%', justifyContent: "center", marginTop: 1, fontFamily: '"Archivo", sans-serif' }}>
-                        <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', marginRight: 10, gap: matches ? '3%' : '5%', fontWeight: 550, fontSize: 15 }}>
+                    <div style={{ display: 'flex', height: '90%', marginLeft: 'auto', width: '90%', justifyContent: "center", marginTop: 1, fontFamily: '"Archivo", sans-serif' }}>
+                        <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', marginRight: 10, gap: matches ? '4%' : '5%', fontWeight: 550, fontSize: 15 }}>
                             <div>About SalesBuddy</div>
                             <div>Help And Support</div>
                             <div>FAQs</div>
@@ -61,7 +145,7 @@ export default function Footer() {
                             <div>E-Waste</div>
                             <div>Franchise Opportunity</div>
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', gap: matches ? '3%' : '5%', fontWeight: 550, fontSize: 15 }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', gap: matches ? '4%' : '5%', fontWeight: 550, fontSize: 15 }}>
                             <div>Site Map</div>
                             <div>Careers At Croma</div>
                             <div>Term Of Use</div>
@@ -74,21 +158,22 @@ export default function Footer() {
                     </div>
                 </div>
                 <div style={{ width: 0.1, height: '85%', background: 'white' }}></div>
-                <div style={{ width: '30%', height: '85%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                    <div style={{ color: 'white', fontFamily: '"Archivo", sans-serif', fontWeight: 600, fontSize: '120%', height: '10%', marginLeft: 'auto', width: matches ? '100%' : '90%' }}>
+                <div style={{ width: matches ? '40%' : '30%', height: '85%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                    <div style={{ color: 'white', fontFamily: '"Archivo", sans-serif', fontWeight: 600, fontSize: '120%', height: '10%', marginLeft: 'auto', width: '90%' }}>
                         Products
                     </div>
-                    <div style={{ display: 'flex', height: '90%', marginLeft: 'auto', width: matches ? '100%' : '93.5%', justifyContent: 'center', marginTop: 1, fontFamily: '"Archivo", sans-serif' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: matches ? '50%' : '45%', alignItems: 'flex-start', justifyContent: 'flex-start', marginRight: 10, gap: matches ? '3%' : '5%', fontWeight: 550, fontSize: 15 }}>
+                    <div style={{ display: 'flex', height: '90%', marginLeft: 'auto', width: '93.5%', justifyContent: 'center', marginTop: 1, fontFamily: '"Archivo", sans-serif' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '45%', alignItems: 'flex-start', justifyContent: 'flex-start', marginRight: 10, gap: matches ? '4%' : '5%', fontWeight: 550, fontSize: 15 }}>
                             <div>Televisions & Accessories</div>
                             <div>Home Appliances</div>
                             <div>Phone & Wearables</div>
                             <div>Computers & Tablets</div>
                             <div>Kitchen Appliances</div>
                             <div>Audio & Video</div>
-                            <div>Health & Fitness</div>
+                            {matches ? <></> : <div>Health & Fitness</div>}
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: matches ? '50%' : '44%', alignItems: 'flex-start', gap: matches ? '3%' : '5%', fontWeight: 550, fontSize: 15 }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '44%', alignItems: 'flex-start', gap: matches ? '4%' : '5%', fontWeight: 550, fontSize: 15 }}>
+                            {matches ? <div>Health & Fitness</div> : <></>}
                             <div>Grooming & Personal Care</div>
                             <div>Cameras & Accessories</div>
                             <div>Smart Devices</div>
@@ -100,6 +185,7 @@ export default function Footer() {
                 </div>
 
             </div>
-            {matches ? <div style={{ display: 'flex', alignItems: 'center', height: 60, width: 'auto', marginTop: 20, marginBottom: 10, color: 'white', fontFamily: '"Roboto Condensed", sans-serif' }}>© Copyright 2025 SalesBuddy. All rights reserved</div> : <></>}
-        </div>)
+            {matches ? <div style={{ display: 'flex', alignItems: 'center', height: 50, width: 'auto', marginTop: 40, marginBottom: 10, color: 'white', fontFamily: '"Roboto Condensed", sans-serif' }}>© Copyright 2025 SalesBuddy. All rights reserved</div> : <></>}
+        </div></>}</>
+    )
 }
