@@ -30,7 +30,7 @@ const Accordion = styled((props) => (
 
 const AccordionSummary = styled((props) => (
     <MuiAccordionSummary
-        expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '1rem', transform: 'rotate(90deg)', color: 'white',width:'100%' }} />}
+        expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '1rem', transform: 'rotate(90deg)', color: 'white', width: '100%' }} />}
         {...props}
     />
 ))(({ theme }) => ({
@@ -52,7 +52,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
     padding: theme.spacing(2),
     borderTop: '0px solid transparent',
     backgroundColor: 'black',
-    width:'100%'
+    
 }));
 export default function Footer() {
 
@@ -81,16 +81,16 @@ export default function Footer() {
                     <TwitterIcon style={{ color: 'white', fontSize: 35 }} />
                 </div>
             </div>
-            <div style={{ width: '95%', height: 0.5, background: 'white' }}></div>
-            <div style={{ backgroundColor: 'transparent', display: 'flex', alignItems: 'center', flexDirection: 'column',width:'100%' }}>
-                <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')} style={{width:'100%'}}>
-                    <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" style={{width:'100%'}}>
-                        <Typography component="span" style={{ color: 'white' ,width:'100%'}}>Useful Links</Typography>
+            <hr style={{ width: '92%',margin:0 }}></hr>
+            <div style={{ backgroundColor: 'transparent', display: 'flex', alignItems: 'center', flexDirection: 'column', width: '100%' }}>
+                <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')} style={{ width: '100%',marginBottom:0 }}>
+                    <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" style={{ width: '100%' }}>
+                        <Typography component="span" style={{ color: 'white', width: '100%' }}>Useful Links</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Typography style={{ color: 'white',width:'100%'}}>
-                            <div style={{ display: 'flex', height: '90%', width: '100%', justifyContent: "center",  marginTop: 5, fontFamily: '"Archivo", sans-serif' }}>
-                                <div style={{ display: 'flex', justifyContent: 'flex-start',flexDirection: 'column',marginLeft:10, color: 'white', width: '50%', alignItems: 'flex-start', marginRight: 10, gap: matches ? '4%' : '5%', fontWeight: 550, fontSize: 15 }}>
+                        <Typography style={{ color: 'white', width: '100%' }}>
+                            <div style={{ display: 'flex', height: '90%', width: '100%', justifyContent: "center", marginTop: 5, fontFamily: '"Archivo", sans-serif' }}>
+                                <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'column', marginLeft: 10, color: 'white', width: '50%', alignItems: 'flex-start', marginRight: 10, gap: matches ? '4%' : '5%', fontWeight: 500, fontSize: 15 }}>
                                     <div>About SalesBuddy</div>
                                     <div>Help And Support</div>
                                     <div>FAQs</div>
@@ -101,7 +101,7 @@ export default function Footer() {
                                     <div>E-Waste</div>
                                     <div>Franchise Opportunity</div>
                                 </div>
-                                <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', gap: matches ? '4%' : '5%', fontWeight: 550, fontSize: 15 }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', gap: matches ? '4%' : '5%', fontWeight: 500, fontSize: 15 }}>
                                     <div>Site Map</div>
                                     <div>Careers At Croma</div>
                                     <div>Term Of Use</div>
@@ -115,26 +115,41 @@ export default function Footer() {
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
-                <div style={{ width: '95%', height: 0.5, background: 'white' }}></div>
-                <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-                    <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-                        <Typography style={{ color: 'white' }} component="span">Products</Typography>
+                <hr style={{ width: '92%',margin:0 }}></hr>
+                <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')} style={{ width: '100%',marginBottom:0 }}>
+                    <AccordionSummary aria-controls="panel2d-content" id="panel2d-header" style={{ width: '100%' }}>
+                        <Typography component="span" style={{ color: 'white', width: '100%' }}>Products</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Typography style={{ color: 'white' }}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-                            sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                            sit amet blandit leo lobortis eget.
+                        <Typography style={{ color: 'white', width: '100%' }}>
+                            <div style={{ display: 'flex', height: '80%', width: '95%', justifyContent: "center", fontFamily: '"Archivo", sans-serif' }}>
+                                <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'column', marginLeft: 15, color: 'white', width: '50%', alignItems: 'flex-start', marginRight: 10, gap: matches ? '4%' : '5%', fontWeight: 500, fontSize: 15 }}>
+                                    <div>Televisions & Accessories</div>
+                                    <div>Home Appliances</div>
+                                    <div>Phone & Wearables</div>
+                                    <div>Computers & Tablets</div>
+                                    <div>Kitchen Appliances</div>
+                                    <div>Audio & Video</div>
+                                </div>
+                                <div style={{ display: 'flex', flexDirection: 'column', color: 'white', width: '50%', alignItems: 'flex-start', gap: matches ? '4%' : '5%', fontWeight: 500, fontSize: 15 }}>
+                                    <div>Health & Fitness</div>
+                                    <div>Grooming & Personal Care</div>
+                                    <div>Cameras & Accessories</div>
+                                    <div>Smart Devices</div>
+                                    <div>Gaming</div>
+                                    <div>Accessories</div>
+                                    <div>Top Brands</div>
+                                </div>
+                            </div>
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
-                <div style={{ width: '95%', height: 0.5, background: 'white' }}></div>
+                <hr style={{ width: '92%',margin:0 }}></hr>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', height: 50, width: 'auto', marginTop: 20, marginBottom: 10, color: 'white', fontFamily: '"Roboto Condensed", sans-serif' }}>© Copyright 2025 SalesBuddy. All rights reserved</div>
         </div>
     </> : <>
-        <div style={{ width: '100%', height: matches ? '70vh' : '62vh', background: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+        <div style={{ width: '100%', height: matches ? '70vh' : '65vh', background: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
             {matches ? <div style={{ width: '40%', display: 'flex', justifyContent: 'center', flexDirection: 'column', height: "30%" }}>
                 <div style={{ color: 'white', fontSize: '130%', fontFamily: '"Roboto Condensed", sans-serif', fontWeight: 500, height: 27, display: 'flex', justifyContent: 'center' }}>Connect With Us</div>
                 <div style={{ width: '100%', height: 40, background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 10, marginTop: 1 }}>
