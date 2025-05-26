@@ -60,7 +60,7 @@ export default function DisplayAllAds() {
     function displayAll() {
         return (
             <MaterialTable
-                title="List Of Product Pictures"
+                title="List Of Ads Pictures"
                 columns={[
                     { title: 'ID', field: 'adid' },
                     { title: 'Service', render: (rowData) => <div>{rowData.servicetype} {rowData.servicename}</div> },
@@ -73,15 +73,17 @@ export default function DisplayAllAds() {
                             <div style={{ width: 20, height: 20, background: `${rowData.productcolor}`, borderRadius: '50%', border: '1px solid black', marginRight: 10, }} />
                             <span >{rowData.productcolorname}</span>
                         </div>
-                    },{
+                    },
+                    { title: 'Image Number', field: 'imgno' },
+                    {
                         title: 'Images',
                         render: (rowData) => {
                             return (
-                                <div style={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+                                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                                     {rowData.images.split(',').map(item => item.trim()).map((item) => (
                                         <img
                                             src={`${serverURL}/images/${item}`}
-                                            style={{ width: 40, height: 40, borderRadius: 10 }}
+                                            style={{ width: 40 }}
                                         />
                                     ))}
                                 </div>

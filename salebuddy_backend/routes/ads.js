@@ -22,7 +22,7 @@ router.post('/insert_ads',upload.any(),function(req,res,next){
         res.status(200).json({status:false,message:'Critical Error,Pls Contact Server Administrator'})
     }
 })
-router.get('/fetch_mainslider',function (req, res, next) {
+router.get('/fetch_ads',function (req, res, next) {
     try {
         pool.query("SELECT P.*, B.*, S.*, PC.*, PV.*, PD.*,AD.* FROM products P, brands B, services S, productcolors PC, productvarients PV, productdetails PD,ads AD WHERE S.serviceid = B.serviceid AND B.brandid = P.brandid AND P.productid = PC.productid AND P.productid = PV.productid AND PD.productdetailsid=AD.productdetailsid AND PC.productcolorid = PD.productcolorid", function (error, result) {
             if (error) {

@@ -187,7 +187,7 @@ export default function MainsliderInterface() {
                         <img src="/logo.png" className={classes.logo_style} />
                     </div>
                     <div className={classes.title_style}>
-                        Add New Pictures
+                        Add New Ads Pictures
                     </div>
                     <div style={{ cursor: 'pointer' }} onClick={() => navigate("/dashboard/displayallads")}>
                         <img src="/report.png" className={classes.report_style} />
