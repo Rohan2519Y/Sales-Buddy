@@ -7,7 +7,7 @@ router.post('/insert_mainslider',upload.any(),function(req,res,next){
     try{
         var images=req.files.map((item)=>item.filename)
         images=images+''
-        pool.query('insert into mainslider (images) values(?)',[ images],function(error, result){
+        pool.query('insert into ads (serviceid, brandid, productid, productdetailsid, images) values(?,?,?,?,?)',[  req.body.serviceid, req.body.brandid, req.body.productid, req.body.productdetailsid, images],function(error, result){
             if(error){
                 console.log(error)
                 res.status(200).json({status:false,message:'Database Error,Pls Contact Backend Team'})
@@ -24,7 +24,7 @@ router.post('/insert_mainslider',upload.any(),function(req,res,next){
 })
 router.get('/fetch_mainslider',function (req, res, next) {
     try {
-        pool.query("SELECT * from mainslider", function (error, result) {
+        pool.query("SELECT P.*, B.*, S.*, PC.*, PV.*, PD.*,AD.* FROM products P, brands B, services S, productcolors PC, productvarients PV, productdetails PD,ads AD WHERE S.serviceid = B.serviceid AND B.brandid = P.brandid AND P.productid = PC.productid AND P.productid = PV.productid AND PD.productdetailsid=AD.productdetailsid AND PC.productcolorid = PD.productcolorid", function (error, result) {
             if (error) {
                 console.log(error)
                 res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })

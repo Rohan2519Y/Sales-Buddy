@@ -20,7 +20,7 @@ import ProductColorInterface from "../../admin/productColors/ProductColorInterfa
 import ProductVarientInterface from "../../admin/productVarient/ProductVarientInterface";
 import ProductDetailsInterface from "../../admin/productdetails/ProductDetailsInterface";
 import MorePictureInterface from "../../admin/morepictures/MorePictureInterface";
-import MainsliderInterface from '../mainslider/MainsliderInterface';
+import AdsInterface from '../ads/AdsInterface';
 import DisplayAllServices from "../../admin/services/DisplayAllServices";
 import DisplayAllProducts from "../../admin/products/DisplayAllProducts";
 import DisplayAllBrands from "../../admin/brands/DisplayAllBrands";
@@ -28,7 +28,7 @@ import DisplayAllProductColor from "../../admin/productColors/DisplayAllProductC
 import DisplayAllProductVarient from "../../admin/productVarient/DisplayAllProductVarient";
 import DisplayAllProductDetails from "../../admin/productdetails/DisplayAllProductDetails";
 import DisplayAllMorePicture from "../../admin/morepictures/DisplayAllMorePicture";
-import DisplayAllMainslider from '../mainslider/DisplayAllMainslider';
+import DisplayAllAds from '../ads/DisplayAllAds';
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 import { useNavigate } from 'react-router';
 export default function Dashboard() {
@@ -164,7 +164,7 @@ export default function Dashboard() {
                         <Route element={<ProductVarientInterface />} path="/productvarientinterface" />
                         <Route element={<ProductDetailsInterface />} path="/productdetailsinterface" />
                         <Route element={<MorePictureInterface />} path="/morepictureinterface" />
-                        <Route element={<MainsliderInterface />} path="/mainsliderinterface" />
+                        <Route element={<AdsInterface />} path="/adsinterface" />
                         <Route element={<DisplayAllServices />} path="/displayallservices" />
                         <Route element={<DisplayAllProducts />} path="/displayallproducts" />
                         <Route element={<DisplayAllBrands />} path="/displayallbrands" />
@@ -172,7 +172,7 @@ export default function Dashboard() {
                         <Route element={<DisplayAllProductVarient />} path="/displayallproductvarient" />
                         <Route element={<DisplayAllProductDetails />} path="/displayallproductdetails" />
                         <Route element={<DisplayAllMorePicture />} path="/displayallmorepicture" />
-                        <Route element={<DisplayAllMainslider />} path="/displayallmainslider" />
+                        <Route element={<DisplayAllAds />} path="/displayallads" />
                     </Routes>
                 </Grid2>
             </Grid2>

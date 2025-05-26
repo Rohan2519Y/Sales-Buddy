@@ -3,56 +3,56 @@ import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { getData, serverURL, postData } from "../../backendservices/FetchNodeServices";
-import { useStyles } from "./DisplayAllMainsliderCss";
+import { useStyles } from "./DisplayAllAdsCss";
 
-export default function DisplayAllMainslider() {
+export default function DisplayAllAds() {
     const classes = useStyles()
     const navigate = useNavigate()
-    const [mainsliderId, setMainsliderId] = useState('')
-    const [listMainslider, setListMainslider] = useState([])
+    const [adsId, setAdsId] = useState('')
+    const [listAds, setListAds] = useState([])
 
-    const fetchAllMainslider = async () => {
-        var response = await getData('mainslider/fetch_mainslider')
+    const fetchAllAds = async () => {
+        var response = await getData('ads/fetch_ads')
         if (response.status) {
-            setListMainslider(response.data)
+            setListAds(response.data)
         }
         else {
             Swal.fire({
                 icon: "error",
-                title: "Mainslider Register",
+                title: "Ads Register",
                 text: response.message,
                 toast: true
             });
         }
     }
     useEffect(function () {
-        fetchAllMainslider()
+        fetchAllAds()
     }, [])
 
     const handleDelete = async (id) => {
         {
-            var body = { 'mainsliderid': id }
-            var result = await postData('mainslider/delete_mainslider', body)
+            var body = { 'adsid': id }
+            var result = await postData('ads/delete_ads', body)
             if (result.status) {
                 Swal.fire({
                     icon: "success",
-                    title: "Mainslider Register",
+                    title: "Ads Register",
                     text: result.message,
                     toast: true
                 });
-                fetchAllMainslider()
+                fetchAllAds()
             }
         }
     }
     const deleteUsingIcon = (rowData) => {
-        setMainsliderId(rowData.mainsliderid)
+        setAdsId(rowData.adsid)
         Swal.fire({
-            title: "Are you sure to delete selected Mainslider",
+            title: "Are you sure to delete selected Ads",
             showCancelButton: true,
             confirmButtonText: 'Delete'
         }).then((result) => {
             if (result.isConfirmed) {
-                handleDelete(rowData.mainsliderid)
+                handleDelete(rowData.adsid)
             }
         })
     }
@@ -62,8 +62,18 @@ export default function DisplayAllMainslider() {
             <MaterialTable
                 title="List Of Product Pictures"
                 columns={[
-                    { title: 'ID', field: 'mainsliderid' },
+                    { title: 'ID', field: 'adid' },
+                    { title: 'Service', render: (rowData) => <div>{rowData.servicetype} {rowData.servicename}</div> },
+                    { title: 'Brand ', field: 'brandname' },
+                    { title: 'Product ', field: 'productname' },
+                    { title: 'IMEI', field: 'imei' },
+                    { title: 'Variant', render: (rowData) => <div>{rowData.productram}GB {rowData.productstorage}GB</div> },
                     {
+                        title: 'Product Color', width: "20%", render: (rowData) => <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <div style={{ width: 20, height: 20, background: `${rowData.productcolor}`, borderRadius: '50%', border: '1px solid black', marginRight: 10, }} />
+                            <span >{rowData.productcolorname}</span>
+                        </div>
+                    },{
                         title: 'Images',
                         render: (rowData) => {
                             return (
@@ -80,17 +90,17 @@ export default function DisplayAllMainslider() {
                         }
                     }
                 ]}
-                data={listMainslider}
+                data={listAds}
                 actions={[
                     {
                         icon: 'add',
-                        tooltip: 'Add More Mainslider',
+                        tooltip: 'Add More Ads',
                         isFreeAction: true,
-                        onClick: (event) => navigate("/dashboard/mainsliderinterface")
+                        onClick: (event) => navigate("/dashboard/adsinterface")
                     },
                     {
                         icon: 'delete',
-                        tooltip: 'Delete Mainslider',
+                        tooltip: 'Delete Ads',
                         onClick: (event,rowData) =>deleteUsingIcon(rowData) 
                     }
                 ]}
