@@ -3,11 +3,11 @@ var router = express.Router()
 var upload = require('./multer')
 var pool=require('./pool')
 
-router.post('/insert_mainslider',upload.any(),function(req,res,next){
+router.post('/insert_ads',upload.any(),function(req,res,next){
     try{
         var images=req.files.map((item)=>item.filename)
         images=images+''
-        pool.query('insert into ads (serviceid, brandid, productid, productdetailsid, images) values(?,?,?,?,?)',[  req.body.serviceid, req.body.brandid, req.body.productid, req.body.productdetailsid, images],function(error, result){
+        pool.query('insert into ads (serviceid, brandid, productid, productdetailsid, images,imgno) values(?,?,?,?,?,?)',[  req.body.serviceid, req.body.brandid, req.body.productid, req.body.productdetailsid, images,req.body.imgno],function(error, result){
             if(error){
                 console.log(error)
                 res.status(200).json({status:false,message:'Database Error,Pls Contact Backend Team'})

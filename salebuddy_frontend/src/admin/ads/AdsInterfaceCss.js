@@ -9,7 +9,7 @@ const useStyles = makeStyles(() => ({
     marginTop:'50px'
   },
   box: {
-    width: '35vw',
+    width: '45vw',
     height: 'auto',
     border: '2px solid #38ada9',
     borderRadius: 6,

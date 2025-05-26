@@ -141,16 +141,16 @@ export default function MainsliderInterface() {
             formData.append('brandid', brandId)
             formData.append('productid', productId)
             formData.append('productdetailsid', productDetailsId)
-            formData.append('imgno', productDetailsId)
+            formData.append('imgno', imgno)
             image?.map((item,i)=>{
                 formData.append(`images${i}`,item)
             })
 
-            var result = await postData('mainslider/insert_mainslider', formData)
+            var result = await postData('ads/insert_ads', formData)
             if (result.status) {
                 Swal.fire({
                     icon: "success",
-                    title: "Mainslider Register",
+                    title: "Ads Register",
                     text: result.message,
                     toast: true
                 });
@@ -159,7 +159,7 @@ export default function MainsliderInterface() {
             else {
                 Swal.fire({
                     icon: "error",
-                    title: "Mainslider Register",
+                    title: "Ads Register",
                     text: result.message,
                     toast: true
                 });
@@ -189,7 +189,7 @@ export default function MainsliderInterface() {
                     <div className={classes.title_style}>
                         Add New Pictures
                     </div>
-                    <div style={{ cursor: 'pointer' }} onClick={() => navigate("/dashboard/displayallmainslider")}>
+                    <div style={{ cursor: 'pointer' }} onClick={() => navigate("/dashboard/displayallads")}>
                         <img src="/report.png" className={classes.report_style} />
                     </div>
                 </div>
@@ -234,12 +234,19 @@ export default function MainsliderInterface() {
                             </FormControl>
                         </Grid2>
                         <Grid2 size={4} >
-                            <FormControl error={error.serviceId} onFocus={() => handleErrorMessage('productDetailsId', null)} fullWidth>
-                                <InputLabel>Product Details ID</InputLabel>
-                                <Select onChange={(e) => setProductDetailsId(e.target.value)} label="Product Details Id" value={productDetailsId}>
-                                    <Option></Option>
+                            <FormControl error={error.imgno} onFocus={() => handleErrorMessage('imgno', null)} fullWidth>
+                                <InputLabel>Image Number</InputLabel>
+                                <Select onChange={(e) => setImgno(e.target.value)} label="Image Number" value={imgno}>
+                                    <MenuItem value='1'>1</MenuItem>
+                                    <MenuItem value='2'>2</MenuItem>
+                                    <MenuItem value='3'>3</MenuItem>
+                                    <MenuItem value='4'>4</MenuItem>
+                                    <MenuItem value='5'>5</MenuItem>
+                                    <MenuItem value='6'>6</MenuItem>
+                                    <MenuItem value='7'>7</MenuItem>
+                                    <MenuItem value='8'>8</MenuItem>
                                 </Select>
-                                <FormHelperText>{error.productDetailsId}</FormHelperText>
+                                <FormHelperText>{error.imgno}</FormHelperText>
                             </FormControl>
                         </Grid2>
                         <Grid2 size={4} className={classes.center}>

@@ -134,7 +134,7 @@ export default function Dashboard() {
                                     </ListItem>
                                     <Divider ></Divider>
                                     <ListItem disablePadding>
-                                        <ListItemButton onClick={() => navigate('/dashboard/mainsliderinterface')}>
+                                        <ListItemButton onClick={() => navigate('/dashboard/adsinterface')}>
                                             <ListItemIcon>
                                                 <img src='/slideshow.png' style={{ height: 30 }} />
                                             </ListItemIcon>
