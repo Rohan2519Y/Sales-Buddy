@@ -128,7 +128,7 @@ export default function Footer() {
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography style={{ color: 'white', width: '100%' }}>
-                            <div style={{ display: 'flex', height: '80%', width: '95%', justifyContent: "center", fontFamily: '"Archivo", sans-serif' }}>
+                            <div style={{ display: 'flex', height: '90%', width: '100%', justifyContent: "center", fontFamily: '"Archivo", sans-serif' }}>
                                 <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'column', marginLeft: 15, color: 'white', width: '50%', alignItems: 'flex-start', marginRight: 10, gap: matches ? '4%' : '5%', fontWeight: 500, fontSize: 15 }}>
                                     <div>Televisions & Accessories</div>
                                     <div>Home Appliances</div>

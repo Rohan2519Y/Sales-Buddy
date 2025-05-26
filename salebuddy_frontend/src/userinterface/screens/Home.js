@@ -3,13 +3,17 @@ import MainSlider from "../components/MainSlider"
 import Footer from "../components/Footer"
 import BrandSlider from "../components/BrandSlider"
 export default function Home() {
-    return (<div style={{ width: '100%', display: 'flex', flexDirection: 'column', margin: 0,minHeight:'100vh' }} >
+    return (<div style={{ width: '100%', display: 'flex', flexDirection: 'column' }} >
         <Header />
-        <div style={{ width: '100%', overflowX: "hidden", flex:1 }}>
+        <div style={{ width: '100%',height:'100%',overflowX: "hidden"}}>
             <MainSlider />
         </div>
-        <BrandSlider style={{margin:0}}/>
+        <div>
+        <BrandSlider/>
+        </div>
+        <div>
         <Footer />
+        </div>
     </div>
     )
 }

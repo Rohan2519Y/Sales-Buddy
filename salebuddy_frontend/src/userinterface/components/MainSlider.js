@@ -20,15 +20,15 @@ export default function MainSlider() {
     var images = data?.images?.split(',')
     const showImages = () => {
         return images.map((item, i) => {
-            return <div>
+            return <div style={{width:'100%',margin:0,overflowY:'hidden',height:'100%'}}>
                 <img src={`${serverURL}/images/${item}`} style={{ width: '100%' }} />
             </div>
         })
     }
     return (
-        <div style={{ position: 'relative' }}>
+        <div style={{ position: 'relative',margin:0 }}>
             <MainsliderForward mainslider={ref}/> 
-            <Slider ref={ref} {...settings} style={{ width: '100%' }}>
+            <Slider ref={ref} {...settings} style={{ width: '100%',margin:0 }}>
                 {showImages()}
             </Slider>
             <MainsliderBack mainslider={ref}/> 

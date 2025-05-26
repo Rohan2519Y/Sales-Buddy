@@ -21,7 +21,7 @@ export default function BrandSlider() {
         })
     }
 return (
-    <div className="slider-container" style={{ width: "100%", height:'80%',display: 'flex', justifyContent: 'center', alignItems: 'center',background:' #191919',marginTop:10,marginBottom:0 }}>
+    <div className="slider-container" style={{ width: "100%", height:'80%',display: 'flex', justifyContent: 'center', alignItems: 'center',background:' #191919',marginBottom:0 }}>
         <Slider {...settings} style={{ width: '80%', height:'100%',background: ' #191919', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             {showImages()}
         </Slider>
