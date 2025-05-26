@@ -1,5 +1,6 @@
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import { useState } from 'react';
 import EastIcon from '@mui/icons-material/East';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -52,7 +53,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
     padding: theme.spacing(2),
     borderTop: '0px solid transparent',
     backgroundColor: 'black',
-    
+
 }));
 export default function Footer() {
 
@@ -60,6 +61,11 @@ export default function Footer() {
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     const smallmatches = useMediaQuery(theme.breakpoints.down('sm'));
     const [expanded, setExpanded] = React.useState(false);
+    const [youtube, setYoutube] = useState('white')
+    const [facebook, setFacebook] = useState('white')
+    const [instagram, setInstagram] = useState('white')
+    const [linkdin, setLinkdin] = useState('white')
+    const [twitter, setTwitter] = useState('white')
 
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
@@ -74,16 +80,16 @@ export default function Footer() {
                     <EastIcon />
                 </div>
                 <div style={{ width: '70%', height: 40, marginTop: 3, alignItems: 'center', justifyContent: 'space-between', display: 'flex' }}>
-                    <YouTubeIcon style={{ color: 'white', fontSize: 35 }} />
-                    <FacebookIcon style={{ color: 'white', fontSize: 35 }} />
-                    <InstagramIcon style={{ color: 'white', fontSize: 35 }} />
-                    <LinkedInIcon style={{ color: 'white', fontSize: 35 }} />
-                    <TwitterIcon style={{ color: 'white', fontSize: 35 }} />
+                    <YouTubeIcon onMouseEnter={() => setYoutube('red')} onMouseLeave={() => setYoutube('white')} style={{ color: youtube, cursor: 'pointer', fontSize: 35 }} />
+                    <FacebookIcon onMouseEnter={() => setFacebook('#1877F2')} onMouseLeave={() => setFacebook('white')} style={{ color: facebook, cursor: 'pointer', fontSize: 35 }} />
+                    <InstagramIcon onMouseEnter={() => setInstagram('#C13584')} onMouseLeave={() => setInstagram('white')} style={{ color: instagram, cursor: 'pointer', fontSize: 35 }} />
+                    <LinkedInIcon onMouseEnter={() => setLinkdin('#0077B5')} onMouseLeave={() => setLinkdin('white')} style={{ color: linkdin, cursor: 'pointer', fontSize: 35 }} />
+                    <TwitterIcon onMouseEnter={() => setTwitter('#1DA1F2')} onMouseLeave={() => setTwitter('white')} style={{ color: twitter, cursor: 'pointer', fontSize: 35 }} />
                 </div>
             </div>
-            <hr style={{ width: '92%',margin:0 }}></hr>
+            <hr style={{ width: '92%', margin: 0 }}></hr>
             <div style={{ backgroundColor: 'transparent', display: 'flex', alignItems: 'center', flexDirection: 'column', width: '100%' }}>
-                <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')} style={{ width: '100%',marginBottom:0 }}>
+                <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')} style={{ width: '100%', marginBottom: 0 }}>
                     <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" style={{ width: '100%' }}>
                         <Typography component="span" style={{ color: 'white', width: '100%' }}>Useful Links</Typography>
                     </AccordionSummary>
@@ -115,8 +121,8 @@ export default function Footer() {
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
-                <hr style={{ width: '92%',margin:0 }}></hr>
-                <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')} style={{ width: '100%',marginBottom:0 }}>
+                <hr style={{ width: '92%', margin: 0 }}></hr>
+                <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')} style={{ width: '100%', marginBottom: 0 }}>
                     <AccordionSummary aria-controls="panel2d-content" id="panel2d-header" style={{ width: '100%' }}>
                         <Typography component="span" style={{ color: 'white', width: '100%' }}>Products</Typography>
                     </AccordionSummary>
@@ -144,7 +150,7 @@ export default function Footer() {
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
-                <hr style={{ width: '92%',margin:0 }}></hr>
+                <hr style={{ width: '92%', margin: 0 }}></hr>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', height: 50, width: 'auto', marginTop: 20, marginBottom: 10, color: 'white', fontFamily: '"Roboto Condensed", sans-serif' }}>© Copyright 2025 SalesBuddy. All rights reserved</div>
         </div>
@@ -157,11 +163,11 @@ export default function Footer() {
                     <EastIcon />
                 </div>
                 <div style={{ width: '100%', height: 40, marginTop: 3, alignItems: 'center', justifyContent: 'space-evenly', display: 'flex' }}>
-                    <YouTubeIcon style={{ color: 'white', fontSize: 35 }} />
-                    <FacebookIcon style={{ color: 'white', fontSize: 35 }} />
-                    <InstagramIcon style={{ color: 'white', fontSize: 35 }} />
-                    <LinkedInIcon style={{ color: 'white', fontSize: 35 }} />
-                    <TwitterIcon style={{ color: 'white', fontSize: 35 }} />
+                    <YouTubeIcon onMouseEnter={() => setYoutube('red')} onMouseLeave={() => setYoutube('white')} style={{ color: youtube, cursor: 'pointer', fontSize: 35 }} />
+                    <FacebookIcon onMouseEnter={() => setFacebook('#1877F2')} onMouseLeave={() => setFacebook('white')} style={{ color: facebook, cursor: 'pointer', fontSize: 35 }} />
+                    <InstagramIcon onMouseEnter={() => setInstagram('#C13584')} onMouseLeave={() => setInstagram('white')} style={{ color: instagram, cursor: 'pointer', fontSize: 35 }} />
+                    <LinkedInIcon onMouseEnter={() => setLinkdin('#0077B5')} onMouseLeave={() => setLinkdin('white')} style={{ color: linkdin, cursor: 'pointer', fontSize: 35 }} />
+                    <TwitterIcon onMouseEnter={() => setTwitter('#1DA1F2')} onMouseLeave={() => setTwitter('white')} style={{ color: twitter, cursor: 'pointer', fontSize: 35 }} />
                 </div>
             </div> : <></>}
             <div style={{ width: '80%', height: '90%', display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
@@ -173,11 +179,11 @@ export default function Footer() {
                             <EastIcon />
                         </div>
                         <div style={{ width: '85%', height: '15%', marginTop: 3, alignItems: 'center', justifyContent: 'space-evenly', display: 'flex' }}>
-                            <YouTubeIcon style={{ color: 'white', fontSize: 35 }} />
-                            <FacebookIcon style={{ color: 'white', fontSize: 35 }} />
-                            <InstagramIcon style={{ color: 'white', fontSize: 35 }} />
-                            <LinkedInIcon style={{ color: 'white', fontSize: 35 }} />
-                            <TwitterIcon style={{ color: 'white', fontSize: 35 }} />
+                            <YouTubeIcon onMouseEnter={() => setYoutube('red')} onMouseLeave={() => setYoutube('white')} style={{ color: youtube, cursor: 'pointer', fontSize: 35 }} />
+                            <FacebookIcon onMouseEnter={() => setFacebook('#1877F2')} onMouseLeave={() => setFacebook('white')} style={{ color: facebook, cursor: 'pointer', fontSize: 35 }} />
+                            <InstagramIcon onMouseEnter={() => setInstagram('#C13584')} onMouseLeave={() => setInstagram('white')} style={{ color: instagram, cursor: 'pointer', fontSize: 35 }} />
+                            <LinkedInIcon onMouseEnter={() => setLinkdin('#0077B5')} onMouseLeave={() => setLinkdin('white')} style={{ color: linkdin, cursor: 'pointer', fontSize: 35 }} />
+                            <TwitterIcon onMouseEnter={() => setTwitter('#1DA1F2')} onMouseLeave={() => setTwitter('white')} style={{ color: twitter, cursor: 'pointer', fontSize: 35 }} />
                         </div>
                         <div style={{ width: '90%', marginTop: 30, color: 'white', fontFamily: '"Roboto Condensed", sans-serif' }}>© Copyright 2025 SalesBuddy. All rights reserved</div>
                     </div>
