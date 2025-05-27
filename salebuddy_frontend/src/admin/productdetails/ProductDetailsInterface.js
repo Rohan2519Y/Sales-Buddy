@@ -21,6 +21,7 @@ export default function ProductDetailInterface() {
     const [productVarientId, setProductVarientId] = useState('')
     const [imei, setImei] = useState('')
     const [productStatus, setProductStatus] = useState('')
+    const [status, setStatus] = useState('')
     const [warrenty, setWarrenty] = useState('')
     const [ratings, setRatings] = useState('')
     const [price, setPrice] = useState('')
@@ -138,6 +139,7 @@ export default function ProductDetailInterface() {
         setProductVarientId('')
         setImei('')
         setProductStatus('')
+        setStatus('')
         setWarrenty('')
         setRatings('')
         setPrice('')
@@ -179,6 +181,10 @@ export default function ProductDetailInterface() {
         if (productStatus.length == 0) {
             err = true
             handleErrorMessage('productStatus', 'Please Input Product Status...')
+        }
+        if (status.length == 0) {
+            err = true
+            handleErrorMessage('status', 'Please Select Status...')
         }
         if (warrenty.length == 0) {
             err = true
@@ -229,6 +235,7 @@ export default function ProductDetailInterface() {
             formData.append('productvarientid', productVarientId)
             formData.append('imei', imei)
             formData.append('productstatus', productStatus)
+            formData.append('status', status)
             formData.append('warrenty', warrenty)
             formData.append('ratings', ratings)
             formData.append('price', price)
@@ -320,7 +327,7 @@ export default function ProductDetailInterface() {
                                 <FormHelperText>{error.productId}</FormHelperText>
                             </FormControl>
                         </Grid2>
-                        <Grid2 size={6} >
+                        <Grid2 size={4} >
                             <FormControl error={error.productColorId} onFocus={() => handleErrorMessage('productColorId', null)} fullWidth>
                                 <InputLabel>Product Colour ID</InputLabel>
                                 <Select onChange={(e) => setProductColorId(e.target.value)} value={productColorId} label="Product Color Id" >
@@ -330,7 +337,7 @@ export default function ProductDetailInterface() {
                                 <FormHelperText>{error.productColorId}</FormHelperText>
                             </FormControl>
                         </Grid2>
-                        <Grid2 size={6} >
+                        <Grid2 size={4} >
                             <FormControl error={error.productVarientId} onFocus={() => handleErrorMessage('productVarientId', null)} fullWidth>
                                 <InputLabel>Product Varient ID</InputLabel>
                                 <Select onChange={(e) => setProductVarientId(e.target.value)} value={productVarientId} label="Product Varient Id" >
@@ -349,6 +356,19 @@ export default function ProductDetailInterface() {
                                     <MenuItem value="Refurbished">Refurbished</MenuItem>
                                 </Select>
                                 <FormHelperText>{error.productStatus}</FormHelperText>
+                            </FormControl>
+                        </Grid2>
+                        <Grid2 size={4} >
+                            <FormControl error={error.status} onFocus={() => handleErrorMessage('status', null)} fullWidth>
+                                <InputLabel>Status</InputLabel>
+                                <Select value={status} onChange={(e) => setStatus(e.target.value)} label="Status">
+                                    <MenuItem value="Latest Launches">Latest Launches</MenuItem>
+                                    <MenuItem value="Hot Deals">Hot Deals</MenuItem>
+                                    <MenuItem value="Deals Of The Day">Deals Of The Day</MenuItem>
+                                    <MenuItem value="Summer Special">Summer Special</MenuItem>
+                                    <MenuItem value="Winter Special">Winter Special</MenuItem>
+                                </Select>
+                                <FormHelperText>{error.Status}</FormHelperText>
                             </FormControl>
                         </Grid2>
                         <Grid2 size={4} >

@@ -1,55 +1,56 @@
-var express=require('express');
+var express = require('express');
 var router = express.Router()
 var upload = require('./multer')
-var pool=require('./pool')
+var pool = require('./pool');
+const { stack } = require('./ads');
 
-router.post('/insert_productdetails',upload.fields([{ name: 'picture', maxCount: 1 }, { name: 'video', maxCount: 1 }]),function(req,res,next){
-    try{
-        pool.query('insert into productdetails (serviceid, brandid, productid, productcolorid, productvarientid, imei, productstatus, warrenty, ratings, price, offerprice, membershipprice, productcondition, description, stock, picture, video) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[ req.body.serviceid, req.body.brandid, req.body.productid, req.body.productcolorid, req.body.productvarientid, req.body.imei, req.body.productstatus, req.body.warrenty, req.body.ratings, req.body.price, req.body.offerprice, req.body.membershipprice, req.body.productcondition, req.body.description, req.body.stock, req.files['picture']?.[0]?.filename, req.files['video']?.[0]?.filename],function(error, result){
-            if(error){
-                res.status(200).json({status:false,message:'Database Error,Pls Contact Backend Team'})
+router.post('/insert_productdetails', upload.fields([{ name: 'picture', maxCount: 1 }, { name: 'video', maxCount: 1 }]), function (req, res, next) {
+    try {
+        pool.query('insert into productdetails (serviceid, brandid, productid, productcolorid, productvarientid, imei, productstatus, warrenty, ratings, price, offerprice, membershipprice, productcondition, description, stock, picture, video,status) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', [req.body.serviceid, req.body.brandid, req.body.productid, req.body.productcolorid, req.body.productvarientid, req.body.imei, req.body.productstatus, req.body.warrenty, req.body.ratings, req.body.price, req.body.offerprice, req.body.membershipprice, req.body.productcondition, req.body.description, req.body.stock, req.files['picture']?.[0]?.filename, req.files['video']?.[0]?.filename, req.body.status], function (error, result) {
+            if (error) {
+                console.log(error)
+                res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
             }
-            else{
-                res.status(200).json({status:true,message:'Products Successfully Submitted..'})
+            else {
+                res.status(200).json({ status: true, message: 'Products Successfully Submitted..' })
             }
         })
     }
-    catch(e){
-        res.status(200).json({status:false,message:'Critical Error,Pls Contact Server Administrator'})
+    catch (e) {
+        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
     }
 })
-router.get('/fetch_productdetails',function (req, res, next) {
+router.get('/fetch_productdetails', function (req, res, next) {
     try {
         pool.query("SELECT P.*, B.*, S.*, PC.*, PV.*, PD.* FROM products P, brands B, services S, productcolors PC, productvarients PV, productdetails PD WHERE S.serviceid = B.serviceid AND B.brandid = P.brandid AND P.productid = PC.productid AND P.productid = PV.productid AND PC.productcolorid = PD.productcolorid;", function (error, result) {
             if (error) {
                 res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
             }
             else {
-                res.status(200).json({ status: true, message: 'Success..',data:result })
+                res.status(200).json({ status: true, message: 'Success..', data: result })
             }
         })
     }
-    catch(e)
-    {
-        res.status(200).json({status:false,message:'Critical Error,Pls Contact Server Administrator'})
+    catch (e) {
+        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
     }
 });
 
-router.post('/fetch_productdetail_by_product',function(req, res, next) {
-    try{
-        pool.query("select P.*,PD.*,PC.*,PV.* from products P,productdetails PD,productcolors PC,productvarients PV where P.productid=PC.productid and PV.productid=PC.productid and PC.productcolorid=PD.productcolorid and P.productid=?",[req.body.productid], function(error,result){
-            if(error){
+router.post('/fetch_productdetail_by_product', function (req, res, next) {
+    try {
+        pool.query("select P.*,PD.*,PC.*,PV.* from products P,productdetails PD,productcolors PC,productvarients PV where P.productid=PC.productid and PV.productid=PC.productid and PC.productcolorid=PD.productcolorid and P.productid=?", [req.body.productid], function (error, result) {
+            if (error) {
                 console.log(error);
-                res.status(200).json({status:false, message:"Database Error, Pls Contact Backend Team"})
+                res.status(200).json({ status: false, message: "Database Error, Pls Contact Backend Team" })
             }
-            else{
-                res.status(200).json({status:true, message:"Sucess...",data:result})
+            else {
+                res.status(200).json({ status: true, message: "Sucess...", data: result })
             }
         })
     }
-    catch(e){
+    catch (e) {
         console.log(error);
-        res.status(200).json({status:false, message:"Critical Error, Pls Contact Server Administrator"})
+        res.status(200).json({ status: false, message: "Critical Error, Pls Contact Server Administrator" })
     }
 });
 
@@ -66,15 +67,14 @@ router.post('/edit_productdetails', function (req, res, next) {
             }
         })
     }
-    catch(e)
-    {
-        res.status(200).json({status:false,message:'Critical Error,Pls Contact Server Administrator'})
+    catch (e) {
+        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
     }
 });
 
 router.post('/delete_productdetails', function (req, res, next) {
     try {
-        pool.query("delete from productdetails where productdetailsid=?", [ req.body.productdetailsid], function (error, result) {
+        pool.query("delete from productdetails where productdetailsid=?", [req.body.productdetailsid], function (error, result) {
             if (error) {
                 res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
             }
@@ -83,48 +83,43 @@ router.post('/delete_productdetails', function (req, res, next) {
             }
         })
     }
-    catch(e)
-    {
-        res.status(200).json({status:false,message:'Critical Error,Pls Contact Server Administrator'})
+    catch (e) {
+        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
     }
 });
-router.post('/update_icon',upload.single('picture'), function(req, res, next) {
-    try{
-       pool.query("update productdetails set picture=? where productdetailsid=?",[req.file.filename,req.body.productdetailsid],function(error,result){
-         if(error)
-         {
-          console.log(error)
-          res.status(200).json({status:false,message:'Database Error,Pls Contact Backend Team'})
-         }
-         else
-         {
-          res.status(200).json({status:true,message:'Product Icon Updated Successfully..'})
-         }
-       })
+router.post('/update_icon', upload.single('picture'), function (req, res, next) {
+    try {
+        pool.query("update productdetails set picture=? where productdetailsid=?", [req.file.filename, req.body.productdetailsid], function (error, result) {
+            if (error) {
+                console.log(error)
+                res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
+            }
+            else {
+                res.status(200).json({ status: true, message: 'Product Icon Updated Successfully..' })
+            }
+        })
     }
-    catch(e)
-    { console.log("EE",error)
-      res.status(200).json({status:false,message:'Critical Error,Pls Contact Server Administrator'})
+    catch (e) {
+        console.log("EE", error)
+        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
     }
-  });
+});
 
-  router.post('/update_video',upload.single('video'), function(req, res, next) {
-    try{
-       pool.query("update productdetails set video=? where productdetailsid=?",[req.file.filename,req.body.productdetailsid],function(error,result){
-         if(error)
-         {
-          console.log(error)
-          res.status(200).json({status:false,message:'Database Error,Pls Contact Backend Team'})
-         }
-         else
-         {
-          res.status(200).json({status:true,message:'Product Video Updated Successfully..'})
-         }
-       })
+router.post('/update_video', upload.single('video'), function (req, res, next) {
+    try {
+        pool.query("update productdetails set video=? where productdetailsid=?", [req.file.filename, req.body.productdetailsid], function (error, result) {
+            if (error) {
+                console.log(error)
+                res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
+            }
+            else {
+                res.status(200).json({ status: true, message: 'Product Video Updated Successfully..' })
+            }
+        })
     }
-    catch(e)
-    { console.log("EE",error)
-      res.status(200).json({status:false,message:'Critical Error,Pls Contact Server Administrator'})
+    catch (e) {
+        console.log("EE", error)
+        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
     }
-  }); 
-module.exports=router;
+});
+module.exports = router;
