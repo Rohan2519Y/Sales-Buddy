@@ -138,7 +138,7 @@ export default function Dashboard() {
                                             <ListItemIcon>
                                                 <img src='/slideshow.png' style={{ height: 30 }} />
                                             </ListItemIcon>
-                                            <ListItemText primary='Main Slider' />
+                                            <ListItemText primary='Ads' />
                                         </ListItemButton>
                                     </ListItem>
                                     <Divider ></Divider>

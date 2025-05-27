@@ -4,6 +4,8 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { postData, getData } from "../../backendservices/FetchNodeServices"
 import Swal from "sweetalert2"
+import ReactQuill from 'react-quill-new';
+import 'react-quill-new/dist/quill.snow.css';
 
 export default function MainsliderInterface() {
     const classes = useStyles()
@@ -13,7 +15,8 @@ export default function MainsliderInterface() {
     const [serviceId, setServiceId] = useState('')
     const [brandId, setBrandId] = useState('')
     const [productDetailsId, setProductDetailsId] = useState('')
-    const [imgno,setImgno]=useState('')
+    const [description, setDescription] = useState('')
+    const [imgno, setImgno] = useState('')
     const [error, setError] = useState({})
 
     //////////////////////////////////////////////////////////////////////////
@@ -105,6 +108,7 @@ export default function MainsliderInterface() {
         setBrandId('')
         setProductId('')
         setProductDetailsId('')
+        setDescription('')
         setImgno('')
         setImage([])
     }
@@ -127,6 +131,10 @@ export default function MainsliderInterface() {
             err = true
             handleErrorMessage('productDetailsId', 'Please Input Product Details ID...')
         }
+        if (description.length == 0) {
+            err = true
+            handleErrorMessage('description', 'Please Input Description...')
+        }
         if (imgno.length == 0) {
             err = true
             handleErrorMessage('imgno', 'Please Select Image Number...')
@@ -141,9 +149,10 @@ export default function MainsliderInterface() {
             formData.append('brandid', brandId)
             formData.append('productid', productId)
             formData.append('productdetailsid', productDetailsId)
+            formData.append('description',description)
             formData.append('imgno', imgno)
-            image?.map((item,i)=>{
-                formData.append(`images${i}`,item)
+            image?.map((item, i) => {
+                formData.append(`images${i}`, item)
             })
 
             var result = await postData('ads/insert_ads', formData)
@@ -168,14 +177,15 @@ export default function MainsliderInterface() {
     }
 
     const showImage = () => {
-        return (image?.map((item)=>{
-        return(<div style={{margin:2}}>
-            <img src={`${URL.createObjectURL(item)}`} style={{width:30,height:30}}/>
-        </div>)}))
+        return (image?.map((item) => {
+            return (<div style={{ margin: 2 }}>
+                <img src={`${URL.createObjectURL(item)}`} style={{ width: 30, height: 30 }} />
+            </div>)
+        }))
     }
 
     const handleImageChange = (e) => {
-        var images=Object.values(e.target.files)
+        var images = Object.values(e.target.files)
         setImage(images)
     }
 
@@ -249,10 +259,29 @@ export default function MainsliderInterface() {
                                 <FormHelperText>{error.imgno}</FormHelperText>
                             </FormControl>
                         </Grid2>
+                        <Grid2 size={12} >
+                            <ReactQuill
+                                value={description}
+                                onChange={setDescription}
+                                modules={{
+                                    toolbar: [
+                                        ['bold', 'italic', 'underline', 'strike'],
+                                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                                        ['link', 'image', 'video'],
+                                        ['clean']
+                                    ],
+                                }}
+                                formats={[
+                                    'bold', 'italic', 'underline', 'strike',
+                                    'list', 'bullet',
+                                    'link', 'image'
+                                ]}
+                            />
+                        </Grid2>
                         <Grid2 size={4} className={classes.center}>
-                          <div style={{display:'flex',flexWrap:'wrap'}}>
-                            {showImage()}
-                          </div>
+                            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                                {showImage()}
+                            </div>
                         </Grid2>
                         <Grid2 size={8}  >
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 60, flexDirection: 'column' }}>
