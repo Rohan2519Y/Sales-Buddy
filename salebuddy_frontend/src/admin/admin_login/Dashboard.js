@@ -69,7 +69,7 @@ export default function Dashboard() {
                                             <ListItemText primary='Dashboard' />
                                         </ListItemButton>
                                     </ListItem>
-                                    <Divider ></Divider>
+                                   
                                     <ListItem disablePadding>
                                         <ListItemButton onClick={() => navigate('/dashboard/displayallservices')}>
                                             <ListItemIcon>
@@ -78,7 +78,7 @@ export default function Dashboard() {
                                             <ListItemText primary='Services' />
                                         </ListItemButton>
                                     </ListItem>
-                                    <Divider ></Divider>
+                                    
                                     <ListItem disablePadding>
                                         <ListItemButton onClick={() => navigate('/dashboard/displayallbrands')}>
                                             <ListItemIcon>
@@ -87,7 +87,7 @@ export default function Dashboard() {
                                             <ListItemText primary='Brands' />
                                         </ListItemButton>
                                     </ListItem>
-                                    <Divider ></Divider>
+                                    
                                     <ListItem disablePadding>
                                         <ListItemButton onClick={() => navigate('/dashboard/displayallproducts')}>
                                             <ListItemIcon>
@@ -96,7 +96,7 @@ export default function Dashboard() {
                                             <ListItemText primary='Products' />
                                         </ListItemButton>
                                     </ListItem>
-                                    <Divider ></Divider>
+                                    
                                     <ListItem disablePadding>
                                         <ListItemButton onClick={() => navigate('/dashboard/displayallproductcolor')}>
                                             <ListItemIcon>
@@ -105,7 +105,7 @@ export default function Dashboard() {
                                             <ListItemText primary='Colors' />
                                         </ListItemButton>
                                     </ListItem>
-                                    <Divider ></Divider>
+                                   
                                     <ListItem disablePadding>
                                         <ListItemButton onClick={() => navigate('/dashboard/displayallproductvarient')}>
                                             <ListItemIcon>
@@ -114,7 +114,7 @@ export default function Dashboard() {
                                             <ListItemText primary='Variants' />
                                         </ListItemButton>
                                     </ListItem>
-                                    <Divider ></Divider>
+                                  
                                     <ListItem disablePadding>
                                         <ListItemButton onClick={() => navigate('/dashboard/displayallproductdetails')}>
                                             <ListItemIcon>
@@ -123,7 +123,7 @@ export default function Dashboard() {
                                             <ListItemText primary='Details' />
                                         </ListItemButton>
                                     </ListItem>
-                                    <Divider ></Divider>
+                                    
                                     <ListItem disablePadding>
                                         <ListItemButton onClick={() => navigate('/dashboard/morepictureinterface')}>
                                             <ListItemIcon>
@@ -132,7 +132,7 @@ export default function Dashboard() {
                                             <ListItemText primary='More Picture' />
                                         </ListItemButton>
                                     </ListItem>
-                                    <Divider ></Divider>
+                                    
                                     <ListItem disablePadding>
                                         <ListItemButton onClick={() => navigate('/dashboard/adsinterface')}>
                                             <ListItemIcon>
@@ -141,7 +141,7 @@ export default function Dashboard() {
                                             <ListItemText primary='Ads' />
                                         </ListItemButton>
                                     </ListItem>
-                                    <Divider ></Divider>
+                                   
                                     <ListItem disablePadding>
                                         <ListItemButton>
                                             <ListItemIcon>
