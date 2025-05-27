@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
     overflowY:'auto'
   },
   box2: {
-    width: 'auto',
+    width: '50vw',
     height: 'auto',
     border: '2px solid #38ada9',
     borderRadius: 5,

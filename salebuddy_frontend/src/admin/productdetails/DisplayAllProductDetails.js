@@ -25,6 +25,7 @@ export default function DisplayAllProducts() {
     const [productVarientId, setProductVarientId] = useState('')
     const [imei, setImei] = useState('')
     const [productStatus, setProductStatus] = useState('')
+    const [status, setStatus] = useState('')
     const [warrenty, setWarrenty] = useState('')
     const [ratings, setRatings] = useState('')
     const [price, setPrice] = useState('')
@@ -240,6 +241,10 @@ export default function DisplayAllProducts() {
             err = true
             handleErrorMessage('productStatus', 'Please Input Product Status...')
         }
+        if (status.length == 0) {
+            err = true
+            handleErrorMessage('productStatus', 'Please Select Status...')
+        }
         if (warrenty.length == 0) {
             err = true
             handleErrorMessage('warrenty', 'Please Input Warrenty...')
@@ -283,6 +288,7 @@ export default function DisplayAllProducts() {
                 'productvarientid': productVarientId,
                 'imei': imei,
                 'productstatus': productStatus,
+                'status': status,
                 'warrenty': warrenty,
                 'ratings': ratings,
                 'price': price,
@@ -326,6 +332,7 @@ export default function DisplayAllProducts() {
         setProductDetailsId(rowData.productdetailsid)
         setImei(rowData.imei)
         setProductStatus(rowData.productstatus)
+        setStatus(rowData.status)
         setWarrenty(rowData.warrenty)
         setRatings(rowData.ratings)
         setPrice(rowData.price)
@@ -385,7 +392,7 @@ export default function DisplayAllProducts() {
                                 <FormHelperText>{error.productId}</FormHelperText>
                             </FormControl>
                         </Grid2>
-                        <Grid2 size={6} >
+                        <Grid2 size={4} >
                             <FormControl error={error.productColorId} onFocus={() => handleErrorMessage('productColorId', null)} fullWidth>
                                 <InputLabel>Product Colour ID</InputLabel>
                                 <Select onChange={(e) => setProductColorId(e.target.value)} value={productColorId} label="Product Color Id" >
@@ -395,7 +402,7 @@ export default function DisplayAllProducts() {
                                 <FormHelperText>{error.productColorId}</FormHelperText>
                             </FormControl>
                         </Grid2>
-                        <Grid2 size={6} >
+                        <Grid2 size={4} >
                             <FormControl error={error.productVarientId} onFocus={() => handleErrorMessage('productVarientId', null)} fullWidth>
                                 <InputLabel>Product Varient ID</InputLabel>
                                 <Select onChange={(e) => setProductVarientId(e.target.value)} value={productVarientId} label="Product Varient Id" >
@@ -405,9 +412,7 @@ export default function DisplayAllProducts() {
                                 <FormHelperText>{error.productVarientId}</FormHelperText>
                             </FormControl>
                         </Grid2>
-                        <Grid2 size={4} >
-                            <TextField value={imei} error={error.imei} helperText={error.imei} onFocus={() => handleErrorMessage('imei', null)} label="IMEI" onChange={(e) => setImei(e.target.value)} fullWidth />
-                        </Grid2>
+                        
                         <Grid2 size={4} >
                             <FormControl error={error.productStatus} onFocus={() => handleErrorMessage('productStatus', null)} fullWidth>
                                 <InputLabel>Product Status</InputLabel>
@@ -419,6 +424,20 @@ export default function DisplayAllProducts() {
                                 <FormHelperText>{error.productStatus}</FormHelperText>
                             </FormControl>
                         </Grid2>
+                        <Grid2 size={4} >
+                            <FormControl error={error.status} onFocus={() => handleErrorMessage('status', null)} fullWidth>
+                                <InputLabel>Status</InputLabel>
+                                <Select value={status} onChange={(e) => setStatus(e.target.value)} label="Status">
+                                    <MenuItem value="Latest Launches">Latest Launches</MenuItem>
+                                    <MenuItem value="Hot Deals">Hot Deals</MenuItem>
+                                    <MenuItem value="Deals Of The Day">Deals Of The Day</MenuItem>
+                                    <MenuItem value="Summer Special">Summer Special</MenuItem>
+                                    <MenuItem value="Winter Special">Winter Special</MenuItem>
+                                </Select>
+                                <FormHelperText>{error.Status}</FormHelperText>
+                            </FormControl>
+                        </Grid2>
+                        
                         <Grid2 size={4} >
                             <FormControl error={error.warrenty} onFocus={() => handleErrorMessage('warrenty', null)} fullWidth>
                                 <InputLabel>Warrenty
@@ -453,6 +472,9 @@ export default function DisplayAllProducts() {
                                 </Select>
                                 <FormHelperText>{error.warrenty}</FormHelperText>
                             </FormControl>
+                        </Grid2>
+                        <Grid2 size={4} >
+                            <TextField value={imei} error={error.imei} helperText={error.imei} onFocus={() => handleErrorMessage('imei', null)} label="IMEI" onChange={(e) => setImei(e.target.value)} fullWidth />
                         </Grid2>
                         <Grid2 size={4} >
                             <TextField value={price} error={error.price} helperText={error.price} onFocus={() => handleErrorMessage('price', null)} label="Price" onChange={(e) => setPrice(e.target.value)} fullWidth />
@@ -629,7 +651,7 @@ export default function DisplayAllProducts() {
         )
     }
     const openDialog = () => {
-        return <Dialog open={open}>
+        return <Dialog open={open} >
             <DialogContent className={classes.dialogcontent}>{dialogState === 'data' ? productDetailsForm() : dialogState === 'image' ? pictureForm() : dialogState === 'video' ? VideoForm() : null}</DialogContent>
             <DialogActions>
                 <Button onClick={handleCloseDialog}>Close</Button>
@@ -656,7 +678,7 @@ export default function DisplayAllProducts() {
 
     function displayAll() {
         return (
-            <MaterialTable 
+            <MaterialTable
                 title="List Of Product Details"
                 columns={[
                     { title: 'ID', field: 'productdetailsid', width: '3%' },

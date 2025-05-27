@@ -14,21 +14,22 @@ export default function MainSlider() {
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 3000
+        autoplaySpeed: 5000,
+        pauseOnHover: false
     };
     var data = { id: 1, images: 'b1.webp,b2.webp,b3.webp,b4.webp,b5.webp,b6.webp,b7.webp,b8.webp' }
     var images = data?.images?.split(',')
     const showImages = () => {
         return images.map((item, i) => {
-            return <div style={{width:'100%',margin:0,overflowY:'hidden',height:'100%'}}>
+            return <div style={{width:'100%',margin:0,overflowY:'hidden',padding:0}}>
                 <img src={`${serverURL}/images/${item}`} style={{ width: '100%' }} />
             </div>
         })
     }
     return (
-        <div style={{ position: 'relative',margin:0 }}>
+        <div style={{ position: 'relative',margin:0,padding:0 }}>
             <MainsliderForward mainslider={ref}/> 
-            <Slider ref={ref} {...settings} style={{ width: '100%',margin:0 }}>
+            <Slider ref={ref} {...settings} style={{ width: '100%',margin:0,padding:0 }}>
                 {showImages()}
             </Slider>
             <MainsliderBack mainslider={ref}/> 

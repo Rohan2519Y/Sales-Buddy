@@ -76,18 +76,13 @@ export default function DisplayAllAds() {
                     },
                     { title: 'Image Number', field: 'imgno' },
                     {
-                        title: 'Images',
-                        render: (rowData) => {
+                        title: 'Images',render: (rowData) => {
                             return (
                                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                                     {rowData.images.split(',').map(item => item.trim()).map((item) => (
-                                        <img
-                                            src={`${serverURL}/images/${item}`}
-                                            style={{ width: 40 }}
-                                        />
+                                        <img src={`${serverURL}/images/${item}`} style={{ width: 40 }}/>
                                     ))}
                                 </div>
-
                             );
                         }
                     }
