@@ -682,7 +682,7 @@ export default function DisplayAllProducts() {
                 title="List Of Product Details"
                 columns={[
                     { title: 'ID', field: 'productdetailsid', width: '3%' },
-                    { title: 'Service', render: (rowData) => <div>{rowData.servicetype} {rowData.servicename}</div> },
+                    { title: 'Service', width: '6%', render: (rowData) => <div>{rowData.servicetype} {rowData.servicename}</div> },
                     { title: 'Brand Product', render: (rowData) => <div>{rowData.brandname} {rowData.productname}</div> },
 
                     {
@@ -691,10 +691,10 @@ export default function DisplayAllProducts() {
                             <span >{rowData.productcolorname}</span>
                         </div>
                     },
-                    { title: 'Product Variant', render: (rowData) => <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}><div>{rowData.productram} GB</div><div> {rowData.productstorage}GB</div></div> },
-                    { title: 'IMEI', field: 'imei' },
+                    { title: 'Product Variant', width: '6%', render: (rowData) => <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}><div>{rowData.productram} GB</div><div> {rowData.productstorage}GB</div></div> },
                     { title: 'Status Condition Ratings', render: (rowData) => <div style={{ display: 'flex', flexDirection: 'column' }}><div>{rowData.productstatus} </div><div>{rowData.productcondition}</div> <div>{rowData.ratings}</div></div> },
-                    { title: 'Warrenty', field: 'warrenty' },
+                    { title: 'Status', width: '7%', field: 'status' },
+                    { title: 'Warrenty IMEI',render:(rowData)=><div style={{display:'flex',flexDirection:'column'}}><div>{rowData.warrenty}</div><div>{rowData.imei}</div></div> },
                     { title: <div style={{ display: 'flex', flexDirection: 'column' }}> <div>Price</div> <div>Offer Price</div> <div>MembershipPrice</div> </div>, width: '11%', render: (rowData) => <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}><div>₹-{rowData.price}</div><div>₹-{rowData.offerprice}</div> <div>₹-{rowData.membershipprice}</div></div> },
 
                     { title: 'Stock', width: '7%', field: 'stock' },
