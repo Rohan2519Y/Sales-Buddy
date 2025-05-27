@@ -57,7 +57,7 @@ router.post('/fetch_productdetail_by_product', function (req, res, next) {
 
 router.post('/edit_productdetails', function (req, res, next) {
     try {
-        pool.query("update productdetails set serviceid=?, brandid=?, productid=?, productcolorid=?, productvarientid=?, imei=?, productstatus=?, warrenty=?, ratings=?, price=?, offerprice=?, membershipprice=?, productcondition=?, description=?, stock=? where productdetailsid=?", [req.body.serviceid, req.body.brandid, req.body.productid, req.body.productcolorid, req.body.productvarientid, req.body.imei, req.body.productstatus, req.body.warrenty, req.body.ratings, req.body.price, req.body.offerprice, req.body.membershipprice, req.body.productcondition, req.body.description, req.body.stock, req.body.productdetailsid], function (error, result) {
+        pool.query("update productdetails set serviceid=?, brandid=?, productid=?, productcolorid=?, productvarientid=?, imei=?, productstatus=?, warrenty=?, ratings=?, price=?, offerprice=?, membershipprice=?, productcondition=?, description=?, stock=?,status=? where productdetailsid=?", [req.body.serviceid, req.body.brandid, req.body.productid, req.body.productcolorid, req.body.productvarientid, req.body.imei, req.body.productstatus, req.body.warrenty, req.body.ratings, req.body.price, req.body.offerprice, req.body.membershipprice, req.body.productcondition, req.body.description, req.body.stock, req.body.status, req.body.productdetailsid], function (error, result) {
             console.error("DB Error:", error);
             if (error) {
                 res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
