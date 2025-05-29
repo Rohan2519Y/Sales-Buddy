@@ -46,7 +46,17 @@ export default function DisplayAllMorePictures() {
                             <span >{rowData.productcolorname}</span>
                         </div>
                     },
-                    { title: 'Icon', render: (rowData) => <div ><img src={`${serverURL}/images/${rowData.picture}`} style={{ width: 60, height: 50, borderRadius: 15 }} /></div> }
+                    {
+                        title: 'Images', render: (rowData) => {
+                            return (
+                                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                                    {rowData.picture.split(',').map(item => item.trim()).map((item) => (
+                                        <img src={`${serverURL}/images/${item}`} style={{ width: 40 }} />
+                                    ))}
+                                </div>
+                            );
+                        }
+                    }
                 ]}
                 data={listMorePicture}
                 actions={[
