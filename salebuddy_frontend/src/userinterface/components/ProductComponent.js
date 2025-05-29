@@ -7,20 +7,21 @@ export default function ProductComponent() {
     }]
 
     const showProducts = () => {
-        return data.map((item) => {
-            return (
-                <div style={{ height: '50vh', width: '100%', background: ' #191919', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', width: '80%', height: '100%' }}>
+
+        return (
+            <div style={{ height: '50vh', width: '100%', background: ' #191919', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', width: '80%', height: '100%' }}>
+                       { data.map((item) => (
                         <div style={{ height: '85%', width: '20%', background: ' black', margin: 30, borderRadius: 10, display: "flex", justifyContent: 'center' }}>
-                            <div style={{ display: 'flex', justifyContent: 'center', height: '70%', width: '99%',position:'relative' }}>
-                                <img src={`${serverURL}/images/${item.image}`} style={{ width: '90%', height:'100%',marginTop:'7%' }} />
-                                <FavoriteBorderIcon style={{ fontSize: '250%', color: 'white',position:'absolute' ,right:'1%',top:'2%'}} />
+                            <div style={{ display: 'flex', justifyContent: 'center', height: '70%', width: '99%', position: 'relative' }}>
+                                <img src={`${serverURL}/images/${item.image}`} style={{ width: '90%', height: '100%', marginTop: '7%' }} />
+                                <FavoriteBorderIcon style={{ fontSize: '200%', color: 'white', position: 'absolute', right: '1%', top: '2%' }} />
                             </div>
                         </div>
-                    </div>
+                    ))}
                 </div>
-            )
-        })
+            </div>
+        )
     }
 
     return (<div>
