@@ -17,9 +17,9 @@ export default function ProductComponent() {
                                 <img src={`${serverURL}/images/${item.image}`} width={'90%'} style={{ marginTop: '2%', position: 'absolute' }} />
                                 <FavoriteBorderIcon style={{ fontSize: '200%', color: 'white', position: 'absolute', right: '1%', top: '2%' }} />
                             </div>
-                            <div style={{ width: '100%', height: '40%', alignItems: 'center', display: 'flex',flexDirection:'column' }}>
+                            <div style={{ width: '100%', height: '40%', alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
                                 <div style={{ width: '95%', color: 'white', justifyContent: 'center' }}>{item.productname}</div>
-                                <div style={{ width: '95%', color: 'white', justifyContent: 'center' , background: 'red'}}>
+                                <div style={{ width: '95%', color: 'white', justifyContent: 'center', background: 'red' }}>
 
                                 </div>
                             </div>
