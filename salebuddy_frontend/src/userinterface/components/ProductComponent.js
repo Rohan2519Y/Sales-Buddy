@@ -9,18 +9,18 @@ export default function ProductComponent() {
     const showProducts = () => {
 
         return (
-            <div style={{ height: '55vh', width: '100%', background: ' #191919', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ height: '50vh', width: '100%', background: ' #191919', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <div style={{ display: 'flex', alignItems: 'center', width: '80%', height: '100%' }}>
                     {data.map((item) => (
                         <div style={{ height: '100%', width: '20%', background: ' black', margin: 30, borderRadius: 10, display: "flex", justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
-                            <div style={{ display: 'flex', justifyContent: 'center', height: '50%', width: '99%', position: 'relative', marginBottom: '5%', background: 'red' }}>
+                            <div style={{ display: 'flex', justifyContent: 'center', height: '50%', width: '99%', position: 'relative', marginBottom: '5%' }}>
                                 <img src={`${serverURL}/images/${item.image}`} width={'90%'} style={{ marginTop: '2%', position: 'absolute' }} />
                                 <FavoriteBorderIcon style={{ fontSize: '200%', color: 'white', position: 'absolute', right: '1%', top: '2%' }} />
                             </div>
-                            <div style={{ width: '100%', height: '40%', alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
-                                <div style={{ width: '95%', color: 'white', justifyContent: 'center' }}>{item.productname}</div>
-                                <div style={{ width: '95%', color: 'white', justifyContent: 'center', background: 'red' }}>
-
+                            <div style={{ width: '100%', height: '40%', alignItems: 'center', display: 'flex', flexDirection: 'column',marginTop:'7%',marginBottom:'5%' }}>
+                                <div style={{ width: '90%', color: 'white', justifyContent: 'center' }}>{item.productname}</div>
+                                <div style={{ width: '90%',height:'50%', color: 'white', justifyContent: 'center',display:'flex' }}>
+                                    <div style={{fontSize:25,fontWeight:600}}>{'\u20B9'}{item.price.toFixed(2)}</div> <div style={{fontSize:20,fontWeight:400,color:'grey'}}><s>{'\u20B9'}{item.offer.toFixed(2)}</s></div>       
                                 </div>
                             </div>
                         </div>
