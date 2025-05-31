@@ -1,3 +1,5 @@
+import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
 import { serverURL } from "../../backendservices/FetchNodeServices"
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 export default function ProductComponent() {
