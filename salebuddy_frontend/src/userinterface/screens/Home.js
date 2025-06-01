@@ -5,7 +5,9 @@ import BrandSlider from "../components/BrandSlider"
 import ProductComponent from "../components/ProductComponent"
 export default function Home() {
     return (<div style={{ width: '100%', display: 'flex', flexDirection: 'column' }} >
+        <div  >
         <Header />
+        </div>
         <div style={{ width: '100%',height:'100%',overflowX: "hidden",background:' #191919'}}>
             <MainSlider />
         </div>
@@ -15,7 +17,7 @@ export default function Home() {
         <div >
         <BrandSlider />
         </div>
-        <div>
+        <div style={{width:'100%',height:'100%'}}>
         <Footer />
         </div>
     </div>

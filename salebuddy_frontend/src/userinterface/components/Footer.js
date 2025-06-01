@@ -60,6 +60,7 @@ export default function Footer() {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     const smallmatches = useMediaQuery(theme.breakpoints.down('sm'));
+    const landscape = useMediaQuery('(orientation: landscape)')
     const [expanded, setExpanded] = React.useState(false);
     const [youtube, setYoutube] = useState('white')
     const [facebook, setFacebook] = useState('white')
@@ -71,7 +72,9 @@ export default function Footer() {
         setExpanded(newExpanded ? panel : false);
     }
 
-    return (<>{smallmatches ? <>
+    return (<>
+    {landscape?<div>this is landscape</div>:<></>}
+    {smallmatches ? <>
         <div style={{ display: 'flex', width: '100%', height: 'auto', background: 'black', flexDirection: 'column', alignItems: 'center' }}>
             <div style={{ width: '90%', display: 'flex', justifyContent: 'flex-end', flexDirection: 'column', alignItems: 'flex-start', height: 130 }}>
                 <div style={{ color: 'white', fontSize: '120%', fontFamily: '"Roboto Condensed", sans-serif', fontWeight: 500, height: 27, display: 'flex', justifyContent: 'center' }}>Connect With Us</div>
