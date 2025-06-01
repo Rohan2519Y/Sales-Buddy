@@ -259,7 +259,7 @@ export default function Footer() {
         return (
             <>
                 <div style={{ width: '100%', height: '130vh', background: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                    <div style={{ width: '40%', display: 'flex', justifyContent: 'center', flexDirection: 'column', height: "40%",alignItems:'center' ,marginTop:10}}>
+                    <div style={{ width: '40%', display: 'flex', justifyContent: 'center', flexDirection: 'column', height: "40%", alignItems: 'center', marginTop: 10 }}>
                         <div style={{ color: 'white', fontSize: '130%', fontFamily: '"Roboto Condensed", sans-serif', fontWeight: 500, height: 27, display: 'flex', justifyContent: 'center' }}>Connect With Us</div>
                         <div style={{ width: '100%', height: 50, background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 5, marginTop: 1 }}>
                             <input type='text' placeholder='Enter Your Email' style={{ width: '80%', margin: 1, height: '80%', outline: 'none', border: '0px solid transparent' }} />
@@ -273,7 +273,7 @@ export default function Footer() {
                             <TwitterIcon onMouseEnter={() => setTwitter('#1DA1F2')} onMouseLeave={() => setTwitter('white')} style={{ color: twitter, cursor: 'pointer', fontSize: 35 }} />
                         </div>
                     </div>
-                    <div style={{ display: 'flex', width: '90%', height: '90%', alignItems: 'center',marginTop:10 }}>
+                    <div style={{ display: 'flex', width: '90%', height: '90%', alignItems: 'center', marginTop: 10 }}>
                         <div style={{ width: '50%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                             <div style={{ color: 'white', fontFamily: '"Archivo", sans-serif', fontWeight: 600, fontSize: '120%', height: '10%', marginLeft: 'auto', width: '90%' }}>
                                 Useful Links
