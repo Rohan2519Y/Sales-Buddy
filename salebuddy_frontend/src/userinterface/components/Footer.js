@@ -177,9 +177,9 @@ export default function Footer() {
                             <TwitterIcon onMouseEnter={() => setTwitter('#1DA1F2')} onMouseLeave={() => setTwitter('white')} style={{ color: twitter, cursor: 'pointer', fontSize: 35 }} />
                         </div>
                     </div> : <></>}
-                    <div style={{ width: '80%', height: '90%', display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
+                    <div style={{ width: '90%', height: '90%', display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
                         {matches ? <></> : <>
-                            <div style={{ width: '30%', height: '85%' }}>
+                            <div style={{ width: matches?'40%':'30%', height: '85%' }}>
                                 <div style={{ color: 'white', fontSize: '130%', fontFamily: '"Roboto Condensed", sans-serif', fontWeight: 500, height: 27 }}>Connect With Us</div>
                                 <div style={{ width: '80%', height: 40, background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 10, marginTop: 1 }}>
                                     <input type='text' placeholder='Enter Your Email' style={{ width: '80%', margin: 1, height: '80%', outline: 'none', border: '0px solid transparent' }} />
@@ -195,7 +195,7 @@ export default function Footer() {
                                 <div style={{ width: '90%', marginTop: 30, color: 'white', fontFamily: '"Roboto Condensed", sans-serif' }}>© Copyright 2025 SalesBuddy. All rights reserved</div>
                             </div>
                             <div style={{ width: 0.1, height: '85%', background: 'white' }}></div></>}
-                        <div style={{ width: matches ? '40%' : '30%', height: '85%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                        <div style={{ width: matches ? '50%' : '30%', height: '85%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                             <div style={{ color: 'white', fontFamily: '"Archivo", sans-serif', fontWeight: 600, fontSize: '120%', height: '10%', marginLeft: 'auto', width: '90%' }}>
                                 Useful Links
                             </div>
@@ -224,7 +224,7 @@ export default function Footer() {
                             </div>
                         </div>
                         <div style={{ width: 0.1, height: '85%', background: 'white' }}></div>
-                        <div style={{ width: matches ? '40%' : '30%', height: '85%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                        <div style={{ width: matches ? '50%' : '30%', height: '85%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                             <div style={{ color: 'white', fontFamily: '"Archivo", sans-serif', fontWeight: 600, fontSize: '120%', height: '10%', marginLeft: 'auto', width: '90%' }}>
                                 Products
                             </div>

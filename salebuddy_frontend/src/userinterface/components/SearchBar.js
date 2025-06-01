@@ -5,7 +5,7 @@ import { useTheme } from '@mui/material/styles';
 export default function SearchBar() {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'));
-    const landscape = useMediaQuery('(orientation: landscape)')
+    const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)')
    if(!landscape){
     return (
         <div style={{marginBottom:5 , width: matches?'90%':'50%', display: 'flex', alignItems: 'center',justifyContent:matches?'center':'' }}>
