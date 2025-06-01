@@ -60,7 +60,7 @@ export default function Footer() {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     const smallmatches = useMediaQuery(theme.breakpoints.down('sm'));
-    const landscape = useMediaQuery('(orientation: landscape)')
+    const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
     const [expanded, setExpanded] = React.useState(false);
     const [youtube, setYoutube] = useState('white')
     const [facebook, setFacebook] = useState('white')
@@ -255,7 +255,7 @@ export default function Footer() {
                 </div></>}</>
         )
     }
-    else {
+    if(landscape) {
         return (
             <>
                 <div style={{ width: '100%', height: '130vh', background: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
