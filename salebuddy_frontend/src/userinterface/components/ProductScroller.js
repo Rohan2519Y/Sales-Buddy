@@ -4,35 +4,44 @@ import Slider from "react-slick";
 import { serverURL } from "../../backendservices/FetchNodeServices"
 import MainsliderForward from "./MainsliderForward";
 import MainsliderBack from "./MainsliderBack";
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 import { useRef } from "react";
+import ProductComponent from "./ProductComponent";
 
-export default function MainSlider() {
-    const ref=useRef()
+export default function ProductScroller({ data }) {
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.down('md'));
+    const smatches = useMediaQuery(theme.breakpoints.down('sm'));
+    const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
+    const ref = useRef()
+
     var settings = {
         infinite: true,
         speed: 1500,
-        slidesToShow: 1,
+        slidesToShow: 4,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 5000,
         pauseOnHover: false
     };
-    var data = { id: 1, images: 'https://res.cloudinary.com/dio6iadsq/image/upload/v1748756295/b1_nhwg7z.png,https://res.cloudinary.com/dio6iadsq/image/upload/v1748756420/b8_j4v3ku.png,https://res.cloudinary.com/dio6iadsq/image/upload/v1748756421/b2_woblzn.png,https://res.cloudinary.com/dio6iadsq/image/upload/v1748756422/b7_eegm6g.png,https://res.cloudinary.com/dio6iadsq/image/upload/v1748756423/b4_wd8tnj.png,https://res.cloudinary.com/dio6iadsq/image/upload/v1748756423/b3_uxtm0q.png,https://res.cloudinary.com/dio6iadsq/image/upload/v1748756424/b5_inflhl.png,https://res.cloudinary.com/dio6iadsq/image/upload/v1748756425/b6_q2vham.png' }
-    var images = data?.images?.split(',')
-    const showImages = () => {
-        return images.map((item, i) => {
-            return <div style={{width:'100%',margin:0,overflowY:'hidden',padding:0}}>
-                <img src={item} style={{ width: '100%' }} />
-            </div>
-        })
-    }
+
+    
+
     return (
-        <div style={{ position: 'relative',margin:0,padding:0 }}>
-            <MainsliderForward mainslider={ref}/> 
-            <Slider ref={ref} {...settings} style={{ width: '100%',margin:0,padding:0 }}>
-                {showImages()}
+        <div style={{ position: 'relative', margin: 0, padding: 0 }}>
+            <MainsliderForward mainslider={ref} />
+            <Slider ref={ref} {...settings}>
+                {Array.isArray(data) && data.map((item, i) => (
+                    <div key={i} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#191919', height: landscape ? '90vh' : smatches ? '40vh' : '52vh' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', width: smatches ? '90%' : '80%', height: '100%', justifyContent: 'center' }}>
+                        <ProductComponent item={item} i={i} />
+                         </div>
+                    </div>
+                ))}
             </Slider>
-            <MainsliderBack mainslider={ref}/> 
+
+            <MainsliderBack mainslider={ref} />
         </div>
     )
 }
