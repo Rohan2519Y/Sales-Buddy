@@ -4,21 +4,31 @@ import Footer from "../components/Footer"
 import BrandSlider from "../components/BrandSlider"
 import ProductComponent from "../components/ProductComponent"
 export default function Home() {
+
+    var data = [{
+        productdetailid: 1, productname: 'SAMSUNG Galaxy S25 Ultra 5G (12GB RAM, 512GB, Titanium Gray)', variant: '128 GB', color: 'Teal',
+        image: 'https://res.cloudinary.com/dio6iadsq/image/upload/v1748777796/15_pro_max_p1iwhz.jpg', ratings: 3.3, price: 78000.00, offer: 70000.00
+    },
+    {
+        productdetailid: 1, productname: 'SAMSUNG Galaxy S25 Ultra 5G (12GB RAM, 512GB, Titanium Gray)', variant: '128 GB', color: 'Teal',
+        image: 'https://res.cloudinary.com/dio6iadsq/image/upload/v1748778280/sam_z6_v6ubdl.png', ratings: 3.3, price: 78000.00, offer: 70000.00
+    }]
+
     return (<div style={{ width: '100%', display: 'flex', flexDirection: 'column' }} >
         <div  >
-        <Header />
+            <Header />
         </div>
-        <div style={{ width: '100%',height:'100%',overflowX: "hidden",background:' #191919'}}>
+        <div style={{ width: '100%', height: '100%', overflowX: "hidden", background: ' #191919' }}>
             <MainSlider />
         </div>
         <div>
-        <ProductComponent />
+            <ProductComponent />
         </div>
         <div >
-        <BrandSlider />
+            <BrandSlider />
         </div>
-        <div style={{width:'100%',height:'100%'}}>
-        <Footer />
+        <div style={{ width: '100%', height: '100%' }}>
+            <Footer />
         </div>
     </div>
     )

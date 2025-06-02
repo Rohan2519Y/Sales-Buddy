@@ -13,14 +13,7 @@ export default function ProductComponent() {
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
     const [heart, setHeart] = useState(null)
 
-    var data = [{
-        productdetailid: 1, productname: 'SAMSUNG Galaxy S25 Ultra 5G (12GB RAM, 512GB, Titanium Gray)', variant: '128 GB', color: 'Teal',
-        image: 'https://res.cloudinary.com/dio6iadsq/image/upload/v1748777796/15_pro_max_p1iwhz.jpg', ratings: 3.3, price: 78000.00, offer: 70000.00
-    },
-    {
-        productdetailid: 1, productname: 'SAMSUNG Galaxy S25 Ultra 5G (12GB RAM, 512GB, Titanium Gray)', variant: '128 GB', color: 'Teal',
-        image: 'https://res.cloudinary.com/dio6iadsq/image/upload/v1748778280/sam_z6_v6ubdl.png', ratings: 3.3, price: 78000.00, offer: 70000.00
-    }]
+    
 
     const showProducts = () => {
         return (
