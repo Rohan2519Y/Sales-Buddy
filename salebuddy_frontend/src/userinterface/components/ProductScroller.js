@@ -19,29 +19,30 @@ export default function ProductScroller({ data }) {
     var settings = {
         infinite: true,
         speed: 1500,
-        slidesToShow: 4,
+        slidesToShow: smatches ? 2 : matches ? 3 : 4,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 5000,
         pauseOnHover: false
     };
 
-    
+
 
     return (
-        <div style={{ position: 'relative', margin: 0, padding: 0 }}>
+        <div style={{ width: '80%', margin: '0 auto', padding: 0 }}>
             <MainsliderForward mainslider={ref} />
             <Slider ref={ref} {...settings}>
-                {Array.isArray(data) && data.map((item, i) => (
-                    <div key={i} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#191919', height: landscape ? '90vh' : smatches ? '40vh' : '52vh' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', width: smatches ? '90%' : '80%', height: '100%', justifyContent: 'center' }}>
-                        <ProductComponent item={item} i={i} />
-                         </div>
+                {data.map((item, i) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: landscape ? '90vh' : smatches ? '40vh' : '52vh', width: '100%', }}  >
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', }}>
+                                <ProductComponent item={item} i={i} />
+                            </div>
+                        </div>
                     </div>
                 ))}
             </Slider>
-
             <MainsliderBack mainslider={ref} />
         </div>
-    )
+    );
 }

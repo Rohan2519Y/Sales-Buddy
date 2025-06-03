@@ -29,7 +29,7 @@ export default function Home() {
         <div style={{ width: '100%', height: '100%', overflowX: "hidden", background: ' #191919' }}>
             <MainSlider />
         </div>
-        <div>
+        <div style={{ width: '100%', height: '100%', overflowX: "hidden", background: ' #191919' }}>
             <ProductScroller data={data}/>
         </div>
         <div >
