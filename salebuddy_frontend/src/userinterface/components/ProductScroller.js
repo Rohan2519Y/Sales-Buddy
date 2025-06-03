@@ -29,8 +29,6 @@ export default function ProductScroller({ data, title }) {
         arrows: false
     };
 
-
-
     return (<>
         <div style={{ width: '100%', color: 'white', height: '10vh', display: 'flex', alignItems: 'center', fontSize: matches ? '170%' : '200%', justifyContent: 'center' }}>
             <div style={{ width: matches?'75%':'78%' }}> {title}</div>
