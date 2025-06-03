@@ -1,8 +1,8 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { serverURL } from "../../backendservices/FetchNodeServices"
-import ProductScrollerFront from './ProductScrollerFront'
+import { serverURL } from "../../backendservices/FetchNodeServices";
+import ProductScrollerFront from './ProductScrollerFront';
 import ProductScrollerBack from "./ProductScrollerBack";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
