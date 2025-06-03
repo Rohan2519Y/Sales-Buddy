@@ -2,8 +2,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { serverURL } from "../../backendservices/FetchNodeServices"
-import MainsliderForward from "./MainsliderForward";
-import MainsliderBack from "./MainsliderBack";
+import ProductScrollerFront from './ProductScrollerFront'
+import ProductScrollerBack from "./ProductScrollerBack";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { useRef } from "react";
@@ -23,26 +23,29 @@ export default function ProductScroller({ data }) {
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 5000,
-        pauseOnHover: false
+        pauseOnHover: false,
+        arrows: false
     };
 
 
 
-    return (
-        <div style={{ width: '80%', margin: '0 auto', padding: 0 }}>
-            <MainsliderForward mainslider={ref} />
-            <Slider ref={ref} {...settings}>
-                {data.map((item, i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: landscape ? '90vh' : smatches ? '40vh' : '52vh', width: '100%', }}  >
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', }}>
-                                <ProductComponent item={item} i={i} />
+    return (<>
+        <div style={{ display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '9%', display: 'flex',justifyContent:'flex-end' }}><ProductScrollerBack productScroller={ref} /></div>
+            <div style={{ width: '82%', margin: '0 auto', padding: 0, position: 'relative' }}>
+                <Slider ref={ref} {...settings}>
+                    {data.map((item, i) => (
+                        <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: landscape ? '90vh' : smatches ? '40vh' : '52vh', width: '100%', }}  >
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', }}>
+                                    <ProductComponent item={item} i={i} />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
-            </Slider>
-            <MainsliderBack mainslider={ref} />
+                    ))}
+                </Slider>
+            </div>
+            <div style={{ width: '9%', display: 'flex'}}><ProductScrollerFront productScroller={ref} /></div>
         </div>
-    );
+    </>);
 }
