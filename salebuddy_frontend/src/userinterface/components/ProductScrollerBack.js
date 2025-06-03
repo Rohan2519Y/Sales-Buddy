@@ -11,7 +11,7 @@ export default function ProductScrollerBack({productScroller}){
         const matches = useMediaQuery(theme.breakpoints.down('md'));
     
     return(<>
-    {matches?<></>: <div onClick={handleBack} style={{ width: '50%', height: '9%', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', right: '0.1%'}}>
+    {matches?<></>: <div onClick={handleBack} style={{ width: 'auto', height: '9%', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', right: '0.1%'}}>
                 <div style={{ display: 'flex', width: '100%' }}><ArrowBackIosNewIcon style={{ width: '100%', fontSize: '230%', color: 'white' }} /></div>
             </div>}</>)
 }

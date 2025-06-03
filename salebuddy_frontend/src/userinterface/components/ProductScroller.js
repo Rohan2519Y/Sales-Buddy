@@ -11,6 +11,8 @@ import ProductComponent from "./ProductComponent";
 
 export default function ProductScroller({ data }) {
     const theme = useTheme();
+    const md = useMediaQuery('(max-width:1200px)');
+const sm = useMediaQuery('(max-width:700px)');
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
@@ -19,7 +21,7 @@ export default function ProductScroller({ data }) {
     var settings = {
         infinite: true,
         speed: 1500,
-        slidesToShow: smatches ? 2 : matches ? 3 : 4,
+        slidesToShow: sm ? 2 : md ? 3 : 4,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 5000,
