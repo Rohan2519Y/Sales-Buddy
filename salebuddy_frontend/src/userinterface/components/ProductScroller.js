@@ -11,7 +11,7 @@ import ProductComponent from "./ProductComponent";
 
 export default function ProductScroller({ data, title }) {
     const theme = useTheme();
-    const md = useMediaQuery('(max-width:1200px)');
+    const md = useMediaQuery('(max-width:1250px)');
     const sm = useMediaQuery('(max-width:700px)');
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
