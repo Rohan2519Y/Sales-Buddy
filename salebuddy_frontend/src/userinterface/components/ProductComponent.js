@@ -14,7 +14,7 @@ export default function ProductComponent({ item, i }) {
     const [heart, setHeart] = useState(null)
 
     return (<>
-        <div style={{ height: smatches ? 250 : matches ? 300 : 350, width: matches ? 170 : 220, background: ' black', margin: '3%', borderRadius: 10, display: "flex", justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
+        <div style={{ height: smatches ? 250 : matches ? 300 : 350, width: matches ? 170 : '100%', background: ' black', marginLeft: '3%',marginRight: '3%', borderRadius: 10, display: "flex", justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
             <div style={{ display: 'flex', justifyContent: 'center', height: '60%', width: '90%', position: 'relative', alignItems: 'center' }}>
                 <img src={item.image} width={'75%'} style={{ position: 'absolute' }} />
                 <FavoriteBorderIcon onMouseEnter={!smatches ? () => setHeart(i) : undefined} onMouseLeave={!smatches ? () => setHeart(null) : undefined} style={{ fontSize: matches ? '150%' : '200%', color: heart == i ? ' #00e9bf' : 'white', position: 'absolute', right: '-4%', top: '-4%', cursor: landscape ? '' : smatches ? '' : 'pointer' }} />
