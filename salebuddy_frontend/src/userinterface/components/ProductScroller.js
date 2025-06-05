@@ -31,11 +31,11 @@ export default function ProductScroller({ data, title }) {
 
     return (<>
         <div style={{ width: '100%', color: 'white', height: '10vh', display: 'flex', alignItems: 'center', fontSize: matches ? '170%' : '200%', justifyContent: 'center' }}>
-            <div style={{ width: matches?'75%':'78%' }}> {title}</div>
+            <div style={{ width: smatches?'90%':md?'90%':'75%',marginLeft: md?'3%':'3.5%',fontFamily: '"Inter", sans-serif',height:'100%',display:'flex',alignItems:'center',fontSize:'90%' }}> {title}</div>
         </div>
         <div style={{ display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{ width: '9%', display: 'flex', justifyContent: 'flex-end' }}><ProductScrollerBack productScroller={ref} /></div>
-            <div style={{ width: smatches?'90%':'74%', margin: '0 auto', padding: 0, position: 'relative' }}>
+            {sm?<></>:<div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}><ProductScrollerBack productScroller={ref} /></div>}
+            <div style={{ width: smatches?'90%':md?'90%':'74%', margin: '0 auto', padding: 0, position: 'relative' }}>
                 <Slider ref={ref} {...settings}>
                     {data.map((item, i) => (
                         <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: landscape ? '90vh' : smatches ? '40vh' : '52vh', width: '100%', }}  >
@@ -48,7 +48,7 @@ export default function ProductScroller({ data, title }) {
                     ))}
                 </Slider>
             </div>
-            <div style={{ width: '9%', display: 'flex' }}><ProductScrollerFront productScroller={ref} /></div>
+            {sm?<></>:<div style={{ width: '100%', display: 'flex'}}><ProductScrollerFront productScroller={ref} /></div>}
         </div>
     </>);
 }
