@@ -35,7 +35,7 @@ export default function ProductScroller({ data, title }) {
         </div>
         <div style={{ display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
             <div style={{ width: '9%', display: 'flex', justifyContent: 'flex-end' }}><ProductScrollerBack productScroller={ref} /></div>
-            <div style={{ width: smatches?'90%':'82%', margin: '0 auto', padding: 0, position: 'relative' }}>
+            <div style={{ width: smatches?'90%':'74%', margin: '0 auto', padding: 0, position: 'relative' }}>
                 <Slider ref={ref} {...settings}>
                     {data.map((item, i) => (
                         <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: landscape ? '90vh' : smatches ? '40vh' : '52vh', width: '100%', }}  >
