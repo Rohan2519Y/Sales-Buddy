@@ -28,8 +28,8 @@ export default function ProductComponent({ item, i }) {
                     <div style={{ width: '100%', display: 'flex', height: '70%', justifyContent: 'center' }}><div style={{ width: '90%', fontSize: landscape ? '75%' : smatches ? '75%' : matches ? '80%' : "88%", fontWeight: 400, color: 'grey', height: '100%', display: 'flex' }}><s>{'\u20B9'}{item.offer.toFixed(2)}</s></div></div>
                 </div>
                 <div style={{ display: 'flex', width: '90%' }}>
-                    {smatches ? <Rating name="half-rating-read" defaultValue={item.ratings} precision={0.1} readOnly icon={<StarIcon sx={{ color: '#00e9bf' }} style={{fontSize:'95%'}}/>} emptyIcon={<StarIcon sx={{ color: 'grey' }} style={{fontSize:'95%'}} />} /> :
-                        <Rating name="half-rating-read"  defaultValue={item.ratings} precision={0.1} readOnly icon={<StarIcon sx={{ color: '#00e9bf' }} />} emptyIcon={<StarIcon sx={{ color: 'grey' }} />} />}
+                    {smatches ? <Rating name="half-rating-read" defaultValue={item.ratings} precision={0.1} readOnly icon={<StarIcon sx={{ color: '#00e9bf' }} style={{ fontSize: '95%' }} />} emptyIcon={<StarIcon sx={{ color: 'grey' }} style={{ fontSize: '95%' }} />} /> :
+                        <Rating name="half-rating-read" defaultValue={item.ratings} precision={0.1} readOnly icon={<StarIcon sx={{ color: '#00e9bf' }} />} emptyIcon={<StarIcon sx={{ color: 'grey' }} />} />}
                 </div>
             </div>
         </div>
