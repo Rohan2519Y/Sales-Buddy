@@ -1,5 +1,5 @@
 import Header from "../components/Header";
-import Dropdown from '../components/Dropdown'
+import MultipleDropdown from "../components/MultipleDropdown";
 
 export default function ProductList() {
     return (
@@ -8,7 +8,7 @@ export default function ProductList() {
                 <Header />
             </div>
             <div>
-                <Dropdown/>
+                <MultipleDropdown/>
             </div>
         </div>
     )
