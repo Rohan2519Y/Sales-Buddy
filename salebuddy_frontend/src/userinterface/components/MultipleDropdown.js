@@ -9,8 +9,8 @@ export default function MultipleDropdown() {
     const discount = ['BELOW 20%', '20% TO 40%', '40% TO 60%', '60% TO 80%', '80% AND ABOVE']
     const delivery = ['EXPRESS DELIVERY', 'HOME DELIVERY']
     return (<>
-        <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{ width: '80%',display:'flex' }}>
+        <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center',height:60 }}>
+            <div style={{ width: '80%',display:'flex',overflowX:'auto',whiteSpace:'nowrap',overflowY:'visible',scrollbarWidth:'none',WebkitOverflowScrolling: 'touch',msOverflowStyle: 'none'}}>
                 <div style={{ margin: '1%' }}>
                     <Dropdown data={catagories} title='Categories' />
                 </div>
