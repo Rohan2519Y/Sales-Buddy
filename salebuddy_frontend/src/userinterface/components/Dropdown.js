@@ -17,7 +17,7 @@ export default function Dropdown({ data, title }) {
 
     return (
         <div style={{ position: 'relative', display: 'inline-block' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 140, height: 35, background: '#373737', borderRadius: 10, margin: '0.2%' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 35, background: '#373737', borderRadius: 10, margin: '0.2%' }}>
                 <button onClick={() => setOpen(!open)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: 130, height: '70%', outline: 'none', background: '#393939', border: 'none', borderRadius: 8, color: ' #fff' }}>
                     {title} <KeyboardArrowDownIcon style={{ fontSize: '100%' }} />
                 </button>
