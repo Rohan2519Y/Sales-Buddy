@@ -1,8 +1,15 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Checkbox from '@mui/material/Checkbox';
 import { useState } from 'react';
-
-export default function Dropdown({ data,title }) {
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+export default function Dropdown({ data, title }) {
+    const theme = useTheme();
+    const md = useMediaQuery('(max-width:1250px)');
+    const sm = useMediaQuery('(max-width:700px)');
+    const matches = useMediaQuery(theme.breakpoints.down('md'));
+    const smatches = useMediaQuery(theme.breakpoints.down('sm'));
+    const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
 
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [open, setOpen] = useState(false)
