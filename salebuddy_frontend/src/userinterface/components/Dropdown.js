@@ -9,7 +9,7 @@ export default function Dropdown({ data, title, isOpen, onToggle }) {
 
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const maxVisibleItems = 5;
-    const itemHeight = 40; // matches your item container height
+    const itemHeight = 40;
 
     return (
         <div style={{ position: 'relative', display: 'inline-block' }}>
