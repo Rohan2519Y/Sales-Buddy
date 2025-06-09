@@ -14,8 +14,8 @@ export default function Dropdown({ data, title, isOpen, onToggle }) {
     return (
         <div style={{ position: 'relative', display: 'inline-block' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 35, background: '#373737', borderRadius: 10, margin: '0.2%' }}>
-                <button onClick={onToggle} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: 130, height: '70%', outline: 'none', background: '#393939', border: 'none', borderRadius: 8, color: '#fff', cursor: 'pointer' }}>
-                    {title} <KeyboardArrowDownIcon style={{ fontSize: '100%' }} />
+                <button onClick={onToggle} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', marginLeft:10, height: '70%', outline: 'none', background: '#393939', border: 'none', borderRadius: 8, color: '#fff', cursor: 'pointer',whiteSpace:'nowrap',overflow: 'hidden',  }}>
+                    <div style={{width:'70%',marginRight:10,display:'flex',justifyContent:'center',alignItems:'center'}}>{title}</div> <div style={{width:'30%',display:'flex',justifyContent:'center',alignItems:'center'}}><KeyboardArrowDownIcon style={{ fontSize: '100%' }} /></div>
                 </button>
             </div>
             {isOpen && !md && (
