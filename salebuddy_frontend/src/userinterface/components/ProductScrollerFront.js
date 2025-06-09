@@ -6,7 +6,7 @@ export default function ProductScrollerForward({productScroller}) {
 
     const [slider,setSlider]=useState(' #576574')
     const handleForward=()=>{
-        productScroller.current.slickNext();
+        productScroller?.current?.slickNext();
     }
      const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'));
