@@ -2,11 +2,11 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Checkbox from '@mui/material/Checkbox';
 import { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles'
 
 export default function Dropdown({ data, title }) {
     const theme = useTheme();
-    const md = useMediaQuery('(max-width:1250px)');
+    const md = useMediaQuery('(max-width:1200px)');
     const sm = useMediaQuery('(max-width:700px)');
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -22,8 +22,8 @@ export default function Dropdown({ data, title }) {
                     {title} <KeyboardArrowDownIcon style={{ fontSize: '100%' }} />
                 </button>
             </div>
-            {open && (
-                <div style={{ position: 'absolute', top: '100%', left: 0, zIndex: 5 }}>
+            {open && !md &&(
+                <div style={{ position: 'absolute', top: '100%', left: 0, zIndex: 5,marginTop:'1%' }}>
                     {data.map((item) => (
                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: 170, }}>
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
