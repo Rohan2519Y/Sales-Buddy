@@ -1,5 +1,5 @@
 import Header from "../components/Header";
-import MultipleDropdown from "../components/MultipleDropdown";
+import MultipleDropdown from "../components/ProductListComponents/MultipleDropdown";
 
 export default function ProductList() {
 
