@@ -5,10 +5,12 @@ import { useState } from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import Checkbox from '@mui/material/Checkbox';
+import Filter from "./Filter";
 
 export default function MultipleDropdown() {
     const theme = useTheme();
     const md = useMediaQuery('(max-width:1200px)');
+    const matches = useMediaQuery(theme.breakpoints.down('md'));
 
     const [openDropdown, setOpenDropdown] = useState(null);
     const [open, setOpen] = useState(false);
@@ -16,8 +18,8 @@ export default function MultipleDropdown() {
     const toggleDropdown = (dropdownId) => {
         setOpenDropdown((prev) => (prev === dropdownId ? null : dropdownId));
     };
-    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
+    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const categories = ['Android', 'iOS', 'Windows', 'Mac'];
     const price = ['0 TO 9,999', '10,000 TO 19,999', '20,000 TO 29,999', '30,000 TO 39,999', '40,000 TO 49,999', '50,000 TO 59,999', '60,000 TO 69,999', '70,000 TO 79,999', '80,000 TO 89,999', '90,000 TO 1,00,000']
     const storage = ['64GB', '128GB', '256GB', '512GB', '1TB'];
@@ -26,7 +28,7 @@ export default function MultipleDropdown() {
 
     return (
         <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{ width: '85%', display: 'flex', overflowX: md ? 'auto' : '', scrollbarWidth: md ? 'none' : '' }}>
+            <div style={{ width: matches?'90%':'85%', display: 'flex', overflowX: md ? 'auto' : '', scrollbarWidth: md ? 'none' : '' }}>
                 <div style={{ margin: 5, cursor: 'pointer' }}>
                     <Dropdown
                         data={categories}
@@ -70,7 +72,7 @@ export default function MultipleDropdown() {
                     />
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 35, background: '#373737', borderRadius: 10, margin: 5 }}>
-                    <button style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: 130, height: '70%', outline: 'none', background: '#393939', border: 'none', borderRadius: 8, color: '#fff', cursor: 'pointer' }}>
+                    <button onClick={()=>{<Filter/>}} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: 130, height: '70%', outline: 'none', background: '#393939', border: 'none', borderRadius: 8, color: '#fff', cursor: 'pointer' }}>
                         All Filters <FilterListIcon style={{ fontSize: '140%' }} />
                     </button>
                 </div>

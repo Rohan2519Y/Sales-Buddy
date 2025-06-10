@@ -4,7 +4,7 @@ import MultipleDropdown from "../components/ProductListComponents/MultipleDropdo
 export default function ProductList() {
 
     return (
-        <div style={{ width: '100%', display: 'flex',flexDirection:'column',background:' #191919' }}>
+        <div style={{ width: '100%', display: 'flex',flexDirection:'column',background:' #191919',height:'100vh' }}>
             <div  >
                 <Header />
             </div>
