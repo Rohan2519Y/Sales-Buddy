@@ -14,29 +14,61 @@ export default function MultipleDropdown() {
 
     const [openDropdown, setOpenDropdown] = useState(null);
     const [open, setOpen] = useState(false);
-    const [showFilter, setShowFilter] = useState(false);
+    const [showFilter, setShowFilter] = useState(false); // Add state for filter visibility
 
     const toggleDropdown = (dropdownId) => {
         setOpenDropdown((prev) => (prev === dropdownId ? null : dropdownId));
     };
 
     const handleFilterClick = () => {
-        setShowFilter(!showFilter);
+        setShowFilter(!showFilter); // Toggle filter visibility
+        // Or you can add any other logic you want when filter button is clicked
+        console.log('Filter button clicked!');
     };
+
     const handleCloseFilter = () => {
         setShowFilter(false);
     };
-
-    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const categories = ['Android', 'iOS', 'Windows', 'Mac'];
     const price = ['0 TO 9,999', '10,000 TO 19,999', '20,000 TO 29,999', '30,000 TO 39,999', '40,000 TO 49,999', '50,000 TO 59,999', '60,000 TO 69,999', '70,000 TO 79,999', '80,000 TO 89,999', '90,000 TO 1,00,000']
     const storage = ['64GB', '128GB', '256GB', '512GB', '1TB'];
     const brands = ["Apple", "Samsung", "OnePlus", "Xiaomi", "Realme", "Oppo", "Vivo", "Motorola", "Nokia", "Google", "Huawei", "Sony", "Asus", "Infinix", "Tecno", "Lenovo", "Honor", "iQOO", "Lava", "Micromax"];
     const tower = ['5G', '4G', '3G', '2G'];
+    // Prepare filter data for the Filter component
+    const filterData = [
+        {
+            key: 'categories',
+            title: 'Categories',
+            data: categories
+        },
+        {
+            key: 'price',
+            title: 'Price',
+            data: price
+        },
+        {
+            key: 'brands',
+            title: 'Brands',
+            data: brands
+        },
+        {
+            key: 'storage',
+            title: 'Internal Storage',
+            data: storage
+        },
+        {
+            key: 'tower',
+            title: 'Cellular Technology',
+            data: tower
+        }
+    ];
+
+   
 
     return (
-        <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center',height:90 }}>
-            <div style={{ width: matches ? '90%' : '85%', display: 'flex', overflowX: md ? 'auto' : '', scrollbarWidth: md ? 'none' : '' }}>
+        <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: matches?'90%':'85%', display: 'flex', overflowX: md ? 'auto' : '', scrollbarWidth: md ? 'none' : '' }}>
                 <div style={{ margin: 5, cursor: 'pointer' }}>
                     <Dropdown
                         data={categories}
@@ -91,10 +123,10 @@ export default function MultipleDropdown() {
                         </button>
                     </div>
                     {open && !md && (
-                        <div style={{ position: 'absolute', top: '100%', left: 0, zIndex: 5, marginTop: '1%', scrollbarWidth: 'thin', backgroundColor: '#373737' }}>
-                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: 170, flexDirection: 'column' }}>
+                        <div style={{ position: 'absolute', top: '100%', left: 0, zIndex: 5, marginTop: '1%', scrollbarWidth: 'thin', backgroundColor: ' #373737',overflowY:'visible' }}>
+                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: 170,flexDirection:'column' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
-                                    <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: '#12daa8' }} /></div>
+                                    <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: ' #12daa8' }} /></div>
                                     <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Latest Arrival</div>
                                 </div>
                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
@@ -118,7 +150,8 @@ export default function MultipleDropdown() {
                     )}
                 </div>
             </div>
-            {showFilter && <Filter onClose={handleCloseFilter} />}
+
+            {showFilter && <Filter onClose={handleCloseFilter} filterData={filterData} />}
         </div>
     );
 }
