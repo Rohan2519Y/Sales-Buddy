@@ -35,7 +35,7 @@ export default function MultipleDropdown() {
     const tower = ['5G', '4G', '3G', '2G'];
 
     return (
-        <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center',height:90 }}>
             <div style={{ width: matches ? '90%' : '85%', display: 'flex', overflowX: md ? 'auto' : '', scrollbarWidth: md ? 'none' : '' }}>
                 <div style={{ margin: 5, cursor: 'pointer' }}>
                     <Dropdown
