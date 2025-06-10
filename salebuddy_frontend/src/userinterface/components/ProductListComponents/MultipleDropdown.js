@@ -14,9 +14,17 @@ export default function MultipleDropdown() {
 
     const [openDropdown, setOpenDropdown] = useState(null);
     const [open, setOpen] = useState(false);
+    const [showFilter, setShowFilter] = useState(false);
 
     const toggleDropdown = (dropdownId) => {
         setOpenDropdown((prev) => (prev === dropdownId ? null : dropdownId));
+    };
+
+    const handleFilterClick = () => {
+        setShowFilter(!showFilter);
+    };
+    const handleCloseFilter = () => {
+        setShowFilter(false);
     };
 
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -28,7 +36,7 @@ export default function MultipleDropdown() {
 
     return (
         <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{ width: matches?'90%':'85%', display: 'flex', overflowX: md ? 'auto' : '', scrollbarWidth: md ? 'none' : '' }}>
+            <div style={{ width: matches ? '90%' : '85%', display: 'flex', overflowX: md ? 'auto' : '', scrollbarWidth: md ? 'none' : '' }}>
                 <div style={{ margin: 5, cursor: 'pointer' }}>
                     <Dropdown
                         data={categories}
@@ -72,7 +80,7 @@ export default function MultipleDropdown() {
                     />
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 35, background: '#373737', borderRadius: 10, margin: 5 }}>
-                    <button onClick={()=>{<Filter/>}} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: 130, height: '70%', outline: 'none', background: '#393939', border: 'none', borderRadius: 8, color: '#fff', cursor: 'pointer' }}>
+                    <button onClick={handleFilterClick} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: 130, height: '70%', outline: 'none', background: '#393939', border: 'none', borderRadius: 8, color: '#fff', cursor: 'pointer' }}>
                         All Filters <FilterListIcon style={{ fontSize: '140%' }} />
                     </button>
                 </div>
@@ -84,7 +92,7 @@ export default function MultipleDropdown() {
                     </div>
                     {open && !md && (
                         <div style={{ position: 'absolute', top: '100%', left: 0, zIndex: 5, marginTop: '1%', scrollbarWidth: 'thin', backgroundColor: '#373737' }}>
-                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: 170,flexDirection:'column' }}>
+                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: 170, flexDirection: 'column' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
                                     <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: '#12daa8' }} /></div>
                                     <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Latest Arrival</div>
@@ -110,6 +118,7 @@ export default function MultipleDropdown() {
                     )}
                 </div>
             </div>
+            {showFilter && <Filter onClose={handleCloseFilter} />}
         </div>
     );
 }
