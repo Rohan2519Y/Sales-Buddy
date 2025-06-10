@@ -14,8 +14,8 @@ export default function Dropdown({ data, title, isOpen, onToggle }) {
     return (
         <div style={{ position: 'relative', display: 'inline-block' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 35, background: '#373737', borderRadius: 10, margin: '0.2%' }}>
-                <button onClick={onToggle} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', marginLeft:10, height: '70%', outline: 'none', background: '#393939', border: 'none', borderRadius: 8, color: '#fff', cursor: 'pointer',whiteSpace:'nowrap',overflow: 'hidden',  }}>
-                    <div style={{width:'70%',marginRight:10,display:'flex',justifyContent:'center',alignItems:'center'}}>{title}</div> <div style={{width:'30%',display:'flex',justifyContent:'center',alignItems:'center'}}><KeyboardArrowDownIcon style={{ fontSize: '100%' }} /></div>
+                <button onClick={onToggle} style={{ display: 'flex', width:'auto',alignItems: 'center', justifyContent: 'space-evenly', marginLeft:10, height: '70%', outline: 'none', background: '#393939', border: 'none', borderRadius: 8, color: '#fff', cursor: 'pointer',whiteSpace:'nowrap',overflow: 'hidden',  }}>
+                    <div style={{width:'80%',marginRight:10,display:'flex',justifyContent:'center',alignItems:'center'}}>{title}</div> <div style={{width:'20%',display:'flex',justifyContent:'center',alignItems:'center'}}><KeyboardArrowDownIcon style={{ fontSize: '100%' }} /></div>
                 </button>
             </div>
             {isOpen && !md && (
@@ -23,8 +23,8 @@ export default function Dropdown({ data, title, isOpen, onToggle }) {
                     {data.map((item) => (
                         <div key={item} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: 170 }}>
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
-                                <div style={{ width: '30%' }}><Checkbox {...label} style={{ color: '#12daa8' }} /></div>
-                                <div style={{ width: '70%' }}>{item}</div>
+                                <div style={{ width: '20%',display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: '#12daa8' }} /></div>
+                                <div style={{ width: '80%',display: 'flex',alignItems: 'center', }}>{item}</div>
                             </div>
                         </div>
                     ))}
