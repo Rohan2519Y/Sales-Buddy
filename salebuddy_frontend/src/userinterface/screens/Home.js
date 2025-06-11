@@ -3,14 +3,24 @@ import MainSlider from "../components/MainSlider"
 import Footer from "../components/Footer"
 import BrandSlider from "../components/BrandSlider"
 import ProductScroller from "../components/ProductScroller"
-import { useState } from "react"
-import { postData } from "../../backendservices/FetchNodeServices"
+import { useEffect, useState } from "react"
+import { getData, postData } from "../../backendservices/FetchNodeServices"
 export default function Home() {
 
-    const [brandList,setBrandList]=useState([])
-    const fetchBrands=async()=>{
-        var response=await postData('/userinterface/fetch_brands_userinterface')
+    const [brandList, setBrandList] = useState([])
+    const fetchBrands = async () => {
+        var response = await getData('userinterface/userinterface_fetch_brands')
+        if (response.status) {
+            setBrandList(response.data)
+        }
+        else {
+            alert(response.message)
+        }
     }
+
+    useEffect(function () {
+        fetchBrands()
+    }, [])
 
     var data = [{
         productdetailid: 1, productname: 'SAMSUNG Galaxy S25 Ultra 5G (12GB RAM, 512GB, Titanium Gray)', variant: '128 GB', color: 'Teal',
@@ -40,7 +50,7 @@ export default function Home() {
             <ProductScroller data={data} title='Summer Special Deals' />
         </div>
         <div >
-            <BrandSlider />
+            <BrandSlider data={brandList} />
         </div>
         <div style={{ width: '100%', height: '100%' }}>
             <Footer />
