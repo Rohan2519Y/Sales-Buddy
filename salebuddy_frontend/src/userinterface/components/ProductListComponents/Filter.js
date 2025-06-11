@@ -24,7 +24,7 @@ export default function Filter({ onClose, filterData }) {
     return (
         <>
             {!matches && (
-                <div onClick={handleBackdropClick} style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                <div onClick={handleBackdropClick} style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.5)',fontFamily: '"Raleway", sans-serif' }}>
                     <div style={{ width: 460, height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'white', boxShadow: '-2px 0 8px rgba(0,0,0,0.2)', depthpadding: '20px', paddingoverflowY: 'auto' }}>
                         <div style={{ width: '100%', display: 'flex', height: '90%', flexDirection: 'column', overflowY: 'auto', alignItems: 'center' }}>
                             <div style={{ width: '85%', display: 'flex', height: '90%', flexDirection: 'column', }}>
@@ -33,7 +33,7 @@ export default function Filter({ onClose, filterData }) {
                                     <div style={{ width: '30%', height: 50, display: 'flex', justifyContent: 'flex-end', alignItems: 'center', fontSize: 40, fontWeight: 600 }}><CloseIcon /></div>
                                 </div>
                                 {sections.map((section) => (
-                                    <div style={{display:'flex',justifyContent:'center',flexDirection:'column'}}>
+                                    <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
                                         <div onClick={() => toggleSection(section.key)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', fontSize: 24, fontWeight: '500', height: 50 }} >
                                             {section.title}
                                             {openSection === section.key ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -53,6 +53,10 @@ export default function Filter({ onClose, filterData }) {
                                         <div style={{ width: '100%', height: 0.5, background: 'black', marginTop: 10, marginBottom: 10 }}></div>
                                     </div>
                                 ))}
+                                <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', height: 50, bottom: 0, background: 'white', zIndex: 10 }}>
+                                    <div style={{ width: '45%', height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, fontWeight: 600, background: ' #393939', color: 'white',borderRadius:10 }}>CLEAR ALL</div>
+                                    <div style={{ width: '45%', height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, fontWeight: 600, background: ' #12daa8', color: 'black',borderRadius:10 }}>APPLY</div>
+                                </div>
                             </div>
                         </div>
                     </div>

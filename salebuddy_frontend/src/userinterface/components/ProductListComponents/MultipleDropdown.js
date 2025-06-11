@@ -37,31 +37,11 @@ export default function MultipleDropdown() {
     const tower = ['5G', '4G', '3G', '2G'];
 
     const filterData = [
-        {
-            key: 'categories',
-            title: 'Categories',
-            data: categories
-        },
-        {
-            key: 'price',
-            title: 'Price',
-            data: price
-        },
-        {
-            key: 'brands',
-            title: 'Brands',
-            data: brands
-        },
-        {
-            key: 'storage',
-            title: 'Internal Storage',
-            data: storage
-        },
-        {
-            key: 'tower',
-            title: 'Cellular Technology',
-            data: tower
-        }
+        { key: 'categories', title: 'Categories', data: categories },
+        { key: 'price', title: 'Price', data: price },
+        { key: 'brands', title: 'Brands', data: brands },
+        { key: 'storage', title: 'Internal Storage', data: storage },
+        { key: 'tower', title: 'Cellular Technology', data: tower }
     ];
 
 
