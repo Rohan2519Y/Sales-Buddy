@@ -35,13 +35,40 @@ export default function MultipleDropdown() {
     const storage = ['64GB', '128GB', '256GB', '512GB', '1TB'];
     const brands = ["Apple", "Samsung", "OnePlus", "Xiaomi", "Realme", "Oppo", "Vivo", "Motorola", "Nokia", "Google", "Huawei", "Sony", "Asus", "Infinix", "Tecno", "Lenovo", "Honor", "iQOO", "Lava", "Micromax"];
     const tower = ['5G', '4G', '3G', '2G'];
+    const discount = ['10% or more', '20% or more', '30% or more', '50% or more'];
+    const deliverymode = ['Same Day', 'Next Day', '2-4 Days', 'Standard'];
+    const processorbrand = ['Qualcomm', 'MediaTek', 'Apple', 'Samsung', 'UNISOC'];
+    const screensize = ['5.0" - 5.5"', '5.6" - 6.0"', '6.1" - 6.5"', '6.6" and above'];
+    const color = ['Black', 'Blue', 'Green', 'Red', 'White', 'Purple'];
+    const refreshrate = ['60Hz', '90Hz', '120Hz', '144Hz'];
+    const mobiletype = ['Smartphone', 'Feature Phone', 'Gaming Phone', 'Foldable'];
+    const sim = ['Single SIM', 'Dual SIM', 'Triple SIM'];
+    const rearcamera = ['Single', 'Dual', 'Triple', 'Quad'];
+    const screentype = ['LCD', 'IPS', 'AMOLED', 'Super AMOLED', 'OLED'];
+    const frontcamera = ['8MP', '12MP', '16MP', '32MP'];
+    const cores = ['Dual Core', 'Quad Core', 'Octa Core', 'Deca Core'];
+    const design = ['Bar', 'Foldable', 'Slider'];
+
 
     const filterData = [
         { key: 'categories', title: 'Categories', data: categories },
         { key: 'price', title: 'Price', data: price },
         { key: 'brands', title: 'Brands', data: brands },
         { key: 'storage', title: 'Internal Storage', data: storage },
-        { key: 'tower', title: 'Cellular Technology', data: tower }
+        { key: 'tower', title: 'Cellular Technology', data: tower },
+        { key: 'discount', title: 'Discount', data: discount },
+        { key: 'deliverymode', title: 'Delivery Mode', data: deliverymode },
+        { key: 'processorbrand', title: 'Processor Brand', data: processorbrand },
+        { key: 'screensize', title: 'Screen Size', data: screensize },
+        { key: 'color', title: 'Color', data: color },
+        { key: 'refreshrate', title: 'Refresh Rate', data: refreshrate },
+        { key: 'mobiletype', title: 'Mobile Type', data: mobiletype },
+        { key: 'sim', title: 'Number of SIM Support', data: sim },
+        { key: 'rearcamera', title: 'Rear Camera Configuration', data: rearcamera },
+        { key: 'screentype', title: 'Screen Type', data: screentype },
+        { key: 'frontcamera', title: 'Front Camera Configuration', data: frontcamera },
+        { key: 'cores', title: 'Number of Cores', data: cores },
+        { key: 'design', title: 'Mobile Design', data: design },
     ];
 
 
