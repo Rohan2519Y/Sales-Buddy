@@ -15,6 +15,7 @@ export default function MultipleDropdown() {
 
     const [openDropdown, setOpenDropdown] = useState(null);
     const [open, setOpen] = useState(false);
+    const [openSort, setOpenSort] = useState(false);
     const [showFilter, setShowFilter] = useState(false);
 
     const dropdownContainerRef = useRef(null);
@@ -189,9 +190,15 @@ export default function MultipleDropdown() {
                     </div></> : <></>}
 
             </div>
+            {openSort && matches && (
+                <div style={{ position: 'fixed', bottom: 0,width: '100%', height: '100%', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.5)', fontFamily: '"Raleway", sans-serif' }}>
+                    <div style={{ width: '100%', height: '50%', display: 'flex', flexDirection: 'column', background: 'white', boxShadow: '-2px 0 8px rgba(0,0,0,0.2)', padding: '20px', boxSizing: 'border-box', overflowY: 'auto',bottom:0,borderTopLeftRadius:10,borderTopRightRadius:10 }}>
+                    </div>
+                </div>
+            )}
             {matches ? <div style={{ width: '100%', height: 55, background: ' #393939', display: 'flex', position: 'fixed', bottom: 0, overflowX: 'hidden', zIndex: 500 }}>
-                <div style={{ width: '100%', height: 55, background: ' #393939', display: 'flex', justifyContent: 'space-between', alignItems: 'center' , fontFamily: '"Raleway", sans-serif'}}>
-                    <div style={{ width: '50%', height: 55, color: 'white', background: ' #393939', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: 20, cursor: 'pointer' }} onClick={() => setOpen(!open)}><ListIcon />Sort</div>
+                <div style={{ width: '100%', height: 55, background: ' #393939', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: '"Raleway", sans-serif' }}>
+                    <div style={{ width: '50%', height: 55, color: 'white', background: ' #393939', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: 20, cursor: 'pointer' }} onClick={() => setOpenSort(!openSort)}><ListIcon />Sort</div>
                     <div style={{ width: 1, height: 55, background: 'white' }}></div>
                     <div style={{ width: '50%', height: 55, color: 'white', background: ' #393939', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: 20, cursor: 'pointer' }}><FilterListIcon />Filter</div>
                 </div>
