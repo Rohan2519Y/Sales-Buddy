@@ -69,38 +69,207 @@ export default function Filter({ onClose, filterData }) {
                 </div>
             )}
             {matches && (
-                <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', flexDirection: 'column', fontFamily: '"Raleway", sans-serif', zIndex: 1100, }}>
-                    <div style={{ width: '100%', display: 'flex', justifyContent: 'center', background: 'white', borderBottom: '1px solid #95a5a6' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', width: '90%', height: 60, alignItems: 'center', position: 'sticky', top: 0, background: 'white', zIndex: 1000, }}>
+                <div
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        fontFamily: '"Raleway", sans-serif',
+                        zIndex: 1300,
+                        backgroundColor: '#f9f9f9',
+                    }}
+                >
+                    {/* Header */}
+                    <div
+                        style={{
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            background: 'white',
+                            borderBottom: '1px solid #95a5a6',
+                            flexShrink: 0,
+                        }}
+                    >
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                width: '90%',
+                                height: 60,
+                                alignItems: 'center',
+                                position: 'sticky',
+                                top: 0,
+                                background: 'white',
+                                zIndex: 1400,
+                                userSelect: 'none',
+                            }}
+                        >
                             <div style={{ fontSize: 25, fontWeight: 600 }}>All Filters</div>
-                            <div onClick={onClose} style={{ cursor: 'pointer', fontSize: 40, fontWeight: 600 }}><CloseIcon /></div>
-                        </div>
-                    </div>
-                    <div style={{ width: '100%', display: 'flex', height: '100%' }}>
-                        <div style={{ width: '40%', height: '100%', background: ' #393939', display: 'flex',justifyContent:'center' }}>
-                            <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column',overflowY:'auto',height:'100%' }}>
-                                {sections.map((section,index) => (
-                                    <div key={section.key} onClick={() => toggleSection(section.key)} style={{cursor: 'pointer', minHeight:60,color: openSection === section.key ? ' #393939':' #ffffff',backgroundColor: openSection === section.key ? ' #ffffff' : 'transparent',display:'flex',alignItems:'center',justifyContent:'center' }}>
-                                        <div style={{ fontSize: 18, fontWeight: 500,width:'85%' }}>{section.title}</div>
-                                    </div>
-                                ))}
+                            <div onClick={onClose} style={{ cursor: 'pointer', fontSize: 40, fontWeight: 600 }}>
+                                <CloseIcon />
                             </div>
                         </div>
-                        <div style={{ width: '60%', height: '100%', background: ' #fff' }}>
-                            {sections.find(s => s.key === openSection)?.data.map((item, index) => (
-                                <div key={index} style={{ display: 'flex', alignItems: 'center', padding: '8px 0' }}>
-                                    <Checkbox style={{ color: '#12daa8' }} />
-                                    <span style={{ fontSize: 18 }}>
-                                        {openSection === 'price' ? `₹${item}` : item}
-                                    </span>
+                    </div>
+
+                    {/* Content */}
+                    <div
+                        style={{
+                            flex: 1,
+                            display: 'flex',
+                            height: 'auto', // flex:1 will handle height now
+                            overflow: 'hidden',
+                        }}
+                    >
+                        {/* Left Sidebar */}
+                        <div
+                            style={{
+                                width: '40%',
+                                background: '#393939',
+                                padding: 12,
+                                boxSizing: 'border-box',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                overflowY: 'auto',
+                                scrollbarWidth:'none',
+                            }}
+                        >
+                            {sections.map((section) => (
+                                <div
+                                    key={section.key}
+                                    onClick={() => toggleSection(section.key)}
+                                    style={{
+                                        cursor: 'pointer',
+                                        minHeight: 60,
+                                        color: openSection === section.key ? '#393939' : '#ffffff',
+                                        backgroundColor: openSection === section.key ? '#ffffff' : 'transparent',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        
+                                        marginBottom: 8,
+                                        padding: '0 12px',
+                                        fontWeight: 550,
+                                        fontSize: 18,
+                                        userSelect: 'none',
+                                        
+                                        overflow: 'hidden',
+                                        
+                                        textAlign: 'center',
+                                        
+                                        boxShadow: openSection === section.key ? '0 0 10px rgba(0,0,0,0.15)' : 'none',
+                                    }}
+                                >
+                                    {section.title}
                                 </div>
                             ))}
                         </div>
+
+                        {/* Right Content Panel */}
+                        <div
+                            style={{
+                                width: '60%',
+                                background: '#fff',
+                                padding: 16,
+                                boxSizing: 'border-box',
+                                overflowY: 'auto',
+                            }}
+                        >
+                            {openSection && sections.find((s) => s.key === openSection) ? (
+                                sections
+                                    .find((s) => s.key === openSection)
+                                    .data.map((item, index) => (
+                                        <div
+                                            key={index}
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                padding: '8px 0',
+                                                userSelect: 'none',
+                                            }}
+                                        >
+                                            <Checkbox style={{ color: '#12daa8' }} />
+                                            <span style={{ fontSize: 18 }}>
+                                                {openSection === 'price' ? `₹${item}` : item}
+                                            </span>
+                                        </div>
+                                    ))
+                            ) : (
+                                <div
+                                    style={{
+                                        textAlign: 'center',
+                                        color: '#999',
+                                        fontStyle: 'italic',
+                                        marginTop: 20,
+                                    }}
+                                >
+                                   
+                                </div>
+                            )}
+                        </div>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'center', width: '100%', bottom: 0, background: 'white', position: 'sticky', marginTop: 'auto', }}>
-                        <div style={{ display: 'flex', width: '94%', justifyContent: 'space-evenly', height: 70, alignItems: 'center' }}>
-                            <div style={{ width: '38%', height: 45, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 17, fontWeight: 600, background: '#393939', color: 'white', borderRadius: 5, cursor: 'pointer' }}>CLEAR </div>
-                            <div style={{ width: '38%', height: 45, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 17, fontWeight: 600, background: '#12daa8', color: 'black', borderRadius: 5, cursor: 'pointer' }}>APPLY</div>
+
+                    {/* Footer Buttons */}
+                    <div
+                        style={{
+                            padding: '10px 0',
+                            background: 'white',
+                            borderTop: '1px solid #ccc',
+                            flexShrink: 0,
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <div
+                            style={{
+                                display: 'flex',
+                                width: '94%',
+                                justifyContent: 'space-evenly',
+                              
+                            }}
+                        >
+                            <div
+                                style={{
+                                    
+                                    height: 45,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    fontSize: 17,
+                                    fontWeight: 600,
+                                    background: '#393939',
+                                    color: 'white',
+                                    borderRadius: 5,
+                                    cursor: 'pointer',
+                                    userSelect: 'none',
+                                    width:'40%'
+                                }}
+                            >
+                                CLEAR
+                            </div>
+                            <div
+                                style={{
+                                    
+                                    height: 45,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    fontSize: 17,
+                                    fontWeight: 600,
+                                    background: '#12daa8',
+                                    color: 'black',
+                                    borderRadius: 5,
+                                    cursor: 'pointer',
+                                    userSelect: 'none',
+                                    width:'40%'
+                                }}
+                            >
+                                APPLY
+                            </div>
                         </div>
                     </div>
                 </div>
