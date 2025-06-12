@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import ListIcon from '@mui/icons-material/List';
+import CloseIcon from '@mui/icons-material/Close';
 import Checkbox from '@mui/material/Checkbox';
 import Filter from "./Filter";
 
@@ -43,6 +44,26 @@ export default function MultipleDropdown() {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
+
+    const sortRef = useRef(null);
+    useEffect(() => {
+        const handleClickOutsideSort = (event) => {
+            if (sortRef.current && !sortRef.current.contains(event.target)) {
+                setOpenSort(false);
+            }
+        };
+
+        if (openSort) {
+            document.addEventListener("mousedown", handleClickOutsideSort);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutsideSort);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutsideSort);
+        };
+    }, [openSort]);
+
 
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const categories = ['Android', 'iOS', 'Windows', 'Mac'];
@@ -191,8 +212,22 @@ export default function MultipleDropdown() {
 
             </div>
             {openSort && matches && (
-                <div style={{ position: 'fixed', bottom: 0,width: '100%', height: '100%', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.5)', fontFamily: '"Raleway", sans-serif' }}>
-                    <div style={{ width: '100%', height: '50%', display: 'flex', flexDirection: 'column', background: 'white', boxShadow: '-2px 0 8px rgba(0,0,0,0.2)', padding: '20px', boxSizing: 'border-box', overflowY: 'auto',bottom:0,borderTopLeftRadius:10,borderTopRightRadius:10 }}>
+                <div style={{ position: 'fixed', bottom: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.5)', fontFamily: '"Raleway", sans-serif' }}>
+                    <div ref={sortRef} style={{ width: '100%', height: 360, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', background: 'white', boxShadow: '-2px 0 8px rgba(0,0,0,0.2)', boxSizing: 'border-box', overflowY: 'auto', bottom: 0, borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
+                        <div style={{ width: '90%', height: '93%', }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', height: 50, alignItems: 'center', zIndex: 1000, borderBottom: '2px solid #95a5a6' }}>
+                                <div style={{ fontSize: 20, fontWeight: 600 }}>Sort By</div>
+                                <div style={{ cursor: 'pointer', fontSize: 40, fontWeight: 600 }}><CloseIcon onClick={() => setOpenSort(false)} /></div>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: '100%' }}>
+                                <div style={{ width: '100%', height: 35, display: 'flex', alignItems: 'center', fontSize: 16, cursor: 'pointer' }}>Top Rated</div>
+                                <div style={{ width: '100%', height: 35, display: 'flex', alignItems: 'center', fontSize: 16, cursor: 'pointer' }}>Price(Lowest First)</div>
+                                <div style={{ width: '100%', height: 35, display: 'flex', alignItems: 'center', fontSize: 16, cursor: 'pointer' }}>Latest Arrival</div>
+                                <div style={{ width: '100%', height: 35, display: 'flex', alignItems: 'center', fontSize: 16, cursor: 'pointer' }}>Discount(Descending)</div>
+                                <div style={{ width: '100%', height: 35, display: 'flex', alignItems: 'center', fontSize: 16, cursor: 'pointer' }}>Featured</div>
+                                <div style={{ width: '100%', height: 35, display: 'flex', alignItems: 'center', fontSize: 16, cursor: 'pointer' }}>Price(Highest First)</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}
