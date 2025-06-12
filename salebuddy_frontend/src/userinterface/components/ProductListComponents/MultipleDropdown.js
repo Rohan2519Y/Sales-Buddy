@@ -14,16 +14,14 @@ export default function MultipleDropdown() {
 
     const [openDropdown, setOpenDropdown] = useState(null);
     const [open, setOpen] = useState(false);
-    const [showFilter, setShowFilter] = useState(false); // Add state for filter visibility
+    const [showFilter, setShowFilter] = useState(false);
 
     const toggleDropdown = (dropdownId) => {
         setOpenDropdown((prev) => (prev === dropdownId ? null : dropdownId));
     };
 
     const handleFilterClick = () => {
-        setShowFilter(!showFilter); // Toggle filter visibility
-        // Or you can add any other logic you want when filter button is clicked
-        console.log('Filter button clicked!');
+        setShowFilter(!showFilter);
     };
 
     const handleCloseFilter = () => {
@@ -36,7 +34,7 @@ export default function MultipleDropdown() {
     const brands = ["Apple", "Samsung", "OnePlus", "Xiaomi", "Realme", "Oppo", "Vivo", "Motorola", "Nokia", "Google", "Huawei", "Sony", "Asus", "Infinix", "Tecno", "Lenovo", "Honor", "iQOO", "Lava", "Micromax"];
     const tower = ['5G', '4G', '3G', '2G'];
     const discount = ['10% or more', '20% or more', '30% or more', '50% or more'];
-    const deliverymode = ['Same Day', 'Next Day', '2-4 Days', 'Standard'];
+    const deliverymode = ['Express Delivery', 'Home Delivery',];
     const processorbrand = ['Qualcomm', 'MediaTek', 'Apple', 'Samsung', 'UNISOC'];
     const screensize = ['5.0" - 5.5"', '5.6" - 6.0"', '6.1" - 6.5"', '6.6" and above'];
     const color = ['Black', 'Blue', 'Green', 'Red', 'White', 'Purple'];
@@ -116,6 +114,22 @@ export default function MultipleDropdown() {
                         title='Cellular Technology'
                         isOpen={openDropdown === 'tower'}
                         onToggle={() => toggleDropdown('tower')}
+                    />
+                </div>
+                <div style={{ margin: 5, cursor: 'pointer' }}>
+                    <Dropdown
+                        data={discount}
+                        title='Discount'
+                        isOpen={openDropdown === 'discount'}
+                        onToggle={() => toggleDropdown('discount')}
+                    />
+                </div>
+                <div style={{ margin: 5, cursor: 'pointer' }}>
+                    <Dropdown
+                        data={deliverymode}
+                        title='Delivery Mode'
+                        isOpen={openDropdown === 'deliverymode'}
+                        onToggle={() => toggleDropdown('deliverymode')}
                     />
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 35, background: '#373737', borderRadius: 10, margin: 5 }}>
