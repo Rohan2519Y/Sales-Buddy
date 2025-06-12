@@ -4,6 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import { useState, useEffect, useRef } from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import ListIcon from '@mui/icons-material/List';
 import Checkbox from '@mui/material/Checkbox';
 import Filter from "./Filter";
 
@@ -85,7 +86,7 @@ export default function MultipleDropdown() {
 
     return (
         <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div 
+            <div
                 ref={dropdownContainerRef}
                 style={{ width: matches ? '90%' : '85%', display: 'flex', overflowX: md ? 'auto' : '', scrollbarWidth: md ? 'none' : '' }}
             >
@@ -131,59 +132,68 @@ export default function MultipleDropdown() {
                         onToggle={() => toggleDropdown('tower')}
                     />
                 </div>
-                <div style={{ margin: 5, cursor: 'pointer' }}>
-                    <Dropdown
-                        data={discount}
-                        title='Discount'
-                        isOpen={openDropdown === 'discount'}
-                        onToggle={() => toggleDropdown('discount')}
-                    />
-                </div>
-                <div style={{ margin: 5, cursor: 'pointer' }}>
-                    <Dropdown
-                        data={deliverymode}
-                        title='Delivery Mode'
-                        isOpen={openDropdown === 'deliverymode'}
-                        onToggle={() => toggleDropdown('deliverymode')}
-                    />
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 35, background: '#373737', borderRadius: 10, margin: 5 }}>
+                {matches ? <>
+                    <div style={{ margin: 5, cursor: 'pointer' }}>
+                        <Dropdown
+                            data={discount}
+                            title='Discount'
+                            isOpen={openDropdown === 'discount'}
+                            onToggle={() => toggleDropdown('discount')}
+                        />
+                    </div>
+                    <div style={{ margin: 5, cursor: 'pointer' }}>
+                        <Dropdown
+                            data={deliverymode}
+                            title='Delivery Mode'
+                            isOpen={openDropdown === 'deliverymode'}
+                            onToggle={() => toggleDropdown('deliverymode')}
+                        />
+                    </div></> : <></>}
+                {!matches ? <><div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 35, background: '#373737', borderRadius: 10, margin: 5 }}>
                     <button onClick={handleFilterClick} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: 130, height: '70%', outline: 'none', background: '#393939', border: 'none', borderRadius: 8, color: '#fff', cursor: 'pointer' }}>
                         All Filters <FilterListIcon style={{ fontSize: '140%' }} />
                     </button>
                 </div>
-                <div style={{ position: 'relative', display: 'inline-block', marginLeft: 'auto' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 35, background: '#373737', borderRadius: 10, margin: '0.2%' }}>
-                        <button onClick={() => setOpen(!open)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: 140, height: '70%', outline: 'none', background: '#393939', border: 'none', borderRadius: 8, color: '#fff', cursor: 'pointer' }}>
-                            Sort By <b>Feature</b> <KeyboardArrowDownIcon style={{ fontSize: '100%' }} />
-                        </button>
-                    </div>
-                    {open && !md && (
-                        <div style={{ position: 'absolute', top: '100%', left: 0, zIndex: 5, marginTop: '1%', scrollbarWidth: 'thin', backgroundColor: ' #373737', overflowY: 'visible' }}>
-                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: 170, flexDirection: 'column' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
-                                    <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: ' #12daa8' }} /></div>
-                                    <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Latest Arrival</div>
-                                </div>
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
-                                    <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: '#12daa8' }} /></div>
-                                    <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Discount</div>
-                                </div>
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
-                                    <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: '#12daa8' }} /></div>
-                                    <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Featured</div>
-                                </div>
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
-                                    <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: '#12daa8' }} /></div>
-                                    <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Price</div>
-                                </div>
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
-                                    <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: '#12daa8' }} /></div>
-                                    <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Top Rated</div>
+                    <div style={{ position: 'relative', display: 'inline-block', marginLeft: 'auto' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 35, background: '#373737', borderRadius: 10, margin: '0.2%' }}>
+                            <button onClick={() => setOpen(!open)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: 140, height: '70%', outline: 'none', background: '#393939', border: 'none', borderRadius: 8, color: '#fff', cursor: 'pointer' }}>
+                                Sort By <b>Feature</b> <KeyboardArrowDownIcon style={{ fontSize: '100%' }} />
+                            </button>
+                        </div>
+                        {open && !md && (
+                            <div style={{ position: 'absolute', top: '100%', left: 0, zIndex: 5, marginTop: '1%', scrollbarWidth: 'thin', backgroundColor: ' #373737', overflowY: 'visible' }}>
+                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: 170, flexDirection: 'column' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
+                                        <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: ' #12daa8' }} /></div>
+                                        <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Latest Arrival</div>
+                                    </div>
+                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
+                                        <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: '#12daa8' }} /></div>
+                                        <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Discount</div>
+                                    </div>
+                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
+                                        <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: '#12daa8' }} /></div>
+                                        <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Featured</div>
+                                    </div>
+                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
+                                        <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: '#12daa8' }} /></div>
+                                        <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Price</div>
+                                    </div>
+                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
+                                        <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: '#12daa8' }} /></div>
+                                        <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Top Rated</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )}
+                        )}
+                    </div></> : <></>}
+
+            </div>
+            <div style={{ width: '100%', height: 60, background: ' #393939', display: 'flex', position: 'fixed', bottom: 0, overflowX: 'hidden' }}>
+                <div style={{ width: '100%', height: 60, background: ' #393939', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ width: '50%', height: 55, color: 'white', background: ' #393939', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: 20 }}><ListIcon />Sort</div>
+                    <div style={{ width: 2, height: 55, background: 'white' }}></div>
+                    <div style={{ width: '50%', height: 55, color: 'white', background: ' #393939', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: 20 }}><FilterListIcon />Filter</div>
                 </div>
             </div>
 
