@@ -8,7 +8,7 @@ export default function Dropdown({ data, title, isOpen, onToggle }) {
     const md = useMediaQuery('(max-width:1200px)');
 
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-    const maxVisibleItems = 5;
+    const maxVisibleItems = 8;
     const itemHeight = 40;
 
     return (

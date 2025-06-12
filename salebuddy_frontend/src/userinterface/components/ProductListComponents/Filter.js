@@ -54,16 +54,53 @@ export default function Filter({ onClose, filterData }) {
                                                 ))}
                                             </div>
                                         )}
-                                        <Divider style={{width:'100%',marginTop:7,marginBottom:7,border:'1px solid #95a5a6'}}/>
+                                        <Divider style={{ width: '100%', marginTop: 7, marginBottom: 7, border: '1px solid #95a5a6' }} />
                                     </div>
                                 ))}
                             </div>
                         </div>
-                        <div style={{ display: 'flex', justifyContent: 'center', width: '100%', bottom: '-2.8%', background: 'white', zIndex: 1000, position: 'sticky', marginTop: 'auto', }}>
-                            <div style={{ display: 'flex', width: '94%', justifyContent: 'space-evenly',height:60 }}>
+                        <div style={{ display: 'flex', justifyContent: 'center', width: '100%', bottom: '-2.8%', background: 'white', zIndex: 1100, position: 'sticky', marginTop: 'auto', }}>
+                            <div style={{ display: 'flex', width: '94%', justifyContent: 'space-evenly', height: 60 }}>
                                 <div style={{ width: '47%', height: 45, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, fontWeight: 600, background: '#393939', color: 'white', borderRadius: 5, cursor: 'pointer' }}>CLEAR ALL</div>
                                 <div style={{ width: '47%', height: 45, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, fontWeight: 600, background: '#12daa8', color: 'black', borderRadius: 5, cursor: 'pointer' }}>APPLY</div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {matches && (
+                <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', flexDirection: 'column', fontFamily: '"Raleway", sans-serif', zIndex: 1100, }}>
+                    <div style={{ width: '100%', display: 'flex', justifyContent: 'center', background: 'white', borderBottom: '1px solid #95a5a6' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', width: '90%', height: 60, alignItems: 'center', position: 'sticky', top: 0, background: 'white', zIndex: 1000, }}>
+                            <div style={{ fontSize: 25, fontWeight: 600 }}>All Filters</div>
+                            <div onClick={onClose} style={{ cursor: 'pointer', fontSize: 40, fontWeight: 600 }}><CloseIcon /></div>
+                        </div>
+                    </div>
+                    <div style={{ width: '100%', display: 'flex', height: '100%' }}>
+                        <div style={{ width: '40%', height: '100%', background: ' #393939', display: 'flex',justifyContent:'center' }}>
+                            <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column',overflowY:'auto',height:'100%' }}>
+                                {sections.map((section,index) => (
+                                    <div key={section.key} onClick={() => toggleSection(section.key)} style={{cursor: 'pointer', minHeight:60,color: openSection === section.key ? ' #393939':' #ffffff',backgroundColor: openSection === section.key ? ' #ffffff' : 'transparent',display:'flex',alignItems:'center',justifyContent:'center' }}>
+                                        <div style={{ fontSize: 18, fontWeight: 500,width:'85%' }}>{section.title}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div style={{ width: '60%', height: '100%', background: ' #fff' }}>
+                            {sections.find(s => s.key === openSection)?.data.map((item, index) => (
+                                <div key={index} style={{ display: 'flex', alignItems: 'center', padding: '8px 0' }}>
+                                    <Checkbox style={{ color: '#12daa8' }} />
+                                    <span style={{ fontSize: 18 }}>
+                                        {openSection === 'price' ? `₹${item}` : item}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'center', width: '100%', bottom: 0, background: 'white', position: 'sticky', marginTop: 'auto', }}>
+                        <div style={{ display: 'flex', width: '94%', justifyContent: 'space-evenly', height: 70, alignItems: 'center' }}>
+                            <div style={{ width: '38%', height: 45, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 17, fontWeight: 600, background: '#393939', color: 'white', borderRadius: 5, cursor: 'pointer' }}>CLEAR </div>
+                            <div style={{ width: '38%', height: 45, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 17, fontWeight: 600, background: '#12daa8', color: 'black', borderRadius: 5, cursor: 'pointer' }}>APPLY</div>
                         </div>
                     </div>
                 </div>

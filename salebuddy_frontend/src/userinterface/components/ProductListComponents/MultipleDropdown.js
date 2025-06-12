@@ -235,7 +235,7 @@ export default function MultipleDropdown() {
                 <div style={{ width: '100%', height: 55, background: ' #393939', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: '"Raleway", sans-serif' }}>
                     <div style={{ width: '50%', height: 55, color: 'white', background: ' #393939', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: 20, cursor: 'pointer' }} onClick={() => setOpenSort(!openSort)}><ListIcon />Sort</div>
                     <div style={{ width: 1, height: 55, background: 'white' }}></div>
-                    <div style={{ width: '50%', height: 55, color: 'white', background: ' #393939', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: 20, cursor: 'pointer' }}><FilterListIcon />Filter</div>
+                    <div style={{ width: '50%', height: 55, color: 'white', background: ' #393939', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: 20, cursor: 'pointer' }} onClick={handleFilterClick}><FilterListIcon />Filter</div>
                 </div>
             </div> : <></>}
 
