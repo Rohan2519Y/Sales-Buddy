@@ -1,7 +1,7 @@
 import Dropdown from "./Dropdown";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import Checkbox from '@mui/material/Checkbox';
@@ -16,6 +16,7 @@ export default function MultipleDropdown() {
     const [open, setOpen] = useState(false);
     const [showFilter, setShowFilter] = useState(false);
 
+    const dropdownContainerRef = useRef(null);
     const toggleDropdown = (dropdownId) => {
         setOpenDropdown((prev) => (prev === dropdownId ? null : dropdownId));
     };
@@ -27,6 +28,20 @@ export default function MultipleDropdown() {
     const handleCloseFilter = () => {
         setShowFilter(false);
     };
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownContainerRef.current && !dropdownContainerRef.current.contains(event.target)) {
+                setOpenDropdown(null);
+                setOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const categories = ['Android', 'iOS', 'Windows', 'Mac'];
     const price = ['0 TO 9,999', '10,000 TO 19,999', '20,000 TO 29,999', '30,000 TO 39,999', '40,000 TO 49,999', '50,000 TO 59,999', '60,000 TO 69,999', '70,000 TO 79,999', '80,000 TO 89,999', '90,000 TO 1,00,000']
@@ -46,7 +61,6 @@ export default function MultipleDropdown() {
     const frontcamera = ['8MP', '12MP', '16MP', '32MP'];
     const cores = ['Dual Core', 'Quad Core', 'Octa Core', 'Deca Core'];
     const design = ['Bar', 'Foldable', 'Slider'];
-
 
     const filterData = [
         { key: 'categories', title: 'Categories', data: categories },
@@ -69,11 +83,12 @@ export default function MultipleDropdown() {
         { key: 'design', title: 'Mobile Design', data: design },
     ];
 
-
-
     return (
         <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{ width: matches ? '90%' : '85%', display: 'flex', overflowX: md ? 'auto' : '', scrollbarWidth: md ? 'none' : '' }}>
+            <div 
+                ref={dropdownContainerRef}
+                style={{ width: matches ? '90%' : '85%', display: 'flex', overflowX: md ? 'auto' : '', scrollbarWidth: md ? 'none' : '' }}
+            >
                 <div style={{ margin: 5, cursor: 'pointer' }}>
                     <Dropdown
                         data={categories}
