@@ -189,13 +189,13 @@ export default function MultipleDropdown() {
                     </div></> : <></>}
 
             </div>
-            <div style={{ width: '100%', height: 60, background: ' #393939', display: 'flex', position: 'fixed', bottom: 0, overflowX: 'hidden' }}>
-                <div style={{ width: '100%', height: 60, background: ' #393939', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div style={{ width: '50%', height: 55, color: 'white', background: ' #393939', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: 20 }}><ListIcon />Sort</div>
-                    <div style={{ width: 2, height: 55, background: 'white' }}></div>
-                    <div style={{ width: '50%', height: 55, color: 'white', background: ' #393939', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: 20 }}><FilterListIcon />Filter</div>
+            {matches ? <div style={{ width: '100%', height: 55, background: ' #393939', display: 'flex', position: 'fixed', bottom: 0, overflowX: 'hidden', zIndex: 500 }}>
+                <div style={{ width: '100%', height: 55, background: ' #393939', display: 'flex', justifyContent: 'space-between', alignItems: 'center' , fontFamily: '"Raleway", sans-serif'}}>
+                    <div style={{ width: '50%', height: 55, color: 'white', background: ' #393939', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: 20, cursor: 'pointer' }} onClick={() => setOpen(!open)}><ListIcon />Sort</div>
+                    <div style={{ width: 1, height: 55, background: 'white' }}></div>
+                    <div style={{ width: '50%', height: 55, color: 'white', background: ' #393939', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: 20, cursor: 'pointer' }}><FilterListIcon />Filter</div>
                 </div>
-            </div>
+            </div> : <></>}
 
             {showFilter && <Filter onClose={handleCloseFilter} filterData={filterData} />}
         </div>
