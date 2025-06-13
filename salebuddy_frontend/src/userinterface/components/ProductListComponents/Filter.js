@@ -1,7 +1,7 @@
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -13,6 +13,11 @@ export default function Filter({ onClose, filterData }) {
     const md = useMediaQuery('(max-width:1200px)');
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     const [openSection, setOpenSection] = useState(null);
+    useEffect(() => {
+        if (filterData.length > 0) {
+            setOpenSection(filterData[0].key);
+        }
+    }, []);
 
     const handleBackdropClick = (e) => {
         if (e.target === e.currentTarget) {
@@ -20,7 +25,7 @@ export default function Filter({ onClose, filterData }) {
         }
     };
     const toggleSection = (sectionName) => {
-        setOpenSection(openSection === sectionName ? null : sectionName);
+        setOpenSection((prev) => (prev === sectionName ? null : sectionName));
     };
     const sections = filterData;
 
@@ -134,7 +139,7 @@ export default function Filter({ onClose, filterData }) {
                                 display: 'flex',
                                 flexDirection: 'column',
                                 overflowY: 'auto',
-                                scrollbarWidth:'none',
+                                scrollbarWidth: 'none',
                             }}
                         >
                             {sections.map((section) => (
@@ -149,17 +154,17 @@ export default function Filter({ onClose, filterData }) {
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        
+
                                         marginBottom: 8,
                                         padding: '0 12px',
                                         fontWeight: 550,
                                         fontSize: 18,
                                         userSelect: 'none',
-                                        
+
                                         overflow: 'hidden',
-                                        
+
                                         textAlign: 'center',
-                                        
+
                                         boxShadow: openSection === section.key ? '0 0 10px rgba(0,0,0,0.15)' : 'none',
                                     }}
                                 >
@@ -206,7 +211,7 @@ export default function Filter({ onClose, filterData }) {
                                         marginTop: 20,
                                     }}
                                 >
-                                   
+
                                 </div>
                             )}
                         </div>
@@ -229,12 +234,12 @@ export default function Filter({ onClose, filterData }) {
                                 display: 'flex',
                                 width: '94%',
                                 justifyContent: 'space-evenly',
-                              
+
                             }}
                         >
                             <div
                                 style={{
-                                    
+
                                     height: 45,
                                     display: 'flex',
                                     alignItems: 'center',
@@ -246,14 +251,14 @@ export default function Filter({ onClose, filterData }) {
                                     borderRadius: 5,
                                     cursor: 'pointer',
                                     userSelect: 'none',
-                                    width:'40%'
+                                    width: '40%'
                                 }}
                             >
                                 CLEAR
                             </div>
                             <div
                                 style={{
-                                    
+
                                     height: 45,
                                     display: 'flex',
                                     alignItems: 'center',
@@ -265,7 +270,7 @@ export default function Filter({ onClose, filterData }) {
                                     borderRadius: 5,
                                     cursor: 'pointer',
                                     userSelect: 'none',
-                                    width:'40%'
+                                    width: '40%'
                                 }}
                             >
                                 APPLY
