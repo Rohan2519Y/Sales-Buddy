@@ -29,7 +29,7 @@ export default function ProductComponent({ item, i }) {
                 </div>
                 <div style={{ display: 'flex', width: '90%' }}>
                     {smatches ? <Rating name="half-rating-read" defaultValue={item.ratings} precision={0.1} readOnly icon={<StarIcon sx={{ color: '#00e9bf' }} style={{ fontSize: '95%' }} />} emptyIcon={<StarIcon sx={{ color: 'grey' }} style={{ fontSize: '95%' }} />} /> :
-                        <Rating name="half-rating-read" defaultValue={item.ratings} precision={0.1} readOnly icon={<StarIcon sx={{ color: '#00e9bf' }} />} emptyIcon={<StarIcon sx={{ color: 'grey' }} />} />}
+                        <Rating name="half-rating-read" defaultValue={item.ratings} precision={0.1} readOnly icon={<StarIcon sx={{ color: ' #00e9bf' }} />} emptyIcon={<StarIcon sx={{ color: 'grey' }} />} />}
                 </div>
             </div>
         </div>

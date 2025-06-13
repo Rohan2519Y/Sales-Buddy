@@ -108,7 +108,7 @@ export default function MultipleDropdown() {
 
     return (
         <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div ref={dropdownContainerRef} style={{ width: matches ? '90%' : '85%', display: 'flex', overflowX: md ? 'auto' : '', scrollbarWidth: md ? 'none' : '' }}>
+            <div ref={dropdownContainerRef} style={{ width: md ? '90%' : '77%', display: 'flex', overflowX: md ? 'auto' : '', scrollbarWidth: md ? 'none' : '',marginTop:'3%' }}>
                 <div style={{ margin: 5,  }}>
                     <Dropdown
                         data={categories}
@@ -174,7 +174,7 @@ export default function MultipleDropdown() {
                     </button>
                 </div>
                     <div style={{ position: 'relative', display: 'inline-block', marginLeft: 'auto' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 35, background: '#373737', borderRadius: 10, margin: '0.2%' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 35, background: '#373737', borderRadius: 10, margin: 5 }}>
                             <button onClick={() => setOpen(!open)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: 140, height: '70%', outline: 'none', background: '#393939', border: 'none', borderRadius: 8, color: '#fff', cursor: 'pointer' }}>
                                 Sort By <b>Feature</b> <KeyboardArrowDownIcon style={{ fontSize: '100%' }} />
                             </button>

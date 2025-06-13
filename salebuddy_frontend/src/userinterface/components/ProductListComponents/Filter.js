@@ -14,10 +14,19 @@ export default function Filter({ onClose, filterData }) {
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     const [openSection, setOpenSection] = useState(null);
     useEffect(() => {
-        if (filterData.length > 0) {
-            setOpenSection(filterData[0].key);
+        if (!matches) {
+            // Lock scroll and force overlay over scrollbar
+            document.body.style.overflow = 'hidden';
+            document.documentElement.style.overflow = 'hidden'; // prevent scroll on html
         }
-    }, []);
+
+        return () => {
+            // Cleanup
+            document.body.style.overflow = 'auto';
+            document.documentElement.style.overflow = 'auto';
+        };
+    }, [matches]);
+
 
     const handleBackdropClick = (e) => {
         if (e.target === e.currentTarget) {
@@ -32,8 +41,8 @@ export default function Filter({ onClose, filterData }) {
     return (
         <>
             {!matches && (
-                <div onClick={handleBackdropClick} style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.5)', fontFamily: '"Raleway", sans-serif' }}>
-                    <div style={{ width: 460, height: '100%', display: 'flex', flexDirection: 'column', background: 'white', boxShadow: '-2px 0 8px rgba(0,0,0,0.2)', padding: '20px', boxSizing: 'border-box', overflowY: 'auto' }}>
+                <div onClick={handleBackdropClick} style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.5)', fontFamily: '"Raleway", sans-serif', zIndex: 1400 }}>
+                    <div style={{ width: 460, height: '100%', display: 'flex', flexDirection: 'column', background: 'white', boxShadow: '-2px 0 8px rgba(0,0,0,0.2)', padding: '20px', boxSizing: 'border-box', overflowY: 'auto', zIndex: 1300 }}>
                         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: "center", alignItems: 'center' }}>
                             <div style={{ width: '90%', display: 'flex', flexDirection: 'column' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', height: 50, alignItems: 'center', position: 'sticky', top: '-2.9%', background: 'white', zIndex: 1000, paddingBottom: 10, borderBottom: '2px solid #95a5a6' }}>
