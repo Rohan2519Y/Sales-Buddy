@@ -26,6 +26,7 @@ export default function MultipleDropdown() {
 
     const handleFilterClick = () => {
         setShowFilter(!showFilter);
+        setOpenSort(false);
     };
 
     const handleCloseFilter = () => {
@@ -48,21 +49,32 @@ export default function MultipleDropdown() {
     const sortRef = useRef(null);
     useEffect(() => {
         const handleClickOutsideSort = (event) => {
-            if (sortRef.current && !sortRef.current.contains(event.target)) {
-                setOpenSort(false);
+            // For mobile modal, check if click is on backdrop
+            if (matches && openSort) {
+                const sortModal = sortRef.current;
+                if (sortModal && !sortModal.contains(event.target)) {
+                    // Check if the click is on the backdrop (the overlay div)
+                    const isBackdropClick = event.target.style.backgroundColor === 'rgba(0, 0, 0, 0.5)' || 
+                                          event.target.className?.includes('backdrop');
+                    if (isBackdropClick) {
+                        setOpenSort(false);
+                    }
+                }
+            }
+            // For desktop dropdown
+            else if (!matches && openSort && sortRef.current && !sortRef.current.contains(event.target)) {
+                setOpen(false);
             }
         };
 
         if (openSort) {
             document.addEventListener("mousedown", handleClickOutsideSort);
-        } else {
-            document.removeEventListener("mousedown", handleClickOutsideSort);
         }
 
         return () => {
             document.removeEventListener("mousedown", handleClickOutsideSort);
         };
-    }, [openSort]);
+    }, [openSort, matches]);
 
 
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -180,7 +192,7 @@ export default function MultipleDropdown() {
                             </button>
                         </div>
                         {open && !md && (
-                            <div style={{ position: 'absolute', top: '100%', left: 0, zIndex: 5, marginTop: '1%', scrollbarWidth: 'thin', backgroundColor: ' #373737', overflowY: 'visible' }}>
+                            <div style={{ position: 'absolute', top: '100%', left: 0, zIndex: 1400, marginTop: '1%', scrollbarWidth: 'thin', backgroundColor: ' #373737', overflowY: 'visible' }}>
                                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: 170, flexDirection: 'column' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
                                         <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: ' #12daa8' }} /></div>
@@ -209,15 +221,15 @@ export default function MultipleDropdown() {
 
             </div>
             {openSort && matches && (
-                <div style={{ position: 'fixed', bottom: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.5)', fontFamily: '"Raleway", sans-serif' }}>
-                    <div ref={sortRef} style={{ width: '100%', height: 360, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', background: 'white', boxShadow: '-2px 0 8px rgba(0,0,0,0.2)', boxSizing: 'border-box', overflowY: 'auto', bottom: 0, borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
+                <div style={{ position: 'fixed', bottom: 55, width: '100%', height: '100%', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.5)', fontFamily: '"Raleway", sans-serif',zIndex:1400 }}>
+                    <div ref={sortRef} style={{ width: '100%', height: 300, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', background: 'white', boxShadow: '-2px 0 8px rgba(0,0,0,0.2)', boxSizing: 'border-box', overflowY: 'auto', bottom: 0, borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
                         <div style={{ width: '90%', height: '93%', }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', height: 50, alignItems: 'center', zIndex: 1000, borderBottom: '2px solid #95a5a6' }}>
                                 <div style={{ fontSize: 20, fontWeight: 600 }}>Sort By</div>
                                 <div style={{ cursor: 'pointer', fontSize: 40, fontWeight: 600 }}><CloseIcon onClick={() => setOpenSort(false)} /></div>
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: '100%' }}>
-                                <div style={{ width: '100%', height: 35, display: 'flex', alignItems: 'center', fontSize: 16, cursor: 'pointer' }}>Top Rated</div>
+                                <div style={{ width: '100%', height: 35, display: 'flex', alignItems: 'center', fontSize: 16, cursor: 'pointer',marginTop:10 }}>Top Rated</div>
                                 <div style={{ width: '100%', height: 35, display: 'flex', alignItems: 'center', fontSize: 16, cursor: 'pointer' }}>Price(Lowest First)</div>
                                 <div style={{ width: '100%', height: 35, display: 'flex', alignItems: 'center', fontSize: 16, cursor: 'pointer' }}>Latest Arrival</div>
                                 <div style={{ width: '100%', height: 35, display: 'flex', alignItems: 'center', fontSize: 16, cursor: 'pointer' }}>Discount(Descending)</div>

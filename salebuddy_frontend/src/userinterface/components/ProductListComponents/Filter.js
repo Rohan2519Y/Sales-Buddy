@@ -14,17 +14,10 @@ export default function Filter({ onClose, filterData }) {
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     const [openSection, setOpenSection] = useState(null);
     useEffect(() => {
-        if (!matches) {
-            // Lock scroll and force overlay over scrollbar
-            document.body.style.overflow = 'hidden';
-            document.documentElement.style.overflow = 'hidden'; // prevent scroll on html
-        }
 
-        return () => {
-            // Cleanup
-            document.body.style.overflow = 'auto';
-            document.documentElement.style.overflow = 'auto';
-        };
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden'; // prevent scroll on html
+
     }, [matches]);
 
 
@@ -193,95 +186,25 @@ export default function Filter({ onClose, filterData }) {
                             }}
                         >
                             {openSection && sections.find((s) => s.key === openSection) ? (
-                                sections
-                                    .find((s) => s.key === openSection)
-                                    .data.map((item, index) => (
-                                        <div
-                                            key={index}
-                                            style={{
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                padding: '8px 0',
-                                                userSelect: 'none',
-                                            }}
-                                        >
-                                            <Checkbox style={{ color: '#12daa8' }} />
-                                            <span style={{ fontSize: 18 }}>
-                                                {openSection === 'price' ? `₹${item}` : item}
-                                            </span>
-                                        </div>
-                                    ))
-                            ) : (
-                                <div
-                                    style={{
-                                        textAlign: 'center',
-                                        color: '#999',
-                                        fontStyle: 'italic',
-                                        marginTop: 20,
-                                    }}
-                                >
-
-                                </div>
+                                sections.find((s) => s.key === openSection).data.map((item, index) => (
+                                    <div key={index} style={{ display: 'flex', padding: '8px 0', userSelect: 'none', alignItems: 'center', }}>
+                                        <Checkbox style={{ color: '#12daa8' }} />
+                                        <span style={{ fontSize: 18 }}>
+                                            {openSection === 'price' ? `₹${item}` : item}
+                                        </span>
+                                    </div>
+                                ))
+                            ) : (<div style={{ textAlign: 'center', color: '#999', fontStyle: 'italic', marginTop: 20, }}></div>
                             )}
                         </div>
                     </div>
 
-                    {/* Footer Buttons */}
-                    <div
-                        style={{
-                            padding: '10px 0',
-                            background: 'white',
-                            borderTop: '1px solid #ccc',
-                            flexShrink: 0,
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <div
-                            style={{
-                                display: 'flex',
-                                width: '94%',
-                                justifyContent: 'space-evenly',
-
-                            }}
-                        >
-                            <div
-                                style={{
-
-                                    height: 45,
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    fontSize: 17,
-                                    fontWeight: 600,
-                                    background: '#393939',
-                                    color: 'white',
-                                    borderRadius: 5,
-                                    cursor: 'pointer',
-                                    userSelect: 'none',
-                                    width: '40%'
-                                }}
-                            >
+                    <div style={{ padding: '10px 0', background: 'white', borderTop: '1px solid #ccc', flexShrink: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
+                        <div style={{ display: 'flex', width: '94%', justifyContent: 'space-evenly', }}>
+                            <div style={{ height: 45, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 17, fontWeight: 600, background: '#393939', color: 'white', borderRadius: 5, cursor: 'pointer', userSelect: 'none', width: '40%' }} >
                                 CLEAR
                             </div>
-                            <div
-                                style={{
-
-                                    height: 45,
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    fontSize: 17,
-                                    fontWeight: 600,
-                                    background: '#12daa8',
-                                    color: 'black',
-                                    borderRadius: 5,
-                                    cursor: 'pointer',
-                                    userSelect: 'none',
-                                    width: '40%'
-                                }}
-                            >
+                            <div style={{ height: 45, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 17, fontWeight: 600, background: '#12daa8', color: 'black', borderRadius: 5, cursor: 'pointer', userSelect: 'none', width: '40%' }}>
                                 APPLY
                             </div>
                         </div>
