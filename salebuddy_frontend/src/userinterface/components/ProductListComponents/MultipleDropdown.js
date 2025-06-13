@@ -108,11 +108,8 @@ export default function MultipleDropdown() {
 
     return (
         <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div
-                ref={dropdownContainerRef}
-                style={{ width: matches ? '90%' : '85%', display: 'flex', overflowX: md ? 'auto' : '', scrollbarWidth: md ? 'none' : '' }}
-            >
-                <div style={{ margin: 5, cursor: 'pointer' }}>
+            <div ref={dropdownContainerRef} style={{ width: matches ? '90%' : '85%', display: 'flex', overflowX: md ? 'auto' : '', scrollbarWidth: md ? 'none' : '' }}>
+                <div style={{ margin: 5,  }}>
                     <Dropdown
                         data={categories}
                         title='Categories'
@@ -121,7 +118,7 @@ export default function MultipleDropdown() {
                         style={{ cursor: 'pointer' }}
                     />
                 </div>
-                <div style={{ margin: 5, cursor: 'pointer' }}>
+                <div style={{ margin: 5 }}>
                     <Dropdown
                         data={price}
                         title='Price'
@@ -130,7 +127,7 @@ export default function MultipleDropdown() {
                         style={{ cursor: 'pointer' }}
                     />
                 </div>
-                <div style={{ margin: 5, cursor: 'pointer' }}>
+                <div style={{ margin: 5, }}>
                     <Dropdown
                         data={brands}
                         title='Brands'
@@ -138,7 +135,7 @@ export default function MultipleDropdown() {
                         onToggle={() => toggleDropdown('brands')}
                     />
                 </div>
-                <div style={{ margin: 5, cursor: 'pointer' }}>
+                <div style={{ margin: 5,}}>
                     <Dropdown
                         data={storage}
                         title='Internal Storage'
@@ -146,7 +143,7 @@ export default function MultipleDropdown() {
                         onToggle={() => toggleDropdown('storage')}
                     />
                 </div>
-                <div style={{ margin: 5, cursor: 'pointer' }}>
+                <div style={{ margin: 5,}}>
                     <Dropdown
                         data={tower}
                         title='Cellular Technology'
@@ -155,7 +152,7 @@ export default function MultipleDropdown() {
                     />
                 </div>
                 {matches ? <>
-                    <div style={{ margin: 5, cursor: 'pointer' }}>
+                    <div style={{ margin: 5,  }}>
                         <Dropdown
                             data={discount}
                             title='Discount'
