@@ -3,6 +3,7 @@ import Dashboard from "./admin/admin_login/Dashboard"
 import Home from "./userinterface/screens/Home"
 import ProductList from "./userinterface/screens/ProductList";
 import {BrowserRouter as Router,Routes,Route} from "react-router";
+import MainProductInfoComponent from "./userinterface/screens/MainProductInfoComponent";
 function App() {
   return (
     <div style={{fontFamily:'Quicksand'}}>
@@ -11,6 +12,7 @@ function App() {
           <Route element={<SignIn/>} path="/signin"/>
           <Route element={<Dashboard/>} path="/dashboard/*"/>
           <Route element={<ProductList/>} path="/productlist"/>
+          <Route element={<MainProductInfoComponent/>} path="/mainproductinfocomponent"/>
           <Route element={<Home/>} path="/"/>
         </Routes>
       </Router>
