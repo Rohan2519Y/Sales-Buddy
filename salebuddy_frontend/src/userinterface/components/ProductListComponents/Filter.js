@@ -7,28 +7,42 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Divider from '@mui/material/Divider';
 
-
 export default function Filter({ onClose, filterData }) {
     const theme = useTheme();
     const md = useMediaQuery('(max-width:1200px)');
     const matches = useMediaQuery(theme.breakpoints.down('md'));
-    const [openSection, setOpenSection] = useState(null);
+    const [openSection, setOpenSection] = useState(filterData?.[0]?.key || null);
+    const [checkedItems, setCheckedItems] = useState({});
+
     useEffect(() => {
-
         document.body.style.overflow = 'hidden';
-        document.documentElement.style.overflow = 'hidden'; // prevent scroll on html
-
+        document.documentElement.style.overflow = 'hidden';
     }, [matches]);
-
 
     const handleBackdropClick = (e) => {
         if (e.target === e.currentTarget) {
             onClose();
         }
     };
+
     const toggleSection = (sectionName) => {
         setOpenSection((prev) => (prev === sectionName ? null : sectionName));
     };
+
+    const handleCheckboxChange = (sectionKey, itemIndex) => {
+        setCheckedItems(prev => ({
+            ...prev,
+            [sectionKey]: {
+                ...prev[sectionKey],
+                [itemIndex]: !prev[sectionKey]?.[itemIndex]
+            }
+        }));
+    };
+
+    const isItemChecked = (sectionKey, itemIndex) => {
+        return checkedItems[sectionKey]?.[itemIndex] || false;
+    };
+
     const sections = filterData;
 
     return (
@@ -42,7 +56,6 @@ export default function Filter({ onClose, filterData }) {
                                     <div style={{ fontSize: 30, fontWeight: 600 }}>All Filters</div>
                                     <div onClick={onClose} style={{ cursor: 'pointer', fontSize: 40, fontWeight: 600 }}><CloseIcon /></div>
                                 </div>
-
                                 {sections.map((section) => (
                                     <div key={section.key} style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', }}>
                                         <div onClick={() => toggleSection(section.key)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', fontSize: 20, fontWeight: '500', height: 50 }} >
@@ -53,7 +66,11 @@ export default function Filter({ onClose, filterData }) {
                                             <div style={{ width: '100%' }}>
                                                 {section.data.map((item, index) => (
                                                     <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
-                                                        <Checkbox style={{ color: ' #12daa8' }} />
+                                                        <Checkbox
+                                                            style={{ color: ' #12daa8' }}
+                                                            checked={isItemChecked(section.key, index)}
+                                                            onChange={() => handleCheckboxChange(section.key, index)}
+                                                        />
                                                         <span style={{ fontSize: 18 }}>
                                                             {section.key === 'price' ? `₹${item}` : item}
                                                         </span>
@@ -76,119 +93,32 @@ export default function Filter({ onClose, filterData }) {
                 </div>
             )}
             {matches && (
-                <div
-                    style={{
-                        position: 'fixed',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        fontFamily: '"Raleway", sans-serif',
-                        zIndex: 1300,
-                        backgroundColor: '#f9f9f9',
-                    }}
-                >
-                    {/* Header */}
-                    <div
-                        style={{
-                            width: '100%',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            background: 'white',
-                            borderBottom: '1px solid #95a5a6',
-                            flexShrink: 0,
-                        }}
-                    >
-                        <div
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                width: '90%',
-                                height: 60,
-                                alignItems: 'center',
-                                position: 'sticky',
-                                top: 0,
-                                background: 'white',
-                                zIndex: 1400,
-                                userSelect: 'none',
-                            }}
-                        >
+                <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', flexDirection: 'column', fontFamily: '"Raleway", sans-serif', zIndex: 1300, backgroundColor: '#f9f9f9', }}>
+                    <div style={{ width: '100%', display: 'flex', justifyContent: 'center', background: 'white', borderBottom: '1px solid #95a5a6', flexShrink: 0, }} >
+                        <div style={{ display: 'flex', justifyContent: 'space-between', width: '90%', height: 60, alignItems: 'center', position: 'sticky', top: 0, background: 'white', zIndex: 1400, userSelect: 'none', }}>
                             <div style={{ fontSize: 25, fontWeight: 600 }}>All Filters</div>
                             <div onClick={onClose} style={{ cursor: 'pointer', fontSize: 40, fontWeight: 600 }}>
                                 <CloseIcon />
                             </div>
                         </div>
                     </div>
-
-                    {/* Content */}
-                    <div
-                        style={{
-                            flex: 1,
-                            display: 'flex',
-                            height: 'auto', // flex:1 will handle height now
-                            overflow: 'hidden',
-                        }}
-                    >
-                        {/* Left Sidebar */}
-                        <div
-                            style={{
-                                width: '40%',
-                                background: '#393939',
-                                padding: 12,
-                                boxSizing: 'border-box',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                overflowY: 'auto',
-                                scrollbarWidth: 'none',
-                            }}
-                        >
+                    <div style={{ flex: 1, display: 'flex', height: 'auto', overflow: 'hidden', }}>
+                        <div style={{ width: '40%', background: '#393939', padding: 12, boxSizing: 'border-box', display: 'flex', flexDirection: 'column', overflowY: 'auto', scrollbarWidth: 'none', }}>
                             {sections.map((section) => (
-                                <div
-                                    key={section.key}
-                                    onClick={() => toggleSection(section.key)}
-                                    style={{
-                                        cursor: 'pointer',
-                                        minHeight: 60,
-                                        color: openSection === section.key ? '#393939' : '#ffffff',
-                                        backgroundColor: openSection === section.key ? '#ffffff' : 'transparent',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-
-                                        marginBottom: 8,
-                                        padding: '0 12px',
-                                        fontWeight: 550,
-                                        fontSize: 18,
-                                        userSelect: 'none',
-
-                                        overflow: 'hidden',
-
-                                        textAlign: 'center',
-
-                                        boxShadow: openSection === section.key ? '0 0 10px rgba(0,0,0,0.15)' : 'none',
-                                    }}
-                                >
+                                <div key={section.key} onClick={() => toggleSection(section.key)} style={{ cursor: 'pointer', minHeight: 60, color: openSection === section.key ? '#393939' : '#ffffff', backgroundColor: openSection === section.key ? '#ffffff' : 'transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 8, padding: '0 12px', fontWeight: 550, fontSize: 18, userSelect: 'none', overflow: 'hidden', textAlign: 'center', boxShadow: openSection === section.key ? '0 0 10px rgba(0,0,0,0.15)' : 'none', }} >
                                     {section.title}
                                 </div>
                             ))}
                         </div>
-
-                        {/* Right Content Panel */}
-                        <div
-                            style={{
-                                width: '60%',
-                                background: '#fff',
-                                padding: 16,
-                                boxSizing: 'border-box',
-                                overflowY: 'auto',
-                            }}
-                        >
+                        <div style={{ width: '60%', background: '#fff', padding: 16, boxSizing: 'border-box', overflowY: 'auto', }}>
                             {openSection && sections.find((s) => s.key === openSection) ? (
                                 sections.find((s) => s.key === openSection).data.map((item, index) => (
                                     <div key={index} style={{ display: 'flex', padding: '8px 0', userSelect: 'none', alignItems: 'center', }}>
-                                        <Checkbox style={{ color: '#12daa8' }} />
+                                        <Checkbox
+                                            style={{ color: '#12daa8' }}
+                                            checked={isItemChecked(openSection, index)}
+                                            onChange={() => handleCheckboxChange(openSection, index)}
+                                        />
                                         <span style={{ fontSize: 18 }}>
                                             {openSection === 'price' ? `₹${item}` : item}
                                         </span>

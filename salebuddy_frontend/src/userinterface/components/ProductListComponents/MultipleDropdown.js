@@ -49,19 +49,16 @@ export default function MultipleDropdown() {
     const sortRef = useRef(null);
     useEffect(() => {
         const handleClickOutsideSort = (event) => {
-            // For mobile modal, check if click is on backdrop
             if (matches && openSort) {
                 const sortModal = sortRef.current;
                 if (sortModal && !sortModal.contains(event.target)) {
-                    // Check if the click is on the backdrop (the overlay div)
-                    const isBackdropClick = event.target.style.backgroundColor === 'rgba(0, 0, 0, 0.5)' || 
-                                          event.target.className?.includes('backdrop');
+                    const isBackdropClick = event.target.style.backgroundColor === 'rgba(0, 0, 0, 0.5)' ||
+                        event.target.className?.includes('backdrop');
                     if (isBackdropClick) {
                         setOpenSort(false);
                     }
                 }
             }
-            // For desktop dropdown
             else if (!matches && openSort && sortRef.current && !sortRef.current.contains(event.target)) {
                 setOpen(false);
             }
@@ -70,7 +67,6 @@ export default function MultipleDropdown() {
         if (openSort) {
             document.addEventListener("mousedown", handleClickOutsideSort);
         }
-
         return () => {
             document.removeEventListener("mousedown", handleClickOutsideSort);
         };
@@ -120,8 +116,8 @@ export default function MultipleDropdown() {
 
     return (
         <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div ref={dropdownContainerRef} style={{ width: md ? '90%' : '77%', display: 'flex', overflowX: md ? 'auto' : '', scrollbarWidth: md ? 'none' : '',marginTop:'3%' }}>
-                <div style={{ margin: 5,  }}>
+            <div ref={dropdownContainerRef} style={{ width: md ? '90%' : '77%', display: 'flex', overflowX: md ? 'auto' : '', scrollbarWidth: md ? 'none' : '', marginTop: '3%' }}>
+                <div style={{ margin: 5, }}>
                     <Dropdown
                         data={categories}
                         title='Categories'
@@ -147,7 +143,7 @@ export default function MultipleDropdown() {
                         onToggle={() => toggleDropdown('brands')}
                     />
                 </div>
-                <div style={{ margin: 5,}}>
+                <div style={{ margin: 5, }}>
                     <Dropdown
                         data={storage}
                         title='Internal Storage'
@@ -155,7 +151,7 @@ export default function MultipleDropdown() {
                         onToggle={() => toggleDropdown('storage')}
                     />
                 </div>
-                <div style={{ margin: 5,}}>
+                <div style={{ margin: 5, }}>
                     <Dropdown
                         data={tower}
                         title='Cellular Technology'
@@ -164,7 +160,7 @@ export default function MultipleDropdown() {
                     />
                 </div>
                 {matches ? <>
-                    <div style={{ margin: 5,  }}>
+                    <div style={{ margin: 5, }}>
                         <Dropdown
                             data={discount}
                             title='Discount'
@@ -221,7 +217,7 @@ export default function MultipleDropdown() {
 
             </div>
             {openSort && matches && (
-                <div style={{ position: 'fixed', bottom: 55, width: '100%', height: '100%', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.5)', fontFamily: '"Raleway", sans-serif',zIndex:1400 }}>
+                <div style={{ position: 'fixed', bottom: 55, width: '100%', height: '100%', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.5)', fontFamily: '"Raleway", sans-serif', zIndex: 1400 }}>
                     <div ref={sortRef} style={{ width: '100%', height: 300, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', background: 'white', boxShadow: '-2px 0 8px rgba(0,0,0,0.2)', boxSizing: 'border-box', overflowY: 'auto', bottom: 0, borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
                         <div style={{ width: '90%', height: '93%', }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', height: 50, alignItems: 'center', zIndex: 1000, borderBottom: '2px solid #95a5a6' }}>
@@ -229,7 +225,7 @@ export default function MultipleDropdown() {
                                 <div style={{ cursor: 'pointer', fontSize: 40, fontWeight: 600 }}><CloseIcon onClick={() => setOpenSort(false)} /></div>
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: '100%' }}>
-                                <div style={{ width: '100%', height: 35, display: 'flex', alignItems: 'center', fontSize: 16, cursor: 'pointer',marginTop:10 }}>Top Rated</div>
+                                <div style={{ width: '100%', height: 35, display: 'flex', alignItems: 'center', fontSize: 16, cursor: 'pointer', marginTop: 10 }}>Top Rated</div>
                                 <div style={{ width: '100%', height: 35, display: 'flex', alignItems: 'center', fontSize: 16, cursor: 'pointer' }}>Price(Lowest First)</div>
                                 <div style={{ width: '100%', height: 35, display: 'flex', alignItems: 'center', fontSize: 16, cursor: 'pointer' }}>Latest Arrival</div>
                                 <div style={{ width: '100%', height: 35, display: 'flex', alignItems: 'center', fontSize: 16, cursor: 'pointer' }}>Discount(Descending)</div>
