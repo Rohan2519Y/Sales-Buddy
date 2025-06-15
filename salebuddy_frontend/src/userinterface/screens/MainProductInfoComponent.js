@@ -8,8 +8,13 @@ export default function MainProductInfoComponent(){
     <div>
         <Header/>
     </div>
-    <div>
+    <div style={{width:'50%',display:'flex',justifyContent:'flex-end'}}>
+        <div style={{width:'15%',height:'80vh'}}>
         <VerticalSlider/>
+        </div>
+        <div style={{width:'50%',height:'80vh',background:'red'}}>
+
+        </div>
     </div>
     <div>
         <Footer/>
