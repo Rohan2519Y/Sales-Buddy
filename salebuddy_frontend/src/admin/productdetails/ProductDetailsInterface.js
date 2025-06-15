@@ -109,7 +109,7 @@ export default function ProductDetailInterface() {
 
     const fillProductVarient = () => {
         return (productVarientList.map((item) => {
-            return <MenuItem value={item.productvarientid}>{item.productram}GB  {item.productstorage}GB</MenuItem>
+            return <MenuItem value={item.productvarientid}>{item.productram}  {item.productstorage}</MenuItem>
         }))
     }
     const handleChangeServiceId = (e) => {
@@ -255,7 +255,6 @@ export default function ProductDetailInterface() {
                     text: result.message,
                     toast: true
                 });
-                handleReset()
             }
             else {
                 Swal.fire({
@@ -396,12 +395,12 @@ export default function ProductDetailInterface() {
                                 <InputLabel>Ratings
                                 </InputLabel>
                                 <Select value={ratings} onChange={(e) => setRatings(e.target.value)} label="Ratings">
-                                    <MenuItem value="0 Star">0 Star</MenuItem>
-                                    <MenuItem value="1 Star">1 Star</MenuItem>
-                                    <MenuItem value="2 Star">2 Star</MenuItem>
-                                    <MenuItem value="3 Star">3 Star</MenuItem>
-                                    <MenuItem value="4 Star">4 Star</MenuItem>
-                                    <MenuItem value="5 Star">5 Star</MenuItem>
+                                    <MenuItem value="0">0 Star</MenuItem>
+                                    <MenuItem value="1">1 Star</MenuItem>
+                                    <MenuItem value="2">2 Star</MenuItem>
+                                    <MenuItem value="3">3 Star</MenuItem>
+                                    <MenuItem value="4">4 Star</MenuItem>
+                                    <MenuItem value="5">5 Star</MenuItem>
                                 </Select>
                                 <FormHelperText>{error.warrenty}</FormHelperText>
                             </FormControl>

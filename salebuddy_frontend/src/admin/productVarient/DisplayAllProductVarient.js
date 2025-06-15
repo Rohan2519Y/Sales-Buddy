@@ -179,7 +179,7 @@ export default function DisplayAllVarients() {
       handleErrorMessage('productStorage', 'Please Input Storage...')
     }
     if (err == false) {
-      var body = { 'productvarientid': productVarientId, 'serviceid': serviceId, 'brandid': brandId, 'productid': productId, 'productRam': productRam, 'productstorage': productStorage }
+      var body = { 'productvarientid': productVarientId, 'serviceid': serviceId, 'brandid': brandId, 'productid': productId, 'productram': productRam, 'productstorage': productStorage }
       var result = await postData('productVarients/update_productVarients', body)
       if (result.status) {
         Swal.fire({
@@ -247,7 +247,7 @@ export default function DisplayAllVarients() {
               <TextField label="Product Ram" variant="outlined" fullWidth value={productRam} onChange={(e) => setProductRam(e.target.value)} />
             </Grid2>
             <Grid2 size={6}>
-            <TextField label="Product Storage" variant="outlined" fullWidth value={productStorage} onChange={(e) => setProductStorage(e.target.value)}/>
+              <TextField label="Product Storage" variant="outlined" fullWidth value={productStorage} onChange={(e) => setProductStorage(e.target.value)} />
             </Grid2>
             <Grid2 size={6} className={classes.center} >
               <Button className={classes.button_style} variant="contained" onClick={handleClick}>Save</Button>
@@ -278,12 +278,12 @@ export default function DisplayAllVarients() {
       <MaterialTable
         title="List Of Product Variants"
         columns={[
-          { title: 'ID',width:'2%', field: 'productvarientid' },
+          { title: 'ID', width: '2%', field: 'productvarientid' },
           { title: 'Service', render: (rowData) => <div>{rowData.servicetype} {rowData.servicename}</div> },
           { title: 'Brand', field: 'brandname' },
           { title: 'Product', field: 'productname' },
-          { title: 'RAM', render:(rowData)=><div>{rowData.productram} GB</div>},
-          { title: 'Storage', render:(rowData)=><div>{rowData.productstorage} GB</div>} 
+          { title: 'RAM', render: (rowData) => <div>{rowData.productram}</div> },
+          { title: 'Storage', render: (rowData) => <div>{rowData.productstorage}</div> }
         ]}
         data={listProductVarients}
         actions={[

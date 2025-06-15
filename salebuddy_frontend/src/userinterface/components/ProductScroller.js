@@ -40,7 +40,7 @@ export default function ProductScroller({ data, title }) {
                     {data.map((item, i) => (
                         <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: landscape ? '90vh' : smatches ? '40vh' : '52vh', width: '100%', }}  >
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', }}>
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center',width:'100%' }}>
                                     <ProductComponent item={item} i={i} />
                                 </div>
                             </div>

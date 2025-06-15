@@ -22,7 +22,7 @@ router.post('/insert_productdetails', upload.fields([{ name: 'picture', maxCount
 })
 router.get('/fetch_productdetails', function (req, res, next) {
     try {
-        pool.query("SELECT P.*, B.*, S.*, PC.*, PV.*, PD.* FROM products P, brands B, services S, productcolors PC, productvarients PV, productdetails PD WHERE S.serviceid = B.serviceid AND B.brandid = P.brandid AND P.productid = PC.productid AND P.productid = PV.productid AND PC.productcolorid = PD.productcolorid;", function (error, result) {
+        pool.query("SELECT P.*, B.*, S.*, PC.*, PV.*, PD.* FROM products P, brands B, services S, productcolors PC, productvarients PV, productdetails PD where P.productid=PD.productid and B.brandid=PD.brandId and S.serviceid=PD.serviceid and PC.productcolorid=Pd.productcolorid  and PV.productvarientid=pd.productvarientid", function (error, result) {
             if (error) {
                 res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
             }

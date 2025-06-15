@@ -8,6 +8,9 @@ import { getData, postData } from "../../backendservices/FetchNodeServices"
 export default function Home() {
 
     const [brandList, setBrandList] = useState([])
+    const [listProduct, setListProduct] = useState([])
+    const [listProductLatest, setListProductLatest] = useState([])
+
     const fetchBrands = async () => {
         var response = await getData('userinterface/userinterface_fetch_brands')
         if (response.status) {
@@ -18,8 +21,20 @@ export default function Home() {
         }
     }
 
+    const fetchAllProducts = async (status) => {
+        var response = await postData('userinterface/userinterface_fetch_productdetails', { status })
+        if (response.status) {
+            status == 'Hot Deals' ? setListProduct(response.data) : setListProductLatest(response.data)
+        }
+        else {
+            alert(response.message)
+        }
+    }
+
     useEffect(function () {
         fetchBrands()
+        fetchAllProducts('Hot Deals')
+        fetchAllProducts('Latest Launches')
     }, [])
 
     var data = [{
@@ -47,7 +62,7 @@ export default function Home() {
             <MainSlider />
         </div>
         <div style={{ width: '100%', height: '100%', overflowX: "hidden", background: ' #191919' }}>
-            <ProductScroller data={data} title='Summer Special Deals' />
+            <ProductScroller data={listProduct} title='Summer Special Deals' />
         </div>
         <div >
             <BrandSlider data={brandList} />
