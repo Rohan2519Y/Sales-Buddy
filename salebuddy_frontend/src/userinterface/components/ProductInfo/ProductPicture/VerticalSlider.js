@@ -49,7 +49,7 @@ export default function VerticalSlider({ onImageClick }) {
                     onMouseEnter={() => setBgcolor(i)}
                     onMouseLeave={() => setBgcolor(null)}
                     onClick={() => handleClick(item, i)}
-                    style={{ background: '#191919', width: 70, height: 70, display: "flex", justifyContent: 'center', alignItems: 'center', margin: '7%', borderRadius: 5, cursor: 'pointer', border: isActive ? '2px solid #00e9bf' : '' }}>
+                    style={{ background: '#191919', width: 70, height: 70, display: "flex", justifyContent: 'center', alignItems: 'center', margin: '7%', borderRadius: 5, cursor: 'pointer', border: isActive ? '2px solid #00e9bf' : '',padding:1 }}>
                     {isVideo ? (<div style={{ width: isActive ? '95%' : '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <PlayCircleIcon style={{ color: '#12daa8', fontSize: '300%', width: '100%' }} />
                     </div>
