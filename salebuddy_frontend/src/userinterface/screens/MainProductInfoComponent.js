@@ -23,7 +23,7 @@ export default function MainProductInfoComponent() {
             </div>
             <div style={{ display: 'flex' }}>
                 <div style={{ width: '50%', display: 'flex', justifyContent: 'flex-end' }}>
-                    <div style={{ width: '11%', height: '100%' }}>
+                    <div style={{ width: '15%', height: '100%' }}>
                         <VerticalSlider onImageClick={setSelectedMedia} />
                     </div>
                     <div style={{ width: '60%', }}>

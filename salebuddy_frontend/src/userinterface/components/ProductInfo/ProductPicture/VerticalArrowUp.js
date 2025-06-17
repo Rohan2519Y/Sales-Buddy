@@ -11,7 +11,7 @@ export default function VerticalArrowUp({VerticalArrow}) {
      const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     return (<>
-    {matches?<></>:<div onClick={handleForward} style={{ width: 'auto', height: '5%', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', top:'1%', }} >
+    {matches?<></>:<div onClick={handleForward} style={{ width: 'auto', height: '5%', cursor: 'pointer', display: 'flex',marginLeft:'12%' }} >
         <div style={{ display: 'flex', width: '100%' }}><KeyboardArrowUpIcon style={{ width: '100%', fontSize: '300%', color: 'white' }} /></div>
     </div>}</>)
 }
