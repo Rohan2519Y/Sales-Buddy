@@ -8,6 +8,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ProductColorComponent from "../components/ProductInfo/ProductDetails/ProductColorComponent";
 import ProductRamComponent from "../components/ProductInfo/ProductDetails/ProductRamCompontent";
 import ProductStorageComponent from "../components/ProductInfo/ProductDetails/ProductStorage";
+import ProductExchangeComponent from "../components/ProductInfo/ProductDetails/ProductExchangeComponent";
 
 export default function MainProductInfoComponent() {
     const [selectedMedia, setSelectedMedia] = useState(null);
@@ -38,6 +39,7 @@ export default function MainProductInfoComponent() {
                 </div>
                 <div style={{ display: 'flex', width: '50%', height: '80vh',flexDirection:'column' }}>
                     <ProductInfoComponent data={data}/>
+                    <ProductExchangeComponent/>
                     <ProductColorComponent color={color} defaultColor={data[0].color}/>
                     <ProductRamComponent ram={ram} defaultRam={data[0].ram}/>
                     <ProductStorageComponent storage={storage} defaultStorage={data[0].storage}/>
