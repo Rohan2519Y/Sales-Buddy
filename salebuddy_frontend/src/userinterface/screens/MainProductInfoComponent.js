@@ -14,6 +14,7 @@ export default function MainProductInfoComponent() {
         productdetailid: 1, productname: 'SAMSUNG Galaxy S25 Ultra 5G (12GB RAM, 256GB, Titanium Silverblue)', variant: '128 GB', color: 'Teal',
         image: 'https://res.cloudinary.com/dio6iadsq/image/upload/v1748778565/s25_ultra_e1hcpg.png', ratings: 3.3, price: 78000.00, offerprice: 70000.00
       }]
+    var color=['Titanium Blue','Titanium Black','Titanium White','Titanium Silver','Titanium WhiteSilver']  
     return (<>
         <div style={{ width: '100%', height: '100%', background: ' #191919',fontFamily: '"Inter", sans-serif' }}>
             <div>
@@ -31,9 +32,9 @@ export default function MainProductInfoComponent() {
                         <ProductPictureComponent media={selectedMedia} />
                     </div>
                 </div>
-                <div style={{ display: 'flex', width: '50%', justifyContent: 'center', height: '80vh' }}>
+                <div style={{ display: 'flex', width: '50%', height: '80vh',flexDirection:'column' }}>
                     <ProductInfoComponent data={data}/>
-                    <ProductColorComponent/>
+                    <ProductColorComponent color={color}/>
                 </div>
             </div>
             <div>
