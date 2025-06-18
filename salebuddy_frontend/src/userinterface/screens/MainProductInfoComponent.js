@@ -10,8 +10,17 @@ import ProductRamComponent from "../components/ProductInfo/ProductDetails/Produc
 import ProductStorageComponent from "../components/ProductInfo/ProductDetails/ProductStorage";
 import ProductExchangeComponent from "../components/ProductInfo/ProductDetails/ProductExchangeComponent";
 import KeyfeatureComponent from "../components/ProductInfo/ProductDetails/KeyfeatureComponent";
-
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 export default function MainProductInfoComponent() {
+
+    const theme = useTheme();
+    const md = useMediaQuery('(max-width:1300px)');
+    const sm = useMediaQuery('(max-width:700px)');
+    const matches = useMediaQuery(theme.breakpoints.down('md'));
+    const smatches = useMediaQuery(theme.breakpoints.down('sm'));
+    const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
+
     const [selectedMedia, setSelectedMedia] = useState(null);
 
     var data = [{
@@ -22,8 +31,8 @@ export default function MainProductInfoComponent() {
         processor: 'MediaTek Dimensity 6300, Octa Core, 2.4 GHz',
         camera: '50 MP + 0.08 MP Dual Rear & 8 MP Front Camera',
         battery: '5500 mAh with 44W FlashCharge',
-        usp: 'IP64 Dust & Water Resistance, AI-Enhanced Stunning Photos, Shock-Absorbing Corners', 
-      }]
+        usp: 'IP64 Dust & Water Resistance, AI-Enhanced Stunning Photos, Shock-Absorbing Corners',
+    }]
     var color = ['Titanium Blue', 'Titanium Black', 'Titanium White', 'Titanium Silver', 'Titanium WhiteSilver']
     var ram = ['8GB', '12GB', '16GB']
     var storage = ['64GB', '128GB', '256GB', '512GB', '1TB']
@@ -37,10 +46,10 @@ export default function MainProductInfoComponent() {
             </div>
             <div style={{ display: 'flex' }}>
                 <div style={{ width: '50%', display: 'flex', justifyContent: 'flex-end' }}>
-                    <div style={{ width: '15%', height: '100%' }}>
+                    <div style={{ width: '17%', height: '100%' }}>
                         <VerticalSlider onImageClick={setSelectedMedia} />
                     </div>
-                    <div style={{ width: '60%', }}>
+                    <div style={{ width: md?'80%':'60%', }}>
                         <ProductPictureComponent media={selectedMedia} />
                     </div>
                 </div>
@@ -50,7 +59,7 @@ export default function MainProductInfoComponent() {
                     <ProductColorComponent color={color} defaultColor={data[0].color} />
                     <ProductRamComponent ram={ram} defaultRam={data[0].ram} />
                     <ProductStorageComponent storage={storage} defaultStorage={data[0].storage} />
-                    <KeyfeatureComponent data={data[0]}/>
+                    <KeyfeatureComponent data={data[0]} />
                 </div>
             </div>
             <div>

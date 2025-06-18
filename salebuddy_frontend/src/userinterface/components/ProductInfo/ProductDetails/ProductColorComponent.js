@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react"
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 export default function ProductColorComponent({ color, defaultColor }) {
+    const theme = useTheme();
+    const md = useMediaQuery('(max-width:1300px)');
+    const sm = useMediaQuery('(max-width:700px)');
+    const matches = useMediaQuery(theme.breakpoints.down('md'));
+    const smatches = useMediaQuery(theme.breakpoints.down('sm'));
+    const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
 
     const [pcolor, setPcolor] = useState('')
     const handleClick = (item) => {
@@ -15,8 +23,8 @@ export default function ProductColorComponent({ color, defaultColor }) {
     }, [defaultColor, color]);
 
     return (<>
-        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', marginTop: 10 }}>
-            <div style={{ width: '80%', height: 'auto', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', marginTop: 20 }}>
+            <div style={{ width:md?'95%': '80%', height: 'auto', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ color: ' #ffffff', fontSize: '90%', marginBottom: 15 }}>Brand Color</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', }}>
                     {color.map((item) => (
