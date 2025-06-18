@@ -37,7 +37,7 @@ export default function MainProductInfoComponent() {
                         <ProductPictureComponent media={selectedMedia} />
                     </div>
                 </div>
-                <div style={{ display: 'flex', width: '50%', height: '80vh',flexDirection:'column' }}>
+                <div style={{ display: 'flex', width: '50%', height: '80vh',flexDirection:'column',overflowY:'auto',scrollbarWidth:'none' }}>
                     <ProductInfoComponent data={data}/>
                     <ProductExchangeComponent/>
                     <ProductColorComponent color={color} defaultColor={data[0].color}/>
