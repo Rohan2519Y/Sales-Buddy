@@ -45,8 +45,8 @@ export default function MainProductInfoComponent() {
                 <div style={{ width: '70%', fontSize: '100%', fontWeight: 400 }}>Phones & Wearables <ArrowForwardIosIcon style={{ fontSize: '80%' }} /> Mobile Phones <ArrowForwardIosIcon style={{ fontSize: '80%' }} /> Android Phones</div>
             </div>
             <div style={{ display: 'flex', flexDirection: matches ? 'column' : '', }}>
-                <div style={{ width: matches ? '100%' : '50%', display: 'flex', justifyContent: 'flex-end' }}>
-                    <div style={{ width: '17%', height: '100%' }}>
+                <div style={{ width: matches ? '100%' : '50%', display: 'flex', justifyContent:matches?'': 'flex-end' }}>
+                    <div style={{ width: matches?'100%':'17%', height: '100%' }}>
                         <VerticalSlider onImageClick={setSelectedMedia} />
                     </div>
                     {matches ? <></> : <div style={{ width: md ? '80%' : '60%', }}>
