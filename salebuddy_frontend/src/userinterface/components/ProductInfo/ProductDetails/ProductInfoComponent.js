@@ -14,7 +14,7 @@ export default function ProductInfoComponent({ data }) {
     var percent = (discount / data[0].price) * 100;
     return (<>
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: matches ? 'center' : '' }}>
-            <div style={{ width: md ? '95%' : '80%', height: matches ? 140 : 170, display: 'flex', flexDirection: 'column' }}>
+            <div style={{ width:matches?'90%': md ? '95%' : '80%', height: matches ? 140 : 170, display: 'flex', flexDirection: 'column' }}>
                 <div style={{ width: '100%', display: 'flex', height: '35%', fontSize: '120%', color: ' #ffffff', fontWeight: 600 }}>{data[0].productname}</div>
                 <div style={{ width: '100%', display: 'flex', height: matches ? '25%' : '20%', color: ' #00e9bf', fontSize: '95%' }}>{data[0].ratings}<StarIcon style={{ fontSize: '100%' }} /></div>
                 <div style={{ width: '100%', display: 'flex', height: '30%', fontSize: '140%', color: ' #ffffff', fontWeight: 600, flexDirection: 'column', borderBottom: matches ? '' : '0.2px solid #9A9A9A' }}>

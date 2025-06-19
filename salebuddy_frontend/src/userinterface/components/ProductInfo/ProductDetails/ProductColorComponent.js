@@ -23,8 +23,8 @@ export default function ProductColorComponent({ color, defaultColor }) {
     }, [defaultColor, color]);
 
     return (<>
-        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', marginTop: 20 }}>
-            <div style={{ width:md?'95%': '80%', height: 'auto', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', marginTop: 20,alignItems:matches?'center':'' }}>
+            <div style={{ width:matches?'90%':md?'95%': '80%', height: 'auto', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ color: ' #ffffff', fontSize: '90%', marginBottom: 15 }}>Brand Color</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', }}>
                     {color.map((item) => (

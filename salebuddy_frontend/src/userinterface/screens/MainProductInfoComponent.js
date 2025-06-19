@@ -37,14 +37,14 @@ export default function MainProductInfoComponent() {
     var ram = ['8GB', '12GB', '16GB']
     var storage = ['64GB', '128GB', '256GB', '512GB', '1TB']
     return (<>
-        <div style={{ width: '100%', height: '100%', background: ' #191919', fontFamily: '"Inter", sans-serif' }}>
+        <div style={{ width: '100%', height: '100%', background: ' #191919', fontFamily: '"Inter", sans-serif',display:'flex',flexDirection:'column' }}>
             <div>
                 <Header />
             </div>
             <div style={{ width: '100%', height: 40, color: ' #ffffff', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <div style={{ width: '70%', fontSize: '100%', fontWeight: 400 }}>Phones & Wearables <ArrowForwardIosIcon style={{ fontSize: '80%' }} /> Mobile Phones <ArrowForwardIosIcon style={{ fontSize: '80%' }} /> Android Phones</div>
             </div>
-            <div style={{ display: 'flex', flexDirection: matches ? 'column' : '' }}>
+            <div style={{ display: 'flex', flexDirection: matches ? 'column' : '', }}>
                 <div style={{ width: matches ? '100%' : '50%', display: 'flex', justifyContent: 'flex-end' }}>
                     <div style={{ width: '17%', height: '100%' }}>
                         <VerticalSlider onImageClick={setSelectedMedia} />
@@ -53,7 +53,7 @@ export default function MainProductInfoComponent() {
                         <ProductPictureComponent media={selectedMedia} />
                     </div>}
                 </div>
-                <div style={{ display: 'flex', width: matches ? '100%' : '50%', height: '100vh', flexDirection: 'column', overflowY: matches ? '' : 'auto', scrollbarWidth: 'none' }}>
+                <div style={{ display: 'flex', width: matches ? '100%' : '50%', height: '100%', flexDirection: 'column', overflowY: matches ? 'none' : 'auto', scrollbarWidth: 'none' }}>
                     <ProductInfoComponent data={data} />
                     <ProductExchangeComponent />
                     <ProductColorComponent color={color} defaultColor={data[0].color} />
@@ -62,7 +62,7 @@ export default function MainProductInfoComponent() {
                     <KeyfeatureComponent data={data[0]} />
                 </div>
             </div>
-            <div>
+            <div style={{height:'100%'}}>
                 <Footer />
             </div>
         </div>

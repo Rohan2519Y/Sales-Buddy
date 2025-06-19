@@ -14,8 +14,8 @@ export default function ProductExchangeComponent() {
     const [selected, setSelected] = useState('with');
 
     return (<>
-        <div style={{ width: '100%', display: 'flex', marginTop: 20 }}>
-            <div style={{ width:md?'95%': '75%', border: '1px solid #9A9A9A', borderRadius: 5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div style={{ width: '100%', display: 'flex', marginTop: 20,justifyContent:matches?'center':'' }}>
+            <div style={{ width:matches?'90%':md?'95%': '75%', border: '1px solid #9A9A9A', borderRadius: 5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div onClick={() => setSelected('with')} style={{ width: '90%', minHeight: 60, flexDirection: 'column', display: 'flex', justifyContent: 'center', color: ' #ffffff' }}>
                     <div style={{ display: 'flex', alignItems: 'center', height: 30, marginTop: 5 }}>{selected === 'with' ? (
                         <RadioButtonCheckedIcon style={{ color: ' #00e9bf', marginRight: 10, fontSize: '140%', cursor: 'pointer' }} />
