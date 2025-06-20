@@ -7,6 +7,5 @@ var pool = mysql.createPool({
     database: 'salebuddy',
     multipleStatements: true,
     connectionLimit: 100
-
 })
 module.exports = pool
