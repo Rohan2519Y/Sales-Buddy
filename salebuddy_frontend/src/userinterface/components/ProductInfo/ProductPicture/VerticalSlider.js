@@ -70,7 +70,6 @@ export default function VerticalSlider({ onImageClick }) {
             return matches ?
                 <div key={i} style={{ width: '100%', display: "flex", justifyContent: 'center', alignItems: 'center', }}>
                     <div
-                        onClick={() => handleClick(item, i)}
                         style={{ width: '100%', height: 400, display: "flex", justifyContent: 'center', alignItems: 'center', marginTop: '7%', borderRadius: 5, cursor: 'pointer', padding: 1 }}>
                         {isVideo ? (<video controls src={item} style={{ height: '100%', maxWidth: '95%' }} />
                         ) : (<img src={item} style={{ height: '100%', }} />)}

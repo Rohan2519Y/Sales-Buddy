@@ -12,6 +12,7 @@ import ProductExchangeComponent from "../components/ProductInfo/ProductDetails/P
 import KeyfeatureComponent from "../components/ProductInfo/ProductDetails/KeyfeatureComponent";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import ProductSpecializationComponent from "../components/ProductInfo/ProductSpecialization/ProductSpecializationComponent";
 export default function MainProductInfoComponent() {
 
     const theme = useTheme();
@@ -37,7 +38,7 @@ export default function MainProductInfoComponent() {
     var ram = ['8GB', '12GB', '16GB']
     var storage = ['64GB', '128GB', '256GB', '512GB', '1TB']
     return (<>
-        <div style={{ width: '100%', height: '100%', background: ' #191919', fontFamily: '"Inter", sans-serif',display:'flex',flexDirection:'column' }}>
+        <div style={{ width: '100%', height: '100%', background: ' #191919', fontFamily: '"Inter", sans-serif', display: 'flex', flexDirection: 'column' }}>
             <div>
                 <Header />
             </div>
@@ -45,8 +46,8 @@ export default function MainProductInfoComponent() {
                 <div style={{ width: '70%', fontSize: '100%', fontWeight: 400 }}>Phones & Wearables <ArrowForwardIosIcon style={{ fontSize: '80%' }} /> Mobile Phones <ArrowForwardIosIcon style={{ fontSize: '80%' }} /> Android Phones</div>
             </div>
             <div style={{ display: 'flex', flexDirection: matches ? 'column' : '', }}>
-                <div style={{ width: matches ? '100%' : '50%', display: 'flex', justifyContent:matches?'': 'flex-end' }}>
-                    <div style={{ width: matches?'100%':'17%', height: '100%' }}>
+                <div style={{ width: matches ? '100%' : '50%', display: 'flex', justifyContent: matches ? '' : 'flex-end' }}>
+                    <div style={{ width: matches ? '100%' : '17%', height: '100%' }}>
                         <VerticalSlider onImageClick={setSelectedMedia} />
                     </div>
                     {matches ? <></> : <div style={{ width: md ? '80%' : '60%', }}>
@@ -62,7 +63,10 @@ export default function MainProductInfoComponent() {
                     <KeyfeatureComponent data={data[0]} />
                 </div>
             </div>
-            <div style={{height:'100%'}}>
+            <div>
+                <ProductSpecializationComponent />
+            </div>
+            <div style={{ height: '100%' }}>
                 <Footer />
             </div>
         </div>
