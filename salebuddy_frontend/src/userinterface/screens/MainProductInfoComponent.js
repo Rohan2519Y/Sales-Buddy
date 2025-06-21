@@ -43,7 +43,7 @@ export default function MainProductInfoComponent() {
                 <Header />
             </div>
             <div style={{ width: '100%', height: 40, color: ' #ffffff', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <div style={{ width: '70%', fontSize: '100%', fontWeight: 400 }}>Phones & Wearables <ArrowForwardIosIcon style={{ fontSize: '80%' }} /> Mobile Phones <ArrowForwardIosIcon style={{ fontSize: '80%' }} /> Android Phones</div>
+                <div style={{ width: matches?'85%':'70%', fontSize: matches?'75%':'100%', fontWeight: 400 }}>Phones & Wearables <ArrowForwardIosIcon style={{ fontSize: '80%' }} /> Mobile Phones <ArrowForwardIosIcon style={{ fontSize: '80%' }} /> Android Phones</div>
             </div>
             <div style={{ display: 'flex', flexDirection: matches ? 'column' : '', }}>
                 <div style={{ width: matches ? '100%' : '50%', display: 'flex', justifyContent: matches ? '' : 'flex-end' }}>

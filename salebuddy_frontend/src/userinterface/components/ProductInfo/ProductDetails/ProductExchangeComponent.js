@@ -24,7 +24,7 @@ export default function ProductExchangeComponent() {
                     )}<div style={{ display: 'flex', alignItems: 'center', fontSize: '85%' }}><b style={{ marginRight: 3 }}>With Exchange up </b> to ₹13,174.15 off</div>
                     </div>
                     {selected === 'with' && (<div style={{ display: 'flex', flexDirection: 'column', marginLeft: 30, marginTop: 10 }}>
-                        <div style={{ width: 330, height: 40, background: ' #12daa8', borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 5, color: ' #000000', fontSize: '90%', fontWeight: 700 }}>
+                        <div style={{ width: matches?'90%':330, height: 40, background: ' #12daa8', borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 5, color: ' #000000', fontSize: '90%', fontWeight: 700 }}>
                             Choose Your Phone For Exchange
                         </div>
                         <div style={{ color: ' #12daa8', marginTop: 4, fontSize: '90%', marginBottom: 7 }}><u>How does exchange work?</u></div>
