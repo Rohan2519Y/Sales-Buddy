@@ -14,6 +14,7 @@ function App() {
           <Route element={<ProductList/>} path="/productlist"/>
           <Route element={<MainProductInfoComponent/>} path="/mainproductinfocomponent"/>
           <Route element={<Home/>} path="/"/>
+          
         </Routes>
       </Router>
     </div>
