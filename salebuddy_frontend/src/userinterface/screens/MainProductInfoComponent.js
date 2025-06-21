@@ -37,6 +37,32 @@ export default function MainProductInfoComponent() {
     var color = ['Titanium Blue', 'Titanium Black', 'Titanium White', 'Titanium Silver', 'Titanium WhiteSilver']
     var ram = ['8GB', '12GB', '16GB']
     var storage = ['64GB', '128GB', '256GB', '512GB', '1TB']
+
+    const specificationData = [
+  {
+    section: "MOBILE CATEGORY",
+    items: [
+      { label: "Mobile Type", value: "Android Smartphone" },
+      { label: "Mobile Design", value: "Touch" },
+    ]
+  },
+  {
+    section: "MANUFACTURER DETAILS",
+    items: [
+      { label: "Brand", value: "Vivo" },
+      { label: "Model Series", value: "Y29" },
+      { label: "Model Number", value: "PD2421BF" },
+    ]
+  },
+  {
+    section: "Product Dimensions (Open)",
+    items: [
+      { label: "Dimensions In CM (WxDxH)", value: "7.61 x 0.81 x 16.57" },
+      { label: "Product Weight", value: "0.198 Kg" },
+      { label: "Dimensions In Inches (WxDxH)", value: "3.00 x 0.32 x 6.52" },
+    ]
+  }
+];
     return (<>
         <div style={{ width: '100%', height: '100%', background: ' #191919', fontFamily: '"Inter", sans-serif', display: 'flex', flexDirection: 'column' }}>
             <div>
@@ -64,7 +90,7 @@ export default function MainProductInfoComponent() {
                 </div>
             </div>
             <div>
-                <ProductSpecializationComponent />
+                <ProductSpecializationComponent data={specificationData}/>
             </div>
             <div style={{ height: '100%' }}>
                 <Footer />
