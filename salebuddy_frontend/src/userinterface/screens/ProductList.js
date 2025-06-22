@@ -26,7 +26,7 @@ export default function ProductList() {
             <div  >
                 <Header />
             </div>
-            <div style={{}}>
+            <div >
                 <MultipleDropdown/>
             </div>
             <div>

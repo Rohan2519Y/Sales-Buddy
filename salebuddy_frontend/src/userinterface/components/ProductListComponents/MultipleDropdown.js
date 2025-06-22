@@ -18,6 +18,7 @@ export default function MultipleDropdown() {
     const [open, setOpen] = useState(false);
     const [openSort, setOpenSort] = useState(false);
     const [showFilter, setShowFilter] = useState(false);
+    const [selectedItems, setSelectedItems] = useState({});
 
     const dropdownContainerRef = useRef(null);
     const toggleDropdown = (dropdownId) => {
@@ -31,6 +32,19 @@ export default function MultipleDropdown() {
 
     const handleCloseFilter = () => {
         setShowFilter(false);
+    };
+
+    const handleItemSelect = (dropdownKey, item) => {
+        setSelectedItems(prev => ({
+            ...prev,
+            [dropdownKey]: prev[dropdownKey]?.includes(item)
+                ? prev[dropdownKey].filter(selectedItem => selectedItem !== item)
+                : [...(prev[dropdownKey] || []), item]
+        }));
+    };
+
+    const handleClearAll = () => {
+        setSelectedItems({});
     };
 
     useEffect(() => {
@@ -116,105 +130,149 @@ export default function MultipleDropdown() {
 
     return (
         <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div ref={dropdownContainerRef} style={{ width: md ? '90%' : '77%', display: 'flex', overflowX: md ? 'auto' : '', scrollbarWidth: md ? 'none' : '', marginTop: '3%' }}>
-                <div style={{ margin: 5, }}>
-                    <Dropdown
-                        data={categories}
-                        title='Categories'
-                        isOpen={openDropdown === 'categories'}
-                        onToggle={() => toggleDropdown('categories')}
-                        style={{ cursor: 'pointer' }}
-                    />
-                </div>
-                <div style={{ margin: 5 }}>
-                    <Dropdown
-                        data={price}
-                        title='Price'
-                        isOpen={openDropdown === 'price'}
-                        onToggle={() => toggleDropdown('price')}
-                        style={{ cursor: 'pointer' }}
-                    />
-                </div>
-                <div style={{ margin: 5, }}>
-                    <Dropdown
-                        data={brands}
-                        title='Brands'
-                        isOpen={openDropdown === 'brands'}
-                        onToggle={() => toggleDropdown('brands')}
-                    />
-                </div>
-                <div style={{ margin: 5, }}>
-                    <Dropdown
-                        data={storage}
-                        title='Internal Storage'
-                        isOpen={openDropdown === 'storage'}
-                        onToggle={() => toggleDropdown('storage')}
-                    />
-                </div>
-                <div style={{ margin: 5, }}>
-                    <Dropdown
-                        data={tower}
-                        title='Cellular Technology'
-                        isOpen={openDropdown === 'tower'}
-                        onToggle={() => toggleDropdown('tower')}
-                    />
-                </div>
-                {matches ? <>
+            <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+
+
+                <div ref={dropdownContainerRef} style={{ width: md ? '90%' : '77%', display: 'flex', overflowX: md ? 'auto' : '', scrollbarWidth: md ? 'none' : '', marginTop: '3%', alignSelf: 'center' }}>
                     <div style={{ margin: 5, }}>
                         <Dropdown
-                            data={discount}
-                            title='Discount'
-                            isOpen={openDropdown === 'discount'}
-                            onToggle={() => toggleDropdown('discount')}
+                            data={categories}
+                            title='Categories'
+                            isOpen={openDropdown === 'categories'}
+                            onToggle={() => toggleDropdown('categories')}
+                            selectedItems={selectedItems.categories || []}
+                            onItemSelect={(item) => handleItemSelect('categories', item)}
+                            onClearAll={() => setSelectedItems(prev => ({ ...prev, categories: [] }))}
+                            style={{ cursor: 'pointer' }}
                         />
                     </div>
-                    <div style={{ margin: 5, cursor: 'pointer' }}>
+                    <div style={{ margin: 5 }}>
                         <Dropdown
-                            data={deliverymode}
-                            title='Delivery Mode'
-                            isOpen={openDropdown === 'deliverymode'}
-                            onToggle={() => toggleDropdown('deliverymode')}
+                            data={price}
+                            title='Price'
+                            isOpen={openDropdown === 'price'}
+                            onToggle={() => toggleDropdown('price')}
+                            selectedItems={selectedItems.price || []}
+                            onItemSelect={(item) => handleItemSelect('price', item)}
+                            onClearAll={() => setSelectedItems(prev => ({ ...prev, price: [] }))}
+                            style={{ cursor: 'pointer' }}
                         />
-                    </div></> : <></>}
-                {!matches ? <><div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 35, background: '#373737', borderRadius: 10, margin: 5 }}>
-                    <button onClick={handleFilterClick} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: 130, height: '70%', outline: 'none', background: '#393939', border: 'none', borderRadius: 8, color: '#fff', cursor: 'pointer' }}>
-                        All Filters <FilterListIcon style={{ fontSize: '140%' }} />
-                    </button>
-                </div>
-                    <div style={{ position: 'relative', display: 'inline-block', marginLeft: 'auto' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 35, background: '#373737', borderRadius: 10, margin: 5 }}>
-                            <button onClick={() => setOpen(!open)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: 140, height: '70%', outline: 'none', background: '#393939', border: 'none', borderRadius: 8, color: '#fff', cursor: 'pointer' }}>
-                                Sort By <b>Feature</b> <KeyboardArrowDownIcon style={{ fontSize: '100%' }} />
-                            </button>
+                    </div>
+                    <div style={{ margin: 5, }}>
+                        <Dropdown
+                            data={brands}
+                            title='Brands'
+                            isOpen={openDropdown === 'brands'}
+                            onToggle={() => toggleDropdown('brands')}
+                            selectedItems={selectedItems.brands || []}
+                            onItemSelect={(item) => handleItemSelect('brands', item)}
+                            onClearAll={() => setSelectedItems(prev => ({ ...prev, brands: [] }))}
+                        />
+                    </div>
+                    <div style={{ margin: 5, }}>
+                        <Dropdown
+                            data={storage}
+                            title='Internal Storage'
+                            isOpen={openDropdown === 'storage'}
+                            onToggle={() => toggleDropdown('storage')}
+                            selectedItems={selectedItems.storage || []}
+                            onItemSelect={(item) => handleItemSelect('storage', item)}
+                            onClearAll={() => setSelectedItems(prev => ({ ...prev, storage: [] }))}
+                        />
+                    </div>
+                    <div style={{ margin: 5, }}>
+                        <Dropdown
+                            data={tower}
+                            title='Cellular Technology'
+                            isOpen={openDropdown === 'tower'}
+                            onToggle={() => toggleDropdown('tower')}
+                            selectedItems={selectedItems.tower || []}
+                            onItemSelect={(item) => handleItemSelect('tower', item)}
+                            onClearAll={() => setSelectedItems(prev => ({ ...prev, tower: [] }))}
+                        />
+                    </div>
+                    {matches ? <>
+                        <div style={{ margin: 5, }}>
+                            <Dropdown
+                                data={discount}
+                                title='Discount'
+                                isOpen={openDropdown === 'discount'}
+                                onToggle={() => toggleDropdown('discount')}
+                                selectedItems={selectedItems.discount || []}
+                                onItemSelect={(item) => handleItemSelect('discount', item)}
+                                onClearAll={() => setSelectedItems(prev => ({ ...prev, discount: [] }))}
+                            />
                         </div>
-                        {open && !md && (
-                            <div style={{ position: 'absolute', top: '100%', left: 0, zIndex: 1400, marginTop: '1%', scrollbarWidth: 'thin', backgroundColor: ' #373737', overflowY: 'visible' }}>
-                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: 170, flexDirection: 'column' }}>
-                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
-                                        <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: ' #12daa8' }} /></div>
-                                        <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Latest Arrival</div>
-                                    </div>
-                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
-                                        <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: '#12daa8' }} /></div>
-                                        <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Discount</div>
-                                    </div>
-                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
-                                        <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: '#12daa8' }} /></div>
-                                        <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Featured</div>
-                                    </div>
-                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
-                                        <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: '#12daa8' }} /></div>
-                                        <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Price</div>
-                                    </div>
-                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
-                                        <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: '#12daa8' }} /></div>
-                                        <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Top Rated</div>
+                        <div style={{ margin: 5, cursor: 'pointer' }}>
+                            <Dropdown
+                                data={deliverymode}
+                                title='Delivery Mode'
+                                isOpen={openDropdown === 'deliverymode'}
+                                onToggle={() => toggleDropdown('deliverymode')}
+                                selectedItems={selectedItems.deliverymode || []}
+                                onItemSelect={(item) => handleItemSelect('deliverymode', item)}
+                                onClearAll={() => setSelectedItems(prev => ({ ...prev, deliverymode: [] }))}
+                            />
+                        </div></> : <></>}
+                    {!matches ? <><div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 35, background: '#373737', borderRadius: 10, margin: 5 }}>
+                        <button onClick={handleFilterClick} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: 130, height: '70%', outline: 'none', background: '#393939', border: 'none', borderRadius: 8, color: '#fff', cursor: 'pointer' }}>
+                            All Filters <FilterListIcon style={{ fontSize: '140%' }} />
+                        </button>
+                    </div>
+                        <div style={{ position: 'relative', display: 'inline-block', marginLeft: 'auto' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 35, background: '#373737', borderRadius: 10, margin: 5 }}>
+                                <button onClick={() => setOpen(!open)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: 140, height: '70%', outline: 'none', background: '#393939', border: 'none', borderRadius: 8, color: '#fff', cursor: 'pointer' }}>
+                                    Sort By <b>Feature</b> <KeyboardArrowDownIcon style={{ fontSize: '100%' }} />
+                                </button>
+                            </div>
+                            {open && !md && (
+                                <div style={{ position: 'absolute', top: '100%', left: 0, zIndex: 1400, marginTop: '1%', scrollbarWidth: 'thin', backgroundColor: ' #373737', overflowY: 'visible' }}>
+                                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: 170, flexDirection: 'column' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
+                                            <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: ' #12daa8' }} /></div>
+                                            <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Latest Arrival</div>
+                                        </div>
+                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
+                                            <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: '#12daa8' }} /></div>
+                                            <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Discount</div>
+                                        </div>
+                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
+                                            <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: '#12daa8' }} /></div>
+                                            <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Featured</div>
+                                        </div>
+                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
+                                            <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: '#12daa8' }} /></div>
+                                            <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Price</div>
+                                        </div>
+                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', width: '99%', height: 40, background: '#373737', color: '#fff', fontSize: '100%' }}>
+                                            <div style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}><Checkbox {...label} style={{ color: '#12daa8' }} /></div>
+                                            <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>Top Rated</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        )}
-                    </div></> : <></>}
+                            )}
+                        </div></> : <></>}
 
+                </div>
+                {Object.values(selectedItems).some(items => items?.length > 0) && (
+                    <div style={{ display: 'flex', marginTop: 10, width: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                        <div style={{ width: md ? '90%' : '77%', display: 'flex', flexWrap: 'wrap' }}>
+                            {Object.entries(selectedItems).map(([key, items]) =>
+                                items?.map(item => (
+                                    <div style={{ background: '#12daa8', color: 'black', paddingRight: 15, paddingLeft: 15, paddingTop: 5, paddingBottom: 5, margin: 5, borderRadius: 5, fontSize: '1em', justifyContent: 'space-between', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                        {item}
+                                        <CloseIcon style={{ fontSize: '1em', cursor: 'pointer' }} onClick={() => handleItemSelect(key, item)} />
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                        <div style={{ width: md ? '90%' : '77%', display: 'flex', }}>
+                            <button onClick={handleClearAll} style={{ color: 'white', border: 'none', padding: '4px 8px', marginTop: 10, borderRadius: '12px', fontSize: '1em', cursor: 'pointer', background: 'transparent' }}>
+                                <u>Clear All</u>
+                            </button>
+                        </div>
+                    </div>
+                )}
             </div>
             {openSort && matches && (
                 <div style={{ position: 'fixed', bottom: 55, width: '100%', height: '100%', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.5)', fontFamily: '"Raleway", sans-serif', zIndex: 1400 }}>
