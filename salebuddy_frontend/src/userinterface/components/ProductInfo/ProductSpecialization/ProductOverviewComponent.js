@@ -23,9 +23,9 @@ export default function ProductOverviewComponent({ data }) {
     return (
         <>
             <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 20, marginBottom: 40 }}>
-                <Accordion sx={{ backgroundColor: '#191919', color: 'white', border: '1px solid #9A9A9A', borderRadius: 10, width: matches ? '85%' : '80%', boxShadow: 'none', minHeight: matches ? 80 : 70, paddingLeft: 2, paddingRight: 2 }}>
+                <Accordion sx={{ backgroundColor: '#191919', color: 'white', border: '1px solid #9A9A9A', borderRadius: 10, width: matches ? '85%' : '75%', boxShadow: 'none', minHeight: matches ? 75 : 65, paddingLeft: 2, paddingRight: 2 }}>
                     <AccordionSummary
-                        sx={{ display: 'flex', minHeight: matches ? 80 : 70, alignItems: 'center', width: '95%' }}
+                        sx={{ display: 'flex', minHeight: matches ? 75 : 65, alignItems: 'center', width: '100%', '& .MuiAccordionSummary-content': { margin: 0, width: '100%', }, '& .MuiAccordionSummary-expandIconWrapper': { marginLeft: 'auto', }, }}
                         expandIcon={<ExpandMoreIcon sx={{ color: 'white', fontSize: 40, fontWeight: 400 }} />} aria-controls="panel1-content" id="panel1-header">
                         <Typography sx={{ fontWeight: 'bold', alignSelf: 'center' }}>Overview</Typography>
                     </AccordionSummary>
