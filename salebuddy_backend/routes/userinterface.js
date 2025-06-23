@@ -37,5 +37,22 @@ router.post('/userinterface_fetch_productdetails', function (req, res, next) {
     }
 });
 
+router.post('/userinterface_fetch_ads', function (req, res, next) {
+    try {
+        pool.query("select * from ads where imgno=?", [req.body.imgno], function (error, result) {
+            if (error) {
+                console.log(error);
+                res.status(200).json({ status: false, message: "Database Error, Pls Contact Backend Team" })
+            }
+            else {
+                res.status(200).json({ status: true, message: "Success...", data: result })
+            }
+        })
+    }
+    catch (e) {
+        console.log(error);
+        res.status(200).json({ status: false, message: "Critical Error, Pls Contact Server Administrator" })
+    }
+});
 
 module.exports = router;
