@@ -33,13 +33,13 @@ export default function ShowFourAds() {
 
     const showAds = () => {
         return ads.map((item) => {
-            return <div style={{ borderRadius: 10, width: '100%', height: 350, display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'linear-gradient(to bottom, #0b0b0f 0%, #1b1142 40%, #4d3ca7 65%, #2fa7e9 100%)', marginRight: 7, marginLeft: 7 }}>
+            return <div style={{ borderRadius: 10, width: matches?'45%':'100%', height: matches?'80vw':md?'28vw':350, display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'linear-gradient(to bottom, #0b0b0f 0%, #1b1142 40%, #4d3ca7 65%, #2fa7e9 100%)', marginRight: 7, marginLeft: 7 }}>
                 <div style={{ width: '95%', height: '95%', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '15%' }}><img src={item.logo} style={{ maxWidth: '90%', maxHeight: '80%', borderRadius: 10 }} /></div>
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '10%', color: ' #f9fbff', fontSize: '1.2em', fontWeight: 600 }}>{item.productname}</div>
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '10%', color: ' #f9fbff', fontSize: matches?'3.2vw':'1.3vw', fontWeight: 600 }}>{item.productname}</div>
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '55%' }}><img src={item.images} style={{ maxWidth: '90%', maxHeight: '90%', borderRadius: 10,filter: 'drop-shadow(0 15px 20px rgba(0, 0, 0, 0.4))' }} /></div>
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '10%', color: ' #f9fbff' }}><div style={{ fontSize: '1.2em' }}>Starting at</div> <div style={{ marginLeft: 5, fontSize: '1.5em' }}>{'\u20B9'} <b>{item.price}</b></div></div>
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '10%', color: ' #f9fbff' }}>*{item.detail}</div>
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '10%', color: ' #f9fbff' }}><div style={{ fontSize: matches?'3vw':'1.3vw' }}>Starting at</div> <div style={{ marginLeft: 5, fontSize:matches?'3.7vw':'1.5vw' }}>{'\u20B9'} <b>{item.price}</b></div></div>
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '10%', color: ' #f9fbff',fontSize:matches?'3vw':'1.1vw' }}>*{item.detail}</div>
                 </div>
             </div>
         })
@@ -47,7 +47,7 @@ export default function ShowFourAds() {
 
     return (<div style={{ display: 'flex', width: '100%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: ' #191919', fontFamily: '"Inter", sans-serif' }} >
         <div style={{ width: md ? '90%' : '74%', display: 'flex', color: ' #ffffff', fontSize: md ? '1.6em' : '1.75em', marginBottom: '2%', marginTop: '2%' }}>Hot Deals Mobile</div>
-        <div style={{ display: 'flex', width: md ? '90%' : '75%', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', width: md ? '95%' : '75%', justifyContent: 'center',flexWrap:matches?'wrap':'' }}>
             {showAds()}
         </div>
     </div>)
