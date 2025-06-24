@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import { getData, postData } from "../../backendservices/FetchNodeServices"
 import ShowAdvertisment from "../components/ShowAdvertisment"
 import ShowTwoAds from "../components/ShowTwoAds"
+import ShowFourAds from "../components/ShowFourAds"
 export default function Home() {
 
     const [brandList, setBrandList] = useState([])
@@ -62,6 +63,9 @@ export default function Home() {
         </div>
         <div style={{ width: '100%', height: '100%', overflowX: "hidden", background: ' #191919' }}>
             <MainSlider />
+        </div>
+        <div>
+            <ShowFourAds/>
         </div>
         <div style={{ width: '100%', height: '100%', overflowX: "hidden", background: ' #191919' }}>
             <ProductScroller data={listProduct} title='Hot Deals' />
