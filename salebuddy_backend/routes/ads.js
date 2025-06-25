@@ -38,14 +38,14 @@ router.get('/fetch_ads', function (req, res, next) {
         res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
     }
 });
-router.post('/delete_mainslider', function (req, res, next) {
+router.post('/delete_ads', function (req, res, next) {
     try {
-        pool.query("delete from mainslider where mainsliderid=?", [req.body.mainsliderid], function (error, result) {
+        pool.query("delete from ads where adid=?", [req.body.adid], function (error, result) {
             if (error) {
                 res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
             }
             else {
-                res.status(200).json({ status: true, message: 'Mainslider Deleted Successfully..' })
+                res.status(200).json({ status: true, message: 'Ads Deleted Successfully..' })
             }
         })
     }

@@ -1,4 +1,5 @@
 import ApplyCoupon from "../components/CartComponent/ApplyCoupon";
+import OrderSummary from "../components/CartComponent/OrderSummary";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
@@ -11,9 +12,12 @@ export default function Cart() {
             <div style={{ width: '100%', height: 100, display: 'flex', justifyContent: 'center' }}>
                 <div style={{ width: '75%', height: '100%', display: 'flex', alignItems: 'center', fontSize: '140%', fontWeight: 700, transform: 'scaleX(1.1)', transformOrigin: 'left' }}>Your Cart</div>
             </div>
-            <div style={{ width: '100%', minHeight: 500 }}>
-                <div style={{width:'65%',minHeight:50,display:'flex',flexDirection:'column'}}>
+            <div style={{ width: '100%', minHeight: 500,display:'flex' }}>
+                <div style={{width:'65%',display:'flex',flexDirection:'column'}}>
                     <div><ApplyCoupon/></div>
+                </div>
+                <div style={{width:'35%'}}>
+                    <OrderSummary/>
                 </div>
             </div>
             <div>

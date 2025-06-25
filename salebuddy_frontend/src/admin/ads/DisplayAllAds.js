@@ -31,7 +31,7 @@ export default function DisplayAllAds() {
 
     const handleDelete = async (id) => {
         {
-            var body = { 'adsid': id }
+            var body = { 'adid': id }
             var result = await postData('ads/delete_ads', body)
             if (result.status) {
                 Swal.fire({
@@ -45,14 +45,14 @@ export default function DisplayAllAds() {
         }
     }
     const deleteUsingIcon = (rowData) => {
-        setAdsId(rowData.adsid)
+        setAdsId(rowData.adid)
         Swal.fire({
             title: "Are you sure to delete selected Ads",
             showCancelButton: true,
             confirmButtonText: 'Delete'
         }).then((result) => {
             if (result.isConfirmed) {
-                handleDelete(rowData.adsid)
+                handleDelete(rowData.adid)
             }
         })
     }
