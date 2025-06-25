@@ -66,7 +66,6 @@ export default function DisplayAllAds() {
                     { title: 'Service', render: (rowData) => <div>{rowData.servicetype} {rowData.servicename}</div> },
                     { title: 'Brand ', field: 'brandname' },
                     { title: 'Product ', field: 'productname' },
-                    { title: 'Status', field: 'status' },
                     { title: 'Image Number', field: 'imgno' },
                     {
                         title: 'Images',render: (rowData) => {

@@ -7,7 +7,7 @@ router.post('/insert_ads', upload.any(), function (req, res, next) {
     try {
         var images = req.files.map((item) => item.filename)
         images = images + ''
-        pool.query('insert into ads (serviceid, brandid, productid, status, images, description, imgno) values(?,?,?,?,?,?,?)', [req.body.serviceid, req.body.brandid, req.body.productid, req.body.status, images,req.body.description, req.body.imgno], function (error, result) {
+        pool.query('insert into ads (serviceid, brandid, productid, images, description, imgno) values(?,?,?,?,?,?)', [req.body.serviceid, req.body.brandid, req.body.productid,  images,req.body.description, req.body.imgno], function (error, result) {
             if (error) {
                 console.log(error)
                 res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })

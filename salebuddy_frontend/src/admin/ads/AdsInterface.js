@@ -14,7 +14,6 @@ export default function MainsliderInterface() {
     const [productId, setProductId] = useState('')
     const [serviceId, setServiceId] = useState('')
     const [brandId, setBrandId] = useState('')
-    const [status, setStatus] = useState('')
     const [description, setDescription] = useState('')
     const [imgno, setImgno] = useState('')
     const [error, setError] = useState({})
@@ -107,7 +106,6 @@ export default function MainsliderInterface() {
         setServiceId('')
         setBrandId('')
         setProductId('')
-        setStatus('')
         setDescription('')
         setImgno('')
         setImage([])
@@ -127,10 +125,6 @@ export default function MainsliderInterface() {
             err = true
             handleErrorMessage('productId', 'Please Input Product ID...')
         }
-        if (status.length == 0) {
-            err = true
-            handleErrorMessage('productDetailsId', 'Please Input Product Details ID...')
-        }
         if (description.length == 0) {
             err = true
             handleErrorMessage('description', 'Please Input Description...')
@@ -148,7 +142,6 @@ export default function MainsliderInterface() {
             formData.append('serviceid', serviceId)
             formData.append('brandid', brandId)
             formData.append('productid', productId)
-            formData.append('status', status)
             formData.append('description',description)
             formData.append('imgno', imgno)
             image?.map((item, i) => {
@@ -235,19 +228,6 @@ export default function MainsliderInterface() {
                             </FormControl>
                         </Grid2>
                         <Grid2 size={6} >
-                            <FormControl error={error.status} onFocus={() => handleErrorMessage('status', null)} fullWidth>
-                                <InputLabel>Status</InputLabel>
-                                <Select value={status} onChange={(e) => setStatus(e.target.value)} label="Status">
-                                    <MenuItem value="Latest Launches">Latest Launches</MenuItem>
-                                    <MenuItem value="Hot Deals">Hot Deals</MenuItem>
-                                    <MenuItem value="Deals Of The Day">Deals Of The Day</MenuItem>
-                                    <MenuItem value="Summer Special">Summer Special</MenuItem>
-                                    <MenuItem value="Winter Special">Winter Special</MenuItem>
-                                </Select>
-                                <FormHelperText>{error.Status}</FormHelperText>
-                            </FormControl>
-                        </Grid2>
-                        <Grid2 size={6} >
                             <FormControl error={error.imgno} onFocus={() => handleErrorMessage('imgno', null)} fullWidth>
                                 <InputLabel>Image Number</InputLabel>
                                 <Select onChange={(e) => setImgno(e.target.value)} label="Image Number" value={imgno}>
@@ -263,7 +243,7 @@ export default function MainsliderInterface() {
                                 <FormHelperText>{error.imgno}</FormHelperText>
                             </FormControl>
                         </Grid2>
-                        <Grid2 size={12} >
+                        <Grid2 size={6} >
                             <TextField value={description} error={error.description} helperText={error.description} onFocus={() => handleErrorMessage('description', null)} label="Description" onChange={(e) => setDescription(e.target.value)} fullWidth />
                         </Grid2>
                         <Grid2 size={4} className={classes.center}>
