@@ -92,7 +92,7 @@ export default function MainProductInfoComponent() {
     }
   ]
   return (<>
-    <div style={{ width: '100%', height: '100%', background: ' #191919', fontFamily: '"Inter", sans-serif', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ width: '100%', height: '100%', background: ' #191919', fontFamily: '"Inter", sans-serif', display: 'flex', flexDirection: 'column',overflowX:'hidden' }}>
       <div>
         <Header />
       </div>
