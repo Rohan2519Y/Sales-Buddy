@@ -7,7 +7,7 @@ export default function OrderSummary() {
 
     return (<>
         <div style={{ width: '100%', display: 'flex', }}>
-            <div style={{ width: '65%', minHeight: 260, marginLeft: 15, borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center', background: ' #ffffff' }}>
+            <div style={{ width: '65%', minHeight: discount?315:260, marginLeft: 15, borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center', background: ' #ffffff' }}>
                 <div style={{ width: '90%',height:'85%' }}>
                     <div style={{ width: '100%', height: 35, fontSize: '125%', fontWeight: 700, }}>
                         Order Summary ( 2 items )
@@ -15,7 +15,7 @@ export default function OrderSummary() {
                     <div style={{ width: '100%', height: 45, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <div>Original Price</div><div>{'\u20B9'} 147,000.00</div>
                     </div>
-                    <div style={{ width: '100%', minHeight: 45, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+                    <div style={{ width: '100%', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
                         <div style={{ display: 'flex', width: '100%' }}>
                             <div style={{ height: 45, display: 'flex', alignItems: 'center' }}>Savings</div>
                             {discount ?
