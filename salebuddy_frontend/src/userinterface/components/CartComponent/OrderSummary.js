@@ -4,6 +4,7 @@ import { useState } from 'react';
 export default function OrderSummary() {
 
     const [discount, setDiscount] = useState(false)
+    const [color,setColor]=useState(' #00e9bf')
 
     return (<>
         <div style={{ width: '100%', display: 'flex', }}>
@@ -42,7 +43,7 @@ export default function OrderSummary() {
                         <div>Total</div><div>{'\u20B9'} 142,980.00</div>
                     </div>
                     <div style={{ width: '100%', height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <div style={{ width: '100%', height: '70%', background: ' #12daa8', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 10, fontSize: '80%', fontWeight: 600 }}>Checkout</div>
+                        <div onMouseEnter={()=>{setColor(' #00b594')}} onMouseLeave={()=>{setColor(' #00e9bf')}} style={{ width: '100%', height: '70%', background: color, display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 10, fontSize: '80%', fontWeight: 600,cursor:'pointer' }}>Checkout</div>
                     </div>
                 </div>
             </div>
