@@ -1,11 +1,15 @@
 import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
+import DoneIcon from '@mui/icons-material/Done';
 import { useState } from 'react';
 
 export default function ProductCart({ item }) {
 
     const [color, setColor] = useState(false)
     const [rcolor, setRcolor] = useState(false)
+
+    var discount = item.price - item.offerprice
+    var percent = (discount / item.price) * 100;
 
     return (<>
         <div style={{ width: '100%', height: '80%', display: 'flex' }}>
@@ -29,12 +33,20 @@ export default function ProductCart({ item }) {
                     </div>
                     <div style={{ width: '40%', height: '100%', display: 'flex', }}>
                         <div style={{ width: '90%', height: '100%' }}>
-                            <div style={{ width: '100%', height: 25, background: 'red', fontSize: '140%',fontWeight:600,display:'flex',justifyContent:'flex-end' }}>{'\u20B9'}{item.price}</div>
+                            <div style={{ width: '100%', height: 25, fontSize: '140%', fontWeight: 700, display: 'flex', justifyContent: 'flex-end' }}>{'\u20B9'}{item.offerprice}</div>
+                            <div style={{ width: '100%', height: 30, fontSize: '90%', display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end' }}>(Incl. all Taxes)</div>
+                            <div style={{ width: '50%', height: 0.5, background: ' #000000', justifySelf: 'flex-end', marginTop: 7, marginBottom: 10 }}></div>
+                            <div style={{ width: '100%', height: 15, fontSize: '85%', display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end', }}><s>MRP {'\u20B9'}{item.price.toFixed(2)}</s></div>
+                            <div style={{ width: '100%', height: 15, fontSize: '75%', display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end', color: ' #9A9A9A' }}>{'\u20B9'}{discount}</div>
+                            <div style={{ width: '50%', height: 0.5, background: ' #000000', justifySelf: 'flex-end', marginTop: 10, marginBottom: 10 }}></div>
+                            <div style={{ width: '100%', height: 25, fontSize: '100%', fontWeight: 700, display: 'flex', justifyContent: 'flex-end' }}>{'\u20B9'}6457/mo*</div>
+                            <div style={{ width: '100%', height: 15, fontSize: '80%', display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end', color: ' #088466' }}><u>EMI Options</u></div>
                         </div>
                     </div>
                 </div>
-                <div style={{ height: '25%', width: '100%', }}>
-
+                <div style={{ width: '100%', height: 0.5, background: ' #000000', justifySelf: 'flex-end', marginTop: 10, marginBottom: 10 }}></div>
+                <div style={{ height: '25%', width: '60%', display: 'flex',  alignItems: 'center' }}>
+                    <DoneIcon style={{display:'flex',alignSelf:'flex-start',fontSize:'140%',color:' #00e9bf',marginRight:10}}/><div style={{fontSize:'85%'}}>Buy & Get Rs.2010 off (Discount auto applied in cart) Offer Applied</div>
                 </div>
             </div>
         </div>
