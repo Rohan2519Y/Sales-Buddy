@@ -18,7 +18,7 @@ export default function ProductPictureComponent({ media }) {
           <img src={media} style={{ maxWidth: '90%', maxHeight: '90%', objectFit: 'contain' }} />
         )}
       </div>
-      <hr style={{ width: '80%', height: '0.01%' }} />
+      <hr style={{ width: '80%', height: '0.01%' }} /> 
     </div>
   );
 }
