@@ -24,9 +24,9 @@ export default function ShowProductCart() {
     }]
 
     return (<>
-        <div style={{ display: 'flex', width: '100%', alignItems: 'flex-end', flexDirection: 'column' }}>
+        <div style={{ display: 'flex', width: '100%', alignItems: matches?'center':'flex-end', flexDirection: 'column' }}>
             {data.map((item) => (
-                <div style={{ width: '80%', height: 280, background: ' #ffffff', marginBottom: 30, display: 'flex', alignItems: 'center' }}>
+                <div style={{ width:matches?'95%': '80%', height: 280, background: ' #ffffff', marginBottom: 30, display: 'flex', alignItems: 'center' }}>
                     <ProductCart item={item} />
                 </div>
             ))}

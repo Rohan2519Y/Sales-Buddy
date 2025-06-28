@@ -8,12 +8,12 @@ import { useTheme } from '@mui/material/styles';
 export default function ProductCart({ item }) {
 
     const theme = useTheme();
-        const md = useMediaQuery('(max-width:1300px)');
-        const sm = useMediaQuery('(max-width:700px)');
-        const matches = useMediaQuery(theme.breakpoints.down('md'));
-        const smatches = useMediaQuery(theme.breakpoints.down('sm'));
-        const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
-    
+    const md = useMediaQuery('(max-width:1300px)');
+    const sm = useMediaQuery('(max-width:700px)');
+    const matches = useMediaQuery(theme.breakpoints.down('md'));
+    const smatches = useMediaQuery(theme.breakpoints.down('sm'));
+    const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
+
 
     const [color, setColor] = useState(false)
     const [rcolor, setRcolor] = useState(false)
@@ -37,8 +37,8 @@ export default function ProductCart({ item }) {
                         </div>
                         <div style={{ width: '50%', height: 35, fontSize: '85%', }}>{item.delivery}</div>
                         <div style={{ width: '100%', height: 60, display: 'flex', alignItems: 'center' }}>
-                            <div onMouseEnter={() => { setColor(true) }} onMouseLeave={() => { setColor(false) }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', border: '1px solid ', borderColor: color ? ' #00e9bf' : ' #000000', borderRadius: 10, boxSizing: 'border-box', cursor: 'pointer', marginRight: 15 }}><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: 30, marginLeft: 30, marginTop: 7, marginBottom: 7, fontSize: '90%', fontWeight: 600 }}>Move To Whislist</div></div>
-                            <div onMouseEnter={() => { setRcolor(true) }} onMouseLeave={() => { setRcolor(false) }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', border: '1px solid ', borderColor: rcolor ? ' #00e9bf' : ' #000000', borderRadius: 10, boxSizing: 'border-box', cursor: 'pointer' }}><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: 30, marginLeft: 30, marginTop: 7, marginBottom: 7, fontSize: '90%', fontWeight: 600 }}>Remove</div></div>
+                            <div onMouseEnter={() => { setColor(true) }} onMouseLeave={() => { setColor(false) }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', border: '1px solid ', borderColor: color ? ' #00e9bf' : ' #000000', borderRadius: 10, boxSizing: 'border-box', cursor: 'pointer', marginRight: 15 }}><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: 30, marginLeft: 30, marginTop: 7, marginBottom: 7, fontSize: '85%', fontWeight: 600 }}>Move To Whislist</div></div>
+                            <div onMouseEnter={() => { setRcolor(true) }} onMouseLeave={() => { setRcolor(false) }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', border: '1px solid ', borderColor: rcolor ? ' #00e9bf' : ' #000000', borderRadius: 10, boxSizing: 'border-box', cursor: 'pointer' }}><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: 30, marginLeft: 30, marginTop: 7, marginBottom: 7, fontSize: '85%', fontWeight: 600 }}>Remove</div></div>
                         </div>
                     </div>
                     <div style={{ width: '40%', height: '100%', display: 'flex', }}>

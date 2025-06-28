@@ -1,15 +1,24 @@
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { useState } from 'react';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 export default function OrderSummary() {
 
+    const theme = useTheme();
+    const md = useMediaQuery('(max-width:1300px)');
+    const sm = useMediaQuery('(max-width:700px)');
+    const matches = useMediaQuery(theme.breakpoints.down('md'));
+    const smatches = useMediaQuery(theme.breakpoints.down('sm'));
+    const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
+
     const [discount, setDiscount] = useState(false)
-    const [color,setColor]=useState(' #00e9bf')
+    const [color, setColor] = useState(' #00e9bf')
 
     return (<>
-        <div style={{ width: '100%', display: 'flex', }}>
-            <div style={{ width: '65%', minHeight: discount?315:260, marginLeft: 15, borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center', background: ' #ffffff' }}>
-                <div style={{ width: '90%',height:'85%' }}>
+        <div style={{ width: '100%', display: 'flex',justifyContent:'center'}}>
+            <div style={{ width: matches ? '95%' : '65%', minHeight: discount ? 315 : 260, marginLeft: matches?'':15, borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center', background: ' #ffffff',marginBottom:30 }}>
+                <div style={{ width: '90%', height: '85%', }}>
                     <div style={{ width: '100%', height: 35, fontSize: '125%', fontWeight: 700, }}>
                         Order Summary ( 2 items )
                     </div>
@@ -43,7 +52,7 @@ export default function OrderSummary() {
                         <div>Total</div><div>{'\u20B9'} 142,980.00</div>
                     </div>
                     <div style={{ width: '100%', height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <div onMouseEnter={()=>{setColor(' #00b594')}} onMouseLeave={()=>{setColor(' #00e9bf')}} style={{ width: '100%', height: '70%', background: color, display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 10, fontSize: '80%', fontWeight: 600,cursor:'pointer' }}>Checkout</div>
+                        <div onMouseEnter={() => { setColor(' #00b594') }} onMouseLeave={() => { setColor(' #00e9bf') }} style={{ width: '100%', height: '70%', background: color, display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 10, fontSize: '80%', fontWeight: 600, cursor: 'pointer' }}>Checkout</div>
                     </div>
                 </div>
             </div>
