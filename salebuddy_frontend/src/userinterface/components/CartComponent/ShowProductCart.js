@@ -5,7 +5,7 @@ import { useTheme } from '@mui/material/styles';
 export default function ShowProductCart() {
 
     const theme = useTheme();
-    const md = useMediaQuery('(max-width:1300px)');
+    const md = useMediaQuery('(max-width:1200px)');
     const sm = useMediaQuery('(max-width:700px)');
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -26,7 +26,7 @@ export default function ShowProductCart() {
     return (<>
         <div style={{ display: 'flex', width: '100%', alignItems: matches?'center':'flex-end', flexDirection: 'column' }}>
             {data.map((item) => (
-                <div style={{ width:matches?'95%': '80%', height: 280, background: ' #ffffff', marginBottom: 30, display: 'flex', alignItems: 'center' }}>
+                <div style={{ width:md?'95%': '80%', height: 280, background: ' #ffffff', marginBottom: 30, display: 'flex', alignItems: 'center' }}>
                     <ProductCart item={item} />
                 </div>
             ))}

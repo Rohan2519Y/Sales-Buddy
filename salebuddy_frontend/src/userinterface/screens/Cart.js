@@ -9,7 +9,7 @@ import { useTheme } from '@mui/material/styles';
 export default function Cart() {
 
     const theme = useTheme();
-    const md = useMediaQuery('(max-width:1300px)');
+    const md = useMediaQuery('(max-width:1200px)');
     const sm = useMediaQuery('(max-width:700px)');
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -21,14 +21,14 @@ export default function Cart() {
                 <Header />
             </div>
             <div style={{ width: '100%', height: 100, display: 'flex', justifyContent: 'center' }}>
-                <div style={{ width: matches?'95%':'75%', height: '100%', display: 'flex', alignItems: 'center', fontSize: '140%', fontWeight: 700, }}>Your Cart</div>
+                <div style={{ width: md ? '95%' : '75%', height: '100%', display: 'flex', alignItems: 'center', fontSize: '140%', fontWeight: 700, }}>Your Cart</div>
             </div>
             <div style={{ width: '100%', minHeight: 500, display: 'flex', flexDirection: matches ? 'column' : '' }}>
-                <div style={{ width: matches?'100%':'65%', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ width: md ? '100%' : '65%', display: 'flex', flexDirection: 'column' }}>
                     <div><ApplyCoupon /></div>
                     <div><ShowProductCart /></div>
                 </div>
-                <div style={{ width: matches?'100%':'35%' }}>
+                <div style={{ width: '35%',  }}>
                     <OrderSummary />
                 </div>
             </div>

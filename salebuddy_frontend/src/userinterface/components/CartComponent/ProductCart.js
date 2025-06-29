@@ -8,7 +8,7 @@ import { useTheme } from '@mui/material/styles';
 export default function ProductCart({ item }) {
 
     const theme = useTheme();
-    const md = useMediaQuery('(max-width:1300px)');
+    const md = useMediaQuery('(max-width:1200px)');
     const sm = useMediaQuery('(max-width:700px)');
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -65,7 +65,7 @@ export default function ProductCart({ item }) {
                 <div style={{ height: '25%', width: '100%', }}>
                     {item.offerapply && (<>
                         <div style={{ width: '100%', height: 0.5, background: ' #000000', marginTop: 10, marginBottom: 10 }}></div>
-                        <div style={{ height: '100%', width: '80%', display: 'flex', alignItems: 'center' }}>
+                        <div style={{ width: '80%', display: 'flex', alignItems: 'center', }}>
                             <DoneIcon style={{ display: 'flex', alignSelf: 'center', fontSize: '140%', color: ' #00e9bf', marginRight: 10 }} /><div style={{ fontSize: '85%' }}>{item.offerapply}</div>
                         </div></>)}
                 </div>
@@ -81,14 +81,14 @@ export default function ProductCart({ item }) {
                 <div style={{ width: '77%', height: '100%', display: 'flex', flexDirection: 'column' }}>
                     <div style={{ height: '75%', width: '100%', display: 'flex' }}>
                         <div style={{ width: '60%', height: '100%', }}>
-                            <div style={{ width: '100%', height: 50, fontSize: '110%', fontWeight: 550 }}>{item.productname}</div>
+                            <div style={{ width: '100%', height: 45, fontSize: '110%', fontWeight: 550, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', textOverflow: 'ellipsis', }}>{item.productname}</div>
                             <div style={{ width: '100%', height: 25 }}>
                                 <Rating name="half-rating-read" defaultValue={item.ratings} precision={0.1} readOnly icon={<StarIcon sx={{ color: ' #00e9bf' }} style={{ fontSize: '70%' }} />} emptyIcon={<StarIcon sx={{ color: 'grey' }} style={{ fontSize: '70%' }} />} />
                             </div>
                             <div style={{ width: '50%', height: 35, fontSize: '85%', }}>{item.delivery}</div>
                             <div style={{ width: '100%', height: 60, display: 'flex', alignItems: 'center' }}>
-                                <div onMouseEnter={() => { setColor(true) }} onMouseLeave={() => { setColor(false) }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', border: '1px solid ', borderColor: color ? ' #00e9bf' : ' #000000', borderRadius: 10, boxSizing: 'border-box', cursor: 'pointer', marginRight: 15 }}><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: 30, marginLeft: 30, marginTop: 7, marginBottom: 7, fontSize: '85%', fontWeight: 600 }}>Move To Whislist</div></div>
-                                <div onMouseEnter={() => { setRcolor(true) }} onMouseLeave={() => { setRcolor(false) }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', border: '1px solid ', borderColor: rcolor ? ' #00e9bf' : ' #000000', borderRadius: 10, boxSizing: 'border-box', cursor: 'pointer' }}><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: 30, marginLeft: 30, marginTop: 7, marginBottom: 7, fontSize: '85%', fontWeight: 600 }}>Remove</div></div>
+                                <div onMouseEnter={() => { setColor(true) }} onMouseLeave={() => { setColor(false) }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', border: '1px solid ', borderColor: color ? ' #00e9bf' : ' #000000', borderRadius: 10, boxSizing: 'border-box', cursor: 'pointer', marginRight: 15 }}><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: md ? 25 : 30, marginLeft: md ? 25 : 30, marginTop: 7, marginBottom: 7, fontSize: '85%', fontWeight: 600 }}>Move To Whislist</div></div>
+                                <div onMouseEnter={() => { setRcolor(true) }} onMouseLeave={() => { setRcolor(false) }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', border: '1px solid ', borderColor: rcolor ? ' #00e9bf' : ' #000000', borderRadius: 10, boxSizing: 'border-box', cursor: 'pointer' }}><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: md ? 25 : 30, marginLeft: md ? 25 : 30, marginTop: 7, marginBottom: 7, fontSize: '85%', fontWeight: 600 }}>Remove</div></div>
                             </div>
                         </div>
                         <div style={{ width: '40%', height: '100%', display: 'flex', }}>

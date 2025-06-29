@@ -6,7 +6,7 @@ import { useTheme } from '@mui/material/styles';
 export default function OrderSummary() {
 
     const theme = useTheme();
-    const md = useMediaQuery('(max-width:1300px)');
+    const md = useMediaQuery('(max-width:1200px)');
     const sm = useMediaQuery('(max-width:700px)');
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -16,39 +16,39 @@ export default function OrderSummary() {
     const [color, setColor] = useState(' #00e9bf')
 
     return (<>
-        <div style={{ width: '100%', display: 'flex',justifyContent:'center'}}>
-            <div style={{ width: matches ? '95%' : '65%', minHeight: discount ? 315 : 260, marginLeft: matches?'':15, borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center', background: ' #ffffff',marginBottom:30 }}>
+        <div style={{ width: '100%', position:'sticky',top:50}}>
+            <div style={{ width: md ? '95%' : '65%', minHeight: discount ? 315 : 260, marginLeft: matches?'':15, borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center', background: ' #ffffff',marginBottom:30 }}>
                 <div style={{ width: '90%', height: '85%', }}>
-                    <div style={{ width: '100%', height: 35, fontSize: '125%', fontWeight: 700, }}>
+                    <div style={{ width: '100%', height: 35, fontSize: md?'1.65vw':'120%', fontWeight: 700, }}>
                         Order Summary ( 2 items )
                     </div>
-                    <div style={{ width: '100%', height: 45, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <div style={{ width: '100%', height: 45, display: 'flex', alignItems: 'center', justifyContent: 'space-between',fontSize: md?'1.65vw':'' }}>
                         <div>Original Price</div><div>{'\u20B9'} 147,000.00</div>
                     </div>
                     <div style={{ width: '100%', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
                         <div style={{ display: 'flex', width: '100%' }}>
-                            <div style={{ height: 45, display: 'flex', alignItems: 'center' }}>Savings</div>
+                            <div style={{ height: 45, display: 'flex', alignItems: 'center',fontSize: md?'1.65vw':'' }}>Savings</div>
                             {discount ?
                                 (<div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', flexDirection: 'column' }}>
-                                    <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', height: 45, alignItems: 'center' }}>< RemoveCircleIcon onClick={() => setDiscount(false)} style={{ fontSize: '105%', marginLeft: 5, color: ' #088466' }} /> <div>{'\u20B9'} 4,020.00</div></div>
+                                    <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', height: 45, alignItems: 'center' }}>< RemoveCircleIcon onClick={() => setDiscount(false)} style={{ fontSize: '105%', marginLeft: 5, color: ' #088466' }} /> <div style={{fontSize: md?'1.65vw':''}}>{'\u20B9'} 4,020.00</div></div>
 
                                 </div>) :
-                                (<div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', height: 45, alignItems: 'center' }}><AddCircleIcon onClick={() => setDiscount(true)} style={{ fontSize: '105%', marginLeft: 5, color: ' #088466' }} /> <div>{'\u20B9'} 4,020.00</div></div>)}
+                                (<div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', height: 45, alignItems: 'center' }}><AddCircleIcon onClick={() => setDiscount(true)} style={{ fontSize: '105%', marginLeft: 5, color: ' #088466' }} /> <div style={{fontSize: md?'1.65vw':''}}>{'\u20B9'} 4,020.00</div></div>)}
                         </div>
                         {discount ? (
                             <div style={{ display: 'flex', width: '100%', flexDirection: 'column', alignItems: 'center' }}>
                                 <div style={{ width: '100%', height: 0.5, background: ' #000000' }}></div>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '90%', height: 30 }}>
-                                    <div style={{ display: 'flex', justifyContent: 'center', alignitem: 'center', fontSize: '80%' }}>Discount on MRP</div> <div style={{ display: 'flex', justifyContent: 'center', alignitem: 'center', fontSize: '80%' }}>{'\u20B9'} 4,020.00</div>
+                                    <div style={{ display: 'flex', justifyContent: 'center', alignitem: 'center', fontSize: md?'1.25vw':'80%' }}>Discount on MRP</div> <div style={{ display: 'flex', justifyContent: 'center', alignitem: 'center', fontSize:md?'1.25vw': '80%' }}>{'\u20B9'} 4,020.00</div>
                                 </div>
                                 <div style={{ width: '100%', height: 0.5, background: ' #000000' }}></div>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '90%', height: 30 }}>
-                                    <div style={{ display: 'flex', justifyContent: 'center', alignitem: 'center', fontSize: '80%' }}>Coupon Discount</div> <div style={{ display: 'flex', justifyContent: 'center', alignitem: 'center', fontSize: '80%' }}>{'\u20B9'} 4,020.00</div>
+                                    <div style={{ display: 'flex', justifyContent: 'center', alignitem: 'center', fontSize: md?'1.25vw':'80%' }}>Coupon Discount</div> <div style={{ display: 'flex', justifyContent: 'center', alignitem: 'center', fontSize:md?'1.25vw': '80%' }}>{'\u20B9'} 4,020.00</div>
                                 </div>
                                 <div style={{ width: '100%', height: 0.5, background: ' #000000' }}></div>
                             </div>) : (<></>)}
                     </div>
-                    <div style={{ width: '100%', height: 45, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <div style={{ width: '100%', height: 45, display: 'flex', alignItems: 'center', justifyContent: 'space-between',fontSize: md?'1.65vw':'' }}>
                         <div>Total</div><div>{'\u20B9'} 142,980.00</div>
                     </div>
                     <div style={{ width: '100%', height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
