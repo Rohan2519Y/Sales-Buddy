@@ -5,6 +5,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router';
 export default function ProductComponent({ item, i }) {
 
     const theme = useTheme();
@@ -14,9 +15,9 @@ export default function ProductComponent({ item, i }) {
     const sm = useMediaQuery('(max-width:700px)');
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
     const [heart, setHeart] = useState(null)
-
+    const navigate=useNavigate()
     return (<>
-        <div style={{ height: smatches ? 270 : matches ? 330 : 370, width: '90%', background: ' black', marginLeft: '3.5%', marginRight: '3.5%', borderRadius: 10, display: "flex", justifyContent: 'center', flexDirection: 'column', alignItems: 'center', fontFamily: '"Inter", sans-serif' }}>
+        <div onClick={()=>navigate(`/mainproductinfocomponent/${item.productdetailsid}`)} style={{ height: smatches ? 270 : matches ? 330 : 370, width: '90%', background: ' black', marginLeft: '3.5%', marginRight: '3.5%', borderRadius: 10, display: "flex", justifyContent: 'center', flexDirection: 'column', alignItems: 'center', fontFamily: '"Inter", sans-serif',cursor:'pointer' }}>
             <div style={{ display: 'flex', justifyContent: 'center', height: '60%', width: '90%', position: 'relative', alignItems: 'center' }}>
                 <div style={{ width: '100%', height: '100%', position: 'absolute', display: 'flex', justifyContent: 'center' }}><img src={`${serverURL}/images/${item.picture}`} style={{ width: 'auto', margin: '5%' }} /></div>
                 <FavoriteBorderIcon onMouseEnter={!smatches ? () => setHeart(i) : undefined} onMouseLeave={!smatches ? () => setHeart(null) : undefined} style={{ fontSize: matches ? '130%' : '170%', color: heart == i ? ' #00e9bf' : 'white', position: 'absolute', right: '-4%', top: '1%', cursor: landscape ? '' : smatches ? '' : 'pointer' }} />
