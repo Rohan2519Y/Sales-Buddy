@@ -11,21 +11,21 @@ export default function ShowTwoAds() {
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
 
-    // const [ads, setAds] = useState(['s.webp','v.webp'])
-    // const fetchAds = async () => {
-    //     var response = await postData('userinterface/userinterface_fetch_ads', { imgno: 1 })
-    //     if (response.status) {
-    //         setAds(response.data)
-    //     }
-    //     else {
-    //         alert(response.message)
-    //     }
-    // }
-    // useEffect(function () {
-    //     fetchAds()
-    // }, [])
+    const [ads, setAds] = useState([])
+    const fetchAds = async () => {
+        var response = await postData('userinterface/userinterface_fetch_ads', { imgno: 2 })
+        if (response.status) {
+            setAds(response.data)
+        }
+        else {
+            alert(response.message)
+        }
+    }
+    useEffect(function () {
+        fetchAds()
+    }, [])
 
-    const ads=[{images:'s.webp'},{images:'v.webp'}]
+    // const ads=[{images:'s.webp'},{images:'v.webp'}]
 
     const showAds = () => {
         return ads.map((item) => {
