@@ -3,6 +3,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
 export default function ProductColorComponent({ color, defaultColor }) {
+
     const theme = useTheme();
     const md = useMediaQuery('(max-width:1300px)');
     const sm = useMediaQuery('(max-width:700px)');
@@ -23,8 +24,8 @@ export default function ProductColorComponent({ color, defaultColor }) {
     }, [defaultColor, color]);
 
     return (<>
-        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', marginTop: 20,alignItems:matches?'center':'' }}>
-            <div style={{ width:matches?'90%':md?'95%': '80%', height: 'auto', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', marginTop: 20, alignItems: matches ? 'center' : '' }}>
+            <div style={{ width: matches ? '90%' : md ? '95%' : '80%', height: 'auto', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ color: ' #ffffff', fontSize: '90%', marginBottom: 15 }}>Brand Color</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', }}>
                     {color.map((item) => (
@@ -42,7 +43,7 @@ export default function ProductColorComponent({ color, defaultColor }) {
                                     e.currentTarget.style.background = '';
                                 }
                             }} style={{ display: 'flex', justifyContent: 'center', backgroundColor: pcolor === item ? ' #000000' : 'transparent', alignItems: 'center', border: pcolor === item ? '1px solid rgb(0, 255, 208)' : '1px solid #ffffff', marginRight: 20, marginBottom: 10, borderRadius: 5, cursor: 'pointer' }}>
-                            <div style={{ color: ' #ffffff', margin: 10, fontSize: '80%' }}>{item}</div>
+                            <div style={{ color: ' #ffffff', margin: 10, fontSize: '80%' }}>{item.productcolorname}</div>
                         </div>
                     ))}
                 </div>

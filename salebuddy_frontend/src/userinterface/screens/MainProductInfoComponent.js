@@ -3,7 +3,9 @@ import Header from "../components/Header";
 import ProductInfoComponent from "../components/ProductInfo/ProductDetails/ProductInfoComponent";
 import ProductPictureComponent from "../components/ProductInfo/ProductPicture/ProductPictureComponent";
 import VerticalSlider from "../components/ProductInfo/ProductPicture/VerticalSlider";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router";
+import { postData, serverURL } from "../../backendservices/FetchNodeServices"
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ProductColorComponent from "../components/ProductInfo/ProductDetails/ProductColorComponent";
 import ProductRamComponent from "../components/ProductInfo/ProductDetails/ProductRamCompontent";
@@ -24,6 +26,24 @@ export default function MainProductInfoComponent() {
   const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
 
   const [selectedMedia, setSelectedMedia] = useState(null);
+
+  const params = useParams()
+
+  const [productData,setProductData]=useState({})
+  const [productColor,setProductColor]=useState([])
+  const fetchProductDetails=async()=>{
+    const response=await postData('userinterface/userinterface_fetch_productdetails_by_id',{productdetailsid:params.productdetailsid})
+    setProductData(response.data)
+  }
+  const fetchProductColors=async()=>{
+    const response=await postData('userinterface/userinterface_fetch_productcolor_by_id',{productid:params.productid})
+    setProductColor(response.data)
+  }
+
+  useEffect(function(){
+    fetchProductDetails()
+    fetchProductColors()
+  },[])
 
   var data = [{
     productdetailid: 1, productname: 'SAMSUNG Galaxy S25 Ultra 5G (12GB RAM, 256GB, Titanium Silverblue)', storage: '128GB', color: 'Titanium Blue', ram: '12GB',
@@ -92,7 +112,7 @@ export default function MainProductInfoComponent() {
     }
   ]
   return (<>
-    <div style={{ width: '100%', height: '100%', background: ' #191919', fontFamily: '"Inter", sans-serif', display: 'flex', flexDirection: 'column',overflowX:'hidden' }}>
+    <div style={{ width: '100%', height: '100%', background: ' #191919', fontFamily: '"Inter", sans-serif', display: 'flex', flexDirection: 'column', overflowX: 'hidden' }}>
       <div>
         <Header />
       </div>
@@ -109,9 +129,9 @@ export default function MainProductInfoComponent() {
           </div>}
         </div>
         <div style={{ display: 'flex', width: matches ? '100%' : '50%', height: '100%', flexDirection: 'column', overflowY: matches ? 'none' : 'auto', scrollbarWidth: 'none' }}>
-          <ProductInfoComponent data={data} />
+          <ProductInfoComponent data={productData} />
           <ProductExchangeComponent />
-          <ProductColorComponent color={color} defaultColor={data[0].color} />
+          <ProductColorComponent color={productColor} defaultColor={productColor[0]?.productcolorname} />
           <ProductRamComponent ram={ram} defaultRam={data[0].ram} />
           <ProductStorageComponent storage={storage} defaultStorage={data[0].storage} />
           <KeyfeatureComponent data={data[0]} />
