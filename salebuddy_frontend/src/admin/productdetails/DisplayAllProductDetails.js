@@ -412,7 +412,7 @@ export default function DisplayAllProducts() {
                                 <FormHelperText>{error.productVarientId}</FormHelperText>
                             </FormControl>
                         </Grid2>
-                        
+
                         <Grid2 size={4} >
                             <FormControl error={error.productStatus} onFocus={() => handleErrorMessage('productStatus', null)} fullWidth>
                                 <InputLabel>Product Status</InputLabel>
@@ -437,7 +437,7 @@ export default function DisplayAllProducts() {
                                 <FormHelperText>{error.Status}</FormHelperText>
                             </FormControl>
                         </Grid2>
-                        
+
                         <Grid2 size={4} >
                             <FormControl error={error.warrenty} onFocus={() => handleErrorMessage('warrenty', null)} fullWidth>
                                 <InputLabel>Warrenty
@@ -691,10 +691,10 @@ export default function DisplayAllProducts() {
                             <span >{rowData.productcolorname}</span>
                         </div>
                     },
-                    { title: 'Product Variant', width: '6%', render: (rowData) => <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}><div>{rowData.productram} GB</div><div> {rowData.productstorage}GB</div></div> },
+                    { title: 'Product Variant', width: '6%', render: (rowData) => <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}><div>{rowData.productram}</div><div> {rowData.productstorage}</div></div> },
                     { title: 'Status Condition Ratings', render: (rowData) => <div style={{ display: 'flex', flexDirection: 'column' }}><div>{rowData.productstatus} </div><div>{rowData.productcondition}</div> <div>{rowData.ratings}</div></div> },
                     { title: 'Status', width: '7%', field: 'status' },
-                    { title: 'Warrenty IMEI',render:(rowData)=><div style={{display:'flex',flexDirection:'column'}}><div>{rowData.warrenty}</div><div>{rowData.imei}</div></div> },
+                    { title: 'Warrenty IMEI', render: (rowData) => <div style={{ display: 'flex', flexDirection: 'column' }}><div>{rowData.warrenty}</div><div>{rowData.imei}</div></div> },
                     { title: <div style={{ display: 'flex', flexDirection: 'column' }}> <div>Price</div> <div>Offer Price</div> <div>MembershipPrice</div> </div>, width: '11%', render: (rowData) => <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}><div>₹-{rowData.price}</div><div>₹-{rowData.offerprice}</div> <div>₹-{rowData.membershipprice}</div></div> },
 
                     { title: 'Stock', width: '7%', field: 'stock' },
