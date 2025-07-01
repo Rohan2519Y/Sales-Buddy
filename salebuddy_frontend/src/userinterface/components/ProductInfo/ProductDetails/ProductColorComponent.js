@@ -13,7 +13,7 @@ export default function ProductColorComponent({ color, defaultColor }) {
 
     const [pcolor, setPcolor] = useState('')
     const handleClick = (item) => {
-        setPcolor(item.productcolorname);
+        setPcolor(item);
     };
     useEffect(() => {
         setPcolor(defaultColor)
@@ -26,7 +26,7 @@ export default function ProductColorComponent({ color, defaultColor }) {
                 <div style={{ display: 'flex', flexWrap: 'wrap', }}>
                     {color.map((item) => (
                         <div
-                            onClick={() => handleClick(item)}
+                            onClick={() => handleClick(item.productcolorname)}
                             onMouseEnter={(e) => {
                                 if (pcolor !== item.productcolorname) {
                                     e.currentTarget.style.border = '1px solid #49a5a2';
