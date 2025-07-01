@@ -74,12 +74,28 @@ router.post('/userinterface_fetch_productdetails_by_id', function (req, res, nex
 
 router.post('/userinterface_fetch_productcolor_by_id', function (req, res, next) {
     try {
-        pool.query("SELECT P.*, B.*, S.*, PC.*, PV.*, PD.* FROM products P, brands B, services S, productcolors PC, productvarients PV, productdetails PD where P.productid=PD.productid and B.brandid=PD.brandId and S.serviceid=PD.serviceid and PC.productcolorid=Pd.productcolorid  and PV.productvarientid=pd.productvarientid and pd.productid=?", [req.body.productid], function (error, result) {
+        pool.query("SELECT P.*, S.*, PC.* FROM products P, services S, productcolors PC where P.serviceid=S.serviceid and PC.productid=P.productid and P.productid=?", [req.body.productid], function (error, result) {
             if (error) {
                 res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
             }
             else {
-                console.log(result)
+             
+                res.status(200).json({ status: true, message: 'Success..', data: result })
+            }
+        })
+    }
+    catch (e) {
+        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
+    }
+});
+router.post('/userinterface_fetch_productvarient_by_id', function (req, res, next) {
+    try {
+        pool.query("SELECT P.*, S.*, PV.* FROM products P, services S, productvarients PV where P.serviceid=S.serviceid and PV.productid=P.productid and P.productid=? group by PV.productram", [req.body.productid], function (error, result) {
+            if (error) {
+                res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
+            }
+            else {
+             
                 res.status(200).json({ status: true, message: 'Success..', data: result })
             }
         })

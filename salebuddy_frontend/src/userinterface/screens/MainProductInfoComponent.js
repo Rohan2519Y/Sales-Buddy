@@ -31,6 +31,7 @@ export default function MainProductInfoComponent() {
 
   const [productData,setProductData]=useState({})
   const [productColor,setProductColor]=useState([])
+  const [productRam,setProductRam]=useState([])
   const fetchProductDetails=async()=>{
     const response=await postData('userinterface/userinterface_fetch_productdetails_by_id',{productdetailsid:params.productdetailsid})
     setProductData(response.data)
@@ -39,10 +40,15 @@ export default function MainProductInfoComponent() {
     const response=await postData('userinterface/userinterface_fetch_productcolor_by_id',{productid:params.productid})
     setProductColor(response.data)
   }
+  const fetchProductRam=async()=>{
+    const response=await postData('userinterface/userinterface_fetch_productvarient_by_id',{productid:params.productid})
+    setProductRam(response.data)
+  }
 
   useEffect(function(){
     fetchProductDetails()
     fetchProductColors()
+    fetchProductRam()
   },[])
 
   var data = [{
@@ -131,9 +137,9 @@ export default function MainProductInfoComponent() {
         <div style={{ display: 'flex', width: matches ? '100%' : '50%', height: '100%', flexDirection: 'column', overflowY: matches ? 'none' : 'auto', scrollbarWidth: 'none' }}>
           <ProductInfoComponent data={productData} />
           <ProductExchangeComponent />
-          <ProductColorComponent color={productColor} defaultColor={productColor[0]?.productcolorname} />
-          <ProductRamComponent ram={ram} defaultRam={data[0].ram} />
-          <ProductStorageComponent storage={storage} defaultStorage={data[0].storage} />
+          <ProductColorComponent color={productColor} defaultColor={productData?.productcolorname} />
+          <ProductRamComponent ram={productRam} defaultRam={productData?.productram} />
+          <ProductStorageComponent storage={productRam} defaultStorage={productData?.productstorage} />
           <KeyfeatureComponent data={data[0]} />
         </div>
       </div>

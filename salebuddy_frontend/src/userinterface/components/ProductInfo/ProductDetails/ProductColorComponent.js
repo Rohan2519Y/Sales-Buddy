@@ -13,15 +13,11 @@ export default function ProductColorComponent({ color, defaultColor }) {
 
     const [pcolor, setPcolor] = useState('')
     const handleClick = (item) => {
-        setPcolor(item);
+        setPcolor(item.productcolorname);
     };
     useEffect(() => {
-        if (defaultColor && color.includes(defaultColor)) {
-            setPcolor(defaultColor);
-        } else if (color.length > 0) {
-            setPcolor(color[0]);
-        }
-    }, [defaultColor, color]);
+        setPcolor(defaultColor)
+    }, [defaultColor]);
 
     return (<>
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', marginTop: 20, alignItems: matches ? 'center' : '' }}>
@@ -32,17 +28,17 @@ export default function ProductColorComponent({ color, defaultColor }) {
                         <div
                             onClick={() => handleClick(item)}
                             onMouseEnter={(e) => {
-                                if (pcolor !== item) {
+                                if (pcolor !== item.productcolorname) {
                                     e.currentTarget.style.border = '1px solid #49a5a2';
                                     e.currentTarget.style.background = '#49a5a2';
                                 }
                             }}
                             onMouseLeave={(e) => {
-                                if (pcolor !== item) {
+                                if (pcolor !== item.productcolorname) {
                                     e.currentTarget.style.border = '1px solid #ffffff';
                                     e.currentTarget.style.background = '';
                                 }
-                            }} style={{ display: 'flex', justifyContent: 'center', backgroundColor: pcolor === item ? ' #000000' : 'transparent', alignItems: 'center', border: pcolor === item ? '1px solid rgb(0, 255, 208)' : '1px solid #ffffff', marginRight: 20, marginBottom: 10, borderRadius: 5, cursor: 'pointer' }}>
+                            }} style={{ display: 'flex', justifyContent: 'center', backgroundColor: pcolor === item.productcolorname ? ' #000000' : 'transparent', alignItems: 'center', border: pcolor === item.productcolorname ? '1px solid rgb(0, 255, 208)' : '1px solid #ffffff', marginRight: 20, marginBottom: 10, borderRadius: 5, cursor: 'pointer' }}>
                             <div style={{ color: ' #ffffff', margin: 10, fontSize: '80%' }}>{item.productcolorname}</div>
                         </div>
                     ))}
