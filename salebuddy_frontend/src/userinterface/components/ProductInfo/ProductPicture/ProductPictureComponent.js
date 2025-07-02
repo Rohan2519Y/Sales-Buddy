@@ -1,5 +1,6 @@
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
+import { serverURL } from '../../../../backendservices/FetchNodeServices';
 
 export default function ProductPictureComponent({ media }) {
 
@@ -13,9 +14,9 @@ export default function ProductPictureComponent({ media }) {
           <ShareIcon />
         </div>
         {isVideo ? (
-          <video src={media} controls style={{ maxWidth: '90%', maxHeight: '90%' }} />
+          <video src={`${serverURL}/images/${media}`} controls style={{ maxWidth: '90%', maxHeight: '90%' }} />
         ) : (
-          <img src={media} style={{ maxWidth: '90%', maxHeight: '90%', objectFit: 'contain' }} />
+          <img src={`${serverURL}/images/${media}`} style={{ maxWidth: '90%', maxHeight: '90%', objectFit: 'contain' }} />
         )}
       </div>
       <hr style={{ width: '80%', height: '0.01%' }} /> 

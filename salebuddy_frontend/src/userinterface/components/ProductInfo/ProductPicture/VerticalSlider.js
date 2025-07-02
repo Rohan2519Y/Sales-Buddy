@@ -42,7 +42,7 @@ export default function VerticalSlider({data, onImageClick }) {
         verticalSwiping: matches ? false : true,
         pauseOnHover: false,
         arrows: false,
-        initialSlide: selectedImage
+        initialSlide: matches?selectedImage:''
     };
   /* var data = {
         id: 1,
@@ -52,18 +52,15 @@ export default function VerticalSlider({data, onImageClick }) {
     var images = data?.images?.split(',')
 */
 //alert(data.picture)
-var images=['xx']
-try{
+
   var images = data?.picture?.split(',')
-}
-catch(e){ images=['xx']}
-/*
+
     useEffect(() => {
-        if (images.length && onImageClick) {
-            onImageClick(images[0]);
-        }
-    }, [onImageClick]);
-*/
+    if (selectedImage !== undefined && onImageClick && images?.length > 0) {
+        onImageClick(images[selectedImage]);
+    }
+}, [selectedImage, onImageClick, images]);
+
     const handleClick = (item, i) => {
         setSelectedImage(i);
         onImageClick(item);
@@ -71,7 +68,7 @@ catch(e){ images=['xx']}
 
     const showImages = () => {
         return images?.map((item, i) => {
-            const isVideo = item.includes('.webm') || item.includes('.mp4');
+            const isVideo = !!item && /\.(mp4|webm|ogg|mov|avi|flv|wmv|mkv|m4v|3gp)$/i.test(item);
             const isActive = selectedImage === i || bgcolor === i;
 
             return matches ?
