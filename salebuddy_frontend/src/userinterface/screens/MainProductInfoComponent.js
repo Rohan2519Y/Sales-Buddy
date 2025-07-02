@@ -56,18 +56,15 @@ export default function MainProductInfoComponent() {
   const [productImages, setProductImages] = useState([])
   const fetchProductImages = async () => {
     const response = await postData("userinterface/moreimages_by_id", { productdetailsid: params.productdetailsid })
-
     setProductImages(response?.data)
   }
-  useEffect(function () {
-    fetchProductImages()
-  }, [])
+
   useEffect(function () {
     fetchProductDetails()
     fetchProductColors()
     fetchProductRam()
     fetchProductStorage()
-
+    fetchProductImages()
   }, [])
 
   var data = [{
