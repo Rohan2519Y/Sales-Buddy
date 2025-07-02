@@ -29,27 +29,36 @@ export default function MainProductInfoComponent() {
 
   const params = useParams()
 
-  const [productData,setProductData]=useState({})
-  const [productColor,setProductColor]=useState([])
-  const [productRam,setProductRam]=useState([])
-  const fetchProductDetails=async()=>{
-    const response=await postData('userinterface/userinterface_fetch_productdetails_by_id',{productdetailsid:params.productdetailsid})
+  const [productData, setProductData] = useState({})
+  const fetchProductDetails = async () => {
+    const response = await postData('userinterface/userinterface_fetch_productdetails_by_id', { productdetailsid: params.productdetailsid })
     setProductData(response.data)
   }
-  const fetchProductColors=async()=>{
-    const response=await postData('userinterface/userinterface_fetch_productcolor_by_id',{productid:params.productid})
+  
+  const [productColor, setProductColor] = useState([])
+  const fetchProductColors = async () => {
+    const response = await postData('userinterface/userinterface_fetch_productcolor_by_id', { productid: params.productid })
     setProductColor(response.data)
   }
-  const fetchProductRam=async()=>{
-    const response=await postData('userinterface/userinterface_fetch_productvarient_by_id',{productid:params.productid})
+ 
+  const [productRam, setProductRam] = useState([])
+  const fetchProductRam = async () => {
+    const response = await postData('userinterface/userinterface_fetch_productram_by_id', { productid: params.productid })
     setProductRam(response.data)
   }
+  
+  const [productStorage, setProductStorage] = useState([])
+  const fetchProductStorage = async () => {
+    const response = await postData('userinterface/userinterface_fetch_productstorage_by_id', { productid: params.productid })
+    setProductStorage(response.data)
+  }
 
-  useEffect(function(){
+  useEffect(function () {
     fetchProductDetails()
     fetchProductColors()
     fetchProductRam()
-  },[])
+    fetchProductStorage()
+  }, [])
 
   var data = [{
     productdetailid: 1, productname: 'SAMSUNG Galaxy S25 Ultra 5G (12GB RAM, 256GB, Titanium Silverblue)', storage: '128GB', color: 'Titanium Blue', ram: '12GB',

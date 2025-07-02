@@ -28,10 +28,10 @@ export default function VerticalSlider({ onImageClick }) {
     opacity: 1;
   }
 `;
-  
+
     const ref = useRef()
     const [selectedImage, setSelectedImage] = useState(0)
-    const [bgcolor, setBgcolor] = useState(null)
+    const [bgcolor, setBgcolor] = useState(null) 
 
     const settings = {
         dots: matches ? true : false,
@@ -96,7 +96,7 @@ export default function VerticalSlider({ onImageClick }) {
     return (
         <div style={{ position: 'relative', margin: 0, padding: 0, marginBottom: 30 }}>
             <div style={{ width: '100%', display: 'flex', }}><VerticalArrowUp VerticalArrow={ref} /></div>
-            <StyledSlider  ref={ref} {...settings} style={{ width: '100%', height: '100%' }}>
+            <StyledSlider ref={ref} {...settings} style={{ width: '100%', height: '100%' }}>
                 {showImages()}
             </StyledSlider>
             <div style={{ width: '100%', display: 'flex', }}><VerticalArrowDown VerticalArrow={ref} /></div>

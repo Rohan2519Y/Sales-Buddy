@@ -79,7 +79,7 @@ router.post('/userinterface_fetch_productcolor_by_id', function (req, res, next)
                 res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
             }
             else {
-             
+
                 res.status(200).json({ status: true, message: 'Success..', data: result })
             }
         })
@@ -88,19 +88,56 @@ router.post('/userinterface_fetch_productcolor_by_id', function (req, res, next)
         res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
     }
 });
-router.post('/userinterface_fetch_productvarient_by_id', function (req, res, next) {
+
+router.post('/userinterface_fetch_productram_by_id', function (req, res, next) {
     try {
         pool.query("SELECT P.*, S.*, PV.* FROM products P, services S, productvarients PV where P.serviceid=S.serviceid and PV.productid=P.productid and P.productid=? group by PV.productram", [req.body.productid], function (error, result) {
             if (error) {
                 res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
             }
             else {
-             
+
                 res.status(200).json({ status: true, message: 'Success..', data: result })
             }
         })
     }
     catch (e) {
+        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
+    }
+});
+
+router.post('/userinterface_fetch_productstorage_by_id', function (req, res, next) {
+    try {
+        pool.query("SELECT P.*, S.*, PV.* FROM products P, services S, productvarients PV where P.serviceid=S.serviceid and PV.productid=P.productid and P.productid=? group by PV.productstorage", [req.body.productid], function (error, result) {
+            if (error) {
+                res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
+            }
+            else {
+
+                res.status(200).json({ status: true, message: 'Success..', data: result })
+            }
+        })
+    }
+    catch (e) {
+        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
+    }
+});
+
+router.post('/moreimages_by_id', function (req, res, next) {
+    try {
+        pool.query("SELECT M.* FROM productdetails PD, morepicture M  where PD.productdetailsid=M.productdetailsid  and pd.productdetailsid=?", [req.body.productdetailsid], function (error, result) {
+            if (error) {
+                console.log(error)
+                res.status(500).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
+            }
+            else {
+                console.log("PIC", result)
+                res.status(200).json({ status: true, message: 'Success..', data: result[0] })
+            }
+        })
+    }
+    catch (e) {
+        console.log("xxxxxxxxxxxxxxxxxx")
         res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
     }
 });
