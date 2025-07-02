@@ -7,8 +7,8 @@ import styled from 'styled-components';
 import { useState, useEffect } from "react";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-
-export default function VerticalSlider({ onImageClick }) {
+import { serverURL } from "../../../../backendservices/FetchNodeServices";
+export default function VerticalSlider({data, onImageClick }) {
 
     const theme = useTheme();
     const md = useMediaQuery('(max-width:1300px)');
@@ -28,10 +28,10 @@ export default function VerticalSlider({ onImageClick }) {
     opacity: 1;
   }
 `;
-
+  
     const ref = useRef()
     const [selectedImage, setSelectedImage] = useState(0)
-    const [bgcolor, setBgcolor] = useState(null) 
+    const [bgcolor, setBgcolor] = useState(null)
 
     const settings = {
         dots: matches ? true : false,
@@ -44,39 +44,46 @@ export default function VerticalSlider({ onImageClick }) {
         arrows: false,
         initialSlide: selectedImage
     };
-    var data = {
+  /* var data = {
         id: 1,
         images: 'https://res.cloudinary.com/dio6iadsq/image/upload/v1749891014/312580_0_u3lpmc_tngxpo.webp,https://res.cloudinary.com/dio6iadsq/video/upload/v1749891022/312580_pbzvd4_dbjpej.webm,https://res.cloudinary.com/dio6iadsq/image/upload/v1749891014/312580_1_l0zqyg_peivwc.webp,https://res.cloudinary.com/dio6iadsq/image/upload/v1749891014/312580_2_eul3kh_gq7cqw.webp,https://res.cloudinary.com/dio6iadsq/image/upload/v1749891014/312580_5_gmurvh_va7cpg.webp,https://res.cloudinary.com/dio6iadsq/image/upload/v1749891014/312580_6_tmvat3_hh87nc.webp,https://res.cloudinary.com/dio6iadsq/image/upload/v1749891014/312580_7_o5mbmj_d0y18u.webp,https://res.cloudinary.com/dio6iadsq/image/upload/v1749891014/312580_8_pxkcdr_wkjny9.webp'
     }
 
     var images = data?.images?.split(',')
-
+*/
+//alert(data.picture)
+var images=['xx']
+try{
+  var images = data?.picture?.split(',')
+}
+catch(e){ images=['xx']}
+/*
     useEffect(() => {
         if (images.length && onImageClick) {
             onImageClick(images[0]);
         }
     }, [onImageClick]);
-
+*/
     const handleClick = (item, i) => {
         setSelectedImage(i);
         onImageClick(item);
     };
 
     const showImages = () => {
-        return images.map((item, i) => {
+        return images?.map((item, i) => {
             const isVideo = item.includes('.webm') || item.includes('.mp4');
             const isActive = selectedImage === i || bgcolor === i;
 
             return matches ?
-                <div key={i} style={{ width: '100%', display: "flex", justifyContent: 'center', alignItems: 'center', }}>
+                <div style={{ width: '100%', display: "flex", justifyContent: 'center', alignItems: 'center', }}>    
                     <div
                         style={{ width: '100%', height: 400, display: "flex", justifyContent: 'center', alignItems: 'center', marginTop: '7%', borderRadius: 5, cursor: 'pointer', padding: 1 }}>
-                        {isVideo ? (<video controls src={item} style={{ height: '100%', maxWidth: '95%' }} />
-                        ) : (<img src={item} style={{ height: '100%', }} />)}
+                        {isVideo ? (<video controls src={`${serverURL}/images/${item}`} style={{ height: '100%', maxWidth: '95%' }} />
+                        ) : (<img src={`${serverURL}/images/${item}`} style={{ height: '100%', }} />)}
                     </div>
                 </div>
                 :
-                <div key={i} style={{ width: '100%', height: 70, display: "flex", justifyContent: 'center', alignItems: 'center' }}>
+                <div style={{ width: '100%', height: 70, display: "flex", justifyContent: 'center', alignItems: 'center' }}>
                     <div>
                         <div
                             onMouseEnter={() => setBgcolor(i)}
@@ -86,7 +93,7 @@ export default function VerticalSlider({ onImageClick }) {
                             {isVideo ? (<div style={{ width: isActive ? '95%' : '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                 <PlayCircleIcon style={{ color: '#12daa8', fontSize: '300%', width: '100%' }} />
                             </div>
-                            ) : (<img src={item} style={{ width: isActive ? '95%' : '100%', }} />)}
+                            ) : (<img src={`${serverURL}/images/${item}`} style={{ width: isActive ? '95%' : '100%', }} />)}
                         </div>
                     </div>
                 </div >
@@ -96,7 +103,7 @@ export default function VerticalSlider({ onImageClick }) {
     return (
         <div style={{ position: 'relative', margin: 0, padding: 0, marginBottom: 30 }}>
             <div style={{ width: '100%', display: 'flex', }}><VerticalArrowUp VerticalArrow={ref} /></div>
-            <StyledSlider ref={ref} {...settings} style={{ width: '100%', height: '100%' }}>
+            <StyledSlider  ref={ref} {...settings} style={{ width: '100%', height: '100%' }}>
                 {showImages()}
             </StyledSlider>
             <div style={{ width: '100%', display: 'flex', }}><VerticalArrowDown VerticalArrow={ref} /></div>

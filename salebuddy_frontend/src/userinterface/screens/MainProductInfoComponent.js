@@ -34,30 +34,40 @@ export default function MainProductInfoComponent() {
     const response = await postData('userinterface/userinterface_fetch_productdetails_by_id', { productdetailsid: params.productdetailsid })
     setProductData(response.data)
   }
-  
+
   const [productColor, setProductColor] = useState([])
   const fetchProductColors = async () => {
     const response = await postData('userinterface/userinterface_fetch_productcolor_by_id', { productid: params.productid })
     setProductColor(response.data)
   }
- 
+
   const [productRam, setProductRam] = useState([])
   const fetchProductRam = async () => {
     const response = await postData('userinterface/userinterface_fetch_productram_by_id', { productid: params.productid })
     setProductRam(response.data)
   }
-  
+
   const [productStorage, setProductStorage] = useState([])
   const fetchProductStorage = async () => {
     const response = await postData('userinterface/userinterface_fetch_productstorage_by_id', { productid: params.productid })
     setProductStorage(response.data)
   }
 
+  const [productImages, setProductImages] = useState([])
+  const fetchProductImages = async () => {
+    const response = await postData("userinterface/moreimages_by_id", { productdetailsid: params.productdetailsid })
+
+    setProductImages(response?.data)
+  }
+  useEffect(function () {
+    fetchProductImages()
+  }, [])
   useEffect(function () {
     fetchProductDetails()
     fetchProductColors()
     fetchProductRam()
     fetchProductStorage()
+
   }, [])
 
   var data = [{
@@ -137,7 +147,7 @@ export default function MainProductInfoComponent() {
       <div style={{ display: 'flex', flexDirection: matches ? 'column' : '', }}>
         <div style={{ width: matches ? '100%' : '50%', display: 'flex', justifyContent: matches ? '' : 'flex-end' }}>
           <div style={{ width: matches ? '100%' : '17%', height: '100%' }}>
-            <VerticalSlider onImageClick={setSelectedMedia} />
+            <VerticalSlider data={productImages} onImageClick={setSelectedMedia} />
           </div>
           {matches ? <></> : <div style={{ width: md ? '80%' : '60%', }}>
             <ProductPictureComponent media={selectedMedia} />
@@ -148,8 +158,8 @@ export default function MainProductInfoComponent() {
           <ProductExchangeComponent />
           <ProductColorComponent color={productColor} defaultColor={productData?.productcolorname} />
           <ProductRamComponent ram={productRam} defaultRam={productData?.productram} />
-          <ProductStorageComponent storage={productRam} defaultStorage={productData?.productstorage} />
-          <KeyfeatureComponent data={data[0]} />
+          <ProductStorageComponent storage={productStorage} defaultStorage={productData?.productstorage} />
+          <KeyfeatureComponent data={productData?.description} />
         </div>
       </div>
       <div>

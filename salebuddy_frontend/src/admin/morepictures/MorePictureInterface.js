@@ -147,7 +147,6 @@ export default function MorePictureInterface() {
                     text: result.message,
                     toast: true
                 });
-                handleReset()
             }
             else {
                 Swal.fire({
@@ -236,7 +235,7 @@ export default function MorePictureInterface() {
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 60, flexDirection: 'column' }}>
                                 <Button fullWidth component="label" variant="outlined">
                                     Upload Image
-                                    <input onFocus={() => handleErrorMessage(image, '')} onChange={handleImageChange} type="file" accept="image/*" hidden multiple />
+                                    <input onFocus={() => handleErrorMessage(image, '')} onChange={handleImageChange} type="file" hidden multiple />
                                 </Button>
                                 <div className={classes.helperTextStyle}>{error.image}</div>
                             </div>
