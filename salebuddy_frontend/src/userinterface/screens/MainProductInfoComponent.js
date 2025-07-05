@@ -153,7 +153,7 @@ export default function MainProductInfoComponent() {
         <div style={{ display: 'flex', width: matches ? '100%' : '50%', height: '100%', flexDirection: 'column', overflowY: matches ? 'none' : 'auto', scrollbarWidth: 'none' }}>
           <ProductInfoComponent data={productData} />
           <ProductExchangeComponent />
-          <ProductColorComponent color={productColor} defaultColor={productData?.productcolorname} />
+          <ProductColorComponent productid={params.productid} productdetailsid={params.productdetailsid} color={productColor} defaultColor={productData?.productcolorname} />
           <ProductRamComponent ram={productRam} defaultRam={productData?.productram} />
           <ProductStorageComponent storage={productStorage} defaultStorage={productData?.productstorage} />
           <KeyfeatureComponent data={productData?.description} />
