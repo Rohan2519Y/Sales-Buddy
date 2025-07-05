@@ -14,10 +14,10 @@ export default function ProductRamComponent({ productid,ram, defaultRam }) {
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
 
     const navigate = useNavigate()
-    const [pcolor, setPcolor] = useState('')
+    const [ramValue, setRamValue] = useState(defaultRam)
 
-    const handleClick = async (item, id) => {
-        setPcolor(item);
+    const handleClick = async (ram, id) => {
+        setRamValue(ram);
         const response = await postData('userinterface/userinterface_fetch_productdetails_by_id_ram', { productid, productvarientid: id })
         if (response.status) {
            
@@ -28,7 +28,7 @@ export default function ProductRamComponent({ productid,ram, defaultRam }) {
     };
 
     useEffect(() => {
-        setPcolor(defaultRam)
+        setRamValue(defaultRam)
     }, [defaultRam]);
 
     return (<>
@@ -40,17 +40,17 @@ export default function ProductRamComponent({ productid,ram, defaultRam }) {
                         <div
                             onClick={() => handleClick(item.productstorage, item.productvarientid)}
                             onMouseEnter={(e) => {
-                                if (pcolor !== item.productram) {
+                                if (ramValue !== item.productram) {
                                     e.currentTarget.style.border = '1px solid #49a5a2';
                                     e.currentTarget.style.background = '#49a5a2';
                                 }
                             }}
                             onMouseLeave={(e) => {
-                                if (pcolor !== item.productram) {
+                                if (ramValue !== item.productram) {
                                     e.currentTarget.style.border = '1px solid #ffffff';
                                     e.currentTarget.style.background = '';
                                 }
-                            }} style={{ display: 'flex', justifyContent: 'center', backgroundColor: pcolor === item.productram ? ' #000000' : 'transparent', alignItems: 'center', border: pcolor === item.productram ? '1px solid rgb(0, 255, 208)' : '1px solid #ffffff', marginRight: 20, marginBottom: 10, borderRadius: 5, }}>
+                            }} style={{ display: 'flex', justifyContent: 'center', backgroundColor: ramValue === item.productram ? ' #000000' : 'transparent', alignItems: 'center', border: ramValue === item.productram ? '1px solid rgb(0, 255, 208)' : '1px solid #ffffff', marginRight: 20, marginBottom: 10, borderRadius: 5, cursor: 'pointer' }}>
                             <div style={{ color: ' #ffffff', margin: 10, fontSize: '80%' }}>{item.productram}</div>
                         </div>
                     ))}

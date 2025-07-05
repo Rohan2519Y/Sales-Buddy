@@ -16,10 +16,10 @@ export default function ProductColorComponent({ productid, color, defaultColor }
 
     const params = useParams()
     const navigate = useNavigate()
-    const [pcolor, setPcolor] = useState('')
+    const [colorValue, setColorValue] = useState(defaultColor)
 
-    const handleClick = async (item, id) => {
-        setPcolor(item);
+    const handleClick = async (color, id) => {
+        setColorValue(color);
         const response = await postData('userinterface/userinterface_fetch_productdetails_by_id_color', { productid, productcolorid: id })
         if (response.status) {
             navigate(`/mainproductinfocomponent/${response.data.productdetailsid}/${productid}`)
@@ -29,7 +29,7 @@ export default function ProductColorComponent({ productid, color, defaultColor }
     };
 
     useEffect(() => {
-        setPcolor(defaultColor)
+        setColorValue(defaultColor)
     }, [defaultColor]);
 
     return (<>
@@ -41,17 +41,17 @@ export default function ProductColorComponent({ productid, color, defaultColor }
                         <div
                             onClick={() => handleClick(item.productcolorname, item.productcolorid)}
                             onMouseEnter={(e) => {
-                                if (pcolor !== item.productcolorname) {
+                                if (colorValue !== item.productcolorname) {
                                     e.currentTarget.style.border = '1px solid #49a5a2';
                                     e.currentTarget.style.background = '#49a5a2';
                                 }
                             }}
                             onMouseLeave={(e) => {
-                                if (pcolor !== item.productcolorname) {
+                                if (colorValue !== item.productcolorname) {
                                     e.currentTarget.style.border = '1px solid #ffffff';
                                     e.currentTarget.style.background = '';
                                 }
-                            }} style={{ display: 'flex', justifyContent: 'center', backgroundColor: pcolor === item.productcolorname ? ' #000000' : 'transparent', alignItems: 'center', border: pcolor === item.productcolorname ? '1px solid rgb(0, 255, 208)' : '1px solid #ffffff', marginRight: 20, marginBottom: 10, borderRadius: 5, cursor: 'pointer' }}>
+                            }} style={{ display: 'flex',justifyContent: 'center', backgroundColor: colorValue === item.productcolorname ? ' #000000' : 'transparent', alignItems: 'center', border: colorValue === item.productcolorname ? '1px solid rgb(0, 255, 208)' : '1px solid #ffffff', marginRight: 20, marginBottom: 10, borderRadius: 5, cursor: 'pointer' }}>
                             <div style={{ color: ' #ffffff', margin: 10, fontSize: '80%' }}>{item.productcolorname}</div>
                         </div>
                     ))}

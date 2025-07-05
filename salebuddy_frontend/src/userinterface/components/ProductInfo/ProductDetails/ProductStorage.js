@@ -14,10 +14,10 @@ export default function ProductStorageComponent({ productid,storage, defaultStor
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
 
     const navigate = useNavigate()
-    const [pcolor, setPcolor] = useState('')
+    const [storageValue, setStorageValue] = useState(defaultStorage)
 
-    const handleClick = async (item, id) => {
-        setPcolor(item);
+    const handleClick = async (storage, id) => {
+        setStorageValue(storage);
         const response = await postData('userinterface/userinterface_fetch_productdetails_by_id_storage', { productid, productvarientid: id })
         if (response.status) {
            
@@ -28,7 +28,7 @@ export default function ProductStorageComponent({ productid,storage, defaultStor
     };
 
     useEffect(() => {
-        setPcolor(defaultStorage)
+        setStorageValue(defaultStorage)
     }, [defaultStorage]);
 
     return (<>
@@ -40,17 +40,17 @@ export default function ProductStorageComponent({ productid,storage, defaultStor
                         <div
                             onClick={() => handleClick(item.productstorage, item.productvarientid)}
                             onMouseEnter={(e) => {
-                                if (pcolor !== item.productstorage) {
+                                if (storageValue !== item.productstorage) {
                                     e.currentTarget.style.border = '1px solid #49a5a2';
                                     e.currentTarget.style.background = '#49a5a2';
                                 }
                             }}
                             onMouseLeave={(e) => {
-                                if (pcolor !== item.productstorage) {
+                                if (storageValue !== item.productstorage) {
                                     e.currentTarget.style.border = '1px solid #ffffff';
                                     e.currentTarget.style.background = '';
                                 }
-                            }} style={{ display: 'flex', justifyContent: 'center', backgroundColor: pcolor === item.productstorage ? ' #000000' : 'transparent', alignItems: 'center', border: pcolor === item.productstorage ? '1px solid rgb(0, 255, 208)' : '1px solid #ffffff', marginRight: 20, marginBottom: 10, borderRadius: 5, }}>
+                            }} style={{ display: 'flex', justifyContent: 'center', backgroundColor: storageValue === item.productstorage ? ' #000000' : 'transparent', alignItems: 'center', border: storageValue === item.productstorage ? '1px solid rgb(0, 255, 208)' : '1px solid #ffffff', marginRight: 20, marginBottom: 10, borderRadius: 5, cursor: 'pointer' }}>
                             <div style={{ color: ' #ffffff', margin: 10, fontSize: '80%' }}>{item.productstorage}</div>
                         </div>
                     ))}
