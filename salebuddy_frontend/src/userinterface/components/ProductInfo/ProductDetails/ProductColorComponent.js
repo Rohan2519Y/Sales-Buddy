@@ -5,7 +5,7 @@ import { postData } from "../../../../backendservices/FetchNodeServices";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router";
 
-export default function ProductColorComponent({ productid, productdetailsid, color, defaultColor }) {
+export default function ProductColorComponent({ productid, color, defaultColor }) {
 
     const theme = useTheme();
     const md = useMediaQuery('(max-width:1300px)');
@@ -16,21 +16,18 @@ export default function ProductColorComponent({ productid, productdetailsid, col
 
     const params = useParams()
     const navigate = useNavigate()
-
-    const [productColorId, setProductColorId] = useState('')
-    // const [productData, setProductData] = useState({})
-    // const fetchProductDetails = async () => {
-    //     const response = await postData('userinterface/userinterface_fetch_productdetails_by_id_color', { productid: params.productid,productcolorid:productcolorid })
-    //     setProductData(response.data)
-    // }
-
     const [pcolor, setPcolor] = useState('')
-    const handleClick = (item, id) => {
+
+    const handleClick = async (item, id) => {
         setPcolor(item);
-        setProductColorId(id)
-        //  fetchProductDetails()
-        navigate('/mainproductinfocomponent/13/13')
+        const response = await postData('userinterface/userinterface_fetch_productdetails_by_id_color', { productid, productcolorid: id })
+        if (response.status) {
+            navigate(`/mainproductinfocomponent/${response.data.productdetailsid}/${productid}`)
+        } else {
+            alert("Id Not Found")
+        }
     };
+
     useEffect(() => {
         setPcolor(defaultColor)
     }, [defaultColor]);
@@ -42,7 +39,7 @@ export default function ProductColorComponent({ productid, productdetailsid, col
                 <div style={{ display: 'flex', flexWrap: 'wrap', }}>
                     {color.map((item) => (
                         <div
-                            onClick={() => handleClick(item.productcolorname)}
+                            onClick={() => handleClick(item.productcolorname, item.productcolorid)}
                             onMouseEnter={(e) => {
                                 if (pcolor !== item.productcolorname) {
                                     e.currentTarget.style.border = '1px solid #49a5a2';

@@ -154,8 +154,8 @@ export default function MainProductInfoComponent() {
           <ProductInfoComponent data={productData} />
           <ProductExchangeComponent />
           <ProductColorComponent productid={params.productid} productdetailsid={params.productdetailsid} color={productColor} defaultColor={productData?.productcolorname} />
-          <ProductRamComponent ram={productRam} defaultRam={productData?.productram} />
-          <ProductStorageComponent storage={productStorage} defaultStorage={productData?.productstorage} />
+          <ProductRamComponent productid={params.productid} productdetailsid={params.productdetailsid} ram={productRam} defaultRam={productData?.productram} />
+          <ProductStorageComponent productid={params.productid} productdetailsid={params.productdetailsid} storage={productStorage} defaultStorage={productData?.productstorage} />
           <KeyfeatureComponent data={productData?.description} />
         </div>
       </div>

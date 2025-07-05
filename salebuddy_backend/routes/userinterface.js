@@ -139,4 +139,55 @@ router.post('/moreimages_by_id', function (req, res, next) {
     }
 });
 
+router.post('/userinterface_fetch_productdetails_by_id_color', function (req, res, next) {
+    try {
+        pool.query("SELECT * FROM productdetails WHERE productid = ? AND productcolorid = ?", [req.body.productid, req.body.productcolorid], function (error, result) {
+            if (error) {
+                res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
+            }
+            else {
+                //console.log(result)
+                res.status(200).json({ status: true, message: 'Success..', data: result[0] })
+            }
+        })
+    }
+    catch (e) {
+        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
+    }
+});
+
+router.post('/userinterface_fetch_productdetails_by_id_ram', function (req, res, next) {
+    try {
+        pool.query("SELECT * FROM productdetails WHERE productid = ? AND productvarientid = ?", [req.body.productid, req.body.productvarientid], function (error, result) {
+            if (error) {
+                res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
+            }
+            else {
+                console.log(result)
+                res.status(200).json({ status: true, message: 'Success..', data: result[0] })
+            }
+        })
+    }
+    catch (e) {
+        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
+    }
+});
+
+router.post('/userinterface_fetch_productdetails_by_id_storage', function (req, res, next) {
+    try {
+        pool.query("SELECT * FROM productdetails WHERE productid = ? AND productvarientid = ?", [req.body.productid, req.body.productvarientid], function (error, result) {
+            if (error) {
+                res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
+            }
+            else {
+                console.log(result)
+                res.status(200).json({ status: true, message: 'Success..', data: result[0] })
+            }
+        })
+    }
+    catch (e) {
+        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
+    }
+});
+
 module.exports = router;

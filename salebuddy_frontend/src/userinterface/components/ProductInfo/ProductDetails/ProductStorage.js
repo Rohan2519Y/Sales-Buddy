@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react"
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import { useParams,useNavigate } from "react-router";
+import { postData } from "../../../../backendservices/FetchNodeServices";
 
-export default function ProductStorageComponent({ storage, defaultStorage }) {
+export default function ProductStorageComponent({ productid,storage, defaultStorage }) {
 
     const theme = useTheme();
     const md = useMediaQuery('(max-width:1300px)');
@@ -11,10 +13,20 @@ export default function ProductStorageComponent({ storage, defaultStorage }) {
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
 
+    const navigate = useNavigate()
     const [pcolor, setPcolor] = useState('')
-    const handleClick = (item) => {
-        setPcolor(item.productstorage);
+
+    const handleClick = async (item, id) => {
+        setPcolor(item);
+        const response = await postData('userinterface/userinterface_fetch_productdetails_by_id_storage', { productid, productvarientid: id })
+        if (response.status) {
+           
+            navigate(`/mainproductinfocomponent/${response.data.productdetailsid}/${productid}`)
+        } else {
+            alert("Id Not Found")
+        }
     };
+
     useEffect(() => {
         setPcolor(defaultStorage)
     }, [defaultStorage]);
@@ -26,7 +38,7 @@ export default function ProductStorageComponent({ storage, defaultStorage }) {
                 <div style={{ display: 'flex', flexWrap: 'wrap', }}>
                     {storage.map((item) => (
                         <div
-                            onClick={() => handleClick(item)}
+                            onClick={() => handleClick(item.productstorage, item.productvarientid)}
                             onMouseEnter={(e) => {
                                 if (pcolor !== item.productstorage) {
                                     e.currentTarget.style.border = '1px solid #49a5a2';
