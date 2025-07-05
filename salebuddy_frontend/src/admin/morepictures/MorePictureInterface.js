@@ -74,7 +74,7 @@ export default function MorePictureInterface() {
 
     const fillProductDetails = () => {
         return (productDetailsList.map((item) => {
-            return <MenuItem value={item.productdetailsid}><div style={{ display: 'flex', alignItems: 'center' }}> <span style={{ marginRight: 10 }}>{item.productram}GB  {item.productstorage}GB </span>
+            return <MenuItem value={item.productdetailsid}><div style={{ display: 'flex', alignItems: 'center' }}> <span style={{ marginRight: 10 }}>{item.productram} {item.productstorage}</span>
                 <div style={{ width: 20, height: 20, background: item.productcolor, borderRadius: '50%', border: '1px solid black', marginRight: 6 }} />
                 <span style={{ marginRight: 10 }}>{item.productcolorname}</span>
                 <span style={{ marginRight: 10 }}>IMEI-{item.imei}</span>
