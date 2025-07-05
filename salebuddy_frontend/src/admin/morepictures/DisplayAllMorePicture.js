@@ -39,7 +39,7 @@ export default function DisplayAllMorePictures() {
                     { title: 'Brand ', field: 'brandname' },
                     { title: 'Product ', field: 'productname' },
                     { title: 'IMEI', field: 'imei' },
-                    { title: 'Variant', render: (rowData) => <div>{rowData.productram}GB {rowData.productstorage}GB</div> },
+                    { title: 'Variant', render: (rowData) => <div>{rowData.productram} {rowData.productstorage}</div> },
                     {
                         title: 'Product Color', width: "20%", render: (rowData) => <div style={{ display: 'flex', alignItems: 'center' }}>
                             <div style={{ width: 20, height: 20, background: `${rowData.productcolor}`, borderRadius: '50%', border: '1px solid black', marginRight: 10, }} />

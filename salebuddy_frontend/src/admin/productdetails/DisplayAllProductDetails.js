@@ -125,7 +125,7 @@ export default function DisplayAllProducts() {
 
     const fillProductVarient = () => {
         return (productVarientList.map((item) => {
-            return <MenuItem value={item.productvarientid}>{item.productram}GB {item.productstorage}GB</MenuItem>
+            return <MenuItem value={item.productvarientid}>{item.productram} {item.productstorage}</MenuItem>
         }))
     }
     const handleChangeServiceId = (e) => {

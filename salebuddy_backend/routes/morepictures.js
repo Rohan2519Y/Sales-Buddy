@@ -23,7 +23,7 @@ router.post('/insert_morepictures',upload.any(),function(req,res,next){
 })
 router.get('/fetch_morepictures',function (req, res, next) {
     try {
-        pool.query("SELECT P.*, B.*, S.*, PC.*, PV.*, PD.*,MP.* FROM products P, brands B, services S, productcolors PC, productvarients PV, productdetails PD,morepicture MP WHERE S.serviceid = B.serviceid AND B.brandid = P.brandid AND P.productid = PC.productid AND P.productid = PV.productid AND PD.productdetailsid=MP.productdetailsid AND PC.productcolorid = PD.productcolorid;", function (error, result) {
+        pool.query("SELECT P.*, B.*, S.*, PC.*, PV.*, PD.*,MP.* FROM products P, brands B, services S, productcolors PC, productvarients PV, productdetails PD,morepicture MP where P.productid=PD.productid and B.brandid=PD.brandId and S.serviceid=PD.serviceid and PC.productcolorid=Pd.productcolorid  and PV.productvarientid=pd.productvarientid AND PD.productdetailsid=MP.productdetailsid;", function (error, result) {
             if (error) {
                 console.log(error)
                 res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
