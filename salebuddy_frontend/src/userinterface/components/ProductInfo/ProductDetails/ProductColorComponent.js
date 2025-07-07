@@ -20,7 +20,7 @@ export default function ProductColorComponent({ productid, color, defaultColor }
 
     const handleClick = async (color, id) => {
         setColorValue(color);
-        const response = await postData('userinterface/userinterface_fetch_productdetails_by_id_color', { productid, productcolorid: id })
+        const response = await postData('userinterface/userinterface_fetch_productdetails_by_id_color', { productid:productid, productcolorid: id })
         if (response.status) {
             navigate(`/mainproductinfocomponent/${response.data.productdetailsid}/${productid}`)
         } else {

@@ -65,7 +65,7 @@ export default function MainProductInfoComponent() {
     fetchProductRam()
     fetchProductStorage()
     fetchProductImages()
-  }, [])
+  }, [params])
 
   var data = [{
     productdetailid: 1, productname: 'SAMSUNG Galaxy S25 Ultra 5G (12GB RAM, 256GB, Titanium Silverblue)', storage: '128GB', color: 'Titanium Blue', ram: '12GB',
