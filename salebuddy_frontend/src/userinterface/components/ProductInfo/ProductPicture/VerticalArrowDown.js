@@ -11,7 +11,7 @@ export default function VerticalArrowDown({ VerticalArrow }) {
     const matches = useMediaQuery(theme.breakpoints.down('md'));
 
     return (<>
-        {matches ? <></> : <div onClick={handleBack} style={{ width: 'auto', height: '5%', cursor: 'pointer', display: 'flex',marginLeft:'12%'  }}>
+        {matches ? <></> : <div onClick={handleBack} style={{ width: 'auto', height: '100%', cursor: 'pointer', display: 'flex',marginLeft:'17%'  }}>
             <div style={{ display: 'flex', width: '100%'}}><KeyboardArrowDownIcon style={{ width: '100%', fontSize: '300%', color: 'white' }} /></div>
         </div>}
     </>)

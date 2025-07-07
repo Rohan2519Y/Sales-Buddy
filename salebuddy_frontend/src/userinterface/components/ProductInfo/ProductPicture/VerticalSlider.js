@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { serverURL } from "../../../../backendservices/FetchNodeServices";
+
 export default function VerticalSlider({ data, onImageClick }) {
 
     const theme = useTheme();
@@ -33,6 +34,7 @@ export default function VerticalSlider({ data, onImageClick }) {
     const [selectedImage, setSelectedImage] = useState(0)
     const [bgcolor, setBgcolor] = useState(null)
 
+
     const settings = {
         dots: matches ? true : false,
         infinite: true,
@@ -40,18 +42,9 @@ export default function VerticalSlider({ data, onImageClick }) {
         slidesToScroll: 1,
         vertical: matches ? false : true,
         verticalSwiping: matches ? false : true,
-        pauseOnHover: false,
         arrows: false,
         initialSlide: matches ? selectedImage : ''
     };
-    /* var data = {
-          id: 1,
-          images: 'https://res.cloudinary.com/dio6iadsq/image/upload/v1749891014/312580_0_u3lpmc_tngxpo.webp,https://res.cloudinary.com/dio6iadsq/video/upload/v1749891022/312580_pbzvd4_dbjpej.webm,https://res.cloudinary.com/dio6iadsq/image/upload/v1749891014/312580_1_l0zqyg_peivwc.webp,https://res.cloudinary.com/dio6iadsq/image/upload/v1749891014/312580_2_eul3kh_gq7cqw.webp,https://res.cloudinary.com/dio6iadsq/image/upload/v1749891014/312580_5_gmurvh_va7cpg.webp,https://res.cloudinary.com/dio6iadsq/image/upload/v1749891014/312580_6_tmvat3_hh87nc.webp,https://res.cloudinary.com/dio6iadsq/image/upload/v1749891014/312580_7_o5mbmj_d0y18u.webp,https://res.cloudinary.com/dio6iadsq/image/upload/v1749891014/312580_8_pxkcdr_wkjny9.webp'
-      }
-  
-      var images = data?.images?.split(',')
-  */
-    //alert(data.picture)
 
     var images = data?.picture?.split(',')
 
@@ -70,39 +63,48 @@ export default function VerticalSlider({ data, onImageClick }) {
         return images?.map((item, i) => {
             const isVideo = !!item && /\.(mp4|webm|ogg|mov|avi|flv|wmv|mkv|m4v|3gp)$/i.test(item);
             const isActive = selectedImage === i || bgcolor === i;
-
-            return matches ?
-                <div style={{ width: '100%', display: "flex", justifyContent: 'center', alignItems: 'center', }}>
-                    <div
-                        style={{ width: '100%', height: 400, display: "flex", justifyContent: 'center', alignItems: 'center', marginTop: '7%', borderRadius: 5, cursor: 'pointer', padding: 1 }}>
-                        {isVideo ? (<video controls src={`${serverURL}/images/${item}`} style={{ height: '100%', maxWidth: '95%' }} />
-                        ) : (<img src={`${serverURL}/images/${item}`} style={{ height: '100%', }} />)}
-                    </div>
-                </div>
-                :
-                <div style={{ width: '100%', height: 70, display: "flex", justifyContent: 'center', alignItems: 'center' }}>
-                    <div>
+            return (
+                matches ?
+                    <div style={{ width: '100%', display: "flex", justifyContent: 'center', alignItems: 'center', }}>
                         <div
-                            onMouseEnter={() => setBgcolor(i)}
-                            onMouseLeave={() => setBgcolor(null)}
-                            onClick={() => handleClick(item, i)}
-                            style={{ background: '#191919', width: 70, height: 70, display: "flex", justifyContent: 'center', alignItems: 'center', marginTop: '7%', borderRadius: 5, cursor: 'pointer', border: isActive ? '2px solid #00e9bf' : '1px solid #ffffff', padding: 1 }}>
-                            {isVideo ? (<div style={{ width: isActive ? '95%' : '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                <PlayCircleIcon style={{ color: '#12daa8', fontSize: '300%', width: '100%' }} />
-                            </div>
-                            ) : (<img src={`${serverURL}/images/${item}`} style={{ width: isActive ? '95%' : '100%', }} />)}
+                            style={{ width: '100%', height: 400, display: "flex", justifyContent: 'center', alignItems: 'center', marginTop: '7%', borderRadius: 5, cursor: 'pointer', padding: 1 }}>
+                            {isVideo ? (<video controls src={`${serverURL}/images/${item}`} style={{ height: '100%', maxWidth: '95%' }} />
+                            ) : (<img src={`${serverURL}/images/${item}`} style={{ height: '100%', }} />)}
                         </div>
                     </div>
-                </div >
-        })
-    }
+                    :
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'red' }}>
+                        {isVideo ? (
+                            <div
+                                onMouseEnter={() => setBgcolor(i)}
+                                onMouseLeave={() => setBgcolor(null)}
+                                onClick={() => handleClick(item, i)}
+                                style={{ width: isActive ? 77 : 79, height: isActive ? 77 : 79, display: 'flex', justifyContent: 'center', alignItems: 'center', border: isActive ? '2px solid #00e9bf' : '1px solid #ffffff', borderRadius: '4px', marginBottom: '2px' }}>
+                                <PlayCircleIcon style={{ color: '#12daa8', fontSize: '300%', width: '100%' }} />
+                            </div>
+                        ) : (
+                            <div
+                                onMouseEnter={() => setBgcolor(i)}
+                                onMouseLeave={() => setBgcolor(null)}
+                                onClick={() => handleClick(item, i)}
+                                style={{ width: isActive ? 77 : 79, height: isActive ? 77 : 79, objectFit: 'cover', border: isActive ? '2px solid #00e9bf' : '1px solid #ffffff', borderRadius: '4px', background: ' #191919', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '2px' }}>
+                                <img style={{ maxWidth: '90%', maxHeight: '90%' }} src={`${serverURL}/images/${item}`} />
+                            </div>
+                        )}
+                    </div>
+            );
+        });
+    };
+
 
     return (
-        <div style={{ position: 'relative', margin: 0, padding: 0, marginBottom: 30 }}>
+        <div style={{ width: '100%', height: 440, display: "flex", flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <div style={{ width: '100%', display: 'flex', }}><VerticalArrowUp VerticalArrow={ref} /></div>
-            <StyledSlider ref={ref} {...settings} style={{ width: '100%', height: '100%' }}>
-                {showImages()}
-            </StyledSlider>
+            <div style={{ width: '100%', flex: 1 }}>
+                <StyledSlider ref={ref} {...settings}>
+                    {showImages()}
+                </StyledSlider >
+            </div>
             <div style={{ width: '100%', display: 'flex', }}><VerticalArrowDown VerticalArrow={ref} /></div>
         </div>
     );
