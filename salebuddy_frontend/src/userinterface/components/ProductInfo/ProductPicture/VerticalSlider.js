@@ -25,6 +25,8 @@ export default function VerticalSlider({ data, onImageClick }) {
 
       .thumbnail:hover {
         border: 2px solid #00e9bf !important;
+        width:77px !important;
+        height:77px !important;
       }
     `;
 
@@ -37,9 +39,10 @@ export default function VerticalSlider({ data, onImageClick }) {
         slidesToShow: matches ? 1 : 4,
         slidesToScroll: 1,
         vertical: !matches,
-        initialSlide: selectedImage,
         arrows: false,
-    }), [matches, selectedImage])
+        focusOnSelect: false,
+        initialSlide: selectedImage
+    }), [matches,selectedImage])
 
     const images = data?.picture?.split(',') || [];
 
