@@ -79,7 +79,7 @@ export default function VerticalSlider({ data, onImageClick }) {
                         className="thumbnail"
                         style={{ width: isActive ? '77px' : '79px', height: isActive ? '77px' : '79px', display: 'flex', justifyContent: 'center', alignItems: 'center', border: isActive ? '2px solid #00e9bf' : '1px solid #ffffff', borderRadius: '4px', marginTop: '3px', cursor: 'pointer', background: '#191919' }}>
                         {isVideo ? (
-                            <PlayCircleIcon style={{ color: '#12daa8', fontSize: '300%', width: '100%' }} />
+                            <PlayCircleIcon style={{ color: ' #12daa8', fontSize: '300%', width: '100%' }} />
                         ) : (
                             <img style={{ maxWidth: '90%', maxHeight: '90%' }} src={`${serverURL}/images/${item}`} alt="" />
                         )}

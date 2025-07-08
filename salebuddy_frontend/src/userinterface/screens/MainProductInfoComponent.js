@@ -16,6 +16,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import ProductSpecializationComponent from "../components/ProductInfo/ProductSpecialization/ProductSpecializationComponent";
 import ProductOverviewComponent from "../components/ProductInfo/ProductSpecialization/ProductOverviewComponent";
+import AddToCartButton from "../components/Cart/AddToCartButton";
 export default function MainProductInfoComponent() {
 
   const theme = useTheme();
@@ -146,16 +147,17 @@ export default function MainProductInfoComponent() {
           <div style={{ width: matches ? '100%' : '17%', height: '100%' }}>
             <VerticalSlider data={productImages} onImageClick={setSelectedMedia} />
           </div>
-          {matches ? <></> : <div style={{ width: md ? '80%' : '60%', }}>
+          {matches ? <></> : <div style={{ width: md ? '80%' : '60%', display: 'flex', flexDirection: 'column' }}>
             <ProductPictureComponent media={selectedMedia} />
+            <AddToCartButton/>
           </div>}
         </div>
         <div style={{ display: 'flex', width: matches ? '100%' : '50%', height: '100%', flexDirection: 'column', overflowY: matches ? 'none' : 'auto', scrollbarWidth: 'none' }}>
           <ProductInfoComponent data={productData} />
           <ProductExchangeComponent />
-          <ProductColorComponent productid={params.productid} productdetailsid={params.productdetailsid} color={productColor} defaultColor={productData?.productcolorname} />
-          <ProductRamComponent productid={params.productid} productdetailsid={params.productdetailsid} ram={productRam} defaultRam={productData?.productram} />
-          <ProductStorageComponent productid={params.productid} productdetailsid={params.productdetailsid} storage={productStorage} defaultStorage={productData?.productstorage} />
+          <ProductColorComponent productid={params.productid} color={productColor} defaultColor={productData?.productcolorname} />
+          <ProductRamComponent productid={params.productid} ram={productRam} defaultRam={productData?.productram} />
+          <ProductStorageComponent productid={params.productid} storage={productStorage} defaultStorage={productData?.productstorage} />
           <KeyfeatureComponent data={productData?.description} />
         </div>
       </div>

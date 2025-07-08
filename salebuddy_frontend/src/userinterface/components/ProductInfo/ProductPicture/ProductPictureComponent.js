@@ -7,19 +7,21 @@ export default function ProductPictureComponent({ media }) {
   const isVideo = !!media && /\.(mp4|webm|ogg|mov|avi|flv|wmv|mkv|m4v|3gp)$/i.test(media);
 
   return (
-    <div style={{ width: '100%', height: '80%', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-      <div style={{ width: '90%', height: '60%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
+    <div style={{ width: '100%', height: 'auto', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+      <div style={{ width: '90%', height: 400, display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
         <div style={{ fontSize: '170%', color: 'white', position: 'absolute', right: '1%', top: '1%', cursor: 'pointer', display: 'flex' }}>
           <FavoriteBorderIcon style={{ marginRight: 20 }} />
           <ShareIcon />
         </div>
-        {isVideo ? (
-          <video src={`${serverURL}/images/${media}`} controls style={{ maxWidth: '90%', maxHeight: '90%' }} />
-        ) : (
-          <img src={`${serverURL}/images/${media}`} style={{ maxWidth: '90%', maxHeight: '90%', objectFit: 'contain' }} />
-        )}
+        <div style={{marginTop:'15%',display:'flex',width:'100%',justifyContent:'center'}}>
+          {isVideo ? (
+            <video src={`${serverURL}/images/${media}`} controls style={{ maxWidth: '100%', maxHeight: '70%' }} />
+          ) : (
+            <img src={`${serverURL}/images/${media}`} style={{ maxWidth: '80%', maxHeight: '70%' }} />
+          )}
+        </div>
       </div>
-      <hr style={{ width: '80%', height: '0.01%' }} /> 
+      <hr style={{ width: '90%', height: '0.01%' }} />
     </div>
   );
 }
