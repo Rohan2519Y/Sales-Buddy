@@ -13,13 +13,13 @@ export default function ShowProductCart() {
 
 
     var data = [{
-        productdetailid: 1, productname: 'SAMSUNG Galaxy S25 Ultra 5G (12GB RAM, 256GB, Titanium Silverblue)', storage: '256GB', color: 'Titanium Blue', ram: '12GB',
-        image: 'https://res.cloudinary.com/dio6iadsq/image/upload/v1748778565/s25_ultra_e1hcpg.png', ratings: 4, price: 78000.00,
+        productdetailid: 1, productname: 'SAMSUNG Galaxy S25 Ultra 5G', productstorage: '256GB', productcolorname: 'Titanium Blue', productram: '12GB',
+        picture: 'https://res.cloudinary.com/dio6iadsq/image/upload/v1748778565/s25_ultra_e1hcpg.png', ratings: 4, price: 78000.00,
         delivery: 'Standard Delivery by 1 July 2025 | Free', offerapply: 'Buy & Get Rs.2010 off (Discount auto applied in cart) Offer Applied'
     },
     {
-        productdetailid: 1, productname: 'SAMSUNG Galaxy Z6 (12GB RAM, 128GB, Titanium Silverblack)', storage: '128GB', color: 'Titanium Blue', ram: '12GB',
-        image: 'https://res.cloudinary.com/dio6iadsq/image/upload/v1748778280/sam_z6_v6ubdl.png', ratings: 3.6, price: 88000.00, offerprice: 80000.00,
+        productdetailid: 1, productname: 'SAMSUNG Galaxy Z6', productstorage: '128GB', productcolorname: 'Titanium Blue', productram: '12GB',
+        picture: 'https://res.cloudinary.com/dio6iadsq/image/upload/v1748778280/sam_z6_v6ubdl.png', ratings: 3.6, price: 88000.00, offerprice: 80000.00,
         delivery: 'Standard Delivery by 1 July 2025 | Free'
     }]
 
