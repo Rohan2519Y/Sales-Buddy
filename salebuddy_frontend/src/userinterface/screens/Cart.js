@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import { useState } from "react";
 
 export default function Cart() {
 
@@ -14,6 +15,8 @@ export default function Cart() {
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
+
+    const [total,setTotal]=useState(0)
 
     return (<>
         <div style={{ width: '100%', height: '100%', background: ' #f9f9f9', fontFamily: '"Inter", sans-serif' }}>
@@ -26,10 +29,10 @@ export default function Cart() {
             <div style={{ width: '100%', minHeight: 500, display: 'flex', flexDirection: matches ? 'column' : '' }}>
                 <div style={{ width: md ? '100%' : '65%', display: 'flex', flexDirection: 'column' }}>
                     <div><ApplyCoupon /></div>
-                    <div><ShowProductCart /></div>
+                    <div><ShowProductCart setTotal={setTotal}/></div>
                 </div>
                 <div style={{ width: '35%',  }}>
-                    <OrderSummary />
+                    <OrderSummary total={total} />
                 </div>
             </div>
             <div>

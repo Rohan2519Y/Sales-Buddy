@@ -3,7 +3,7 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-export default function OrderSummary() {
+export default function OrderSummary({total}) {
 
     const theme = useTheme();
     const md = useMediaQuery('(max-width:1200px)');
@@ -23,7 +23,7 @@ export default function OrderSummary() {
                         Order Summary ( 2 items )
                     </div>
                     <div style={{ width: '100%', height: 45, display: 'flex', alignItems: 'center', justifyContent: 'space-between',fontSize: md?'1.65vw':'' }}>
-                        <div>Original Price</div><div>{'\u20B9'} 147,000.00</div>
+                        <div>Original Price</div><div>{'\u20B9'} {total}</div>
                     </div>
                     <div style={{ width: '100%', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
                         <div style={{ display: 'flex', width: '100%' }}>
@@ -49,7 +49,7 @@ export default function OrderSummary() {
                             </div>) : (<></>)}
                     </div>
                     <div style={{ width: '100%', height: 45, display: 'flex', alignItems: 'center', justifyContent: 'space-between',fontSize: md?'1.65vw':'' }}>
-                        <div>Total</div><div>{'\u20B9'} 142,980.00</div>
+                        <div>Total</div><div>{'\u20B9'} {total}</div>
                     </div>
                     <div style={{ width: '100%', height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <div onMouseEnter={() => { setColor(' #00b594') }} onMouseLeave={() => { setColor(' #00e9bf') }} style={{ width: '100%', height: '70%', background: color, display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 10, fontSize: '80%', fontWeight: 600, cursor: 'pointer' }}>Checkout</div>

@@ -1,8 +1,9 @@
 import ProductCart from "./ProductCart"
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import { useEffect } from "react";
 
-export default function ShowProductCart() {
+export default function ShowProductCart({ setTotal }) {
 
     const theme = useTheme();
     const md = useMediaQuery('(max-width:1200px)');
@@ -23,10 +24,19 @@ export default function ShowProductCart() {
         delivery: 'Standard Delivery by 1 July 2025 | Free'
     }]
 
+    useEffect(() => {
+        var total = 0
+        data.map(item => {
+            const price = parseInt(item.offerprice) || parseInt(item.price);
+            total = total + price
+        })
+        setTotal(total);
+    }, [data, setTotal]);
+
     return (<>
-        <div style={{ display: 'flex', width: '100%', alignItems: matches?'center':'flex-end', flexDirection: 'column' }}>
+        <div style={{ display: 'flex', width: '100%', alignItems: matches ? 'center' : 'flex-end', flexDirection: 'column' }}>
             {data.map((item) => (
-                <div style={{ width:md?'95%': '80%', height: 280, background: ' #ffffff', marginBottom: 30, display: 'flex', alignItems: 'center' }}>
+                <div style={{ width: md ? '95%' : '80%', height: 280, background: ' #ffffff', marginBottom: 30, display: 'flex', alignItems: 'center' }}>
                     <ProductCart item={item} />
                 </div>
             ))}
