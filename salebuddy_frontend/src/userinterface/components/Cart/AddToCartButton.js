@@ -1,10 +1,37 @@
 import { Button } from "@mui/material";
+import { useState } from "react";
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
-export default function AddToCartButton() {
+export default function AddToCartButton(props) {
+
+    const [value, setValue] = useState(0)
+    const handlePlus = () => {
+        var v = value
+        v++
+        setValue(v)
+        props.onchange(v)
+    }
+     const handleMinas = () => {
+        var v = value
+        v--
+        setValue(v)
+        props.onchange(v)
+    }
     return (<>
         <div style={{ width: '100%', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
             <Button style={{ background: ' #00e9bf', width: '35%', color: ' #000000', borderRadius: 5, fontSize: '85%', fontWeight: 700, height: '70%' }}>Buy Now</Button>
-            <Button style={{ background: ' #353535', width: '35%', color: ' #ffffff', borderRadius: 5, fontSize: '85%', fontWeight: 700, height: '70%' }}>Add To Cart</Button>
+            {value == 0 ?
+                <Button onClick={handlePlus} style={{ background: ' #353535', width: '35%', color: ' #ffffff', borderRadius: 5, fontSize: '85%', fontWeight: 700, height: '70%' }}>Add To Cart</Button>
+                : <>
+                    <div style={{ width: '35%', height: '70%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <div style={{ width: '80%', height: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <div onClick={handlePlus} style={{ width: 35, height: 35, border: '2px solid #ffffff', borderRadius: '100%', color: ' #ffffff', fontSize: '110%', display: 'flex', justifyContent: 'center', alignItems: 'center',cursor:'pointer' }}><AddIcon /></div>
+                            <div style={{ height: '100%', color: ' #ffffff', fontWeight: 600, fontSize: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>{value}</div>
+                            <div onClick={handleMinas} style={{ width: 35, height: 35, border: '2px solid #ffffff', borderRadius: '100%', color: ' #ffffff', fontSize: '110%', display: 'flex', justifyContent: 'center', alignItems: 'center',cursor:'pointer' }}><RemoveIcon /></div>
+                        </div>
+                    </div>
+                </>}
         </div>
     </>)
 }

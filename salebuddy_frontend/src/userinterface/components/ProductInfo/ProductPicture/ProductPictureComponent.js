@@ -8,7 +8,7 @@ export default function ProductPictureComponent({ media }) {
 
   return (
     <div style={{ width: '100%', height: 'auto', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-      <div style={{ width: '90%', height: 400, display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
+      <div style={{ width: '90%', height: 450, display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
         <div style={{ fontSize: '170%', color: 'white', position: 'absolute', right: '1%', top: '1%', cursor: 'pointer', display: 'flex' }}>
           <FavoriteBorderIcon style={{ marginRight: 20 }} />
           <ShareIcon />

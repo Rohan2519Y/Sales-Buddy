@@ -6,14 +6,18 @@ import Menu from "./Menu"
 import Search from "./SearchBar"
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import { useSelector } from 'react-redux';
+import { Badge } from '@mui/material';
 export default function Header() {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'));
+    const product = useSelector((state) => state.cart)
+    const keys = Object.keys(product)
     return (<>
-        <div style={{boxSizing:'border-box',padding:5, width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center', height:matches?'auto': '9vh', background: '#000', boxShadow: '0 5px 15px rgba(0, 0, 0, 0.3)' }}>
-            <div style={{display:'flex',alignItems:'center',justifyContent:'space-evenly',flexDirection:'row',width:'100%'}}>
+        <div style={{ boxSizing: 'border-box', padding: 5, width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center', height: matches ? 'auto' : '9vh', background: '#000', boxShadow: '0 5px 15px rgba(0, 0, 0, 0.3)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', flexDirection: 'row', width: '100%' }}>
                 <Menu />
-                <div style={{ color: 'white', width: "15%", display: 'flex', alignItems: 'center', fontSize: 22, flexGrow: 1 }}><div style={{ marginRight: '40%', fontSize: matches?25:30 }}>SalesBuddy</div></div>
+                <div style={{ color: 'white', width: "15%", display: 'flex', alignItems: 'center', fontSize: 22, flexGrow: 1 }}><div style={{ marginRight: '40%', fontSize: matches ? 25 : 30 }}>SalesBuddy</div></div>
                 {matches ? <></> : <Search />}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '24%' }}>
                     {matches ? <></> : <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 2 }}>
@@ -23,7 +27,9 @@ export default function Header() {
                     </div>}
                     <div style={{ marginLeft: matches ? 'auto' : 0, marginRight: 10 }}>
                         <PersonIcon style={{ color: 'white', fontSize: 20, margin: '0 5 0 5' }} />
-                        <ShoppingCartIcon style={{ color: 'white', fontSize: 20, margin: '0 5 0 5' }} />
+                        <Badge badgeContent={keys.length} color="primary" style={{ marginTop:-10}}>
+                            <ShoppingCartIcon style={{ color: 'white', fontSize: 20,margin: '0 5 0 5' }} />
+                        </Badge>
                     </div>
                 </div>
             </div>

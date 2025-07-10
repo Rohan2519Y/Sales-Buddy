@@ -42,7 +42,7 @@ export default function VerticalSlider({ data, onImageClick }) {
         arrows: false,
         focusOnSelect: false,
         initialSlide: selectedImage
-    }), [matches,selectedImage])
+    }), [matches, selectedImage])
 
     const images = data?.picture?.split(',') || [];
 
@@ -77,7 +77,7 @@ export default function VerticalSlider({ data, onImageClick }) {
                     <div
                         onClick={() => handleClick(item, i)}
                         className="thumbnail"
-                        style={{ width: isActive ? '77px' : '79px', height: isActive ? '77px' : '79px', display: 'flex', justifyContent: 'center', alignItems: 'center', border: isActive ? '2px solid #00e9bf' : '1px solid #ffffff', borderRadius: '4px', marginTop: '3px', cursor: 'pointer', background: '#191919' }}>
+                        style={{ width: isActive ? '77px' : '79px', height: isActive ? '77px' : '79px', display: 'flex', justifyContent: 'center', alignItems: 'center', border: isActive ? '2px solid #00e9bf' : '1px solid #ffffff', borderRadius: '4px', marginBottom: '7px', cursor: 'pointer', background: '#191919' }}>
                         {isVideo ? (
                             <PlayCircleIcon style={{ color: ' #12daa8', fontSize: '300%', width: '100%' }} />
                         ) : (
@@ -90,7 +90,7 @@ export default function VerticalSlider({ data, onImageClick }) {
     }
 
     return (
-        <div style={{ width: '100%', height: 435, display: "flex", flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginBottom: 30 }}>
+        <div style={{ width: '100%', height: 435, display: "flex", flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginBottom: 50 }}>
             <div style={{ width: '100%', display: 'flex' }}>
                 <VerticalArrowUp VerticalArrow={ref} />
             </div>

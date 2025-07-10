@@ -17,6 +17,7 @@ import { useTheme } from '@mui/material/styles';
 import ProductSpecializationComponent from "../components/ProductInfo/ProductSpecialization/ProductSpecializationComponent";
 import ProductOverviewComponent from "../components/ProductInfo/ProductSpecialization/ProductOverviewComponent";
 import AddToCartButton from "../components/Cart/AddToCartButton";
+import { useDispatch } from "react-redux";
 export default function MainProductInfoComponent() {
 
   const theme = useTheme();
@@ -27,8 +28,10 @@ export default function MainProductInfoComponent() {
   const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
 
   const [selectedMedia, setSelectedMedia] = useState(null);
+  const [refresh,setRefresh]=useState(false)
 
   const params = useParams()
+  const dispatch=useDispatch()
 
   const [productData, setProductData] = useState({})
   const fetchProductDetails = async () => {
@@ -134,6 +137,15 @@ export default function MainProductInfoComponent() {
       description: "With 10 portrait styles and Multi-Styles Night Filters, you can unleash your creativity and capture unique, artistic photos. You can also explore innovative night modes for stunning night scenes with a single tap."
     }
   ]
+
+  
+  const handleQtyChange = (v) => {
+    var data = productData
+    data['qty'] = v
+    dispatch({type:'ADD_CART',payload:[data.productdetailsid,data]})
+    setRefresh(!refresh)
+  }
+
   return (<>
     <div style={{ width: '100%', height: '100%', background: ' #191919', fontFamily: '"Inter", sans-serif', display: 'flex', flexDirection: 'column', overflowX: 'hidden' }}>
       <div>
@@ -149,7 +161,7 @@ export default function MainProductInfoComponent() {
           </div>
           {matches ? <></> : <div style={{ width: md ? '80%' : '60%', display: 'flex', flexDirection: 'column' }}>
             <ProductPictureComponent media={selectedMedia} />
-            <AddToCartButton/>
+            <AddToCartButton onchange={handleQtyChange} />
           </div>}
         </div>
         <div style={{ display: 'flex', width: matches ? '100%' : '50%', height: '100%', flexDirection: 'column', overflowY: matches ? 'none' : 'auto', scrollbarWidth: 'none' }}>
