@@ -49,7 +49,7 @@ export default function OTPComponent({ open = true, onClose = () => { } }) {
                         ) :
                             (`Resend OTP in 00:${seconds.toString().padStart(2, '0')}`)}
                     </div>
-                    <Button disabled style={{ width: '90%', height: '17%', display: 'flex', justifyContent: 'center', alignItems: 'center', background: ' #353535', borderRadius: 10, color: ' #a1a1a1', fontSize: '90%', fontWeight: 600 }}>Submit OTP</Button>
+                    <Button disabled={otp.length != 4} style={{ width: '90%', height: '17%', display: 'flex', justifyContent: 'center', alignItems: 'center', background: ' #353535', borderRadius: 10, color: ' #a1a1a1', fontSize: '90%', fontWeight: 600 }}>Submit OTP</Button>
                 </div>
             </div>
         </Dialog>
