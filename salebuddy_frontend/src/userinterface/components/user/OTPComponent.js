@@ -42,7 +42,7 @@ export default function OTPComponent({ open = true, onClose = () => { } }) {
                             numInputs={4}
                             renderSeparator={<span style={{ margin: '0 8px' }}> </span>}
                             renderInput={(props) => (
-                                <input 
+                                <input  
                                     {...props}
                                     style={{
                                         width: '50px',
