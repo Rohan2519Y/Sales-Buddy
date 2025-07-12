@@ -75,8 +75,7 @@ export default function VerticalSlider({ data, onImageClick }) {
             ) : (
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <div
-                        onClick={() => handleClick(item, i)}
-                        className="thumbnail"
+                        onClick={() => handleClick(item, i)} className="thumbnail"
                         style={{ width: isActive ? '77px' : '79px', height: isActive ? '77px' : '79px', display: 'flex', justifyContent: 'center', alignItems: 'center', border: isActive ? '2px solid #00e9bf' : '1px solid #ffffff', borderRadius: '4px', marginBottom: '7px', cursor: 'pointer', background: '#191919' }}>
                         {isVideo ? (
                             <PlayCircleIcon style={{ color: ' #12daa8', fontSize: '300%', width: '100%' }} />
