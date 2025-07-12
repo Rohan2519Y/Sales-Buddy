@@ -2,23 +2,25 @@ import SignIn from "./admin/admin_login/SignIn"
 import Dashboard from "./admin/admin_login/Dashboard"
 import Home from "./userinterface/screens/Home"
 import ProductList from "./userinterface/screens/ProductList";
-import {BrowserRouter as Router,Routes,Route} from "react-router";
+import { BrowserRouter as Router, Routes, Route } from "react-router";
 import MainProductInfoComponent from "./userinterface/screens/MainProductInfoComponent";
 import Cart from "./userinterface/screens/Cart";
 import UserLogin from "./userinterface/components/user/UserLogin"
 import OTPComponent from "./userinterface/components/user/OTPComponent";
+import ProfilePage from "./userinterface/screens/ProfilePage";
 function App() {
   return (
-    <div style={{fontFamily:'Quicksand'}}>
+    <div style={{ fontFamily: 'Quicksand' }}>
       <Router>
         <Routes>
-          <Route element={<SignIn/>} path="/signin"/>
-          <Route element={<Dashboard/>} path="/dashboard/*"/>
-          <Route element={<ProductList/>} path="/productlist"/>
-          <Route element={<MainProductInfoComponent/>} path="/mainproductinfocomponent/:productdetailsid/:productid"/>
-          <Route element={<Cart/>} path="/cart"/>
-          <Route element={<Home/>} path="/"/>
+          <Route element={<SignIn />} path="/signin" />
+          <Route element={<Dashboard />} path="/dashboard/*" />
+          <Route element={<ProductList />} path="/productlist" />
+          <Route element={<MainProductInfoComponent />} path="/mainproductinfocomponent/:productdetailsid/:productid" />
+          <Route element={<Cart />} path="/cart" />
+          <Route element={<Home />} path="/" />
           <Route element={<OTPComponent />} path="/login" />
+          <Route element={<ProfilePage />} path="/profilepage" />
         </Routes>
       </Router>
     </div>
