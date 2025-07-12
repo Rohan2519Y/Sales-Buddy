@@ -1,7 +1,5 @@
 import { Button, Dialog } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import { useState, useEffect } from "react";
 import OtpInput from 'react-otp-input';
 
@@ -42,21 +40,8 @@ export default function OTPComponent({ open = true, onClose = () => { } }) {
                             numInputs={4}
                             renderSeparator={<span style={{ margin: '0 8px' }}> </span>}
                             renderInput={(props) => (
-                                <input  
-                                    {...props}
-                                    style={{
-                                        width: '50px',
-                                        height: '50px',
-                                        background: ' #191919',
-                                        textAlign: 'center',
-                                        fontSize: '120%',
-                                        border: '1px solid #ccc',
-                                        borderRadius: '4px',
-                                        color: ' #ffffff'
-                                    }}
-                                />
-                            )}
-                        />
+                                <input {...props} style={{ width: '50px', height: '50px', background: ' #191919', textAlign: 'center', fontSize: '120%', border: '1px solid #ccc', borderRadius: '4px', color: ' #ffffff' }} />
+                            )} />
                     </div>
                     <div style={{ width: '100%', height: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '100%', fontWeight: 600, color: ' #ffffff' }}>
                         {seconds == 0 ? (
