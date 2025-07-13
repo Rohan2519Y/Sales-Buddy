@@ -15,7 +15,7 @@ export default function ProfilePage() {
     const sm = useMediaQuery('(max-width:700px)');
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
-    const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
+    const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)')
 
     return (<>
         <div style={{ width: '100%', height: '100%', background: ' #191919', fontFamily: '"Inter", sans-serif' }}>
