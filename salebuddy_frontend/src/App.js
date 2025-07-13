@@ -19,7 +19,7 @@ function App() {
           <Route element={<MainProductInfoComponent />} path="/mainproductinfocomponent/:productdetailsid/:productid" />
           <Route element={<Cart />} path="/cart" />
           <Route element={<Home />} path="/" />
-          <Route element={<OTPComponent />} path="/login" />
+          <Route element={<UserLogin />} path="/login" />
           <Route element={<ProfilePage />} path="/profilepage" />
         </Routes>
       </Router>
