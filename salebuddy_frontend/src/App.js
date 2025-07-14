@@ -7,7 +7,7 @@ import MainProductInfoComponent from "./userinterface/screens/MainProductInfoCom
 import Cart from "./userinterface/screens/Cart";
 import UserLogin from "./userinterface/components/user/UserLogin"
 import OTPComponent from "./userinterface/components/user/OTPComponent";
-import ProfilePage from "./userinterface/screens/ProfilePage";
+import Profile from "./userinterface/screens/Profile";
 function App() {
   return (
     <div style={{ fontFamily: 'Quicksand' }}>
@@ -19,8 +19,8 @@ function App() {
           <Route element={<MainProductInfoComponent />} path="/mainproductinfocomponent/:productdetailsid/:productid" />
           <Route element={<Cart />} path="/cart" />
           <Route element={<Home />} path="/" />
-          <Route element={<UserLogin />} path="/login" />
-          <Route element={<ProfilePage />} path="/profilepage" />
+          <Route element={<UserLogin />} path="/loginn" />
+          <Route element={<Profile />} path="/login" />
         </Routes>
       </Router>
     </div>

@@ -4,8 +4,9 @@ import DoneIcon from '@mui/icons-material/Done';
 import { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-
-export default function ProductCart({ item }) {
+import {serverURL} from '../../../backendservices/FetchNodeServices'
+import { useDispatch } from 'react-redux';
+export default function ProductCart({ item ,refresh,setRefresh}) {
 
     const theme = useTheme();
     const md = useMediaQuery('(max-width:1200px)');
@@ -14,19 +15,23 @@ export default function ProductCart({ item }) {
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
 
-
     const [color, setColor] = useState(false)
     const [rcolor, setRcolor] = useState(false)
 
+    var dispatch=useDispatch()
+    const handleRemove=(item)=>{
+        dispatch({type:'DEL_CART',payload:[item.productdetailsid]})
+        setRefresh(!refresh)
+    }
     var discount = item?.price - item?.offerprice
-    var percent = (discount / item?.price) * 100;
+    var percent = (discount / item?.price) * 100
 
     return (<>
         {matches ? <>
             <div style={{ width: '100%', height: '100%', }}>
                 <div style={{ width: '100%', height: '75%', display: 'flex' }}>
                     <div style={{ width: '40%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
-                        <img src={item?.picture} style={{ maxWidth: '90%', maxHeight: '100%' }} />
+                        <img src={`${serverURL}/images/${item?.picture}`} style={{ maxWidth: '90%', maxHeight: '100%' }} />
                     </div>
                     <div style={{ width: '60%', height: '100%', display: 'flex', flexDirection: 'column' }}>
                         <div style={{ width: '100%', height: 40, fontSize: '100%', fontWeight: 550, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', textOverflow: 'ellipsis', }}>{item?.productname} ({item?.productram} RAM, {item?.productstorage} Storage) {item?.productcolorname}</div>
@@ -58,7 +63,7 @@ export default function ProductCart({ item }) {
                         <div style={{ width: '100%', height: 25, fontSize: '70%', display: 'flex', alignItems: 'center' }}>{item?.delivery}</div>
                         <div style={{ width: '100%', height: 70, display: 'flex', alignItems: 'center' }}>
                             <div onMouseEnter={() => { setColor(true) }} onMouseLeave={() => { setColor(false) }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', border: '1px solid ', borderColor: color ? ' #00e9bf' : ' #000000', borderRadius: 10, boxSizing: 'border-box', cursor: 'pointer', marginRight: 10 }}><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: 15, marginLeft: 15, marginTop: 15, marginBottom: 15, fontSize: '75%', fontWeight: 600 }}>Move To Whislist</div></div>
-                            <div onMouseEnter={() => { setRcolor(true) }} onMouseLeave={() => { setRcolor(false) }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', border: '1px solid ', borderColor: rcolor ? ' #00e9bf' : ' #000000', borderRadius: 10, boxSizing: 'border-box', cursor: 'pointer' }}><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: 15, marginLeft: 15, marginTop: 15, marginBottom: 15, fontSize: '80%', fontWeight: 600 }}>Remove</div></div>
+                            <div onMouseEnter={() => { setRcolor(true) }} onMouseLeave={() => { setRcolor(false) }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', border: '1px solid ', borderColor: rcolor ? ' #00e9bf' : ' #000000', borderRadius: 10, boxSizing: 'border-box', cursor: 'pointer' }}><div  style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: 15, marginLeft: 15, marginTop: 15, marginBottom: 15, fontSize: '80%', fontWeight: 600 }} onClick={()=>handleRemove(item)}>Remove</div></div>
                         </div>
                     </div>
                 </div>
@@ -75,7 +80,7 @@ export default function ProductCart({ item }) {
             <div style={{ width: '100%', height: '80%', display: 'flex' }}>
                 <div style={{ width: '23%', height: '100%', }}>
                     <div style={{ width: '100%', height: '60%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <img src={item?.picture} style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                        <img src={`${serverURL}/images/${item?.picture}`} style={{ maxWidth: '100%', maxHeight: '100%' }} />
                     </div>
                 </div>
                 <div style={{ width: '77%', height: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -88,7 +93,7 @@ export default function ProductCart({ item }) {
                             <div style={{ width: '50%', height: 35, fontSize: '85%', }}>{item?.delivery}</div>
                             <div style={{ width: '100%', height: 60, display: 'flex', alignItems: 'center' }}>
                                 <div onMouseEnter={() => { setColor(true) }} onMouseLeave={() => { setColor(false) }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', border: '1px solid ', borderColor: color ? ' #00e9bf' : ' #000000', borderRadius: 10, boxSizing: 'border-box', cursor: 'pointer', marginRight: 15 }}><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: md ? 25 : 30, marginLeft: md ? 25 : 30, marginTop: 7, marginBottom: 7, fontSize: '85%', fontWeight: 600 }}>Move To Whislist</div></div>
-                                <div onMouseEnter={() => { setRcolor(true) }} onMouseLeave={() => { setRcolor(false) }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', border: '1px solid ', borderColor: rcolor ? ' #00e9bf' : ' #000000', borderRadius: 10, boxSizing: 'border-box', cursor: 'pointer' }}><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: md ? 25 : 30, marginLeft: md ? 25 : 30, marginTop: 7, marginBottom: 7, fontSize: '85%', fontWeight: 600 }}>Remove</div></div>
+                                <div onMouseEnter={() => { setRcolor(true) }} onMouseLeave={() => { setRcolor(false) }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', border: '1px solid ', borderColor: rcolor ? ' #00e9bf' : ' #000000', borderRadius: 10, boxSizing: 'border-box', cursor: 'pointer' }}><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: md ? 25 : 30, marginLeft: md ? 25 : 30, marginTop: 7, marginBottom: 7, fontSize: '85%', fontWeight: 600 }} onClick={()=>handleRemove(item)}>Remove</div></div>
                             </div>
                         </div>
                         <div style={{ width: '40%', height: '100%', display: 'flex', }}>

@@ -3,7 +3,7 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-export default function OrderSummary({total}) {
+export default function OrderSummary({ productData }) {
 
     const theme = useTheme();
     const md = useMediaQuery('(max-width:1200px)');
@@ -14,42 +14,54 @@ export default function OrderSummary({total}) {
 
     const [discount, setDiscount] = useState(false)
     const [color, setColor] = useState(' #00e9bf')
+    
+    var totalAmount = productData.reduce((p1, p2) => {
+        var amt = p2.price * p2.qty
+        return p1 + amt
+    }, 0)
+    
+    var totalSaving = productData.reduce((p1, p2) => {
+        var amt = p2.offerprice == 0 ? 0 : (p2.price - p2.offerprice) * p2.qty
+        return p1 + amt
+    }, 0)
+
+    var netAmount = totalAmount - totalSaving
 
     return (<>
-        <div style={{ width: '100%', position:'sticky',top:50}}>
-            <div style={{ width: md ? '95%' : '65%', minHeight: discount ? 315 : 260, marginLeft: matches?'':15, borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center', background: ' #ffffff',marginBottom:30 }}>
+        <div style={{ width: '100%', position: 'sticky', top: 50 }}>
+            <div style={{ width: md ? '95%' : '65%', minHeight: discount ? 315 : 260, marginLeft: matches ? '' : 15, borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center', background: ' #ffffff', marginBottom: 30 }}>
                 <div style={{ width: '90%', height: '85%', }}>
-                    <div style={{ width: '100%', height: 35, fontSize: md?'1.65vw':'120%', fontWeight: 700, }}>
+                    <div style={{ width: '100%', height: 35, fontSize: md ? '1.65vw' : '120%', fontWeight: 700, }}>
                         Order Summary ( 2 items )
                     </div>
-                    <div style={{ width: '100%', height: 45, display: 'flex', alignItems: 'center', justifyContent: 'space-between',fontSize: md?'1.65vw':'' }}>
-                        <div>Original Price</div><div>{'\u20B9'} {total}</div>
+                    <div style={{ width: '100%', height: 45, display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: md ? '1.65vw' : '' }}>
+                        <div>Original Price</div><div>{'\u20B9'} {totalAmount}</div>
                     </div>
                     <div style={{ width: '100%', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
                         <div style={{ display: 'flex', width: '100%' }}>
-                            <div style={{ height: 45, display: 'flex', alignItems: 'center',fontSize: md?'1.65vw':'' }}>Savings</div>
+                            <div style={{ height: 45, display: 'flex', alignItems: 'center', fontSize: md ? '1.65vw' : '' }}>Savings</div>
                             {discount ?
                                 (<div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', flexDirection: 'column' }}>
-                                    <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', height: 45, alignItems: 'center' }}>< RemoveCircleIcon onClick={() => setDiscount(false)} style={{ fontSize: '105%', marginLeft: 5, color: ' #088466' }} /> <div style={{fontSize: md?'1.65vw':''}}>{'\u20B9'} 4,020.00</div></div>
+                                    <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', height: 45, alignItems: 'center' }}>< RemoveCircleIcon onClick={() => setDiscount(false)} style={{ fontSize: '105%', marginLeft: 5, color: ' #088466' }} /> <div style={{ fontSize: md ? '1.65vw' : '' }}>{'\u20B9'} {totalSaving}</div></div>
 
                                 </div>) :
-                                (<div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', height: 45, alignItems: 'center' }}><AddCircleIcon onClick={() => setDiscount(true)} style={{ fontSize: '105%', marginLeft: 5, color: ' #088466' }} /> <div style={{fontSize: md?'1.65vw':''}}>{'\u20B9'} 4,020.00</div></div>)}
+                                (<div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', height: 45, alignItems: 'center' }}><AddCircleIcon onClick={() => setDiscount(true)} style={{ fontSize: '105%', marginLeft: 5, color: ' #088466' }} /> <div style={{ fontSize: md ? '1.65vw' : '' }}>{'\u20B9'} {totalSaving}</div></div>)}
                         </div>
                         {discount ? (
                             <div style={{ display: 'flex', width: '100%', flexDirection: 'column', alignItems: 'center' }}>
                                 <div style={{ width: '100%', height: 0.5, background: ' #000000' }}></div>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '90%', height: 30 }}>
-                                    <div style={{ display: 'flex', justifyContent: 'center', alignitem: 'center', fontSize: md?'1.25vw':'80%' }}>Discount on MRP</div> <div style={{ display: 'flex', justifyContent: 'center', alignitem: 'center', fontSize:md?'1.25vw': '80%' }}>{'\u20B9'} 4,020.00</div>
+                                    <div style={{ display: 'flex', justifyContent: 'center', alignitem: 'center', fontSize: md ? '1.25vw' : '80%' }}>Discount on MRP</div> <div style={{ display: 'flex', justifyContent: 'center', alignitem: 'center', fontSize: md ? '1.25vw' : '80%' }}>{'\u20B9'} {totalSaving}</div>
                                 </div>
                                 <div style={{ width: '100%', height: 0.5, background: ' #000000' }}></div>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '90%', height: 30 }}>
-                                    <div style={{ display: 'flex', justifyContent: 'center', alignitem: 'center', fontSize: md?'1.25vw':'80%' }}>Coupon Discount</div> <div style={{ display: 'flex', justifyContent: 'center', alignitem: 'center', fontSize:md?'1.25vw': '80%' }}>{'\u20B9'} 4,020.00</div>
+                                    <div style={{ display: 'flex', justifyContent: 'center', alignitem: 'center', fontSize: md ? '1.25vw' : '80%' }}>Coupon Discount</div> <div style={{ display: 'flex', justifyContent: 'center', alignitem: 'center', fontSize: md ? '1.25vw' : '80%' }}>{'\u20B9'} 0</div>
                                 </div>
                                 <div style={{ width: '100%', height: 0.5, background: ' #000000' }}></div>
                             </div>) : (<></>)}
                     </div>
-                    <div style={{ width: '100%', height: 45, display: 'flex', alignItems: 'center', justifyContent: 'space-between',fontSize: md?'1.65vw':'' }}>
-                        <div>Total</div><div>{'\u20B9'} {total}</div>
+                    <div style={{ width: '100%', height: 45, display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: md ? '1.65vw' : '' }}>
+                        <div>Total</div><div>{'\u20B9'} {netAmount}</div>
                     </div>
                     <div style={{ width: '100%', height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <div onMouseEnter={() => { setColor(' #00b594') }} onMouseLeave={() => { setColor(' #00e9bf') }} style={{ width: '100%', height: '70%', background: color, display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 10, fontSize: '80%', fontWeight: 600, cursor: 'pointer' }}>Checkout</div>

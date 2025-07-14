@@ -1,59 +1,60 @@
-import Footer from '../components/Footer'
-import Header from '../components/Header'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
-import { Select, MenuItem, Button } from '@mui/material';
-import { useState, useEffect } from 'react';
-import { Typography } from '@mui/material';
-import Radio from '@mui/material/Radio';
+import Footer from '../Footer'
+import Header from '../Header'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { useTheme } from '@mui/material/styles'
+import { Select, MenuItem, Button } from '@mui/material'
+import { useState, useEffect } from 'react'
+import { Typography } from '@mui/material'
+import Radio from '@mui/material/Radio'
 
-export default function ProfilePage() {
+export default function ProfilePage({number}) {
 
-    const theme = useTheme();
-    const md = useMediaQuery('(max-width:1300px)');
-    const sm = useMediaQuery('(max-width:700px)');
-    const matches = useMediaQuery(theme.breakpoints.down('md'));
-    const smatches = useMediaQuery(theme.breakpoints.down('sm'));
+    const theme = useTheme()
+    const md = useMediaQuery('(max-width:1300px)')
+    const sm = useMediaQuery('(max-width:700px)')
+    const matches = useMediaQuery(theme.breakpoints.down('md'))
+    const smatches = useMediaQuery(theme.breakpoints.down('sm'))
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)')
 
-    const [firstName, setFirstName] = useState('');
-    const [errorF, setErrorF] = useState('');
-    const [touchedF, setTouchedF] = useState(false);
+    const [firstName, setFirstName] = useState('')
+    const [errorF, setErrorF] = useState('')
+    const [touchedF, setTouchedF] = useState(false)
 
-    const [middleName, setMiddleName] = useState('');
+    const [middleName, setMiddleName] = useState('')
 
-    const [lastName, setLastName] = useState('');
-    const [errorL, setErrorL] = useState('');
-    const [touchedL, setTouchedL] = useState(false);
+    const [lastName, setLastName] = useState('')
+    const [errorL, setErrorL] = useState('')
+    const [touchedL, setTouchedL] = useState(false)
 
-    const [selectedValue, setSelectedValue] = useState(null);
+    const [selectedValue, setSelectedValue] = useState(null)
+    const [buttonColor, setButtonColor] = useState('#12daa8')
 
     const handleChange = (value) => {
-        setSelectedValue(value);
-    };
+        setSelectedValue(value)
+    }
 
     useEffect(() => {
         if (touchedF && firstName.length === 0) {
-            setErrorF('First Name is required');
+            setErrorF('First Name is required')
         } else {
-            setErrorF('');
+            setErrorF('')
         }
         if (touchedL && lastName.length === 0) {
-            setErrorL('Last Name is required');
+            setErrorL('Last Name is required')
         } else {
-            setErrorL('');
+            setErrorL('')
         }
-    }, [firstName, lastName, touchedF, touchedL]);
+    }, [firstName, lastName, touchedF, touchedL])
 
     return (<>
 
         <style>{`
         .placeholdercolor::placeholder {
-          font-size: ${matches ? '80%' : '100%'};
-          color: #aaa;
+          font-size: ${matches ? '80%' : '100%'}
+          color: #aaa
         }
       `}</style>
 
@@ -123,14 +124,14 @@ export default function ProfilePage() {
                     <div style={{ display: 'flex', flexDirection: 'column', width: '50%', height: 90, position: 'relative' }}>
                         <div style={{ width: '97%', fontSize: '100%', height: 38, marginBottom: 'auto', color: ' #ffffff', display: 'flex', alignItems: 'center' }}>Mobile Number *</div>
                         <div style={{ width: '97%', height: 55, background: ' #f6f6f6', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 8, border: '1px solid #f6f6f6' }}>
-                            <input className="placeholdercolor" type="text" placeholder="Enter Mobile Number" value='6573256229' style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '120%' }} />
+                            <input className="placeholdercolor" type="text" placeholder="Enter Mobile Number" value={typeof number === 'number' ? number : ''} style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '120%' }} />
                             <EditOutlinedIcon style={{ position: 'absolute', right: '7%', top: '55%', fontSize: '150%', pointerEvents: 'none', cursor: 'pointer' }} />
                         </div>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', width: '50%', height: 90, position: 'relative' }}>
                         <div style={{ width: '97%', fontSize: '100%', height: 38, marginBottom: 'auto', color: ' #ffffff', display: 'flex', alignItems: 'center' }}>Email Id *</div>
                         <div style={{ width: '97%', height: 55, background: ' #f6f6f6', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 8, border: '1px solid #f6f6f6' }}>
-                            <input className="placeholdercolor" type="text" placeholder="Enter Middle Name" value='1234@gmail.com' style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '120%' }} />
+                            <input className="placeholdercolor" type="text" placeholder="Enter Middle Name" value={typeof number === 'number' ? '' : number} style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '120%' }} />
                         </div>
                         <EditOutlinedIcon style={{ position: 'absolute', right: '7%', top: '55%', fontSize: '150%', pointerEvents: 'none', cursor: 'pointer' }} />
                     </div>
@@ -140,19 +141,19 @@ export default function ProfilePage() {
                     <div style={{ display: 'flex', flexDirection: 'column', width: '50%', height: 90 }}>
                         <div style={{ width: '97%', fontSize: '100%', height: 38, marginBottom: 'auto', color: ' #ffffff', display: 'flex', alignItems: 'center' }}>Date of Birth</div>
                         <div style={{ width: '97%', height: 55, background: ' #191919', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 8, border: '1px solid #f6f6f6' }}>
-                            <input className="placeholdercolor" type="text" placeholder="DD/MM/YYYY" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '120%', background: ' transparent' }} />
+                            <input className="placeholdercolor" type="text" placeholder="DD/MM/YYYY" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '120%', background: ' transparent',color:'#ffffff' }} />
                         </div>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', width: '50%', height: 90 }}>
                         <div style={{ width: '97%', fontSize: '100%', height: 38, marginBottom: 'auto', color: ' #ffffff', display: 'flex', alignItems: 'center' }}>Date of Anniversary</div>
                         <div style={{ width: '97%', height: 55, background: ' #191919', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 8, border: '1px solid #f6f6f6' }}>
-                            <input className="placeholdercolor" type="text" placeholder="DD/MM/YYYY" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '120%', background: ' transparent' }} />
+                            <input className="placeholdercolor" type="text" placeholder="DD/MM/YYYY" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '120%', background: ' transparent',color:'#ffffff' }} />
                         </div>
                     </div>
                 </div>
                 <div style={{ width: '25%', height: 200, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Button style={{ width: '47%', height: '25%', border: '1px solid #ffffff', color: ' #ffffff', fontWeight: 600, borderRadius: 7 }}>DISCARD CHANGES</Button>
-                    <Button style={{ width: '47%', height: '25%', border: '1px solid #12daa8', color: ' #000000', fontWeight: 700, borderRadius: 7,background:' #12daa8' }}>SAVE CHANGES</Button>
+                    <Button onMouseEnter={() => setButtonColor('#00b594')} onMouseLeave={() => setButtonColor('#12daa8')}  style={{ width: '47%', height: '25%', border: '1px solid #12daa8', color: ' #000000', fontWeight: 700, borderRadius: 7, background: buttonColor }}>SAVE CHANGES</Button>
                 </div>
             </div>
             <Footer />
