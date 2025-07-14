@@ -1,22 +1,26 @@
 import { Button } from "@mui/material";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
 export default function AddToCartButton(props) {
 
-    const [value, setValue] = useState(0)
+    const [value, setValue] = useState(props.qty)
+    useEffect(function () {
+        setValue(props.qty)
+    }, [props.qty])
+
     const handlePlus = () => {
         var v = value
         v++
         setValue(v)
-        props.onchange(v)
+        props.onChange(v)
     }
-     const handleMinas = () => {
+    const handleMinus = () => {
         var v = value
         v--
         setValue(v)
-        props.onchange(v)
+        props.onChange(v)
     }
     return (<>
         <div style={{ width: '100%', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
@@ -26,9 +30,9 @@ export default function AddToCartButton(props) {
                 : <>
                     <div style={{ width: '35%', height: '70%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <div style={{ width: '80%', height: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <div onClick={handlePlus} style={{ width: 35, height: 35, border: '2px solid #ffffff', borderRadius: '100%', color: ' #ffffff', fontSize: '110%', display: 'flex', justifyContent: 'center', alignItems: 'center',cursor:'pointer' }}><AddIcon /></div>
+                            <div onClick={handlePlus} style={{ width: 35, height: 35, border: '2px solid #ffffff', borderRadius: '100%', color: ' #ffffff', fontSize: '110%', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}><AddIcon /></div>
                             <div style={{ height: '100%', color: ' #ffffff', fontWeight: 600, fontSize: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>{value}</div>
-                            <div onClick={handleMinas} style={{ width: 35, height: 35, border: '2px solid #ffffff', borderRadius: '100%', color: ' #ffffff', fontSize: '110%', display: 'flex', justifyContent: 'center', alignItems: 'center',cursor:'pointer' }}><RemoveIcon /></div>
+                            <div onClick={handleMinus} style={{ width: 35, height: 35, border: '2px solid #ffffff', borderRadius: '100%', color: ' #ffffff', fontSize: '110%', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}><RemoveIcon /></div>
                         </div>
                     </div>
                 </>}

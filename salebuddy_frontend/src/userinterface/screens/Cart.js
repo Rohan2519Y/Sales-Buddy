@@ -31,7 +31,7 @@ export default function Cart() {
                     <div><ApplyCoupon /></div>
                     <div><ShowProductCart setTotal={setTotal}/></div>
                 </div>
-                <div style={{ width: '35%',  }}>
+                <div style={{ width: matches?'100%':'35%',  }}>
                     <OrderSummary total={total} />
                 </div>
             </div>

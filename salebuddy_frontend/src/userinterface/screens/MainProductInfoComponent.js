@@ -17,7 +17,7 @@ import { useTheme } from '@mui/material/styles';
 import ProductSpecializationComponent from "../components/ProductInfo/ProductSpecialization/ProductSpecializationComponent";
 import ProductOverviewComponent from "../components/ProductInfo/ProductSpecialization/ProductOverviewComponent";
 import AddToCartButton from "../components/Cart/AddToCartButton";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 export default function MainProductInfoComponent() {
 
   const theme = useTheme();
@@ -28,10 +28,12 @@ export default function MainProductInfoComponent() {
   const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
 
   const [selectedMedia, setSelectedMedia] = useState(null);
-  const [refresh,setRefresh]=useState(false)
+  const [refresh, setRefresh] = useState(false)
 
   const params = useParams()
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
+  const product = useSelector((state) => state.cart)
+  const keys = Object.keys(product)
 
   const [productData, setProductData] = useState({})
   const fetchProductDetails = async () => {
@@ -138,11 +140,16 @@ export default function MainProductInfoComponent() {
     }
   ]
 
-  
+
   const handleQtyChange = (v) => {
     var data = productData
-    data['qty'] = v
-    dispatch({type:'ADD_CART',payload:[data.productdetailsid,data]})
+    if (v == 0) {
+      dispatch({ type: 'DEL_CART', payload: [data.productdetailsid, data] })
+    }
+    else {
+      data['qty'] = v
+      dispatch({ type: 'ADD_CART', payload: [data.productdetailsid, data] })
+    }
     setRefresh(!refresh)
   }
 
@@ -161,7 +168,7 @@ export default function MainProductInfoComponent() {
           </div>
           {matches ? <></> : <div style={{ width: md ? '80%' : '60%', display: 'flex', flexDirection: 'column' }}>
             <ProductPictureComponent media={selectedMedia} />
-            <AddToCartButton onchange={handleQtyChange} />
+            <AddToCartButton qty={keys.includes(productData.productdetailsid + "") ? product[productData.productdetailsid].qty : 0} onChange={handleQtyChange} />
           </div>}
         </div>
         <div style={{ display: 'flex', width: matches ? '100%' : '50%', height: '100%', flexDirection: 'column', overflowY: matches ? 'none' : 'auto', scrollbarWidth: 'none' }}>
