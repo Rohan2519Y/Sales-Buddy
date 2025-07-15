@@ -141,13 +141,15 @@ export default function ProfilePage({ number }) {
                     <div style={{ display: 'flex', flexDirection: 'column', width: '50%', height: 90 }}>
                         <div style={{ width: '97%', fontSize: '100%', height: 38, marginBottom: 'auto', color: ' #ffffff', display: 'flex', alignItems: 'center' }}>Date of Birth</div>
                         <div style={{ width: '97%', height: 55, background: ' #191919', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 8, border: '1px solid #f6f6f6' }}>
-                            <input className="placeholdercolor" type="text" placeholder="DD/MM/YYYY" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '120%', background: ' transparent', color: '#ffffff' }} />
+                            <input type="date" min="1900-01-01" max="2099-12-31"
+                                style={{ width: '90%', height: '90%', border: '0', outline: 'none', fontSize: '120%', background: 'transparent', color: '#ffffff', fontFamily: 'inherit', appearance: 'none', WebkitAppearance: 'none' }} />
                         </div>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', width: '50%', height: 90 }}>
                         <div style={{ width: '97%', fontSize: '100%', height: 38, marginBottom: 'auto', color: ' #ffffff', display: 'flex', alignItems: 'center' }}>Date of Anniversary</div>
-                        <div style={{ width: '97%', height: 55, background: ' #191919', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 8, border: '1px solid #f6f6f6' }}>
-                            <input className="placeholdercolor" type="text" placeholder="DD/MM/YYYY" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '120%', background: ' transparent', color: '#ffffff' }} />
+                        <div style={{ width: '97%', height: 55, background: ' #191919', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 8, border: '1px solid #f6f6f6', position: 'relative' }}>
+                            <input type="date" min="1900-01-01" max="2099-12-31"
+                                style={{ width: '90%', height: '90%', border: '0', outline: 'none', fontSize: '120%', background: 'transparent', color: '#ffffff', fontFamily: 'inherit', appearance: 'none', WebkitAppearance: 'none' }} />
                         </div>
                     </div>
                 </div>
@@ -156,7 +158,6 @@ export default function ProfilePage({ number }) {
                     <Button style={{ width: '47%', height: '25%', border: '1px solid #ffffff', color: ' #ffffff', fontWeight: 600, borderRadius: 7 }}>DISCARD CHANGES</Button>
                     <Button onMouseEnter={() => setButtonColor('#00b594')} onMouseLeave={() => setButtonColor('#12daa8')} style={{ width: '47%', height: '25%', border: '1px solid #12daa8', color: ' #000000', fontWeight: 700, borderRadius: 7, background: buttonColor }}>SAVE CHANGES</Button>
                 </div>
-
             </div>
             <Footer />
         </div>

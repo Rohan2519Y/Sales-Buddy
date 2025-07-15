@@ -189,5 +189,42 @@ router.post('/userinterface_fetch_productdetails_by_id_storage', function (req, 
         res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
     }
 });
+router.post('/userinterface_user_submit', function (req, res, next) {
+    try {
+        pool.query("insert into users values(?,?,?,?,?,?) ", [req.body.mobileno, req.body.emailid, req.body, username, req.body.dob, req.body.gender, req.body.doa], function (error, result) {
+            if (error) {
+                res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
+            }
+            else {
+                console.log(result)
+                res.status(200).json({ status: true, message: 'Success..' })
+            }
+        })
+    }
+    catch (e) {
+        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
+    }
+});
+
+router.post('/userinterface_chk_mobile_email', function (req, res, next) {
+    try {
+        pool.query("select * from users where emailid=? or mobileno=?", [req.body.mobileno, req.body.mobileno], function (error, result) {
+            if (error) {
+                res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
+            }
+            else {
+                console.log(result)
+                if (result.length == 1)
+                    res.status(200).json({ status: true, message: 'Success..', data: result[0] })
+                else
+                    res.status(200).json({ status: false, message: 'Fail', data: [] })
+
+            }
+        })
+    }
+    catch (e) {
+        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
+    }
+});
 
 module.exports = router;

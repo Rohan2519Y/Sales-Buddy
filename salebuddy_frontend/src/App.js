@@ -19,7 +19,6 @@ function App() {
           <Route element={<MainProductInfoComponent />} path="/mainproductinfocomponent/:productdetailsid/:productid" />
           <Route element={<Cart />} path="/cart" />
           <Route element={<Home />} path="/" />
-          <Route element={<UserLogin />} path="/loginn" />
           <Route element={<Profile />} path="/login" />
         </Routes>
       </Router>
