@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router';
 export default function Header() {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md')) 
-    const product = useSelector((state) => state.cart)
+    const product = useSelector((state) => state.cart) 
     const keys = Object.keys(product)
     const navigate = useNavigate()
     return (<>
