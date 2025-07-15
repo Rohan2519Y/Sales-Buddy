@@ -31,7 +31,7 @@ export default function OTPComponent({ open = true, number, handleOTPClose, hand
           .placeholdercolor::placeholder {
             font-size: 100%;
             color: #aaa;
-          }
+          } 
         `}
         </style>
         <Dialog
