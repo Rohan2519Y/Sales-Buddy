@@ -8,7 +8,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
 import { Badge } from '@mui/material';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router'
 export default function Header() {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md')) 
