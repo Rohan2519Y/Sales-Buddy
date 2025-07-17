@@ -12,7 +12,6 @@ export default function OTPComponent({ open = true, number, handleOTPClose, hand
     const [seconds, setSeconds] = useState(30);
     const [submit, setSubmit] = useState('#12daa8');
 
-    // OTP State
     const otpcount = 4;
     const [inputArr, setInputArr] = useState(new Array(otpcount).fill(''));
     const ref = useRef([]);

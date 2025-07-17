@@ -8,6 +8,7 @@ import Cart from "./userinterface/screens/Cart";
 import UserLogin from "./userinterface/components/user/UserLogin"
 import OTPComponent from "./userinterface/components/user/OTPComponent";
 import Profile from "./userinterface/screens/Profile";
+import Checkout from "./userinterface/screens/Checkout"
 function App() {
   return (
     <div style={{ fontFamily: 'Quicksand' }}>
@@ -19,7 +20,7 @@ function App() {
           <Route element={<MainProductInfoComponent />} path="/mainproductinfocomponent/:productdetailsid/:productid" />
           <Route element={<Cart />} path="/cart" />
           <Route element={<Home />} path="/" />
-          <Route element={<OTPComponent />} path="/login" />
+          <Route element={<Checkout />} path="/checkout" />
         </Routes>
       </Router>
     </div>

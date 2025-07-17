@@ -3,8 +3,7 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import { useSelector } from 'react-redux';
-export default function OrderSummary({ productData }) {
+export default function CheckoutOrder({ productData }) {
 
     const theme = useTheme();
     const md = useMediaQuery('(max-width:1200px)');
@@ -15,14 +14,12 @@ export default function OrderSummary({ productData }) {
 
     const [discount, setDiscount] = useState(false)
     const [color, setColor] = useState(' #00e9bf')
-    const product = useSelector((state) => state.cart)
-    const keys = Object.keys(product)
-
+    
     var totalAmount = productData.reduce((p1, p2) => {
         var amt = p2.price * p2.qty
         return p1 + amt
     }, 0)
-
+    
     var totalSaving = productData.reduce((p1, p2) => {
         var amt = p2.offerprice == 0 ? 0 : (p2.price - p2.offerprice) * p2.qty
         return p1 + amt
@@ -35,7 +32,7 @@ export default function OrderSummary({ productData }) {
             <div style={{ width: md ? '95%' : '65%', minHeight: discount ? 315 : 260, marginLeft: matches ? '' : 15, borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center', background: ' #ffffff', marginBottom: 30 }}>
                 <div style={{ width: '90%', height: '85%', }}>
                     <div style={{ width: '100%', height: 35, fontSize: md ? '1.65vw' : '120%', fontWeight: 700, }}>
-                        Order Summary ({ keys !== 0 && `${keys.length} items` })
+                        Order Summary ( 2 items )
                     </div>
                     <div style={{ width: '100%', height: 45, display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: md ? '1.65vw' : '' }}>
                         <div>Original Price</div><div>{'\u20B9'} {totalAmount}</div>

@@ -1,5 +1,5 @@
 import OTPComponent from "../components/user/OTPComponent";
-import ProfilePage from "../components/user/ProfilePage";
+import ProfilePage from "../components/user/Profile";
 import UserLogin from "../components/user/UserLogin";
 import { useState } from "react";
 
