@@ -76,8 +76,8 @@ export default function ProfilePage({ number }) {
         }
       `}</style>
 
-        <div style={{ display: 'flex', width: '100%', alignItems: 'flex-end', flexDirection: 'column' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '80%', height: '100%', background: ' #ffffff' }}>
+        <div style={{ display: 'flex', width: '100%', alignItems: md?'center':'flex-end', flexDirection: 'column' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: md?'95%':'80%', height: '100%', background: ' #ffffff' }}>
                 <div style={{ display: 'flex', width: '95%', height: '100%', flexDirection: 'column' }}>
                     <div style={{ display: 'flex', width: '100%', height: 40, alignItems: 'center', fontWeight: 700, fontSize: '100%' }}>Contact Information</div>
                     <div style={{ width: '100%', height: sm ? 200 : 105, display: 'flex', justifyContent: 'space-between', flexDirection: sm ? 'column' : '' }}>

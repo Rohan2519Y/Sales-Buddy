@@ -95,8 +95,8 @@ export default function Address() {
         }
       `}</style>
 
-        <div style={{ display: 'flex', width: '100%', height: '100vh', alignItems: 'flex-end', flexDirection: 'column' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '80%', height: '100%', background: ' #ffffff', marginTop: 20 }}>
+        <div style={{ display: 'flex', width: '100%', alignItems: md ? 'center' : 'flex-end', flexDirection: 'column' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: md ? '95%' : '80%', height: '100%', background: ' #ffffff', marginTop: 20 }}>
                 <div style={{ display: 'flex', width: '95%', height: '100%', flexDirection: 'column' }}>
                     <div style={{ display: 'flex', width: '100%', height: 50, alignItems: 'center', fontWeight: 700, fontSize: '100%' }}>Address Details</div>
                     <div style={{ width: '100%', height: sm ? 200 : 105, display: 'flex', justifyContent: 'space-between', flexDirection: sm ? 'column' : '', marginTop: sm ? '' : 15 }}>
@@ -125,7 +125,7 @@ export default function Address() {
                         </div>
                     </div>
 
-                    <div style={{ width: '100%', height: sm ? 200 : 105, display: 'flex', justifyContent: 'space-between', flexDirection: sm ? 'column' : '', marginTop: sm ? '' : 15 }}>
+                    <div style={{ width: '100%', height: sm ? 200 : 105, display: 'flex', justifyContent: 'space-between', flexDirection: sm ? 'column' : '', marginTop: sm ? 18 : 15 }}>
                         <div style={{ display: 'flex', flexDirection: 'column', width: sm ? '100%' : '50%', height: errorA ? 112 : 90 }}>
                             <div style={{ width: sm ? '100%' : '97%', fontSize: '100%', height: 38, marginBottom: 'auto', color: ' #000000', display: 'flex', alignItems: 'center' }}>Address (Flat no., Building, Company, Street)*</div>
                             <div style={{ width: sm ? '100%' : '97%', height: 55, background: ' #f6f6f6', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 8, border: errorA ? '1px solid red' : '1px solid #f6f6f6', position: 'relative' }}>
@@ -151,7 +151,7 @@ export default function Address() {
                         </div>
                     </div>
 
-                    <div style={{ width: '100%', height: sm ? 200 : 105, display: 'flex', justifyContent: 'space-between', flexDirection: sm ? 'column' : '', marginTop: sm ? '' : 15 }}>
+                    <div style={{ width: '100%', height: 105, display: 'flex', justifyContent: 'space-between', flexDirection: sm ? 'column' : '', marginTop: sm ? 18 : 15 }}>
                         <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: errorAr ? 112 : 90 }}>
                             <div style={{ width: '100%', fontSize: '100%', height: 38, marginBottom: 'auto', color: ' #000000', display: 'flex', alignItems: 'center' }}>Locality / Sector / Area*
                             </div>
@@ -166,7 +166,7 @@ export default function Address() {
                         </div>
                     </div>
 
-                    <div style={{ width: '100%', height: sm ? 200 : 105, display: 'flex', justifyContent: 'space-between', flexDirection: sm ? 'column' : '', marginTop: sm ? '' : 15 }}>
+                    <div style={{ width: '100%', height: sm ? 200 : 105, display: 'flex', justifyContent: 'space-between', flexDirection: sm ? 'column' : '', marginTop: sm ? 5 : 15 }}>
                         <div style={{ display: 'flex', flexDirection: 'column', width: sm ? '100%' : '50%', height: errorS ? 112 : 90 }}>
                             <div style={{ width: sm ? '100%' : '97%', fontSize: '100%', height: 38, marginBottom: 'auto', color: ' #000000', display: 'flex', alignItems: 'center' }}>State*</div>
                             <div style={{ width: sm ? '100%' : '97%', height: 55, background: ' #f6f6f6', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 8, border: errorS ? '1px solid red' : '1px solid #f6f6f6', position: 'relative' }}>
@@ -191,7 +191,7 @@ export default function Address() {
                             )}
                         </div>
                     </div>
-                    <div style={{ width: '100%', height: sm ? 60 : 50, display: 'flex', marginTop: sm ? 5 : '', flexDirection: 'column' }}>
+                    <div style={{ width: '100%', height: sm ? 60 : 50, display: 'flex', marginTop: sm ? 15 : '', flexDirection: 'column' }}>
                         <div style={{ width: '100%', fontSize: '100%', height: 20, marginBottom: 'auto', color: ' #000000', display: 'flex', alignItems: 'center' }}>Address Type</div>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '50%' }}>
                             <div style={{ display: 'flex' }}><Radio checked={selectedValue == 'Home'} onChange={() => handleChange('Home')} sx={{ color: '#000000', '&.Mui-checked': { color: ' #12daa8' } }} /><div style={{ display: 'flex', alignItems: 'center', color: '#000000', fontSize: '100%' }}>Home</div></div>
@@ -199,10 +199,10 @@ export default function Address() {
                             <div style={{ display: 'flex' }}><Radio checked={selectedValue == 'Others'} onChange={() => handleChange('Others')} sx={{ color: '#000000', '&.Mui-checked': { color: ' #12daa8' } }} /><div style={{ display: 'flex', alignItems: 'center', color: '#000000', fontSize: '100%' }}>Others</div></div>
                         </div>
                     </div>
-                    <div style={{ width: '100%', height: 80, marginTop: 40, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+                    <div style={{ width: '100%', height: 80, marginTop: sm ? 30 : 40, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
                         <div style={{ width: '90%', height: '40%' }}>Billing Address</div>
-                        <div style={{ width: '90%', height: '60%' ,display:'flex'}}>{check ? (<><CheckBoxOutlineBlankIcon onClick={() => { setCheck(false) }} style={{ color: ' #000000', fontSize: '140%', marginRight: 5 }} /></>) : (<><CheckBoxIcon onClick={() => { setCheck(true) }} style={{ color: ' #00e9bf', fontSize: '140%', marginRight: 5 }} /></>)}
-                            <div style={{ color: ' #000000',fontSize:'110%',fontWeight:600 }}>Same as Shipping address</div>
+                        <div style={{ width: '90%', height: '60%', display: 'flex' }}>{check ? (<><CheckBoxOutlineBlankIcon onClick={() => { setCheck(false) }} style={{ color: ' #000000', fontSize: '140%', marginRight: 5 }} /></>) : (<><CheckBoxIcon onClick={() => { setCheck(true) }} style={{ color: ' #00e9bf', fontSize: '140%', marginRight: 5 }} /></>)}
+                            <div style={{ color: ' #000000', fontSize: '110%', fontWeight: 600 }}>Same as Shipping address</div>
                         </div>
                     </div>
                 </div>

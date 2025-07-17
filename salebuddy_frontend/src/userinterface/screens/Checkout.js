@@ -9,11 +9,13 @@ import CheckoutOrder from "../components/checkout/CheckoutOrder";
 import ShippingInfo from "../components/checkout/ShippingInfo";
 import ProfilePage from "../components/checkout/ProfilePage";
 import Address from "../components/checkout/Address";
+import Delivery from "../components/checkout/Delivery";
+import GST from "../components/checkout/GST";
 
 export default function Checkout() {
 
     const theme = useTheme();
-    const md = useMediaQuery('(max-width:1200px)');
+    const md = useMediaQuery('(max-width:1300px)');
     const sm = useMediaQuery('(max-width:700px)');
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -28,14 +30,15 @@ export default function Checkout() {
             <div>
                 <Header />
             </div>
-            <div style={{ width: '100%', minHeight: 500, display: 'flex', flexDirection: matches ? 'column' : '', marginTop: 25 }}>
+            <div style={{ width: '100%', minHeight: 500, display: 'flex', flexDirection: md ? 'column' : '', marginTop: 25 }}>
                 <div style={{ width: md ? '100%' : '65%', display: 'flex', flexDirection: 'column' }}>
                     <div><ShippingInfo /></div>
                     <div><ProfilePage /></div>
                     <div><Address /></div>
-                    <div><ShowProductCart refresh={refresh} setRefresh={setRefresh} productData={productData} /></div>
+                    <div><Delivery/></div>
+                    <div><GST/></div>
                 </div>
-                <div style={{ width: matches ? '100%' : '35%', }}>
+                <div style={{ width: md ? '100%' : '35%', }}>
                     <CheckoutOrder productData={productData} />
                 </div>
             </div>
