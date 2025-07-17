@@ -1,7 +1,8 @@
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
-import { Select, MenuItem, Button } from '@mui/material'
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import { useState, useEffect } from 'react'
 import { Typography } from '@mui/material'
 import Radio from '@mui/material/Radio'
@@ -14,6 +15,12 @@ export default function Address() {
     const matches = useMediaQuery(theme.breakpoints.down('md'))
     const smatches = useMediaQuery(theme.breakpoints.down('sm'))
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)')
+
+    const [check, setCheck] = useState(false)
+    const [selectedValue, setSelectedValue] = useState(null)
+    const handleChange = (value) => {
+        setSelectedValue(value)
+    }
 
     const [nickName, setNickName] = useState('')
     const [errorN, setErrorN] = useState('')
@@ -34,6 +41,14 @@ export default function Address() {
     const [area, setArea] = useState('')
     const [errorAr, setErrorAr] = useState('')
     const [touchedAr, setTouchedAr] = useState(false)
+
+    const [state, setState] = useState('')
+    const [errorS, setErrorS] = useState('')
+    const [touchedS, setTouchedS] = useState(false)
+
+    const [city, setCity] = useState('')
+    const [errorC, setErrorC] = useState('')
+    const [touchedC, setTouchedC] = useState(false)
 
     useEffect(() => {
         if (touchedN && nickName.length === 0) {
@@ -57,11 +72,21 @@ export default function Address() {
             setErrorL('')
         }
         if (touchedAr && area.length === 0) {
-            setErrorA('Locality / Sector / Area is Required')
+            setErrorAr('Locality / Sector / Area is Required')
         } else {
-            setErrorA('')
+            setErrorAr('')
         }
-    }, [nickName, pin, address, landmark, area, touchedP, touchedN, touchedA, touchedL, touchedAr])
+        if (touchedS && state.length === 0) {
+            setErrorS('State is Required')
+        } else {
+            setErrorS('')
+        }
+        if (touchedC && city.length === 0) {
+            setErrorC('City is Required')
+        } else {
+            setErrorC('')
+        }
+    }, [nickName, pin, address, landmark, area, state, city, touchedP, touchedN, touchedA, touchedL, touchedAr, touchedS, touchedC])
     return (<>
         <style>{`
         .placeholdercolor::placeholder {
@@ -125,6 +150,7 @@ export default function Address() {
                             )}
                         </div>
                     </div>
+
                     <div style={{ width: '100%', height: sm ? 200 : 105, display: 'flex', justifyContent: 'space-between', flexDirection: sm ? 'column' : '', marginTop: sm ? '' : 15 }}>
                         <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: errorAr ? 112 : 90 }}>
                             <div style={{ width: '100%', fontSize: '100%', height: 38, marginBottom: 'auto', color: ' #000000', display: 'flex', alignItems: 'center' }}>Locality / Sector / Area*
@@ -137,6 +163,46 @@ export default function Address() {
                                     {errorAr}
                                 </Typography>
                             )}
+                        </div>
+                    </div>
+
+                    <div style={{ width: '100%', height: sm ? 200 : 105, display: 'flex', justifyContent: 'space-between', flexDirection: sm ? 'column' : '', marginTop: sm ? '' : 15 }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', width: sm ? '100%' : '50%', height: errorS ? 112 : 90 }}>
+                            <div style={{ width: sm ? '100%' : '97%', fontSize: '100%', height: 38, marginBottom: 'auto', color: ' #000000', display: 'flex', alignItems: 'center' }}>State*</div>
+                            <div style={{ width: sm ? '100%' : '97%', height: 55, background: ' #f6f6f6', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 8, border: errorS ? '1px solid red' : '1px solid #f6f6f6', position: 'relative' }}>
+                                <input onBlur={() => setTouchedS(true)} onChange={(e) => setState(e.target.value)} value={state} className="placeholdercolor" type="text" placeholder="Enter State" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '105%', background: ' #f6f6f6' }} />
+                            </div>
+                            {errorS && (
+                                <Typography sx={{ width: sm ? '100%' : '97%', fontSize: '90%', color: '#f44336', fontWeight: 600 }} >
+                                    {errorS}
+                                </Typography>
+                            )}
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column', width: sm ? '100%' : '50%', height: errorC ? 112 : 90 }}>
+                            <div style={{ width: sm ? '100%' : '97%', fontSize: '100%', height: 38, marginBottom: 'auto', color: ' #000000', display: 'flex', alignItems: 'center' }}>City*
+                            </div>
+                            <div style={{ width: sm ? '100%' : '97%', height: 55, background: ' #f6f6f6', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 8, border: errorC ? '1px solid red' : '1px solid #f6f6f6', position: 'relative' }}>
+                                <input onBlur={() => setTouchedC(true)} onChange={(e) => setCity(e.target.value)} value={city} className="placeholdercolor" type="text" placeholder="Enter City" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '105%', background: ' #f6f6f6' }} />
+                            </div>
+                            {errorC && (
+                                <Typography sx={{ width: sm ? '100%' : '97%', fontSize: '90%', color: '#f44336', fontWeight: 600 }} >
+                                    {errorC}
+                                </Typography>
+                            )}
+                        </div>
+                    </div>
+                    <div style={{ width: '100%', height: sm ? 60 : 50, display: 'flex', marginTop: sm ? 5 : '', flexDirection: 'column' }}>
+                        <div style={{ width: '100%', fontSize: '100%', height: 20, marginBottom: 'auto', color: ' #000000', display: 'flex', alignItems: 'center' }}>Address Type</div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '50%' }}>
+                            <div style={{ display: 'flex' }}><Radio checked={selectedValue == 'Home'} onChange={() => handleChange('Home')} sx={{ color: '#000000', '&.Mui-checked': { color: ' #12daa8' } }} /><div style={{ display: 'flex', alignItems: 'center', color: '#000000', fontSize: '100%' }}>Home</div></div>
+                            <div style={{ display: 'flex' }}><Radio checked={selectedValue == 'Work'} onChange={() => handleChange('Work')} sx={{ color: '#000000', '&.Mui-checked': { color: ' #12daa8' } }} /><div style={{ display: 'flex', alignItems: 'center', color: '#000000', fontSize: '100%' }}>Work</div></div>
+                            <div style={{ display: 'flex' }}><Radio checked={selectedValue == 'Others'} onChange={() => handleChange('Others')} sx={{ color: '#000000', '&.Mui-checked': { color: ' #12daa8' } }} /><div style={{ display: 'flex', alignItems: 'center', color: '#000000', fontSize: '100%' }}>Others</div></div>
+                        </div>
+                    </div>
+                    <div style={{ width: '100%', height: 80, marginTop: 40, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+                        <div style={{ width: '90%', height: '40%' }}>Billing Address</div>
+                        <div style={{ width: '90%', height: '60%' ,display:'flex'}}>{check ? (<><CheckBoxOutlineBlankIcon onClick={() => { setCheck(false) }} style={{ color: ' #000000', fontSize: '140%', marginRight: 5 }} /></>) : (<><CheckBoxIcon onClick={() => { setCheck(true) }} style={{ color: ' #00e9bf', fontSize: '140%', marginRight: 5 }} /></>)}
+                            <div style={{ color: ' #000000',fontSize:'110%',fontWeight:600 }}>Same as Shipping address</div>
                         </div>
                     </div>
                 </div>
