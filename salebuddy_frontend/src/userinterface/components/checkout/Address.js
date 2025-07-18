@@ -115,7 +115,7 @@ export default function Address() {
                             <div style={{ width: sm ? '100%' : '97%', fontSize: '100%', height: 38, marginBottom: 'auto', color: ' #000000', display: 'flex', alignItems: 'center' }}>Pin Code*
                             </div>
                             <div style={{ width: sm ? '100%' : '97%', height: 55, background: ' #f6f6f6', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 8, border: errorP ? '1px solid red' : '1px solid #f6f6f6', position: 'relative' }}>
-                                <input onBlur={() => setTouchedP(true)} onChange={(e) => setPin(e.target.value)} value={pin} className="placeholdercolor" type="text" placeholder="Enter Pin Code" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '105%', background: ' #f6f6f6' }} />
+                                <input onBlur={() => setTouchedP(true)} onChange={(e) => setPin(e.target.value)} value={pin} className="placeholdercolor" type="number"  placeholder="Enter Pin Code" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '105%', background: ' #f6f6f6' }} />
                             </div>
                             {errorP && (
                                 <Typography sx={{ width: sm ? '100%' : '97%', fontSize: '90%', color: '#f44336', fontWeight: 600 }} >

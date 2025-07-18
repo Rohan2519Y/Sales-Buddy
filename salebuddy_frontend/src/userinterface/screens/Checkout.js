@@ -11,6 +11,7 @@ import ProfilePage from "../components/checkout/ProfilePage";
 import Address from "../components/checkout/Address";
 import Delivery from "../components/checkout/Delivery";
 import GST from "../components/checkout/GST";
+import Contact from "../components/checkout/Contact";
 
 export default function Checkout() {
 
@@ -32,11 +33,12 @@ export default function Checkout() {
             </div>
             <div style={{ width: '100%', minHeight: 500, display: 'flex', flexDirection: md ? 'column' : '', marginTop: 25 }}>
                 <div style={{ width: md ? '100%' : '65%', display: 'flex', flexDirection: 'column' }}>
-                    <div><ShippingInfo /></div>
-                    <div><ProfilePage /></div>
-                    <div><Address /></div>
-                    <div><Delivery refresh={refresh} setRefresh={setRefresh} productData={productData} /></div>
-                    <div><GST /></div>
+                    <ShippingInfo />
+                    <ProfilePage />
+                    <Address />
+                    <Contact />
+                    <Delivery refresh={refresh} setRefresh={setRefresh} productData={productData} />
+                    <GST />
                 </div>
                 <div style={{ width: md ? '100%' : '35%', }}>
                     <CheckoutOrder productData={productData} />
