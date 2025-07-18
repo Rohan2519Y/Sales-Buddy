@@ -35,8 +35,8 @@ export default function Checkout() {
                     <div><ShippingInfo /></div>
                     <div><ProfilePage /></div>
                     <div><Address /></div>
-                    <div><Delivery/></div>
-                    <div><GST/></div>
+                    <div><Delivery refresh={refresh} setRefresh={setRefresh} productData={productData} /></div>
+                    <div><GST /></div>
                 </div>
                 <div style={{ width: md ? '100%' : '35%', }}>
                     <CheckoutOrder productData={productData} />

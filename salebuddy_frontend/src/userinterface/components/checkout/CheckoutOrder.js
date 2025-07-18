@@ -3,6 +3,7 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import { useSelector } from 'react-redux';
 export default function CheckoutOrder({ productData }) {
 
     const theme = useTheme();
@@ -14,6 +15,8 @@ export default function CheckoutOrder({ productData }) {
 
     const [discount, setDiscount] = useState(false)
     const [color, setColor] = useState(' #00e9bf')
+    const product = useSelector((state) => state.cart)
+    const keys = Object.keys(product)
 
     var totalAmount = productData.reduce((p1, p2) => {
         var amt = p2.price * p2.qty
@@ -28,11 +31,11 @@ export default function CheckoutOrder({ productData }) {
     var netAmount = totalAmount - totalSaving
 
     return (<>
-        <div style={{ width: '100%', position: md ? '' : 'sticky', top: md ? '' : 50, display: 'flex', justifyContent: md ? 'center' : '',marginBottom:md?30:'' }}>
+        <div style={{ width: '100%', position: md ? '' : 'sticky', top: md ? '' : 50, display: 'flex', justifyContent: md ? 'center' : '', marginBottom: md ? 30 : '' }}>
             <div style={{ width: md ? '95%' : '65%', background: ' #ffffff', minHeight: discount ? 315 : 260, marginLeft: md ? '' : 15, borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 30, marginTop: matches ? 30 : '' }}>
                 <div style={{ width: '90%', height: '85%', }}>
                     <div style={{ width: '100%', height: 35, fontSize: md ? '110%' : '120%', fontWeight: 700, }}>
-                        Order Summary ( 2 items )
+                        Order Summary ({keys !== 0 && `${keys.length} items`})
                     </div>
                     <div style={{ width: '100%', height: 45, display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: md ? '100%' : '' }}>
                         <div>Original Price</div><div>{'\u20B9'} {totalAmount}</div>
@@ -64,7 +67,7 @@ export default function CheckoutOrder({ productData }) {
                         <div>Total</div><div>{'\u20B9'} {netAmount}</div>
                     </div>
                     <div style={{ width: '100%', height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <div onMouseEnter={() => { setColor(' #00b594') }} onMouseLeave={() => { setColor(' #00e9bf') }} style={{ width: '100%', height: '70%', background: color, display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 10, fontSize: '80%', fontWeight: 600, cursor: 'pointer' }}>Checkout</div>
+                        <div onMouseEnter={() => { setColor(' #00b594') }} onMouseLeave={() => { setColor(' #00e9bf') }} style={{ width: '100%', height: '70%', background: color, display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 10, fontSize: '80%', fontWeight: 600, cursor: 'pointer' }}>Proceed To Payment</div>
                     </div>
                 </div>
             </div>

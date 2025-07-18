@@ -19,6 +19,8 @@ export default function ProfilePage({ number }) {
     const smatches = useMediaQuery(theme.breakpoints.down('sm'))
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)')
 
+    const [title,setTitle]=useState('')
+    
     const [firstName, setFirstName] = useState('')
     const [errorF, setErrorF] = useState('')
     const [touchedF, setTouchedF] = useState(false)
@@ -86,12 +88,12 @@ export default function ProfilePage({ number }) {
                             <Select displayEmpty
                                 sx={{ width: sm ? '100%' : '97%', height: 55, border: '1px solid #f6f6f6', backgroundColor: '#f6f6f6', borderRadius: 2.2, color: '#000000', pl: 1, fontSize: '120%', '.MuiSvgIcon-root': { color: 'transparent' }, '.MuiOutlinedInput-notchedOutline': { border: 'none' } }}
                                 MenuProps={{ PaperProps: { sx: { backgroundColor: '#ffffff', color: '#000', borderRadius: 1.2, boxShadow: '0px 4px 12px rgba(0,0,0,0.15)', fontWeight: 600 } } }}>
-                                <MenuItem value="Mr" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Mr</MenuItem>
-                                <MenuItem value="Mrs" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Mrs</MenuItem>
-                                <MenuItem value="Miss" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Miss</MenuItem>
-                                <MenuItem value="Ms" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Ms</MenuItem>
-                                <MenuItem value="Dr" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Dr</MenuItem>
-                                <MenuItem value="Prof" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Prof</MenuItem>
+                                <MenuItem onChange={(e)=>setTitle(e.target.value)} value="Mr" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Mr</MenuItem>
+                                <MenuItem onChange={(e)=>setTitle(e.target.value)} value="Mrs" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Mrs</MenuItem>
+                                <MenuItem onChange={(e)=>setTitle(e.target.value)} value="Miss" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Miss</MenuItem>
+                                <MenuItem onChange={(e)=>setTitle(e.target.value)} value="Ms" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Ms</MenuItem>
+                                <MenuItem onChange={(e)=>setTitle(e.target.value)} value="Dr" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Dr</MenuItem>
+                                <MenuItem onChange={(e)=>setTitle(e.target.value)} value="Prof" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Prof</MenuItem>
                             </Select>
                             <ArrowDropDownIcon style={{ position: 'absolute', right: '6%', top: '50%', color: ' #666666', fontSize: '200%', pointerEvents: 'none' }} />
                         </div>

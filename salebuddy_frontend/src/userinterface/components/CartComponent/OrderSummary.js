@@ -4,6 +4,7 @@ import { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 export default function OrderSummary({ productData }) {
 
     const theme = useTheme();
@@ -13,6 +14,7 @@ export default function OrderSummary({ productData }) {
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
 
+    const navigate=useNavigate()
     const [discount, setDiscount] = useState(false)
     const [color, setColor] = useState(' #00e9bf')
     const product = useSelector((state) => state.cart)
@@ -67,7 +69,7 @@ export default function OrderSummary({ productData }) {
                         <div>Total</div><div>{'\u20B9'} {netAmount}</div>
                     </div>
                     <div style={{ width: '100%', height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <div onMouseEnter={() => { setColor(' #00b594') }} onMouseLeave={() => { setColor(' #00e9bf') }} style={{ width: '100%', height: '70%', background: color, display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 10, fontSize: '80%', fontWeight: 600, cursor: 'pointer' }}>Checkout</div>
+                        <div onClick={()=>{navigate('/checkout')}} onMouseEnter={() => { setColor(' #00b594') }} onMouseLeave={() => { setColor(' #00e9bf') }} style={{ width: '100%', height: '70%', background: color, display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 10, fontSize: '80%', fontWeight: 600, cursor: 'pointer' }}>Checkout</div>
                     </div>
                 </div>
             </div>
