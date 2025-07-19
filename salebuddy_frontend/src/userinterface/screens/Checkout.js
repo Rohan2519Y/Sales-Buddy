@@ -12,6 +12,7 @@ import Address from "../components/checkout/Address";
 import Delivery from "../components/checkout/Delivery";
 import GST from "../components/checkout/GST";
 import Contact from "../components/checkout/Contact";
+import CheckOutHeader from "../components/checkout/CheckOutHeader";
 
 export default function Checkout() {
 
@@ -29,7 +30,7 @@ export default function Checkout() {
     return (<>
         <div style={{ width: '100%', height: '100%', background: ' #f9f9f9', fontFamily: '"Inter", sans-serif' }}>
             <div>
-                <Header />
+                <CheckOutHeader />
             </div>
             <div style={{ width: '100%', minHeight: 500, display: 'flex', flexDirection: md ? 'column' : '', marginTop: 25 }}>
                 <div style={{ width: md ? '100%' : '65%', display: 'flex', flexDirection: 'column' }}>
