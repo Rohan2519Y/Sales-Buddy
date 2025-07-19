@@ -27,11 +27,10 @@ export default function Delivery({ productData, refresh, setRefresh }) {
         delivery: 'Standard Delivery by 1 July 2025 | Free'
     }]
 
-    var dispatch = useDispatch()
-
     return (<>
 
         <div style={{ display: 'flex', width: '100%', alignItems: md ? 'center' : 'flex-end', flexDirection: 'column', marginTop: 20 }}>
+            <div style={{ display: 'flex', width: md?'94%':'79%', fontWeight: 650, fontSize: '110%' }}>Delivery Options</div>
             {productData.map((item) => (
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: md ? '95%' : '80%', height: 270 }}>
                     <div style={{ display: 'flex', alignItems: 'center', background: ' #ffffff', width: '100%', height: '90%' }}>

@@ -1,6 +1,7 @@
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
 import { useState } from 'react'
+
 export default function GST() {
     const theme = useTheme()
     const md = useMediaQuery('(max-width:1300px)')
