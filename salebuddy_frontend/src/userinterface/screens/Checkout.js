@@ -13,6 +13,7 @@ import Delivery from "../components/checkout/Delivery";
 import GST from "../components/checkout/GST";
 import Contact from "../components/checkout/Contact";
 import CheckOutHeader from "../components/checkout/CheckOutHeader";
+import SubmittedAddress from "../components/checkout/SubmittedAddress";
 
 export default function Checkout() {
 
@@ -38,6 +39,7 @@ export default function Checkout() {
                     <ProfilePage />
                     <Address />
                     <Contact />
+                    <SubmittedAddress/>
                     <Delivery refresh={refresh} setRefresh={setRefresh} productData={productData} />
                     <GST />
                 </div>
