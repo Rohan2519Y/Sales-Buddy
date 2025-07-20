@@ -11,9 +11,9 @@ export default function SubmittedAddress() {
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)')
 
     return (<>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: md ? 'center' : 'flex-end', width: '100%', height: 200, marginBottom: md ? '' : 30 }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: md ? '95%' : '80%', height: '90%' }}>
-                <div style={{ width: '49%', height: '100%', background: '#ffffff', borderRadius: 10, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: md ? 'center' : 'flex-end', width: '100%', height: sm?'auto':200, marginBottom: md ? '' : 30 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: sm?'center':'space-between', width: md ? '95%' : '80%', height: '90%',flexDirection:sm?'column':'' }}>
+                <div style={{ width: sm?'100%':'49%', height: sm?160:'100%', background: '#ffffff', borderRadius: 10, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <div style={{ width: '90%', height: '90%' }}>
                         <div style={{ width: '100%', height: '15%', display: 'flex' }}>Shipping Address</div>
                         <div style={{ width: '100%', height: '15%', display: 'flex', fontWeight: 650 }}>House<div style={{ marginLeft: 5, border: '1px solid #888888', height: 20, fontWeight: 450, fontSize: '90%', color: '#888888', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 5, boxSizing: 'border-box', paddingLeft: 5, paddingRight: 5 }}>Home</div></div>
@@ -29,7 +29,7 @@ export default function SubmittedAddress() {
                         </div>
                     </div>
                 </div>
-                <div style={{ width: '49%', height: '100%', background: '#ffffff', borderRadius: 10, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div style={{ width: sm?'100%':'49%', height: sm?160:'100%', background: '#ffffff', borderRadius: 10, display: 'flex', justifyContent: 'center', alignItems: 'center',marginTop:sm?10:'' }}>
                     <div style={{ width: '90%', height: '90%' }}>
                         <div style={{ width: '100%', height: '15%', display: 'flex' }}>Billing Address</div>
                         <div style={{ width: '100%', height: '15%', display: 'flex', fontWeight: 650 }}>House</div>
