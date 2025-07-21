@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-export default function OTPComponent({ open = true, number, handleOTPClose, handleProfile }) {
+export default function OTPComponent({ openOtp, setOpenOtp, otpValue, setOtpValue, number, setOpenDialog }) {
 
     const theme = useTheme();
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -16,22 +16,35 @@ export default function OTPComponent({ open = true, number, handleOTPClose, hand
     const [inputArr, setInputArr] = useState(new Array(otpcount).fill(''));
     const ref = useRef([]);
     const currentOtp = inputArr.join('')
+    const handleCheckOtp = () => {
+        alert(otpValue, currentOtp)
+        if (otpValue == currentOtp) {
+            alert("Ok")
+            setOpenOtp(false)
+        }
+        else { alert("Invalid Otp") }
+    }
 
     useEffect(() => {
-        if (seconds > 0 && open) {
+        if (seconds > 0 && openOtp) {
             const timer = setTimeout(() => setSeconds(seconds - 1), 1000);
             return () => clearTimeout(timer)
         }
-    }, [seconds, open])
+    }, [seconds, openOtp])
 
     useEffect(() => {
-        if (open) {
+        if (openOtp) {
             const timer = setTimeout(() => {
                 ref.current[0]?.focus()
             }, 10)
             return () => clearTimeout(timer)
         }
-    }, [open])
+    }, [openOtp])
+
+    const handleOTPClose = () => {
+        setOpenOtp(false)
+        setOpenDialog(true)
+    }
 
     const handleChange = (e, i) => {
         const value = e.target.value;
@@ -61,7 +74,7 @@ export default function OTPComponent({ open = true, number, handleOTPClose, hand
         `}
         </style>
         <Dialog
-            open={open}
+            open={openOtp}
             PaperProps={{ sx: { width: '565px', height: '426px', background: ' #191919', borderRadius: 2 } }}>
             <CloseIcon onClick={handleOTPClose} style={{ color: 'white', right: 6, position: 'absolute', top: 3, cursor: 'pointer' }} />
             <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -90,6 +103,7 @@ export default function OTPComponent({ open = true, number, handleOTPClose, hand
                         )}
                     </div>
                     <Button
+                        onClick={handleCheckOtp}
                         disabled={currentOtp.length !== 4}
                         onMouseEnter={() => setSubmit('#00b594')}
                         onMouseLeave={() => setSubmit('#12daa8')}

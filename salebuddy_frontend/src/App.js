@@ -21,6 +21,7 @@ function App() {
           <Route element={<Cart />} path="/cart" />
           <Route element={<Home />} path="/" />
           <Route element={<Checkout />} path="/checkout" />
+          <Route element={<OTPComponent />} path="/otp" />
         </Routes>
       </Router>
     </div>

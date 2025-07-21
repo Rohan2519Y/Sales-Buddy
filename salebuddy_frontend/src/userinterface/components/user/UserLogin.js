@@ -6,9 +6,9 @@ import { useState } from "react";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { useNavigate } from "react-router";
-import { postData } from "../../../backendservices/FetchNodeServices";
+import { postData,generateOtp } from "../../../backendservices/FetchNodeServices";
 
-export default function UserLogin({open=true, handleOTP, setNumber, number }) {
+export default function UserLogin({open,setOpenDialog,openOtp,setOpenOtp,otpValue,setOtpValue}) {
 
   const theme = useTheme();
   const md = useMediaQuery('(max-width:1200px)');
@@ -24,13 +24,21 @@ export default function UserLogin({open=true, handleOTP, setNumber, number }) {
   const [mobileno, setMobileno] = useState('')
 
   const handleClick = async () => {
-    var response = await postData('userinterface/userinterface_chk_mobile_email', { mobileno })
-    if (response.status) {
-      alert(true)
-    }
-    else {
-      alert(false)
-    }
+    setOpenDialog(false)
+    var otp = generateOtp()
+    setOtpValue(otp)
+    alert(otp)
+    setOpenOtp(true)
+    /*var response=await postData('userinterface/userinterface_chk_mobile_email',{mobileno})
+     if(response.status) 
+     {
+         alert(true)
+     }
+     else
+     {
+         alert(false)
+     }    
+    */
   }
 
   return (<>
@@ -43,7 +51,7 @@ export default function UserLogin({open=true, handleOTP, setNumber, number }) {
     <Dialog
       open={open}
       PaperProps={{ sx: { width: '525px', height: '406px', background: '#191919', borderRadius: 2, } }}>
-      <CloseIcon onClick={handleOTP} style={{ color: 'white', right: 6, position: 'absolute', top: 3, cursor: 'pointer' }} />
+      <CloseIcon onClick={()=>setOpenDialog(false)} style={{ color: 'white', right: 6, position: 'absolute', top: 3, cursor: 'pointer' }} />
       <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <div style={{ width: smatches ? '90%' : '70%', height: '80%', }}>
           <div style={{ width: '100%', height: '15%', border: '2px solid #353535', borderRadius: 3, display: 'flex', justifyContent: 'space-evenly' }}>
@@ -57,7 +65,7 @@ export default function UserLogin({open=true, handleOTP, setNumber, number }) {
           </div>
           <div style={{ width: '100%', height: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', color: ' #ffffff', fontSize: '90%' }}>Please enter your Email ID or Phone number</div>
           <div style={{ width: '100%', height: '15%', display: 'flex', justifyContent: 'center', alignItems: 'center', border: '2px solid #999999', borderRadius: 4 }}>
-            <input onChange={(e) => { setNumber(e.target.value) }} value={number} className="placeholdercolor" type="text" placeholder="Enter your Email ID or Phone Number" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', background: ' #191919', color: ' #ffffff', fontSize: '120%' }} />
+            <input className="placeholdercolor" type="text" placeholder="Enter your Email ID or Phone Number" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', background: ' #191919', color: ' #ffffff', fontSize: '120%' }} />
           </div>
           <div style={{ width: '100%', height: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             {check ? (<><CheckBoxOutlineBlankIcon onClick={() => { setCheck(false) }} style={{ color: ' #ffffff', fontSize: '140%', marginRight: 5 }} /></>) : (<><CheckBoxIcon onClick={() => { setCheck(true) }} style={{ color: ' #00e9bf', fontSize: '140%', marginRight: 5 }} /></>)}
