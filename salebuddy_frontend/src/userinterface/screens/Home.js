@@ -13,9 +13,6 @@ export default function Home() {
     const [brandList, setBrandList] = useState([])
     const [listProduct, setListProduct] = useState([])
     const [listProductLatest, setListProductLatest] = useState([])
-    const [open, setOpenDialog] = useState(false)
-    const [openOtp, setOpenOtp] = useState(false)
-    const [otpValue, setOtpValue] = useState('')
 
     const fetchBrands = async () => {
         var response = await getData('userinterface/userinterface_fetch_brands')
@@ -62,7 +59,7 @@ export default function Home() {
 
     return (<div style={{ width: '100%', display: 'flex', flexDirection: 'column' }} >
         <div  >
-            <Header open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} />
+            <Header />
         </div>
         <div style={{ width: '100%', height: '100%', overflowX: "hidden", background: ' #191919' }}>
             <MainSlider />

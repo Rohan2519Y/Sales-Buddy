@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-export default function OTPComponent({ openOtp, setOpenOtp, otpValue, setOtpValue, number, setOpenDialog }) {
+export default function OTPComponent({ openOtp, setOpenOtp, otpValue, setOtpValue, setOpenDialog, number, setNumber }) {
 
     const theme = useTheme();
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));

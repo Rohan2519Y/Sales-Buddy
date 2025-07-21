@@ -8,7 +8,7 @@ import { useTheme } from '@mui/material/styles';
 import { useNavigate } from "react-router";
 import { postData,generateOtp } from "../../../backendservices/FetchNodeServices";
 
-export default function UserLogin({open,setOpenDialog,openOtp,setOpenOtp,otpValue,setOtpValue}) {
+export default function UserLogin({open,setOpenDialog,openOtp,setOpenOtp,otpValue,setOtpValue,number,setNumber}) {
 
   const theme = useTheme();
   const md = useMediaQuery('(max-width:1200px)');
@@ -65,7 +65,7 @@ export default function UserLogin({open,setOpenDialog,openOtp,setOpenOtp,otpValu
           </div>
           <div style={{ width: '100%', height: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', color: ' #ffffff', fontSize: '90%' }}>Please enter your Email ID or Phone number</div>
           <div style={{ width: '100%', height: '15%', display: 'flex', justifyContent: 'center', alignItems: 'center', border: '2px solid #999999', borderRadius: 4 }}>
-            <input className="placeholdercolor" type="text" placeholder="Enter your Email ID or Phone Number" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', background: ' #191919', color: ' #ffffff', fontSize: '120%' }} />
+            <input onChange={(e)=>{setNumber(e.target.value)}} value={number} className="placeholdercolor" type="text" placeholder="Enter your Email ID or Phone Number" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', background: ' #191919', color: ' #ffffff', fontSize: '120%' }} />
           </div>
           <div style={{ width: '100%', height: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             {check ? (<><CheckBoxOutlineBlankIcon onClick={() => { setCheck(false) }} style={{ color: ' #ffffff', fontSize: '140%', marginRight: 5 }} /></>) : (<><CheckBoxIcon onClick={() => { setCheck(true) }} style={{ color: ' #00e9bf', fontSize: '140%', marginRight: 5 }} /></>)}

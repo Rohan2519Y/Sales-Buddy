@@ -20,6 +20,7 @@ router.post('/insert_productdetails', upload.fields([{ name: 'picture', maxCount
         res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
     }
 })
+
 router.get('/fetch_productdetails', function (req, res, next) {
     try {
         pool.query("SELECT P.*, B.*, S.*, PC.*, PV.*, PD.* FROM products P, brands B, services S, productcolors PC, productvarients PV, productdetails PD where P.productid=PD.productid and B.brandid=PD.brandId and S.serviceid=PD.serviceid and PC.productcolorid=Pd.productcolorid  and PV.productvarientid=pd.productvarientid", function (error, result) {

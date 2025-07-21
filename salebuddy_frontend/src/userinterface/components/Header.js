@@ -13,20 +13,25 @@ import { useState } from "react";
 import UserLogin from './user/UserLogin';
 import OTPComponent from './user/OTPComponent';
 
-export default function Header({ open, setOpenDialog, openOtp, setOpenOtp, otpValue, setOtpValue }) {
+export default function Header() {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'))
     const product = useSelector((state) => state.cart)
     const keys = Object.keys(product)
     const navigate = useNavigate()
 
+    const [open, setOpenDialog] = useState(false)
+        const [openOtp, setOpenOtp] = useState(false)
+        const [otpValue, setOtpValue] = useState('')
+    const [number,setNumber]=useState('')
+
     const handleLogin = () => {
         setOpenDialog(true)
     }
 
     return (<>
-        <UserLogin open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} />
-        <OTPComponent open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} />
+        <UserLogin open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} number={number} setNumber={setNumber}/>
+        <OTPComponent open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} number={number} setNumber={setNumber}/>
 
         <div style={{ boxSizing: 'border-box', padding: 5, width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center', height: matches ? 'auto' : '9vh', background: '#000', boxShadow: '0 5px 15px rgba(0, 0, 0, 0.3)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', flexDirection: 'row', width: '100%' }}>
