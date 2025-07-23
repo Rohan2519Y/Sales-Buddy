@@ -286,6 +286,7 @@ router.post('/userinterface_user_address_submit', function (req, res, next) {
     try {
         pool.query("insert into useraddress(emailid, mobileno, address, state, city, pincode, landmark, username, gender)values(?,?,?,?,?,?,?,?,?) ", [req.body.emailid, req.body.mobileno, req.body.address, req.body.state, req.body.city, req.body.pincode, req.body.landmark, req.body.username, req.body.gender], function (error, result) {
             if (error) {
+                console.log(error)
                 res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
             }
             else {

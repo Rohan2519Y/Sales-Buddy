@@ -26,20 +26,20 @@ export default function Checkout() {
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
 
     const [refresh, setRefresh] = useState('')
-    const [userAddress,setUserAddress]=useState([])
+    const [userAddress, setUserAddress] = useState([])
     var product = useSelector((state) => state.cart)
     var user = useSelector((state) => state.user)
     var productData = Object.values(product)
-    const fetchUserAddress=async()=>{
-        var res=await postData('userinterface/userinterface_user_address_submit',{mobileno:user.mobileno})
-        setUserAddress(res.data)  
 
-
+    const fetchUserAddress = async () => {
+        var res = await postData('userinterface/userinterface_user_address_submit', { mobileno: user.mobileno })
+        setUserAddress(res?.data ? res.data : [])
     }
-    useEffect(function(){
 
+    useEffect(function () {
         fetchUserAddress()
-    },[])
+    }, [])
+
     return (<>
         <div style={{ width: '100%', height: '100%', background: ' #f9f9f9', fontFamily: '"Inter", sans-serif' }}>
             <div>
@@ -47,16 +47,21 @@ export default function Checkout() {
             </div>
             <div style={{ width: '100%', minHeight: 500, display: 'flex', flexDirection: md ? 'column' : '', marginTop: 25 }}>
                 <div style={{ width: md ? '100%' : '65%', display: 'flex', flexDirection: 'column' }}>
-                   {userAddress.length==0?<><ShippingInfo />
-                    <ProfilePage />
-                    <Address />
-                    <Contact /></>:
-                    <SubmittedAddress/>}
+                    {userAddress?.length === 0 ?
+                        <>
+                            <ShippingInfo />
+                            <ProfilePage />
+                            <Address />
+                            <Contact />
+                        </>
+                        :
+                        <SubmittedAddress />
+                    }
                     <Delivery refresh={refresh} setRefresh={setRefresh} productData={productData} />
                     <GST />
                 </div>
                 <div style={{ width: md ? '100%' : '35%', }}>
-                    <CheckoutOrder userStatus={userAddress.length} productData={productData} />
+                    <CheckoutOrder userStatus={userAddress?.length} productData={productData} />
                 </div>
             </div>
             <div>

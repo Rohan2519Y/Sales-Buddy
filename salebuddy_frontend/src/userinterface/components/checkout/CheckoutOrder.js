@@ -4,7 +4,7 @@ import { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
-export default function CheckoutOrder({ productData }) {
+export default function CheckoutOrder({userStatus, productData }) {
 
     const theme = useTheme();
     const md = useMediaQuery('(max-width:1200px)');
@@ -29,7 +29,10 @@ export default function CheckoutOrder({ productData }) {
     }, 0)
 
     var netAmount = totalAmount - totalSaving
+   const handlePayment=async()=>{
+     
 
+   }
     return (<>
         <div style={{ width: '100%', position: md ? '' : 'sticky', top: md ? '' : 50, display: 'flex', justifyContent: md ? 'center' : '', marginBottom: md ? 30 : '' }}>
             <div style={{ width: md ? '95%' : '65%', background: ' #ffffff', minHeight: discount ? 315 : 260, marginLeft: md ? '' : 15, borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 30, marginTop: matches ? 30 : '' }}>
@@ -67,7 +70,7 @@ export default function CheckoutOrder({ productData }) {
                         <div>Total</div><div>{'\u20B9'} {netAmount}</div>
                     </div>
                     <div style={{ width: '100%', height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <div onMouseEnter={() => { setColor(' #00b594') }} onMouseLeave={() => { setColor(' #00e9bf') }} style={{ width: '100%', height: '70%', background: color, display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 10, fontSize: '80%', fontWeight: 600, cursor: 'pointer' }}>Proceed To Payment</div>
+                        <div onMouseEnter={() => { setColor(' #00b594') }} onMouseLeave={() => { setColor(' #00e9bf') }} style={{ width: '100%', height: '70%', background: color, display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 10, fontSize: '80%', fontWeight: 600, cursor: 'pointer' }} onClick={handlePayment}>Proceed To Payment</div>
                     </div>
                 </div>
             </div>

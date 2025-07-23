@@ -30,16 +30,6 @@ export default function UserLogin({open,setOpenDialog,openOtp,setOpenOtp,otpValu
     setOtpValue(otp)
     alert(otp)
     setOpenOtp(true)
-    /*var response=await postData('userinterface/userinterface_chk_mobile_email',{mobileno})
-     if(response.status) 
-     {
-         alert(true)
-     }
-     else
-     {
-         alert(false)
-     }    
-    */
   }
   const handleClose = () => {
     setOpenDialog(false)
@@ -69,7 +59,7 @@ export default function UserLogin({open,setOpenDialog,openOtp,setOpenOtp,otpValu
           </div>
           <div style={{ width: '100%', height: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center', color: ' #ffffff', fontSize: '90%' }}>Please enter your Email ID or Phone number</div>
           <div style={{ width: '100%', height: '15%', display: 'flex', justifyContent: 'center', alignItems: 'center', border: '2px solid #999999', borderRadius: 4 }}>
-            <input onChange={(e) => { setMobileNo(e.target.value) }} value={mobileNo} className="placeholdercolor" type="text" placeholder="Enter your Email ID or Phone Number" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', background: ' #191919', color: ' #ffffff', fontSize: '120%' }} />
+            <input onChange={(e) => { setMobileno(e.target.value) }} value={mobileno} className="placeholdercolor" type="text" placeholder="Enter your Email ID or Phone Number" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', background: ' #191919', color: ' #ffffff', fontSize: '120%' }} />
           </div>
           <div style={{ width: '100%', height: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             {check ? (<><CheckBoxOutlineBlankIcon onClick={() => { setCheck(false) }} style={{ color: ' #ffffff', fontSize: '140%', marginRight: 5 }} /></>) : (<><CheckBoxIcon onClick={() => { setCheck(true) }} style={{ color: ' #00e9bf', fontSize: '140%', marginRight: 5 }} /></>)}
@@ -78,7 +68,7 @@ export default function UserLogin({open,setOpenDialog,openOtp,setOpenOtp,otpValu
           <div style={{ width: '100%', height: '15%', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: smatches ? '65%' : '80%', color: ' #ffffff' }}>
             By continuing you agree to our <u style={{ marginRight: 5, marginLeft: 5, color: ' #00e9bf' }}> Terms of Use </u> & <u style={{ marginRight: 5, marginLeft: 5, color: ' #00e9bf' }}> Privacy Policy </u>
           </div>
-          <Button onClick={handleClick} onChange={(e) => setMobileno(e.target.value)} onMouseEnter={() => setButtonColor('#00b594')} onMouseLeave={() => setButtonColor('#12daa8')} style={{ width: '100%', height: '15%', background: buttonColor, borderRadius: 7, color: ' #000000', fontWeight: 650, fontSize: '80%' }}>Continue</Button>
+          <Button onClick={handleClick} onMouseEnter={() => setButtonColor('#00b594')} onMouseLeave={() => setButtonColor('#12daa8')} style={{ width: '100%', height: '15%', background: buttonColor, borderRadius: 7, color: ' #000000', fontWeight: 650, fontSize: '80%' }}>Continue</Button>
         </div>
       </div>
     </Dialog>
