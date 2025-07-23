@@ -8,7 +8,7 @@ import { useTheme } from '@mui/material/styles';
 import { useNavigate } from "react-router";
 import { postData,generateOtp } from "../../../backendservices/FetchNodeServices";
 
-export default function UserLogin({open,setOpenDialog,openOtp,setOpenOtp,otpValue,setOtpValue,number,setNumber}) {
+export default function UserLogin({open,setOpenDialog,openOtp,setOpenOtp,otpValue,setOtpValue,number,setNumber,setCLogin}) {
 
   const theme = useTheme();
   const md = useMediaQuery('(max-width:1200px)');
@@ -40,6 +40,9 @@ export default function UserLogin({open,setOpenDialog,openOtp,setOpenOtp,otpValu
      }    
     */
   }
+  const handleClose=()=>{
+    setOpenDialog(false) 
+  }
 
   return (<>
     <style>{`
@@ -51,7 +54,7 @@ export default function UserLogin({open,setOpenDialog,openOtp,setOpenOtp,otpValu
     <Dialog
       open={open}
       PaperProps={{ sx: { width: '525px', height: '406px', background: '#191919', borderRadius: 2, } }}>
-      <CloseIcon onClick={()=>setOpenDialog(false)} style={{ color: 'white', right: 6, position: 'absolute', top: 3, cursor: 'pointer' }} />
+      <CloseIcon onClick={handleClose} style={{ color: 'white', right: 6, position: 'absolute', top: 3, cursor: 'pointer' }} />
       <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <div style={{ width: smatches ? '90%' : '70%', height: '80%', }}>
           <div style={{ width: '100%', height: '15%', border: '2px solid #353535', borderRadius: 3, display: 'flex', justifyContent: 'space-evenly' }}>

@@ -9,11 +9,11 @@ import { useTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
 import { Badge, fabClasses } from '@mui/material';
 import { useNavigate } from 'react-router'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UserLogin from './user/UserLogin';
 import OTPComponent from './user/OTPComponent';
 
-export default function Header() {
+export default function Header({ cLogin, setCLogin }) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'))
     const product = useSelector((state) => state.cart)
@@ -21,17 +21,22 @@ export default function Header() {
     const navigate = useNavigate()
 
     const [open, setOpenDialog] = useState(false)
-        const [openOtp, setOpenOtp] = useState(false)
-        const [otpValue, setOtpValue] = useState('')
-    const [number,setNumber]=useState('')
+    const [openOtp, setOpenOtp] = useState(false)
+    const [otpValue, setOtpValue] = useState('')
+    const [number, setNumber] = useState('')
 
     const handleLogin = () => {
         setOpenDialog(true)
+        if (cLogin == true) { setCLogin(false) }
     }
 
+    useEffect(function () {
+        setOpenDialog(cLogin)
+    }, [cLogin])
+
     return (<>
-        <UserLogin open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} number={number} setNumber={setNumber}/>
-        <OTPComponent open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} number={number} setNumber={setNumber}/>
+        <UserLogin open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} number={number} setNumber={setNumber} setCLogin={setCLogin} />
+        <OTPComponent open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} number={number} setNumber={setNumber} />
 
         <div style={{ boxSizing: 'border-box', padding: 5, width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center', height: matches ? 'auto' : '9vh', background: '#000', boxShadow: '0 5px 15px rgba(0, 0, 0, 0.3)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', flexDirection: 'row', width: '100%' }}>

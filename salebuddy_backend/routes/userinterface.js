@@ -227,4 +227,21 @@ router.post('/userinterface_chk_mobile_email', function (req, res, next) {
     }
 });
 
+router.post('/userinterface_submit_mobile', function (req, res, next) {
+    try {
+        pool.query("insert into users(mobileno) values(?)", [req.body.mobileno], function (error, result) {
+            if (error) {
+                console.log(error)
+                res.status(201).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
+            }
+            else {
+                res.status(200).json({ status: true, message: 'Success..' })
+            }
+        })
+    }
+    catch (e) {
+        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
+    }
+});
+
 module.exports = router;

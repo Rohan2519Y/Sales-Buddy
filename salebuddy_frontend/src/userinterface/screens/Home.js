@@ -8,6 +8,7 @@ import { getData, postData } from "../../backendservices/FetchNodeServices"
 import ShowAdvertisment from "../components/ShowAdvertisment"
 import ShowTwoAds from "../components/ShowTwoAds"
 import ShowFourAds from "../components/ShowFourAds"
+import ServiceSlider from "../components/ServiceSlider"
 export default function Home() {
 
     const [brandList, setBrandList] = useState([])
@@ -63,6 +64,9 @@ export default function Home() {
         </div>
         <div style={{ width: '100%', height: '100%', overflowX: "hidden", background: ' #191919' }}>
             <MainSlider />
+        </div>
+        <div>
+            <ServiceSlider/>
         </div>
         <div>
             <ShowFourAds />

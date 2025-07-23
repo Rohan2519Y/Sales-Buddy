@@ -5,7 +5,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-export default function OrderSummary({ productData }) {
+export default function OrderSummary({ productData, setCLogin, cLogin }) {
 
     const theme = useTheme();
     const md = useMediaQuery('(max-width:1200px)');
@@ -14,9 +14,10 @@ export default function OrderSummary({ productData }) {
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
 
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const [discount, setDiscount] = useState(false)
     const [color, setColor] = useState(' #00e9bf')
+    const user = useSelector((state) => state.user)
     const product = useSelector((state) => state.cart)
     const keys = Object.keys(product)
 
@@ -32,12 +33,18 @@ export default function OrderSummary({ productData }) {
 
     var netAmount = totalAmount - totalSaving
 
+    const handleCheckout = () => {
+        if (JSON.stringify(user) == '{}') {
+            setCLogin(true)
+        }
+    }
+
     return (<>
         <div style={{ width: '100%', position: 'sticky', top: 50 }}>
             <div style={{ width: md ? '95%' : '65%', minHeight: discount ? 315 : 260, marginLeft: matches ? '' : 15, borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center', background: ' #ffffff', marginBottom: 30 }}>
                 <div style={{ width: '90%', height: '85%', }}>
                     <div style={{ width: '100%', height: 35, fontSize: md ? '1.65vw' : '120%', fontWeight: 700, }}>
-                        Order Summary ({ keys !== 0 && `${keys.length} items` })
+                        Order Summary ({keys !== 0 && `${keys.length} items`})
                     </div>
                     <div style={{ width: '100%', height: 45, display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: md ? '1.65vw' : '' }}>
                         <div>Original Price</div><div>{'\u20B9'} {totalAmount}</div>
@@ -69,7 +76,7 @@ export default function OrderSummary({ productData }) {
                         <div>Total</div><div>{'\u20B9'} {netAmount}</div>
                     </div>
                     <div style={{ width: '100%', height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <div onClick={()=>{navigate('/checkout')}} onMouseEnter={() => { setColor(' #00b594') }} onMouseLeave={() => { setColor(' #00e9bf') }} style={{ width: '100%', height: '70%', background: color, display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 10, fontSize: '80%', fontWeight: 600, cursor: 'pointer' }}>Checkout</div>
+                        <div onClick={handleCheckout} onMouseEnter={() => { setColor(' #00b594') }} onMouseLeave={() => { setColor(' #00e9bf') }} style={{ width: '100%', height: '70%', background: color, display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 10, fontSize: '80%', fontWeight: 600, cursor: 'pointer' }}>Checkout</div>
                     </div>
                 </div>
             </div>

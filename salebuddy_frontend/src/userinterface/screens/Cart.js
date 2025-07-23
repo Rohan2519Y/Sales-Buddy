@@ -17,14 +17,16 @@ export default function Cart() {
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
 
-    const [refresh,setRefresh]=useState('')
-    var product=useSelector((state)=>state.cart)
-    var productData=Object.values(product)
+    const [refresh, setRefresh] = useState('')
+    var product = useSelector((state) => state.cart)
+    var productData = Object.values(product)
+
+    const [cLogin, setCLogin] = useState(false)
 
     return (<>
         <div style={{ width: '100%', height: '100%', background: ' #f9f9f9', fontFamily: '"Inter", sans-serif' }}>
             <div>
-                <Header />
+                <Header cLogin={cLogin} setCLogin={setCLogin} />
             </div>
             <div style={{ width: '100%', height: 100, display: 'flex', justifyContent: 'center' }}>
                 <div style={{ width: md ? '95%' : '75%', height: '100%', display: 'flex', alignItems: 'center', fontSize: '140%', fontWeight: 700, }}>Your Cart</div>
@@ -34,8 +36,8 @@ export default function Cart() {
                     <div><ApplyCoupon /></div>
                     <div><ShowProductCart refresh={refresh} setRefresh={setRefresh} productData={productData} /></div>
                 </div>
-                <div style={{ width: matches?'100%':'35%',  }}>
-                    <OrderSummary productData={productData}/>
+                <div style={{ width: matches ? '100%' : '35%', }}>
+                    <OrderSummary productData={productData} cLogin={cLogin} setCLogin={setCLogin} />
                 </div>
             </div>
             <div>

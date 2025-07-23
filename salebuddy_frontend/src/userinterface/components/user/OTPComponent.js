@@ -3,10 +3,12 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useState, useEffect, useRef } from "react";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-
-export default function OTPComponent({ openOtp, setOpenOtp, otpValue, setOtpValue, setOpenDialog, number, setNumber }) {
+import { postData } from "../../../backendservices/FetchNodeServices";
+import { useDispatch } from "react-redux";
+export default function OTPComponent({ mobileNo, setMobileNo, openOtp, setOpenOtp, otpValue, setOtpValue, number }) {
 
     const theme = useTheme();
+    var dispatch = useDispatch()
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
 
     const [seconds, setSeconds] = useState(30);
@@ -16,10 +18,18 @@ export default function OTPComponent({ openOtp, setOpenOtp, otpValue, setOtpValu
     const [inputArr, setInputArr] = useState(new Array(otpcount).fill(''));
     const ref = useRef([]);
     const currentOtp = inputArr.join('')
-    const handleCheckOtp = () => {
+
+    const handleCheckOtp = async () => {
         alert(otpValue, currentOtp)
         if (otpValue == currentOtp) {
-            alert("Ok")
+            var response = await postData('userinterface/userinterface_chk_mobile_email', { number })
+            if (response.status) {
+                dispatch({ type: 'ADD_USER', payload: [number, response.data] })
+            }
+            else {
+                var res = postData('userinterface/userinterface_submit_mobile', { mobileno: number })
+                dispatch({ type: 'ADD_USER', payload: [number, { mobileno: number }] })
+            }
             setOpenOtp(false)
         }
         else { alert("Invalid Otp") }
@@ -40,12 +50,7 @@ export default function OTPComponent({ openOtp, setOpenOtp, otpValue, setOtpValu
             return () => clearTimeout(timer)
         }
     }, [openOtp])
-
-    const handleOTPClose = () => {
-        setOpenOtp(false)
-        setOpenDialog(true)
-    }
-
+    const handleOTPClose = () => { setOpenOtp(false) }
     const handleChange = (e, i) => {
         const value = e.target.value;
 
@@ -80,7 +85,7 @@ export default function OTPComponent({ openOtp, setOpenOtp, otpValue, setOtpValu
             <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <div style={{ width: smatches ? '90%' : '70%', height: '80%', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
                     <div style={{ width: '100%', height: '10%', fontSize: '120%', fontWeight: 700, color: ' #ffffff', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>VERIFY WITH OTP</div>
-                    <div style={{ width: '100%', height: '25%', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '100%', color: ' #ffffff' }}>Sent to {number}</div>
+                    <div style={{ width: '100%', height: '25%', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '100%', color: ' #ffffff' }}>Sent to {mobileNo}</div>
                     <div style={{ width: '80%', height: '25%', display: 'flex', justifyContent: 'space-evenly' }}>
                         {inputArr.map((input, i) => (
                             <input
