@@ -154,7 +154,7 @@ export default function ProfilePage({ number }) {
                         <div style={{ display: 'flex', flexDirection: 'column', width: sm ? '100%' : '50%', height: errorE ? 112 : 90 }}>
                             <div style={{ width: sm ? '100%' : '97%', fontSize: '100%', height: 38, marginBottom: 'auto', color: ' #000000', display: 'flex', alignItems: 'center' }}>Email Id *</div>
                             <div style={{ width: sm ? '100%' : '97%', height: 55, background: ' #f6f6f6', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 8, border: errorE ? '1px solid red' : '1px solid #f6f6f6', position: 'relative' }}>
-                                <input onBlur={() => setTouchedE(true)} onChange={(e) => setEmail(e.target.value)} value={email} className="placeholdercolor" type="text" placeholder="Enter Middle Name" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '105%', background: ' #f6f6f6' }} />
+                                <input onBlur={() => setTouchedE(true)} onChange={(e) => setEmail(e.target.value)} value={email} className="placeholdercolor" type="text" placeholder="Enter Email ID" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '105%', background: ' #f6f6f6' }} />
                                 <EditOutlinedIcon style={{ position: 'absolute', right: '3%', top: '25%', fontSize: '150%', cursor: 'pointer' }} />
                             </div>
                             {errorE && (

@@ -5,7 +5,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-export default function OrderSummary({ productData, setCLogin, cLogin }) {
+export default function OrderSummary({productData,setMobileNo,mobileNo,open,setOpenDialog,openOtp, setOpenOtp,otpValue,setOtpValue}) {
 
     const theme = useTheme();
     const md = useMediaQuery('(max-width:1200px)');
@@ -35,7 +35,7 @@ export default function OrderSummary({ productData, setCLogin, cLogin }) {
 
     const handleCheckout = () => {
         if (JSON.stringify(user) == '{}') {
-            setCLogin(true)
+            setOpenDialog(true)
         }
     }
 

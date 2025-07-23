@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import UserLogin from './user/UserLogin';
 import OTPComponent from './user/OTPComponent';
 
-export default function Header({ cLogin, setCLogin }) {
+export default function Header({ cLogin, setCLogin, screencart }) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'))
     const product = useSelector((state) => state.cart)
@@ -24,10 +24,13 @@ export default function Header({ cLogin, setCLogin }) {
     const [openOtp, setOpenOtp] = useState(false)
     const [otpValue, setOtpValue] = useState('')
     const [number, setNumber] = useState('')
+    const [screen, setScreen] = useState('header')
 
     const handleLogin = () => {
         setOpenDialog(true)
-        if (cLogin == true) { setCLogin(false) }
+        if (cLogin == true) {
+            setCLogin(false)
+        }
     }
 
     useEffect(function () {
@@ -36,7 +39,7 @@ export default function Header({ cLogin, setCLogin }) {
 
     return (<>
         <UserLogin open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} number={number} setNumber={setNumber} setCLogin={setCLogin} />
-        <OTPComponent open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} number={number} setNumber={setNumber} />
+        <OTPComponent screen={screen} setScreen={setScreen} screencart={screencart} open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} number={number} setNumber={setNumber} />
 
         <div style={{ boxSizing: 'border-box', padding: 5, width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center', height: matches ? 'auto' : '9vh', background: '#000', boxShadow: '0 5px 15px rgba(0, 0, 0, 0.3)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', flexDirection: 'row', width: '100%' }}>
@@ -51,7 +54,8 @@ export default function Header({ cLogin, setCLogin }) {
                     </div>}
                     <div style={{ marginLeft: matches ? 'auto' : 0, marginRight: 10 }}>
                         <PersonIcon style={{ color: 'white', fontSize: 20, margin: '0 5 0 5', cursor: 'pointer' }} onClick={handleLogin} />
-                        <Badge badgeContent={keys.length} color="primary" style={{ marginTop: -10 }}>
+                        <Badge invisible={keys.length === 0} badgeContent={keys.length} color="secondary"
+                            sx={{ '& .MuiBadge-badge': { backgroundColor: '#12DAA8', color: '#000' } }}>
                             <ShoppingCartIcon onClick={() => navigate('/cart')} style={{ color: 'white', fontSize: 20, margin: '0 5 0 5', cursor: 'pointer' }} />
                         </Badge>
                     </div>

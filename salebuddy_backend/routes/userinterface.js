@@ -261,4 +261,42 @@ router.post('/userinterface_submit_mobile', function (req, res, next) {
     }
 });
 
+router.post('/userinterface_chk_address', function (req, res, next) {
+    try {
+        pool.query("select * from usersaddress where (emailid=? or mobileno=?)", [req.body.mobileno, req.body.mobileno], function (error, result) {
+            if (error) {
+                res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
+            }
+            else {
+              
+                if(result.length>=1)
+                res.status(200).json({ status: true, message: 'Success..',data:result})
+                else
+                res.status(200).json({ status: false, message: 'Fail',data:[]})    
+
+            }
+        })
+    }
+    catch (e) {
+        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
+    }
+});
+
+router.post('/userinterface_user_address_submit', function (req, res, next) {
+    try {
+        pool.query("insert into useraddress(emailid, mobileno, address, state, city, pincode, landmark, username, gender)values(?,?,?,?,?,?,?,?,?) ", [req.body.emailid, req.body.mobileno, req.body.address, req.body.state, req.body.city, req.body.pincode, req.body.landmark, req.body.username, req.body.gender], function (error, result) {
+            if (error) {
+                res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
+            }
+            else {
+                console.log(result)
+                res.status(200).json({ status: true, message: 'Success..' })
+            }
+        })
+    }
+    catch (e) {
+        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
+    }
+});
+
 module.exports = router;

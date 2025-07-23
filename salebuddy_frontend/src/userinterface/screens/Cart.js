@@ -7,7 +7,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { useState } from "react";
 import { useSelector } from "react-redux";
-
+import Login from "../components/user/UserLogin";
+import OTPComponent from "../components/user/OTPComponent";
 export default function Cart() {
 
     const theme = useTheme();
@@ -16,17 +17,18 @@ export default function Cart() {
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
-
-    const [refresh, setRefresh] = useState('')
+    const [open, setOpenDialog] = useState(false)
+    const [openOtp, setOpenOtp] = useState(false)
+    const [otpValue, setOtpValue] = useState('')
+    const [mobileNo, setMobileNo] = useState('')
+    const [screen, setScreen] = useState('cart')
+    const [refresh, setRefresh] = useState(false)
     var product = useSelector((state) => state.cart)
     var productData = Object.values(product)
-
-    const [cLogin, setCLogin] = useState(false)
-
     return (<>
         <div style={{ width: '100%', height: '100%', background: ' #f9f9f9', fontFamily: '"Inter", sans-serif' }}>
             <div>
-                <Header cLogin={cLogin} setCLogin={setCLogin} />
+                <Header />
             </div>
             <div style={{ width: '100%', height: 100, display: 'flex', justifyContent: 'center' }}>
                 <div style={{ width: md ? '95%' : '75%', height: '100%', display: 'flex', alignItems: 'center', fontSize: '140%', fontWeight: 700, }}>Your Cart</div>
@@ -37,7 +39,9 @@ export default function Cart() {
                     <div><ShowProductCart refresh={refresh} setRefresh={setRefresh} productData={productData} /></div>
                 </div>
                 <div style={{ width: matches ? '100%' : '35%', }}>
-                    <OrderSummary productData={productData} cLogin={cLogin} setCLogin={setCLogin} />
+                    <OrderSummary productData={productData} setMobileNo={setMobileNo} mobileNo={mobileNo} open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} />
+                    <Login setMobileNo={setMobileNo} mobileNo={mobileNo} open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} />
+                    <OTPComponent setMobileNo={setMobileNo} mobileNo={mobileNo} open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} screen={screen} setScreen={setScreen} />
                 </div>
             </div>
             <div>

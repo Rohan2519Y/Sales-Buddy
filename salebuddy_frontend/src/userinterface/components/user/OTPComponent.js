@@ -5,10 +5,12 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { postData } from "../../../backendservices/FetchNodeServices";
 import { useDispatch } from "react-redux";
-export default function OTPComponent({ mobileNo, setMobileNo, openOtp, setOpenOtp, otpValue, setOtpValue, number }) {
-
+import { useNavigate } from "react-router";
+export default function OTPComponent({mobileNo,setMobileNo, openOtp,setOpenOtp,otpValue,setOtpValue,number,screen,setScreen}) {
+     
     const theme = useTheme();
-    var dispatch = useDispatch()
+    var dispatch=useDispatch()
+    var navigate=useNavigate()
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
 
     const [seconds, setSeconds] = useState(30);
@@ -18,21 +20,38 @@ export default function OTPComponent({ mobileNo, setMobileNo, openOtp, setOpenOt
     const [inputArr, setInputArr] = useState(new Array(otpcount).fill(''));
     const ref = useRef([]);
     const currentOtp = inputArr.join('')
+    const handleCheckOtp=async()=>{
+        alert(otpValue,currentOtp)
+     if(otpValue==currentOtp)
+     { 
 
-    const handleCheckOtp = async () => {
-        alert(otpValue, currentOtp)
-        if (otpValue == currentOtp) {
-            var response = await postData('userinterface/userinterface_chk_mobile_email', { number })
-            if (response.status) {
-                dispatch({ type: 'ADD_USER', payload: [number, response.data] })
-            }
-            else {
-                var res = postData('userinterface/userinterface_submit_mobile', { mobileno: number })
-                dispatch({ type: 'ADD_USER', payload: [number, { mobileno: number }] })
-            }
-            setOpenOtp(false)
+        var response=await postData('userinterface/userinterface_chk_mobile_email',{mobileNo})
+        if(response.status) 
+        {
+              dispatch({type:'ADD_USER',payload:[mobileNo,response.data]})
         }
-        else { alert("Invalid Otp") }
+        else
+        {
+            var res=postData('userinterface/userinterface_submit_mobile',{mobileno:mobileNo})
+             dispatch({type:'ADD_USER',payload:[mobileNo,{mobileno:mobileNo}]})
+        }    
+    
+
+ 
+   setOpenOtp(false)
+
+   if(screen=='cart')
+   {
+           
+            
+            navigate('/checkout')
+            
+    
+   }
+     }
+     else
+     {alert("Invalid Otp")}
+
     }
 
     useEffect(() => {
@@ -50,7 +69,7 @@ export default function OTPComponent({ mobileNo, setMobileNo, openOtp, setOpenOt
             return () => clearTimeout(timer)
         }
     }, [openOtp])
-    const handleOTPClose = () => { setOpenOtp(false) }
+    const handleOTPClose=()=>{ setOpenOtp(false)}
     const handleChange = (e, i) => {
         const value = e.target.value;
 
