@@ -12,6 +12,7 @@ import ServiceSlider from "../components/ServiceSlider"
 export default function Home() {
 
     const [brandList, setBrandList] = useState([])
+    const [serviceList, setServiceList] = useState([])
     const [listProduct, setListProduct] = useState([])
     const [listProductLatest, setListProductLatest] = useState([])
 
@@ -19,6 +20,16 @@ export default function Home() {
         var response = await getData('userinterface/userinterface_fetch_brands')
         if (response.status) {
             setBrandList(response.data)
+        }
+        else {
+            alert(response.message)
+        }
+    }
+
+    const fetchServices = async () => {
+        var response = await getData('userinterface/userinterface_fetch_services')
+        if (response.status) {
+            setServiceList(response.data)
         }
         else {
             alert(response.message)
@@ -37,6 +48,7 @@ export default function Home() {
 
     useEffect(function () {
         fetchBrands()
+        fetchServices()
         fetchAllProducts('Hot Deals')
         fetchAllProducts('Latest Launches')
     }, [])
@@ -66,7 +78,7 @@ export default function Home() {
             <MainSlider />
         </div>
         <div>
-            <ServiceSlider/>
+            <ServiceSlider data={serviceList}/>
         </div>
         <div>
             <ShowFourAds />

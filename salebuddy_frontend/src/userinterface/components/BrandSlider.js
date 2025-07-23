@@ -1,4 +1,3 @@
-import React from "react";
 import Slider from "react-slick";
 import { serverURL } from "../../backendservices/FetchNodeServices";
 import useMediaQuery from '@mui/material/useMediaQuery';
