@@ -7,7 +7,9 @@ import { useState, useEffect } from 'react'
 import { Typography } from '@mui/material'
 import Radio from '@mui/material/Radio'
 
-export default function Address() {
+export default function Address({nickName, setNickName,pin, setPin,address, setAddress,landmark, setLandmark,area, setArea,state, setState,city, setCity,handleSubmit,
+    errorN, setErrorN, touchedN, setTouchedN, errorP, setErrorP, touchedP, setTouchedP, errorA, setErrorA, touchedA, setTouchedA, errorLa, setErrorLa, touchedLa, setTouchedLa, errorAr, setErrorAr, touchedAr, setTouchedAr, errorS, setErrorS, touchedS, setTouchedS, errorC, setErrorC, touchedC, setTouchedC
+}) {
 
     const theme = useTheme()
     const md = useMediaQuery('(max-width:1300px)')
@@ -22,33 +24,7 @@ export default function Address() {
         setSelectedValue(value)
     }
 
-    const [nickName, setNickName] = useState('')
-    const [errorN, setErrorN] = useState('')
-    const [touchedN, setTouchedN] = useState(false)
-
-    const [pin, setPin] = useState('')
-    const [errorP, setErrorP] = useState('')
-    const [touchedP, setTouchedP] = useState(false)
-
-    const [address, setAddress] = useState('')
-    const [errorA, setErrorA] = useState('')
-    const [touchedA, setTouchedA] = useState(false)
-
-    const [landmark, setLandmark] = useState('')
-    const [errorL, setErrorL] = useState('')
-    const [touchedL, setTouchedL] = useState(false)
-
-    const [area, setArea] = useState('')
-    const [errorAr, setErrorAr] = useState('')
-    const [touchedAr, setTouchedAr] = useState(false)
-
-    const [state, setState] = useState('')
-    const [errorS, setErrorS] = useState('')
-    const [touchedS, setTouchedS] = useState(false)
-
-    const [city, setCity] = useState('')
-    const [errorC, setErrorC] = useState('')
-    const [touchedC, setTouchedC] = useState(false)
+    
 
     useEffect(() => {
         if (touchedN && nickName.length === 0) {
@@ -66,10 +42,10 @@ export default function Address() {
         } else {
             setErrorA('')
         }
-        if (touchedL && landmark.length === 0) {
-            setErrorL('Landmark is required')
+        if (touchedLa && landmark.length === 0) {
+            setErrorLa('Landmark is required')
         } else {
-            setErrorL('')
+            setErrorLa('')
         }
         if (touchedAr && area.length === 0) {
             setErrorAr('Locality / Sector / Area is Required')
@@ -86,7 +62,7 @@ export default function Address() {
         } else {
             setErrorC('')
         }
-    }, [nickName, pin, address, landmark, area, state, city, touchedP, touchedN, touchedA, touchedL, touchedAr, touchedS, touchedC])
+    }, [nickName, pin, address, landmark, area, state, city, touchedP, touchedN, touchedA, touchedLa, touchedAr, touchedS, touchedC])
     return (<>
         <style>{`
         .placeholdercolor::placeholder {
@@ -137,15 +113,15 @@ export default function Address() {
                                 </Typography>
                             )}
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', width: sm ? '100%' : '50%', height: errorL ? 112 : 90 }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', width: sm ? '100%' : '50%', height: errorLa ? 112 : 90 }}>
                             <div style={{ width: sm ? '100%' : '97%', fontSize: '100%', height: 38, marginBottom: 'auto', color: ' #000000', display: 'flex', alignItems: 'center' }}>Landmark*
                             </div>
-                            <div style={{ width: sm ? '100%' : '97%', height: 55, background: ' #f6f6f6', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 8, border: errorL ? '1px solid red' : '1px solid #f6f6f6', position: 'relative' }}>
-                                <input onBlur={() => setTouchedL(true)} onChange={(e) => setLandmark(e.target.value)} value={landmark} className="placeholdercolor" type="text" placeholder="Enter Landmark" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '105%', background: ' #f6f6f6' }} />
+                            <div style={{ width: sm ? '100%' : '97%', height: 55, background: ' #f6f6f6', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 8, border: errorLa ? '1px solid red' : '1px solid #f6f6f6', position: 'relative' }}>
+                                <input onBlur={() => setTouchedLa(true)} onChange={(e) => setLandmark(e.target.value)} value={landmark} className="placeholdercolor" type="text" placeholder="Enter Landmark" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '105%', background: ' #f6f6f6' }} />
                             </div>
-                            {errorL && (
+                            {errorLa && (
                                 <Typography sx={{ width: sm ? '100%' : '97%', fontSize: '90%', color: '#f44336', fontWeight: 600 }} >
-                                    {errorL}
+                                    {errorLa}
                                 </Typography>
                             )}
                         </div>

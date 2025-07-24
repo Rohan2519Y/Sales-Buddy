@@ -31,15 +31,133 @@ export default function Checkout() {
     var user = useSelector((state) => state.user)
     var productData = Object.values(product)
 
-    const fetchUserAddress = async () => {
-        var res = await postData('userinterface/userinterface_user_address_submit', { mobileno: user.mobileno })
-        setUserAddress(res?.data ? res.data : [])
+    const [title, setTitle] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const [middleName, setMiddleName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [mobile, setMobile] = useState(user.mobileno)
+    const [email, setEmail] = useState('')
+    const [nickName, setNickName] = useState('')
+    const [pin, setPin] = useState('')
+    const [address, setAddress] = useState('')
+    const [landmark, setLandmark] = useState('')
+    const [area, setArea] = useState('')
+    const [state, setState] = useState('')
+    const [city, setCity] = useState('')
+    const [gender, setGender] = useState(null)
+
+    const [errorF, setErrorF] = useState('')
+    const [errorL, setErrorL] = useState('')
+    const [errorM, setErrorM] = useState('')
+    const [errorE, setErrorE] = useState('')
+    const [touchedF, setTouchedF] = useState(false)
+    const [touchedL, setTouchedL] = useState(false)
+    const [touchedM, setTouchedM] = useState(false)
+    const [touchedE, setTouchedE] = useState(false)
+
+    const [errorN, setErrorN] = useState('')
+    const [errorC, setErrorC] = useState('')
+    const [errorP, setErrorP] = useState('')
+    const [errorA, setErrorA] = useState('')
+    const [errorLa, setErrorLa] = useState('')
+    const [errorAr, setErrorAr] = useState('')
+    const [errorS, setErrorS] = useState('')
+    const [touchedN, setTouchedN] = useState(false)
+    const [touchedP, setTouchedP] = useState(false)
+    const [touchedA, setTouchedA] = useState(false)
+    const [touchedLa, setTouchedLa] = useState(false)
+    const [touchedAr, setTouchedAr] = useState(false)
+    const [touchedS, setTouchedS] = useState(false)
+    const [touchedC, setTouchedC] = useState(false)
+
+    const handleSubmit = async () => {
+        var err = false
+        if (touchedN || nickName.length == 0) {
+            setErrorN('Address Nickname is Required')
+            err = true
+        } else {
+            setErrorN('')
+        }
+        if (touchedP || pin.length === 0) {
+            setErrorP('Pin Code is required')
+            err = true
+        } else {
+            setErrorP('')
+        }
+        if (touchedA || address.length === 0) {
+            setErrorA('Address is Required')
+            err = true
+        } else {
+            setErrorA('')
+        }
+        if (touchedLa || landmark.length === 0) {
+            setErrorLa('Landmark is required')
+            err = true
+        } else {
+            setErrorLa('')
+        }
+        if (touchedAr || area.length === 0) {
+            setErrorAr('Locality / Sector / Area is Required')
+            err = true
+        } else {
+            setErrorAr('')
+        }
+        if (touchedS || state.length === 0) {
+            setErrorS('State is Required')
+            err = true
+        } else {
+            setErrorS('')
+        }
+        if (touchedC || city.length === 0) {
+            setErrorC('City is Required')
+            err = true
+        } else {
+            setErrorC('')
+        }
+        if (touchedF || firstName.length === 0) {
+            setErrorF('First Name is required')
+            err = true
+        } else {
+            setErrorF('')
+        }
+        if (touchedL || lastName.length === 0) {
+            setErrorL('Last Name is required')
+            err = true
+        } else {
+            setErrorL('')
+        }
+        if (touchedM || mobile?.length === 0) {
+            setErrorM('Mobile Number is Required')
+            err = true
+        } else {
+            setErrorM('')
+        }
+        if (touchedE || email?.length === 0) {
+            setErrorE('Email is required')
+            err = true
+        } else {
+            setErrorE('')
+        }
+        if (err === false) {
+            alert(err)
+            var res = await postData('userinterface/userinterface_user_address_submit', { emailid: email, mobileno: mobile, address, state, city, pincode: pin, landmark, username: `${title} ${firstName} ${middleName} ${lastName}`, gender, area, nickName })
+            if (res.status) {
+                alert('Submit')
+            }
+            else {
+                alert('Fail')
+            }
+        }
     }
 
+    const fetchUserAddress = async () => {
+        var res = await postData('userinterface/userinterface_chk_address', { mobileno: user.mobileno })
+        setUserAddress(res.data)
+    }
     useEffect(function () {
+
         fetchUserAddress()
     }, [])
-
     return (<>
         <div style={{ width: '100%', height: '100%', background: ' #f9f9f9', fontFamily: '"Inter", sans-serif' }}>
             <div>
@@ -47,21 +165,18 @@ export default function Checkout() {
             </div>
             <div style={{ width: '100%', minHeight: 500, display: 'flex', flexDirection: md ? 'column' : '', marginTop: 25 }}>
                 <div style={{ width: md ? '100%' : '65%', display: 'flex', flexDirection: 'column' }}>
-                    {userAddress?.length === 0 ?
-                        <>
-                            <ShippingInfo />
-                            <ProfilePage />
-                            <Address />
-                            <Contact />
-                        </>
-                        :
-                        <SubmittedAddress />
-                    }
+                    {userAddress?.length == 0 ? <><ShippingInfo />
+                        <ProfilePage title={title}  setTitle={setTitle} firstName={firstName} setFirstName={setFirstName} middleName={middleName} setMiddleName={setMiddleName} lastName={lastName} gender={gender} setGender={setGender} setLastName={setLastName} mobile={mobile} setMobile={setMobile} email={email} setEmail={setEmail}
+                            errorF={errorF} setErrorF={setErrorF} touchedF={touchedF} setTouchedF={setTouchedF} errorL={errorL} setErrorL={setErrorL} touchedL={touchedL} setTouchedL={setTouchedL} errorM={errorM} setErrorM={setErrorM} touchedM={touchedM} setTouchedM={setTouchedM} errorE={errorE} setErrorE={setErrorE} touchedE={touchedE} setTouchedE={setTouchedE} />
+                        <Address nickName={nickName}  setNickName={setNickName} pin={pin} setPin={setPin} address={address} setAddress={setAddress} landmark={landmark} setLandmark={setLandmark} area={area} setArea={setArea} state={state} setState={setState} city={city} setCity={setCity}
+                            errorN={errorN} setErrorN={setErrorN} touchedN={touchedN} setTouchedN={setTouchedN} errorP={errorP} setErrorP={setErrorP} touchedP={touchedP} setTouchedP={setTouchedP} errorA={errorA} setErrorA={setErrorA} touchedA={touchedA} setTouchedA={setTouchedA} errorLa={errorLa} setErrorLa={setErrorLa} touchedLa={touchedLa} setTouchedL={setTouchedLa} errorAr={errorAr} setErrorAr={setErrorAr} touchedAr={touchedAr} setTouchedAr={setTouchedAr} errorS={errorS} setErrorS={setErrorS} touchedS={touchedS} setTouchedS={setTouchedS} errorC={errorC} setErrorC={setErrorC} touchedC={touchedC} setTouchedC={setTouchedC} />
+                        <Contact /></> :
+                        <SubmittedAddress />}
                     <Delivery refresh={refresh} setRefresh={setRefresh} productData={productData} />
                     <GST />
                 </div>
                 <div style={{ width: md ? '100%' : '35%', }}>
-                    <CheckoutOrder userStatus={userAddress?.length} productData={productData} />
+                    <CheckoutOrder handleSubmit={handleSubmit} userStatus={userAddress?.length} productData={productData} />
                 </div>
             </div>
             <div>

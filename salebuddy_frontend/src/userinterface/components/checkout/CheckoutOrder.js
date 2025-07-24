@@ -4,7 +4,7 @@ import { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
-export default function CheckoutOrder({userStatus, productData }) {
+export default function CheckoutOrder({userStatus, productData,handleSubmit }) {
 
     const theme = useTheme();
     const md = useMediaQuery('(max-width:1200px)');
@@ -30,7 +30,7 @@ export default function CheckoutOrder({userStatus, productData }) {
 
     var netAmount = totalAmount - totalSaving
    const handlePayment=async()=>{
-     
+     handleSubmit()
 
    }
     return (<>

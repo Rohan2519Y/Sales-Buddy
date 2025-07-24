@@ -10,7 +10,9 @@ import { useState, useEffect } from 'react'
 import { Typography } from '@mui/material'
 import Radio from '@mui/material/Radio'
 
-export default function ProfilePage({ number }) {
+export default function ProfilePage({ gender, setGender, title, setTitle, firstName, setFirstName, middleName, setMiddleName, lastName, setLastName, mobile, setMobile, email, setEmail, err, handleSubmit,
+    errorF, setErrorF, touchedF, setTouchedF, errorM, setErrorM, touchedM, setTouchedM, errorE, setErrorE, touchedE, setTouchedE,errorL, setErrorL, touchedL, setTouchedL
+}) {
 
     const theme = useTheme()
     const md = useMediaQuery('(max-width:1300px)')
@@ -19,34 +21,13 @@ export default function ProfilePage({ number }) {
     const smatches = useMediaQuery(theme.breakpoints.down('sm'))
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)')
 
-    const [title,setTitle]=useState('')
-    
-    const [firstName, setFirstName] = useState('')
-    const [errorF, setErrorF] = useState('')
-    const [touchedF, setTouchedF] = useState(false)
-
-    const [middleName, setMiddleName] = useState('')
-
-    const [lastName, setLastName] = useState('')
-    const [errorL, setErrorL] = useState('')
-    const [touchedL, setTouchedL] = useState(false)
-
-    const [mobile, setMobile] = useState('')
-    const [errorM, setErrorM] = useState('')
-    const [touchedM, setTouchedM] = useState(false)
-
-    const [email, setEmail] = useState('')
-    const [errorE, setErrorE] = useState('')
-    const [touchedE, setTouchedE] = useState(false)
-
-    const [selectedValue, setSelectedValue] = useState(null)
     const [buttonColor, setButtonColor] = useState('#12daa8')
 
     const handleChange = (value) => {
-        setSelectedValue(value)
+        setGender(value)
     }
 
-    useEffect(() => {
+    useEffect(function () {
         if (touchedF && firstName.length === 0) {
             setErrorF('First Name is required')
         } else {
@@ -67,7 +48,7 @@ export default function ProfilePage({ number }) {
         } else {
             setErrorE('')
         }
-    }, [firstName, lastName, mobile, email, touchedF, touchedL, touchedE, touchedM])
+    }, [firstName, lastName, mobile, email, touchedF, touchedL, touchedE, touchedM, ])
 
     return (<>
 
@@ -78,8 +59,8 @@ export default function ProfilePage({ number }) {
         }
       `}</style>
 
-        <div style={{ display: 'flex', width: '100%', alignItems: md?'center':'flex-end', flexDirection: 'column' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: md?'95%':'80%', height: '100%', background: ' #ffffff' }}>
+        <div style={{ display: 'flex', width: '100%', alignItems: md ? 'center' : 'flex-end', flexDirection: 'column' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: md ? '95%' : '80%', height: '100%', background: ' #ffffff' }}>
                 <div style={{ display: 'flex', width: '95%', height: '100%', flexDirection: 'column' }}>
                     <div style={{ display: 'flex', width: '100%', height: 40, alignItems: 'center', fontWeight: 700, fontSize: '100%' }}>Contact Information</div>
                     <div style={{ width: '100%', height: sm ? 200 : 105, display: 'flex', justifyContent: 'space-between', flexDirection: sm ? 'column' : '' }}>
@@ -88,12 +69,12 @@ export default function ProfilePage({ number }) {
                             <Select displayEmpty
                                 sx={{ width: sm ? '100%' : '97%', height: 55, border: '1px solid #f6f6f6', backgroundColor: '#f6f6f6', borderRadius: 2.2, color: '#000000', pl: 1, fontSize: '120%', '.MuiSvgIcon-root': { color: 'transparent' }, '.MuiOutlinedInput-notchedOutline': { border: 'none' } }}
                                 MenuProps={{ PaperProps: { sx: { backgroundColor: '#ffffff', color: '#000', borderRadius: 1.2, boxShadow: '0px 4px 12px rgba(0,0,0,0.15)', fontWeight: 600 } } }}>
-                                <MenuItem onChange={(e)=>setTitle(e.target.value)} value="Mr" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Mr</MenuItem>
-                                <MenuItem onChange={(e)=>setTitle(e.target.value)} value="Mrs" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Mrs</MenuItem>
-                                <MenuItem onChange={(e)=>setTitle(e.target.value)} value="Miss" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Miss</MenuItem>
-                                <MenuItem onChange={(e)=>setTitle(e.target.value)} value="Ms" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Ms</MenuItem>
-                                <MenuItem onChange={(e)=>setTitle(e.target.value)} value="Dr" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Dr</MenuItem>
-                                <MenuItem onChange={(e)=>setTitle(e.target.value)} value="Prof" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Prof</MenuItem>
+                                <MenuItem onChange={(e) => setTitle(e.target.value)} value="Mr" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Mr</MenuItem>
+                                <MenuItem onChange={(e) => setTitle(e.target.value)} value="Mrs" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Mrs</MenuItem>
+                                <MenuItem onChange={(e) => setTitle(e.target.value)} value="Miss" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Miss</MenuItem>
+                                <MenuItem onChange={(e) => setTitle(e.target.value)} value="Ms" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Ms</MenuItem>
+                                <MenuItem onChange={(e) => setTitle(e.target.value)} value="Dr" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Dr</MenuItem>
+                                <MenuItem onChange={(e) => setTitle(e.target.value)} value="Prof" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Prof</MenuItem>
                             </Select>
                             <ArrowDropDownIcon style={{ position: 'absolute', right: '6%', top: '50%', color: ' #666666', fontSize: '200%', pointerEvents: 'none' }} />
                         </div>
@@ -132,10 +113,10 @@ export default function ProfilePage({ number }) {
                     </div>
 
                     <div style={{ width: '100%', height: sm ? 60 : 50, display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: sm ? 5 : '' }}>
-                        <div style={{ display: 'flex' }}><Radio checked={selectedValue == 'Female'} onChange={() => handleChange('Female')} sx={{ color: '#000000', '&.Mui-checked': { color: ' #12daa8' } }} /><div style={{ display: 'flex', alignItems: 'center', color: '#000000', fontSize: '100%' }}>Female</div></div>
-                        <div style={{ display: 'flex' }}><Radio checked={selectedValue == 'Male'} onChange={() => handleChange('Male')} sx={{ color: '#000000', '&.Mui-checked': { color: ' #12daa8' } }} /><div style={{ display: 'flex', alignItems: 'center', color: '#000000', fontSize: '100%' }}>Male</div></div>
-                        <div style={{ display: 'flex' }}><Radio checked={selectedValue == 'Transgender'} onChange={() => handleChange('Transgender')} sx={{ color: '#000000', '&.Mui-checked': { color: ' #12daa8' } }} /><div style={{ display: 'flex', alignItems: 'center', color: '#000000', fontSize: '100%' }}>Transgender</div></div>
-                        <div style={{ display: 'flex' }}><Radio checked={selectedValue == 'I’d rather not say'} onChange={() => handleChange('I’d rather not say')} sx={{ color: '#000000', '&.Mui-checked': { color: ' #12daa8' } }} /><div style={{ display: 'flex', alignItems: 'center', color: '#000000', fontSize: '100%' }}>I’d rather not say</div></div>
+                        <div style={{ display: 'flex' }}><Radio checked={gender == 'Female'} onChange={() => handleChange('Female')} sx={{ color: '#000000', '&.Mui-checked': { color: ' #12daa8' } }} /><div style={{ display: 'flex', alignItems: 'center', color: '#000000', fontSize: '100%' }}>Female</div></div>
+                        <div style={{ display: 'flex' }}><Radio checked={gender == 'Male'} onChange={() => handleChange('Male')} sx={{ color: '#000000', '&.Mui-checked': { color: ' #12daa8' } }} /><div style={{ display: 'flex', alignItems: 'center', color: '#000000', fontSize: '100%' }}>Male</div></div>
+                        <div style={{ display: 'flex' }}><Radio checked={gender == 'Transgender'} onChange={() => handleChange('Transgender')} sx={{ color: '#000000', '&.Mui-checked': { color: ' #12daa8' } }} /><div style={{ display: 'flex', alignItems: 'center', color: '#000000', fontSize: '100%' }}>Transgender</div></div>
+                        <div style={{ display: 'flex' }}><Radio checked={gender == 'I’d rather not say'} onChange={() => handleChange('I’d rather not say')} sx={{ color: '#000000', '&.Mui-checked': { color: ' #12daa8' } }} /><div style={{ display: 'flex', alignItems: 'center', color: '#000000', fontSize: '100%' }}>I’d rather not say</div></div>
                     </div>
 
                     <div style={{ width: '100%', height: sm ? 200 : 105, display: 'flex', justifyContent: 'space-between', flexDirection: sm ? 'column' : '', marginTop: sm ? '' : 15 }}>
@@ -154,7 +135,7 @@ export default function ProfilePage({ number }) {
                         <div style={{ display: 'flex', flexDirection: 'column', width: sm ? '100%' : '50%', height: errorE ? 112 : 90 }}>
                             <div style={{ width: sm ? '100%' : '97%', fontSize: '100%', height: 38, marginBottom: 'auto', color: ' #000000', display: 'flex', alignItems: 'center' }}>Email Id *</div>
                             <div style={{ width: sm ? '100%' : '97%', height: 55, background: ' #f6f6f6', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 8, border: errorE ? '1px solid red' : '1px solid #f6f6f6', position: 'relative' }}>
-                                <input onBlur={() => setTouchedE(true)} onChange={(e) => setEmail(e.target.value)} value={email} className="placeholdercolor" type="text" placeholder="Enter Email ID" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '105%', background: ' #f6f6f6' }} />
+                                <input onBlur={() => setTouchedE(true)} onChange={(e) => setEmail(e.target.value)} value={email} className="placeholdercolor" type="text" placeholder="Enter Middle Name" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '105%', background: ' #f6f6f6' }} />
                                 <EditOutlinedIcon style={{ position: 'absolute', right: '3%', top: '25%', fontSize: '150%', cursor: 'pointer' }} />
                             </div>
                             {errorE && (
