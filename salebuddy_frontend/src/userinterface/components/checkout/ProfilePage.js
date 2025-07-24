@@ -33,7 +33,7 @@ export default function ProfilePage({ gender, setGender, title, setTitle, firstN
         } else {
             setErrorF('')
         }
-        if (touchedL && lastName.length === 0) {
+        if (touchedL && lastName.length === 0 ) {
             setErrorL('Last Name is required')
         } else {
             setErrorL('')

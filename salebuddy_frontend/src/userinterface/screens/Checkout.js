@@ -72,75 +72,52 @@ export default function Checkout() {
 
     const handleSubmit = async () => {
         var err = false
-        if (touchedN || nickName.length == 0) {
+        if (nickName.length == 0) {
             setErrorN('Address Nickname is Required')
             err = true
-        } else {
-            setErrorN('')
-        }
-        if (touchedP || pin.length === 0) {
+        } 
+        if (pin.length === 0) {
             setErrorP('Pin Code is required')
             err = true
-        } else {
-            setErrorP('')
-        }
-        if (touchedA || address.length === 0) {
+        } 
+        if (address.length === 0) {
             setErrorA('Address is Required')
             err = true
-        } else {
-            setErrorA('')
-        }
-        if (touchedLa || landmark.length === 0) {
+        } 
+        if (landmark.length === 0) {
             setErrorLa('Landmark is required')
             err = true
-        } else {
-            setErrorLa('')
-        }
-        if (touchedAr || area.length === 0) {
+        } 
+        if (area.length === 0) {
             setErrorAr('Locality / Sector / Area is Required')
             err = true
-        } else {
-            setErrorAr('')
-        }
-        if (touchedS || state.length === 0) {
+        } 
+        if (state.length === 0) {
             setErrorS('State is Required')
             err = true
-        } else {
-            setErrorS('')
-        }
-        if (touchedC || city.length === 0) {
+        } 
+        if (city.length === 0) {
             setErrorC('City is Required')
             err = true
-        } else {
-            setErrorC('')
-        }
-        if (touchedF || firstName.length === 0) {
+        } 
+        if (firstName.length === 0) {
             setErrorF('First Name is required')
             err = true
-        } else {
-            setErrorF('')
-        }
-        if (touchedL || lastName.length === 0) {
+        } 
+        if (lastName.length === 0) {
             setErrorL('Last Name is required')
             err = true
-        } else {
-            setErrorL('')
-        }
-        if (touchedM || mobile?.length === 0) {
+        } 
+        if (mobile?.length === 0) {
             setErrorM('Mobile Number is Required')
             err = true
-        } else {
-            setErrorM('')
-        }
-        if (touchedE || email?.length === 0) {
+        } 
+        if (email?.length === 0) {
             setErrorE('Email is required')
             err = true
-        } else {
-            setErrorE('')
-        }
+        } 
         if (err === false) {
-            alert(err)
-            var res = await postData('userinterface/userinterface_user_address_submit', { emailid: email, mobileno: mobile, address, state, city, pincode: pin, landmark, username: `${title} ${firstName} ${middleName} ${lastName}`, gender, area, nickName })
+            var res = await postData('userinterface/userinterface_user_address_submit', { emailid: email, mobileno: mobile, address, state, city, pincode: pin, landmark, username: `${title} ${firstName} ${middleName} ${lastName}`, gender, area, nickname: nickName })
             if (res.status) {
                 alert('Submit')
             }
@@ -166,10 +143,10 @@ export default function Checkout() {
             <div style={{ width: '100%', minHeight: 500, display: 'flex', flexDirection: md ? 'column' : '', marginTop: 25 }}>
                 <div style={{ width: md ? '100%' : '65%', display: 'flex', flexDirection: 'column' }}>
                     {userAddress?.length == 0 ? <><ShippingInfo />
-                        <ProfilePage title={title}  setTitle={setTitle} firstName={firstName} setFirstName={setFirstName} middleName={middleName} setMiddleName={setMiddleName} lastName={lastName} gender={gender} setGender={setGender} setLastName={setLastName} mobile={mobile} setMobile={setMobile} email={email} setEmail={setEmail}
+                        <ProfilePage title={title} setTitle={setTitle} firstName={firstName} setFirstName={setFirstName} middleName={middleName} setMiddleName={setMiddleName} lastName={lastName} gender={gender} setGender={setGender} setLastName={setLastName} mobile={mobile} setMobile={setMobile} email={email} setEmail={setEmail}
                             errorF={errorF} setErrorF={setErrorF} touchedF={touchedF} setTouchedF={setTouchedF} errorL={errorL} setErrorL={setErrorL} touchedL={touchedL} setTouchedL={setTouchedL} errorM={errorM} setErrorM={setErrorM} touchedM={touchedM} setTouchedM={setTouchedM} errorE={errorE} setErrorE={setErrorE} touchedE={touchedE} setTouchedE={setTouchedE} />
-                        <Address nickName={nickName}  setNickName={setNickName} pin={pin} setPin={setPin} address={address} setAddress={setAddress} landmark={landmark} setLandmark={setLandmark} area={area} setArea={setArea} state={state} setState={setState} city={city} setCity={setCity}
-                            errorN={errorN} setErrorN={setErrorN} touchedN={touchedN} setTouchedN={setTouchedN} errorP={errorP} setErrorP={setErrorP} touchedP={touchedP} setTouchedP={setTouchedP} errorA={errorA} setErrorA={setErrorA} touchedA={touchedA} setTouchedA={setTouchedA} errorLa={errorLa} setErrorLa={setErrorLa} touchedLa={touchedLa} setTouchedL={setTouchedLa} errorAr={errorAr} setErrorAr={setErrorAr} touchedAr={touchedAr} setTouchedAr={setTouchedAr} errorS={errorS} setErrorS={setErrorS} touchedS={touchedS} setTouchedS={setTouchedS} errorC={errorC} setErrorC={setErrorC} touchedC={touchedC} setTouchedC={setTouchedC} />
+                        <Address nickName={nickName} setNickName={setNickName} pin={pin} setPin={setPin} address={address} setAddress={setAddress} landmark={landmark} setLandmark={setLandmark} area={area} setArea={setArea} state={state} setState={setState} city={city} setCity={setCity}
+                            errorN={errorN} setErrorN={setErrorN} touchedN={touchedN} setTouchedN={setTouchedN} errorP={errorP} setErrorP={setErrorP} touchedP={touchedP} setTouchedP={setTouchedP} errorA={errorA} setErrorA={setErrorA} touchedA={touchedA} setTouchedA={setTouchedA} errorLa={errorLa} setErrorLa={setErrorLa} touchedLa={touchedLa} setTouchedLa={setTouchedLa} errorAr={errorAr} setErrorAr={setErrorAr} touchedAr={touchedAr} setTouchedAr={setTouchedAr} errorS={errorS} setErrorS={setErrorS} touchedS={touchedS} setTouchedS={setTouchedS} errorC={errorC} setErrorC={setErrorC} touchedC={touchedC} setTouchedC={setTouchedC} />
                         <Contact /></> :
                         <SubmittedAddress />}
                     <Delivery refresh={refresh} setRefresh={setRefresh} productData={productData} />
