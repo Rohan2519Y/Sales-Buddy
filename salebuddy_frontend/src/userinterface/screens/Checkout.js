@@ -15,6 +15,7 @@ import Contact from "../components/checkout/Contact";
 import CheckOutHeader from "../components/checkout/CheckOutHeader";
 import SubmittedAddress from "../components/checkout/SubmittedAddress";
 import { postData } from "../../backendservices/FetchNodeServices";
+import { useDispatch } from "react-redux";
 
 export default function Checkout() {
 
@@ -25,17 +26,20 @@ export default function Checkout() {
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
 
+    var dispatch=useDispatch()
     const [refresh, setRefresh] = useState('')
     const [userAddress, setUserAddress] = useState([])
     var product = useSelector((state) => state.cart)
     var user = useSelector((state) => state.user)
+    var mobileno = Object.keys(user)[0]
+    console.log('idufh',mobileno)
     var productData = Object.values(product)
 
     const [title, setTitle] = useState('')
     const [firstName, setFirstName] = useState('')
     const [middleName, setMiddleName] = useState('')
     const [lastName, setLastName] = useState('')
-    const [mobile, setMobile] = useState(user.mobileno)
+    const [mobile, setMobile] = useState(mobileno)
     const [email, setEmail] = useState('')
     const [nickName, setNickName] = useState('')
     const [pin, setPin] = useState('')
@@ -75,47 +79,47 @@ export default function Checkout() {
         if (nickName.length == 0) {
             setErrorN('Address Nickname is Required')
             err = true
-        } 
+        }
         if (pin.length === 0) {
             setErrorP('Pin Code is required')
             err = true
-        } 
+        }
         if (address.length === 0) {
             setErrorA('Address is Required')
             err = true
-        } 
+        }
         if (landmark.length === 0) {
             setErrorLa('Landmark is required')
             err = true
-        } 
+        }
         if (area.length === 0) {
             setErrorAr('Locality / Sector / Area is Required')
             err = true
-        } 
+        }
         if (state.length === 0) {
             setErrorS('State is Required')
             err = true
-        } 
+        }
         if (city.length === 0) {
             setErrorC('City is Required')
             err = true
-        } 
+        }
         if (firstName.length === 0) {
             setErrorF('First Name is required')
             err = true
-        } 
+        }
         if (lastName.length === 0) {
             setErrorL('Last Name is required')
             err = true
-        } 
+        }
         if (mobile?.length === 0) {
             setErrorM('Mobile Number is Required')
             err = true
-        } 
+        }
         if (email?.length === 0) {
             setErrorE('Email is required')
             err = true
-        } 
+        }
         if (err === false) {
             var res = await postData('userinterface/userinterface_user_address_submit', { emailid: email, mobileno: mobile, address, state, city, pincode: pin, landmark, username: `${title} ${firstName} ${middleName} ${lastName}`, gender, area, nickname: nickName })
             if (res.status) {
@@ -128,13 +132,17 @@ export default function Checkout() {
     }
 
     const fetchUserAddress = async () => {
-        var res = await postData('userinterface/userinterface_chk_address', { mobileno: user.mobileno })
-        setUserAddress(res.data)
+        var res = await postData('userinterface/userinterface_chk_address', { mobileno })
+        if (res.status) {
+            setUserAddress(res.data)
+            dispatch({ type: 'ADD_USER', payload: [mobileno, res.data] })
+        }
     }
-    useEffect(function () {
 
+    useEffect(function () {
         fetchUserAddress()
     }, [])
+
     return (<>
         <div style={{ width: '100%', height: '100%', background: ' #f9f9f9', fontFamily: '"Inter", sans-serif' }}>
             <div>
@@ -148,12 +156,12 @@ export default function Checkout() {
                         <Address nickName={nickName} setNickName={setNickName} pin={pin} setPin={setPin} address={address} setAddress={setAddress} landmark={landmark} setLandmark={setLandmark} area={area} setArea={setArea} state={state} setState={setState} city={city} setCity={setCity}
                             errorN={errorN} setErrorN={setErrorN} touchedN={touchedN} setTouchedN={setTouchedN} errorP={errorP} setErrorP={setErrorP} touchedP={touchedP} setTouchedP={setTouchedP} errorA={errorA} setErrorA={setErrorA} touchedA={touchedA} setTouchedA={setTouchedA} errorLa={errorLa} setErrorLa={setErrorLa} touchedLa={touchedLa} setTouchedLa={setTouchedLa} errorAr={errorAr} setErrorAr={setErrorAr} touchedAr={touchedAr} setTouchedAr={setTouchedAr} errorS={errorS} setErrorS={setErrorS} touchedS={touchedS} setTouchedS={setTouchedS} errorC={errorC} setErrorC={setErrorC} touchedC={touchedC} setTouchedC={setTouchedC} />
                         <Contact /></> :
-                        <SubmittedAddress />}
+                        <SubmittedAddress userAddress={userAddress}/>}
                     <Delivery refresh={refresh} setRefresh={setRefresh} productData={productData} />
                     <GST />
                 </div>
                 <div style={{ width: md ? '100%' : '35%', }}>
-                    <CheckoutOrder handleSubmit={handleSubmit} userStatus={userAddress?.length} productData={productData} />
+                    <CheckoutOrder userAddress={userAddress} status={userAddress.length>=1?true:false} handleSubmit={handleSubmit} userStatus={userAddress?.length} productData={productData} />
                 </div>
             </div>
             <div>

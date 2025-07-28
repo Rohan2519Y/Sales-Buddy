@@ -4,7 +4,8 @@ import { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
-export default function CheckoutOrder({userStatus, productData,handleSubmit }) {
+import { useRazorpay, RazorpayOrderOptions } from "react-razorpay";
+export default function CheckoutOrder({ status, productData, handleSubmit,userAddress }) {
 
     const theme = useTheme();
     const md = useMediaQuery('(max-width:1200px)');
@@ -17,6 +18,7 @@ export default function CheckoutOrder({userStatus, productData,handleSubmit }) {
     const [color, setColor] = useState(' #00e9bf')
     const product = useSelector((state) => state.cart)
     const keys = Object.keys(product)
+    const { error, isLoading, Razorpay } = useRazorpay();
 
     var totalAmount = productData.reduce((p1, p2) => {
         var amt = p2.price * p2.qty
@@ -29,10 +31,39 @@ export default function CheckoutOrder({userStatus, productData,handleSubmit }) {
     }, 0)
 
     var netAmount = totalAmount - totalSaving
-   const handlePayment=async()=>{
-     handleSubmit()
 
-   }
+    const handlePayment = async () => {
+        if (!status)
+            handleSubmit()
+        else
+            await handleRazorPayment()
+    }
+    const handleRazorPayment = async () => {
+        const options = {
+            key: "rzp_test_GQ6XaPC6gMPNwH",
+            amount: 50000, // Amount in paise
+            currency: "INR",
+            name: "Test Company",
+            description: "Test Transaction",
+            //order_id: "order_9A33XWu170gUtm", // Generate order_id on server
+            handler: async (response) => {
+                console.log(response);
+                alert("Payment Successful!");
+            },
+            prefill: {
+                name: "John Doe",
+                email: "john.doe@example.com",
+                contact: "9999999999",
+            },
+            theme: {
+                color: "#F37254",
+            },
+        };
+
+        const razorpayInstance = new Razorpay(options);
+        razorpayInstance.open();
+    };
+
     return (<>
         <div style={{ width: '100%', position: md ? '' : 'sticky', top: md ? '' : 50, display: 'flex', justifyContent: md ? 'center' : '', marginBottom: md ? 30 : '' }}>
             <div style={{ width: md ? '95%' : '65%', background: ' #ffffff', minHeight: discount ? 315 : 260, marginLeft: md ? '' : 15, borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 30, marginTop: matches ? 30 : '' }}>
