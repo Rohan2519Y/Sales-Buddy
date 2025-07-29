@@ -28,7 +28,8 @@ export default function UserLogin({open,setOpenDialog,openOtp,setOpenOtp,otpValu
     var otp = generateOtp()
     setMobileNo(mobileno)
     setOtpValue(otp)
-    alert(otp)
+            alert(otp)
+        //var res=await postData('smsapi/sendotp',{mobileno,otp})
     setOpenOtp(true)
   }
   const handleClose = () => {

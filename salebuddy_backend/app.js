@@ -17,6 +17,7 @@ var morePicturesRouter=require('./routes/morepictures')
 var adsRouter=require('./routes/ads')
 var userinterfaceRouter=require('./routes/userinterface')
 var adminRouter=require('./routes/admin')
+var smsapiRouter=require('./routes/smsapi')
 
 var app = express();
 
@@ -42,6 +43,7 @@ app.use('/morePictures',morePicturesRouter)
 app.use('/ads',adsRouter)
 app.use('/userinterface',userinterfaceRouter)
 app.use('/admin',adminRouter)
+app.use('/smsapi',smsapiRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
