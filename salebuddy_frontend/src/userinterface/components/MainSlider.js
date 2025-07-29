@@ -15,7 +15,8 @@ export default function MainSlider() {
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 5000,
-        pauseOnHover: false
+        pauseOnHover: false,
+        fade: true,
     };
     var data = { id: 1, images: 'https://res.cloudinary.com/dio6iadsq/image/upload/v1748756295/b1_nhwg7z.png,https://res.cloudinary.com/dio6iadsq/image/upload/v1748756420/b8_j4v3ku.png,https://res.cloudinary.com/dio6iadsq/image/upload/v1748756421/b2_woblzn.png,https://res.cloudinary.com/dio6iadsq/image/upload/v1748756422/b7_eegm6g.png,https://res.cloudinary.com/dio6iadsq/image/upload/v1748756423/b4_wd8tnj.png,https://res.cloudinary.com/dio6iadsq/image/upload/v1748756423/b3_uxtm0q.png,https://res.cloudinary.com/dio6iadsq/image/upload/v1748756424/b5_inflhl.png,https://res.cloudinary.com/dio6iadsq/image/upload/v1748756425/b6_q2vham.png' }
     var images = data?.images?.split(',')
