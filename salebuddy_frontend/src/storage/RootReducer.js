@@ -1,24 +1,41 @@
-const initialState = {
-  cart: {},
-  user: {}
-
+const initialState={
+       cart:{},
+       user:{}
+     
 }
 
-export default function RootReducer(state = initialState, action) {
-  switch (action.type) {
+export default function RootReducer(state=initialState,action)
+{
+  switch(action.type)
+  {
     case "ADD_CART":
-      state.cart[action.payload[0]] = action.payload[1]
-      console.log(state)
-      return { cart: state.cart, user: state.user }
+        state.cart[action.payload[0]]=action.payload[1]
+        localStorage.setItem('cart',JSON.stringify(state.cart))
+        console.log(state)
+        return {cart:state.cart,user:state.user} 
     case "DEL_CART":
-      delete state.cart[action.payload[0]]
-
-      return { cart: state.cart, user: state.user }
+        delete state.cart[action.payload[0]]
+        localStorage.setItem('cart',JSON.stringify(state.cart))
+        return {cart:state.cart,user:state.user} 
     case "ADD_USER":
-      state.user[action.payload[0]] = action.payload[1]
-      return { cart: state.cart, user: state.user }
-
+           state.user[action.payload[0]]=action.payload[1]
+           console.log("USSERR",state.user)
+           localStorage.setItem('user',state.user)
+           return {cart:state.cart,user:state.user} 
+    case "CLEAR_CART":
+           
+           state.cart={}
+           localStorage.removeItem('cart')
+           
+           return {cart:state.cart,user:state.user} 
+    case "LOGOUT":       
+           state.user={}
+           localStorage.removeItem('user')
+           
+           return {cart:state.cart,user:state.user} 
+           
     default:
-      return { cart: state.cart, user: state.user }
+        return {cart:state.cart,user:state.user} 
   }
+
 }

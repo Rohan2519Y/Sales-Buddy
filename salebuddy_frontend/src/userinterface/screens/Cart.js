@@ -23,8 +23,16 @@ export default function Cart() {
     const [mobileNo, setMobileNo] = useState('')
     const [screen, setScreen] = useState('cart')
     const [refresh, setRefresh] = useState(false)
-    var product = useSelector((state) => state.cart)
-    var productData = Object.values(product)
+    //var product=useSelector((state)=>state.cart) 
+    //var productData=Object.values(product)
+    ///localstorage  
+    var keys = 0
+    var productData = []
+    try {
+        const product = JSON.parse(localStorage.getItem('cart'))
+        productData = Object.values(product)
+    }
+    catch (e) { }
     return (<>
         <div style={{ width: '100%', height: '100%', background: ' #f9f9f9', fontFamily: '"Inter", sans-serif' }}>
             <div>

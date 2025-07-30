@@ -8,7 +8,7 @@ import { useTheme } from '@mui/material/styles';
 import { useNavigate } from "react-router";
 import { postData, generateOtp } from "../../../backendservices/FetchNodeServices";
 
-export default function UserLogin({open,setOpenDialog,openOtp,setOpenOtp,otpValue,setOtpValue,mobileNo,setMobileNo}) {
+export default function UserLogin({ open, setOpenDialog, openOtp, setOpenOtp, otpValue, setOtpValue, mobileNo, setMobileNo }) {
 
   const theme = useTheme();
   const md = useMediaQuery('(max-width:1200px)');
@@ -28,8 +28,8 @@ export default function UserLogin({open,setOpenDialog,openOtp,setOpenOtp,otpValu
     var otp = generateOtp()
     setMobileNo(mobileno)
     setOtpValue(otp)
-            alert(otp)
-        //var res=await postData('smsapi/sendotp',{mobileno,otp})
+    alert(otp)
+    //var res = await postData('smsapi/sendotp', { mobileno, otp })
     setOpenOtp(true)
   }
   const handleClose = () => {
