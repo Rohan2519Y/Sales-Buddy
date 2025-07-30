@@ -29,11 +29,29 @@ export default function Checkout() {
     var dispatch=useDispatch()
     const [refresh, setRefresh] = useState('')
     const [userAddress, setUserAddress] = useState([])
-    var product = useSelector((state) => state.cart)
-    var user = useSelector((state) => state.user)
-    var mobileno = Object.keys(user)[0]
-    console.log('idufh',mobileno)
-    var productData = Object.values(product)
+    // var user = useSelector((state) => state.user)
+    // var mobileno = Object.keys(user)[0]
+
+    var user = {}
+   try{
+       user = JSON.parse(localStorage.getItem('user')) || {}
+   }catch(e){
+       user = {}
+   }
+   var mobileno = Object.keys(user)[0] || ''
+
+    // var product = useSelector((state) => state.cart)
+    // var productData = Object.values(product)
+
+    var productData = []
+    try {
+        const product = JSON.parse(localStorage.getItem('cart'))
+        productData = Object.values(product)
+    }
+    catch (e) { }
+
+    console.log('data',productData)
+    console.log('user',JSON.stringify(user))
 
     const [title, setTitle] = useState('')
     const [firstName, setFirstName] = useState('')

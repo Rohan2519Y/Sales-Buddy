@@ -32,8 +32,17 @@ export default function MainProductInfoComponent() {
 
   const params = useParams()
   const dispatch = useDispatch()
-  const product = useSelector((state) => state.cart)
-  const keys = Object.keys(product)
+  // const product = useSelector((state) => state.cart)
+  // const keys = Object.keys(product)
+
+  var keys = 0
+  var product
+  try {
+    product = JSON.parse(localStorage.getItem('cart'))
+    keys = Object.keys(product)
+    //alert(JSON.stringify(Object.values(product)))
+  }
+  catch (e) { }
 
   const [productData, setProductData] = useState({})
   const fetchProductDetails = async () => {
@@ -72,6 +81,18 @@ export default function MainProductInfoComponent() {
     fetchProductStorage()
     fetchProductImages()
   }, [params])
+
+  const handleQtyChange = (v) => {
+    var data = productData
+    if (v == 0) {
+      dispatch({ type: 'DEL_CART', payload: [data.productdetailsid, data] })
+    }
+    else {
+      data['qty'] = v
+      dispatch({ type: 'ADD_CART', payload: [data.productdetailsid, data] })
+    }
+    setRefresh(!refresh)
+  }
 
   var data = [{
     productdetailid: 1, productname: 'SAMSUNG Galaxy S25 Ultra 5G (12GB RAM, 256GB, Titanium Silverblue)', storage: '128GB', color: 'Titanium Blue', ram: '12GB',
@@ -139,19 +160,6 @@ export default function MainProductInfoComponent() {
       description: "With 10 portrait styles and Multi-Styles Night Filters, you can unleash your creativity and capture unique, artistic photos. You can also explore innovative night modes for stunning night scenes with a single tap."
     }
   ]
-
-
-  const handleQtyChange = (v) => {
-    var data = productData
-    if (v == 0) {
-      dispatch({ type: 'DEL_CART', payload: [data.productdetailsid, data] })
-    }
-    else {
-      data['qty'] = v
-      dispatch({ type: 'ADD_CART', payload: [data.productdetailsid, data] })
-    }
-    setRefresh(!refresh)
-  }
 
   return (<>
     <div style={{ width: '100%', height: '100%', background: ' #191919', fontFamily: '"Inter", sans-serif', display: 'flex', flexDirection: 'column', overflowX: 'hidden' }}>

@@ -5,7 +5,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-export default function OrderSummary({productData,setMobileNo,mobileNo,open,setOpenDialog,openOtp, setOpenOtp,otpValue,setOtpValue}) {
+export default function OrderSummary({ productData, setMobileNo, mobileNo, open, setOpenDialog, openOtp, setOpenOtp, otpValue, setOtpValue }) {
 
     const theme = useTheme();
     const md = useMediaQuery('(max-width:1200px)');
@@ -17,8 +17,13 @@ export default function OrderSummary({productData,setMobileNo,mobileNo,open,setO
     const navigate = useNavigate()
     const [discount, setDiscount] = useState(false)
     const [color, setColor] = useState(' #00e9bf')
-    const user = useSelector((state) => state.user)
-    const product = useSelector((state) => state.cart)
+    //const user = useSelector((state) => state.user)
+    var user = {}
+    try {
+        user = JSON.parse(localStorage.getItem('user')) || {}
+    } catch (e) { }
+    // const product = useSelector((state) => state.cart)
+    const product = JSON.parse(localStorage.getItem('cart'))
     const keys = Object.keys(product)
 
     var totalAmount = productData.reduce((p1, p2) => {
@@ -36,6 +41,9 @@ export default function OrderSummary({productData,setMobileNo,mobileNo,open,setO
     const handleCheckout = () => {
         if (JSON.stringify(user) == '{}') {
             setOpenDialog(true)
+        }
+        else {
+            navigate('/checkout')
         }
     }
 

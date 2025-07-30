@@ -5,7 +5,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
 import { useRazorpay, RazorpayOrderOptions } from "react-razorpay";
-export default function CheckoutOrder({ status, productData, handleSubmit,userAddress }) {
+import { postData, serverURL } from '../../../backendservices/FetchNodeServices';
+export default function CheckoutOrder({ status, productData, handleSubmit, userAddress, userData }) {
 
     const theme = useTheme();
     const md = useMediaQuery('(max-width:1200px)');
@@ -16,9 +17,23 @@ export default function CheckoutOrder({ status, productData, handleSubmit,userAd
 
     const [discount, setDiscount] = useState(false)
     const [color, setColor] = useState(' #00e9bf')
-    const product = useSelector((state) => state.cart)
-    const keys = Object.keys(product)
-    const { error, isLoading, Razorpay } = useRazorpay();
+    //const product = useSelector((state) => state.cart)
+    const product = JSON.parse(localStorage.getItem('cart'))
+
+    // const user = useSelector((state) => state.user)
+    // var userData = Object.values(user)[0]
+    // const keys = Object.keys(product)
+
+    var keys = []
+    var userData = {}
+    try {
+        const userJson = localStorage.getItem('user')
+        const user = JSON.parse(userJson)
+        keys = Object.keys(user)
+        userData = Object.values(user)[0] || {}
+    } catch (e) { }
+
+    const { error, isLoading, Razorpay } = useRazorpay()
 
     var totalAmount = productData.reduce((p1, p2) => {
         var amt = p2.price * p2.qty
@@ -38,22 +53,36 @@ export default function CheckoutOrder({ status, productData, handleSubmit,userAd
         else
             await handleRazorPayment()
     }
+
+    var date = new Date().toISOString().split('T')[0];
+    console.log(date)
+
+    console.log('netamount', netAmount)
     const handleRazorPayment = async () => {
         const options = {
             key: "rzp_test_GQ6XaPC6gMPNwH",
-            amount: 50000, // Amount in paise
+            amount: netAmount * 100,
+
             currency: "INR",
-            name: "Test Company",
+            name: "SalesBuddy",
+            image: `${serverURL}/images/logo.png`,
             description: "Test Transaction",
             //order_id: "order_9A33XWu170gUtm", // Generate order_id on server
             handler: async (response) => {
                 console.log(response);
                 alert("Payment Successful!");
+                var res = await postData('userinterface/userinterface_user_order_submit', { orderdate: date, mobileno: userData[0]?.mobileno, status: 'true' })
+                if (res.status) {
+                    alert('Submit')
+                }
+                else {
+                    alert('Fail')
+                }
             },
             prefill: {
-                name: "John Doe",
-                email: "john.doe@example.com",
-                contact: "9999999999",
+                name: userData?.username,
+                email: userData?.emailid,
+                contact: userData?.mobileno,
             },
             theme: {
                 color: "#F37254",

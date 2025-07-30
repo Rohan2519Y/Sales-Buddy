@@ -299,4 +299,21 @@ router.post('/userinterface_user_address_submit', function (req, res, next) {
     }
 });
 
+router.post('/userinterface_user_order_submit', function (req, res, next) {
+    try {
+        pool.query("insert into orders(orderdate, mobileno, status)values(?,?,?) ", [req.body.orderdate, req.body.mobileno, req.body.status], function (error, result) {
+            if (error) {
+                console.log(error)
+                res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
+            }
+            else {
+                res.status(200).json({ status: true, message: 'Success..' })
+            }
+        })
+    }
+    catch (e) {
+        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
+    }
+});
+
 module.exports = router;
