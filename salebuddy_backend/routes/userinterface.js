@@ -316,4 +316,20 @@ router.post('/userinterface_user_order_submit', function (req, res, next) {
     }
 });
 
+router.post('/userinterface_user_orderdetails_submit', function (req, res, next) {
+    try {
+        pool.query("insert into orderdetails(mobileno, productdetailsid, price, offerprice, amount, qty, deliverystatus, address, city, state, paymentstatus, transactionid)values(?,?,?,?,?,?,?,?,?,?,?,?) ", [req.body.mobileno, req.body.productdetailsid, req.body.price, req.body.offerprice, req.body.amount, req.body.qty, req.body.deliverystatus, req.body.address, req.body.city, req.body.state, req.body.paymentstatus, req.body.transactionid], function (error, result) {
+            if (error) {
+                console.log(error)
+                res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
+            }
+            else {
+                res.status(200).json({ status: true, message: 'Success..' })
+            }
+        })
+    }
+    catch (e) {
+        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
+    }
+});
 module.exports = router;

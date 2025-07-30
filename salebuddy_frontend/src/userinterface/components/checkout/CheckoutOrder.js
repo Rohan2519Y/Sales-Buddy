@@ -33,6 +33,13 @@ export default function CheckoutOrder({ status, productData, handleSubmit, userA
         userData = Object.values(user)[0] || {}
     } catch (e) { }
 
+    var productData = []
+    try {
+        const product = JSON.parse(localStorage.getItem('cart'))
+        productData = Object.values(product)
+    }
+    catch (e) { }
+
     const { error, isLoading, Razorpay } = useRazorpay()
 
     var totalAmount = productData.reduce((p1, p2) => {
@@ -55,9 +62,13 @@ export default function CheckoutOrder({ status, productData, handleSubmit, userA
     }
 
     var date = new Date().toISOString().split('T')[0];
-    console.log(date)
 
-    console.log('netamount', netAmount)
+    let productdetailsid = productData.map(item => item.productdetailsid).join(',')
+    let price = productData.map(item => item.price).join(',')
+    let offerprice = productData.map(item => item.offerprice).join(',')
+    let membershipprice = productData.map(item => item.membershipprice).join(',')
+    let qty = productData.map(item => item.qty).join(',')
+
     const handleRazorPayment = async () => {
         const options = {
             key: "rzp_test_GQ6XaPC6gMPNwH",
@@ -70,10 +81,18 @@ export default function CheckoutOrder({ status, productData, handleSubmit, userA
             //order_id: "order_9A33XWu170gUtm", // Generate order_id on server
             handler: async (response) => {
                 console.log(response);
-                alert("Payment Successful!");
+                const transactionid = response.razorpay_payment_id;
+                //alert("Payment Successful!");
                 var res = await postData('userinterface/userinterface_user_order_submit', { orderdate: date, mobileno: userData[0]?.mobileno, status: 'true' })
                 if (res.status) {
-                    alert('Submit')
+                    alert('Submit Order')
+                }
+                else {
+                    alert('Fail')
+                }
+                var res = await postData('userinterface/userinterface_user_orderdetails_submit', {mobileno:userData[0]?.mobileno, productdetailsid, price, offerprice, amount:membershipprice, qty, deliverystatus:'false', address:`${userData[0].address} ${userData[0].landmark} ${userData[0].area} ${userData[0].pincode}`, city:userData[0].city, state:userData[0].state, paymentstatus:'true', transactionid })
+                if (res.status) {
+                    alert('Submit Order Details')
                 }
                 else {
                     alert('Fail')
