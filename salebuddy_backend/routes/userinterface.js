@@ -268,11 +268,11 @@ router.post('/userinterface_chk_address', function (req, res, next) {
                 res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
             }
             else {
-              
-                if(result.length>=1)
-                res.status(200).json({ status: true, message: 'Success..',data:result})
+
+                if (result.length >= 1)
+                    res.status(200).json({ status: true, message: 'Success..', data: result })
                 else
-                res.status(200).json({ status: false, message: 'Fail',data:[]})    
+                    res.status(200).json({ status: false, message: 'Fail', data: [] })
 
             }
         })
@@ -331,5 +331,25 @@ router.post('/userinterface_user_orderdetails_submit', function (req, res, next)
     catch (e) {
         res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
     }
+});
+
+
+router.post('/userinterface_user_search', function (req, res, next) {
+    try {
+        const text = `%${req.body.searchtext}%`
+        pool.query("SELECT P.*, B.*, S.*, PC.*, PV.*, PD.* FROM products P, brands B, services S, productcolors PC, productvarients PV, productdetails PD where P.productid=PD.productid and B.brandid=PD.brandId and S.serviceid=PD.serviceid and PC.productcolorid=Pd.productcolorid  and PV.productvarientid=pd.productvarientid and (P.productname LIKE ? OR B.brandname LIKE ? OR S.servicename LIKE ?)", [text,text,text], function (error, result) {
+        if (error) {
+            console.log(error)
+            res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
+        }
+        else {
+            console.log(result)
+            res.status(200).json({ status: true, message: 'Success..', data: result })
+        }
+    })
+    }
+    catch (e) {
+    res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
+}
 });
 module.exports = router;

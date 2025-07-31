@@ -91,7 +91,7 @@ export default function Header({ cLogin, setCLogin, screencart }) {
         <UserLogin open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} mobileNo={mobileNo} setMobileNo={setMobileNo} setCLogin={setCLogin} />
         <OTPComponent screen={screen} setScreen={setScreen} screencart={screencart} open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} mobileNo={mobileNo} setMobileNo={setMobileNo} />
         {hover && <UserHover />}
-        <div style={{ boxSizing: 'border-box', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: matches ? 'auto' : 75, background: '#000', boxShadow: '0 5px 15px rgba(0, 0, 0, 0.3)' }}>
+        <div style={{ boxSizing: 'border-box', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: matches ? 90 : 75, background: '#000', boxShadow: '0 5px 15px rgba(0, 0, 0, 0.3)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', flexDirection: 'row', width: '95%', height: '100%' }}>
                 <Menu />
                 <div style={{ color: 'white', width: "15%", display: 'flex', alignItems: 'center', fontSize: 22, flexGrow: 1 }}><div style={{ marginRight: '40%', fontSize: matches ? 25 : 30, cursor: 'pointer' }} onClick={() => { navigate('/') }}>SalesBuddy</div></div>
@@ -104,7 +104,7 @@ export default function Header({ cLogin, setCLogin, screencart }) {
                     </div>}
                     <div style={{ marginLeft: matches ? 'auto' : 0, marginRight: 10, height: '100%', display: 'flex', alignItems: 'center' }}>
                         <div onClick={() => {
-                            if (JSON.stringify(user) === '{}') { handleLogin(); }
+                            if (JSON.stringify(user) === '{}') { handleLogin() }
                         }}
                             onMouseEnter={() => { setHover(true) }} onMouseLeave={() => { setHover(false) }} style={{ color: 'white', fontSize: 25, marginRight: 10, cursor: 'pointer', height: hover ? '100%' : '', display: 'flex', alignItems: 'center' }} ><PersonIcon /></div>
                         <Badge style={{ margin: '0 8 0 8' }} invisible={keys.length === 0} badgeContent={keys.length} sx={{ '& .MuiBadge-badge': { backgroundColor: '#12DAA8', color: '#000' } }}>

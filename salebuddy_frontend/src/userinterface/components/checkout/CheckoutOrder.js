@@ -6,6 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import { useSelector,useDispatch } from 'react-redux';
 import { useRazorpay, RazorpayOrderOptions } from "react-razorpay";
 import { postData, serverURL } from '../../../backendservices/FetchNodeServices';
+import { useNavigate } from 'react-router';
 export default function CheckoutOrder({ status, productData, handleSubmit, userAddress, userData }) {
 
     const theme = useTheme();
@@ -19,7 +20,7 @@ export default function CheckoutOrder({ status, productData, handleSubmit, userA
     const [color, setColor] = useState(' #00e9bf')
     //const product = useSelector((state) => state.cart)
     const product = JSON.parse(localStorage.getItem('cart'))
-
+    const navigate=useNavigate()
     // const user = useSelector((state) => state.user)
     // var userData = Object.values(user)[0]
     // const keys = Object.keys(product)
@@ -97,6 +98,7 @@ export default function CheckoutOrder({ status, productData, handleSubmit, userA
                 else {
                     alert('Fail')
                 }
+                navigate('/')
             },
             prefill: {
                 name: userData?.username,
