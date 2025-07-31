@@ -36,7 +36,7 @@ export default function MainProductInfoComponent() {
   // const keys = Object.keys(product)
 
   var keys = 0
-  var product
+  var product=[]
   try {
     product = JSON.parse(localStorage.getItem('cart'))
     keys = Object.keys(product)
@@ -176,7 +176,7 @@ export default function MainProductInfoComponent() {
           </div>
           {matches ? <></> : <div style={{ width: md ? '80%' : '60%', display: 'flex', flexDirection: 'column' }}>
             <ProductPictureComponent media={selectedMedia} />
-            <AddToCartButton qty={keys.includes(productData.productdetailsid + "") ? product[productData.productdetailsid].qty : 0} onChange={handleQtyChange} />
+            <AddToCartButton qty={product?.[productData.productdetailsid]?.qty || 0} onChange={handleQtyChange} />
           </div>}
         </div>
         <div style={{ display: 'flex', width: matches ? '100%' : '50%', height: '100%', flexDirection: 'column', overflowY: matches ? 'none' : 'auto', scrollbarWidth: 'none' }}>

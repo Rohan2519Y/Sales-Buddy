@@ -23,8 +23,11 @@ export default function OrderSummary({ productData, setMobileNo, mobileNo, open,
         user = JSON.parse(localStorage.getItem('user')) || {}
     } catch (e) { }
     // const product = useSelector((state) => state.cart)
+    var keys=0
+    try{
     const product = JSON.parse(localStorage.getItem('cart'))
-    const keys = Object.keys(product)
+    keys = Object.keys(product)}
+    catch(e){}
 
     var totalAmount = productData.reduce((p1, p2) => {
         var amt = p2.price * p2.qty
