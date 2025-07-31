@@ -35,9 +35,11 @@ export default function CheckoutOrder({ status, productData, handleSubmit, userA
     } catch (e) { }
 
     var productData = []
+    var productkey=0
     try {
         const product = JSON.parse(localStorage.getItem('cart'))
         productData = Object.values(product)
+        productkey=Object.keys(product)
     }
     catch (e) { }
 
@@ -112,14 +114,13 @@ export default function CheckoutOrder({ status, productData, handleSubmit, userA
 
         const razorpayInstance = new Razorpay(options);
         razorpayInstance.open();
-    };
-
+    }
     return (<>
         <div style={{ width: '100%', position: md ? '' : 'sticky', top: md ? '' : 50, display: 'flex', justifyContent: md ? 'center' : '', marginBottom: md ? 30 : '' }}>
             <div style={{ width: md ? '95%' : '65%', background: ' #ffffff', minHeight: discount ? 315 : 260, marginLeft: md ? '' : 15, borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 30, marginTop: matches ? 30 : '' }}>
                 <div style={{ width: '90%', height: '85%', }}>
                     <div style={{ width: '100%', height: 35, fontSize: md ? '110%' : '120%', fontWeight: 700, }}>
-                        Order Summary ({keys !== 0 && `${keys.length} items`})
+                        Order Summary ({productkey !== 0 && `${productkey.length} items`})
                     </div>
                     <div style={{ width: '100%', height: 45, display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: md ? '100%' : '' }}>
                         <div>Original Price</div><div>{'\u20B9'} {totalAmount}</div>

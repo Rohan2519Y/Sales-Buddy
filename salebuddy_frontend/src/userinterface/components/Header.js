@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router'
 import { useEffect, useRef, useState } from "react";
 import UserLogin from './user/UserLogin';
 import OTPComponent from './user/OTPComponent';
+import UpdateProfile from './UpdateProfile';
 
 export default function Header({ cLogin, setCLogin, screencart }) {
     const theme = useTheme();
@@ -76,20 +77,26 @@ export default function Header({ cLogin, setCLogin, screencart }) {
     const UserHover = () => {
         return (<>
             {JSON.stringify(user) == '{}' ? <></> : <>
-                <div onMouseEnter={() => { setHover(true) }} onMouseLeave={() => { setHover(false) }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: 250, minHeight: 200, zIndex: 20, borderRadius: 10, background: ' #393939', fontFamily: '"Inter", sans-serif', fontSize: '120%', position: 'absolute', right: '4%', top: '9%', boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.4)' }}>
+                <div onMouseEnter={() => { setHover(true) }} onMouseLeave={() => { setHover(false) }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: 250, minHeight: 200, zIndex: 20, borderRadius: 10, background: ' #393939', fontFamily: '"Inter", sans-serif', fontSize: '100%', position: 'absolute', right: '4%', top: '9%', boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.4)' }}>
                     {/* <div onMouseEnter={() => { setLoginColor('#12DAA8') }} onMouseLeave={() => { setLoginColor('#ffffff') }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 80, cursor: 'pointer', color: loginColor }}><LoginIcon style={{ marginRight: 10, fontSize: '190%' }} /> Login</div> */}
-                    <div onMouseEnter={() => { setProfileColor('#12DAA8') }} onMouseLeave={() => { setProfileColor('#ffffff') }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 80, cursor: 'pointer', color: profileColor }}><AccountCircleOutlinedIcon style={{ marginRight: 10, fontSize: '190%' }} /> Update Profile</div>
-                    <div onMouseEnter={() => { setOrderColor('#12DAA8') }} onMouseLeave={() => { setOrderColor('#ffffff') }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 80, cursor: 'pointer', color: orderColor }}><InventoryIcon style={{ marginRight: 10, fontSize: '190%' }} /> Order  History</div>
-                    <div onClick={handleLogout} onMouseEnter={() => { setLogoutColor('#12DAA8') }} onMouseLeave={() => { setLogoutColor('#ffffff') }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 80, cursor: 'pointer', color: logoutColor }}><LogoutIcon style={{ marginRight: 10, fontSize: '190%' }} /> Logout</div>
+                    <div onClick={()=>{setUpdate(true)}} onMouseEnter={() => { setProfileColor('#12DAA8') }} onMouseLeave={() => { setProfileColor('#ffffff') }} style={{ background: profileColor == '#ffffff' ? '' : '#575757ff', borderTopLeftRadius:10,borderTopRightRadius:10,display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 80, cursor: 'pointer', color: profileColor }}><AccountCircleOutlinedIcon style={{ marginRight: 10, fontSize: '180%' }} /> Update Profile</div>
+                    <div onMouseEnter={() => { setOrderColor('#12DAA8') }} onMouseLeave={() => { setOrderColor('#ffffff') }} style={{ background: orderColor == '#ffffff' ? '' : '#575757ff', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 80, cursor: 'pointer', color: orderColor }}><InventoryIcon style={{ marginRight: 10, fontSize: '180%' }} /> Order  History</div>
+                    <div onClick={handleLogout} onMouseEnter={() => { setLogoutColor('#12DAA8') }} onMouseLeave={() => { setLogoutColor('#ffffff') }} style={{background: logoutColor == '#ffffff' ? '' : '#575757ff',borderBottomLeftRadius:10,borderBottomRightRadius:10, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 80, cursor: 'pointer', color: logoutColor }}><LogoutIcon style={{ marginRight: 10, fontSize: '180%' }} /> Logout</div>
                 </div></>}
         </>)
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // UPDATE
+
+    const [update,setUpdate]=useState(false)
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     return (<>
         <UserLogin open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} mobileNo={mobileNo} setMobileNo={setMobileNo} setCLogin={setCLogin} />
         <OTPComponent screen={screen} setScreen={setScreen} screencart={screencart} open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} mobileNo={mobileNo} setMobileNo={setMobileNo} />
+        <UpdateProfile open={update} setOpen={setUpdate}/>
         {hover && <UserHover />}
         <div style={{ boxSizing: 'border-box', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: matches ? 90 : 75, background: '#000', boxShadow: '0 5px 15px rgba(0, 0, 0, 0.3)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', flexDirection: 'row', width: '95%', height: '100%' }}>
@@ -99,7 +106,7 @@ export default function Header({ cLogin, setCLogin, screencart }) {
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '24%', height: '100%' }}>
                     {matches ? <></> : <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 2 }}>
                         <RoomIcon style={{ color: 'white', fontSize: 25, margin: 2 }} />
-                        <div style={{ color: 'white', fontSize: 16 }}>Gwalior,474011</div>
+                        <div style={{ color: 'white', fontSize: 14 }}>Gwalior,474011</div>
                         <EditIcon style={{ color: 'white', fontSize: 16 }} />
                     </div>}
                     <div style={{ marginLeft: matches ? 'auto' : 0, marginRight: 10, height: '100%', display: 'flex', alignItems: 'center' }}>

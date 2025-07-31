@@ -26,19 +26,19 @@ export default function Checkout() {
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
 
-    var dispatch=useDispatch()
+    var dispatch = useDispatch()
     const [refresh, setRefresh] = useState('')
     const [userAddress, setUserAddress] = useState([])
     // var user = useSelector((state) => state.user)
     // var mobileno = Object.keys(user)[0]
 
     var user = {}
-   try{
-       user = JSON.parse(localStorage.getItem('user')) || {}
-   }catch(e){
-       user = {}
-   }
-   var mobileno = Object.keys(user)[0] || ''
+    try {
+        user = JSON.parse(localStorage.getItem('user')) || {}
+    } catch (e) {
+        user = {}
+    }
+    var mobileno = Object.keys(user)[0] || ''
 
     // var product = useSelector((state) => state.cart)
     // var productData = Object.values(product)
@@ -50,8 +50,8 @@ export default function Checkout() {
     }
     catch (e) { }
 
-    console.log('data',productData)
-    console.log('user',JSON.stringify(user))
+    console.log('data', productData)
+    console.log('user', JSON.stringify(user))
 
     const [title, setTitle] = useState('')
     const [firstName, setFirstName] = useState('')
@@ -59,6 +59,7 @@ export default function Checkout() {
     const [lastName, setLastName] = useState('')
     const [mobile, setMobile] = useState(mobileno)
     const [email, setEmail] = useState('')
+    const [gender, setGender] = useState(null)
     const [nickName, setNickName] = useState('')
     const [pin, setPin] = useState('')
     const [address, setAddress] = useState('')
@@ -66,7 +67,8 @@ export default function Checkout() {
     const [area, setArea] = useState('')
     const [state, setState] = useState('')
     const [city, setCity] = useState('')
-    const [gender, setGender] = useState(null)
+
+    console.log('title',title)
 
     const [errorF, setErrorF] = useState('')
     const [errorL, setErrorL] = useState('')
@@ -174,12 +176,12 @@ export default function Checkout() {
                         <Address nickName={nickName} setNickName={setNickName} pin={pin} setPin={setPin} address={address} setAddress={setAddress} landmark={landmark} setLandmark={setLandmark} area={area} setArea={setArea} state={state} setState={setState} city={city} setCity={setCity}
                             errorN={errorN} setErrorN={setErrorN} touchedN={touchedN} setTouchedN={setTouchedN} errorP={errorP} setErrorP={setErrorP} touchedP={touchedP} setTouchedP={setTouchedP} errorA={errorA} setErrorA={setErrorA} touchedA={touchedA} setTouchedA={setTouchedA} errorLa={errorLa} setErrorLa={setErrorLa} touchedLa={touchedLa} setTouchedLa={setTouchedLa} errorAr={errorAr} setErrorAr={setErrorAr} touchedAr={touchedAr} setTouchedAr={setTouchedAr} errorS={errorS} setErrorS={setErrorS} touchedS={touchedS} setTouchedS={setTouchedS} errorC={errorC} setErrorC={setErrorC} touchedC={touchedC} setTouchedC={setTouchedC} />
                         <Contact /></> :
-                        <SubmittedAddress userAddress={userAddress}/>}
+                        <SubmittedAddress userAddress={userAddress} />}
                     <Delivery refresh={refresh} setRefresh={setRefresh} productData={productData} />
                     <GST />
                 </div>
                 <div style={{ width: md ? '100%' : '35%', }}>
-                    <CheckoutOrder userAddress={userAddress} status={userAddress.length>=1?true:false} handleSubmit={handleSubmit} userStatus={userAddress?.length} productData={productData} />
+                    <CheckoutOrder userAddress={userAddress} status={userAddress.length >= 1 ? true : false} handleSubmit={handleSubmit} userStatus={userAddress?.length} productData={productData} />
                 </div>
             </div>
             <div>

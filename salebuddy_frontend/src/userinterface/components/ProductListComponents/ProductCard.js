@@ -23,7 +23,7 @@ export default function ProductCard({ data }) {
         {!matches ? <div style={{ width: '100%', minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'flex-start', padding: '4% 0' }}>
             <div style={{ width: md ? '92%' : '77%', display: 'flex', flexWrap: 'wrap', gap: '3.5%', }} >
                 {data.map((item, i) => (
-                    <div key={i} onClick={()=>navigate(`/mainproductinfocomponent/${item.productdetailsid}/${item.productid}`)} style={{ height: smatches ? 270 : matches ? 330 : 470, width: smatches ? '100%' : matches ? '48%' : '31%', borderBottom: '0.5px solid gray', display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', fontFamily: '"Inter", sans-serif', marginBottom: 100, paddingBottom: 30 }} >
+                    <div key={i} onClick={()=>navigate(`/mainproductinfocomponent/${item.productdetailsid}/${item.productid}`)} style={{ height: smatches ? 270 : matches ? 330 : 470, width: smatches ? '100%' : matches ? '48%' : '31%', borderBottom: '0.5px solid gray', display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', fontFamily: '"Inter", sans-serif', marginBottom: 100, paddingBottom: 30,cursor:'pointer' }} >
                         <div style={{ display: 'flex', justifyContent: 'center', height: '60%', width: '100%', position: 'relative', alignItems: 'center', background: ' #393939', borderRadius: 10 }}>
                             <div style={{ width: '100%', height: '100%', position: 'absolute', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                 <img src={`${serverURL}/images/${item.picture}`} style={{ height: '14rem', borderRadius: 8, marginRight: '5%', marginLeft: '5%' }} />
@@ -63,7 +63,7 @@ export default function ProductCard({ data }) {
             <div style={{ width: '100%', minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'flex-start', padding: '4% 0' }}>
                 <div style={{ width: md ? '92%' : '77%', display: 'flex', flexWrap: 'wrap', gap: '2%', }} >
                     {data.map((item, i) => (
-                        <div key={i} onClick={()=>navigate(`/mainproductinfocomponent/${item.productdetailsid}/${item.productid}`)} style={{ height: matches ? 400 : 470, width: smatches ? '100%' : matches ? '48%' : '31%', borderBottom: '0.5px solid gray', display: 'flex', justifyContent: 'center', alignItems: 'center', fontFamily: '"Inter", sans-serif', }} >
+                        <div key={i} onClick={()=>navigate(`/mainproductinfocomponent/${item.productdetailsid}/${item.productid}`)} style={{ height: matches ? 400 : 470, width: smatches ? '100%' : matches ? '48%' : '31%', borderBottom: '0.5px solid gray', display: 'flex', justifyContent: 'center', alignItems: 'center', fontFamily: '"Inter", sans-serif', cursor:'pointer'}} >
                             <div style={{ display: 'flex', justifyContent: 'center', height: '75%', width: smatches?'55%':'100%', position: 'relative', alignItems: 'center', background: ' #393939', borderRadius: 10 }}>
                                 <div style={{ width: '100%', height: '100%', position: 'absolute', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                     <img src={`${serverURL}/images/${item.picture}`} style={{ width: '90%', borderRadius: 8, marginRight: '5%', marginLeft: '5%' }} />

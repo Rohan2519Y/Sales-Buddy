@@ -84,7 +84,7 @@ router.post('/update_productColors', function (req, res, next) {
         console.log(req.body)
         pool.query("update productColors set  serviceid=?, brandid=?, productid=?, productcolor=?,productcolorname=? where productcolorid=? ", [req.body.serviceid, req.body.brandid, req.body.productid, req.body.productcolor, req.body.productcolorname, req.body.productcolorid], function (error, result) {
             if (error) {
-                console.log(req.body);
+                console.log(error);
                 res.status(200).json({ status: false, message: "Database Error, Pls Contact Backend Team" })
             }
             else {

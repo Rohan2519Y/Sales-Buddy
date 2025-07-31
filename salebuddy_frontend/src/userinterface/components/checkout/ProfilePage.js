@@ -11,7 +11,7 @@ import { Typography } from '@mui/material'
 import Radio from '@mui/material/Radio'
 
 export default function ProfilePage({ gender, setGender, title, setTitle, firstName, setFirstName, middleName, setMiddleName, lastName, setLastName, mobile, setMobile, email, setEmail, err, handleSubmit,
-    errorF, setErrorF, touchedF, setTouchedF, errorM, setErrorM, touchedM, setTouchedM, errorE, setErrorE, touchedE, setTouchedE,errorL, setErrorL, touchedL, setTouchedL
+    errorF, setErrorF, touchedF, setTouchedF, errorM, setErrorM, touchedM, setTouchedM, errorE, setErrorE, touchedE, setTouchedE, errorL, setErrorL, touchedL, setTouchedL
 }) {
 
     const theme = useTheme()
@@ -33,7 +33,7 @@ export default function ProfilePage({ gender, setGender, title, setTitle, firstN
         } else {
             setErrorF('')
         }
-        if (touchedL && lastName.length === 0 ) {
+        if (touchedL && lastName.length === 0) {
             setErrorL('Last Name is required')
         } else {
             setErrorL('')
@@ -48,7 +48,7 @@ export default function ProfilePage({ gender, setGender, title, setTitle, firstN
         } else {
             setErrorE('')
         }
-    }, [firstName, lastName, mobile, email, touchedF, touchedL, touchedE, touchedM, ])
+    }, [firstName, lastName, mobile, email, touchedF, touchedL, touchedE, touchedM,])
 
     return (<>
 
@@ -66,15 +66,15 @@ export default function ProfilePage({ gender, setGender, title, setTitle, firstN
                     <div style={{ width: '100%', height: sm ? 200 : 105, display: 'flex', justifyContent: 'space-between', flexDirection: sm ? 'column' : '' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', width: sm ? '100%' : '50%', height: 90, position: 'relative' }}>
                             <div style={{ width: '100%', fontSize: '100%', height: 40, marginBottom: 'auto', color: ' #000000', display: 'flex', alignItems: 'center' }}>Title</div>
-                            <Select displayEmpty
+                            <Select displayEmpty onChange={(e) => setTitle(e.target.value)}
                                 sx={{ width: sm ? '100%' : '97%', height: 55, border: '1px solid #f6f6f6', backgroundColor: '#f6f6f6', borderRadius: 2.2, color: '#000000', pl: 1, fontSize: '120%', '.MuiSvgIcon-root': { color: 'transparent' }, '.MuiOutlinedInput-notchedOutline': { border: 'none' } }}
                                 MenuProps={{ PaperProps: { sx: { backgroundColor: '#ffffff', color: '#000', borderRadius: 1.2, boxShadow: '0px 4px 12px rgba(0,0,0,0.15)', fontWeight: 600 } } }}>
-                                <MenuItem onChange={(e) => setTitle(e.target.value)} value="Mr" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Mr</MenuItem>
-                                <MenuItem onChange={(e) => setTitle(e.target.value)} value="Mrs" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Mrs</MenuItem>
-                                <MenuItem onChange={(e) => setTitle(e.target.value)} value="Miss" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Miss</MenuItem>
-                                <MenuItem onChange={(e) => setTitle(e.target.value)} value="Ms" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Ms</MenuItem>
-                                <MenuItem onChange={(e) => setTitle(e.target.value)} value="Dr" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Dr</MenuItem>
-                                <MenuItem onChange={(e) => setTitle(e.target.value)} value="Prof" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Prof</MenuItem>
+                                <MenuItem value="Mr" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Mr</MenuItem>
+                                <MenuItem value="Mrs" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Mrs</MenuItem>
+                                <MenuItem value="Miss" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Miss</MenuItem>
+                                <MenuItem value="Ms" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Ms</MenuItem>
+                                <MenuItem value="Dr" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Dr</MenuItem>
+                                <MenuItem value="Prof" sx={{ fontWeight: 650, color: ' #000000', '&.Mui-selected': { backgroundColor: '#ffffff' }, '&.Mui-selected:hover': { backgroundColor: '#ffffff' }, '&:hover': { backgroundColor: '#ffffff' } }}>Prof</MenuItem>
                             </Select>
                             <ArrowDropDownIcon style={{ position: 'absolute', right: '6%', top: '50%', color: ' #666666', fontSize: '200%', pointerEvents: 'none' }} />
                         </div>
