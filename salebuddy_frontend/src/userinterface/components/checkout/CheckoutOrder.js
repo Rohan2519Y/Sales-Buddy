@@ -3,7 +3,7 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useRazorpay, RazorpayOrderOptions } from "react-razorpay";
 import { postData, serverURL } from '../../../backendservices/FetchNodeServices';
 import { useNavigate } from 'react-router';
@@ -20,7 +20,7 @@ export default function CheckoutOrder({ status, productData, handleSubmit, userA
     const [color, setColor] = useState(' #00e9bf')
     //const product = useSelector((state) => state.cart)
     const product = JSON.parse(localStorage.getItem('cart'))
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     // const user = useSelector((state) => state.user)
     // var userData = Object.values(user)[0]
     // const keys = Object.keys(product)
@@ -35,11 +35,11 @@ export default function CheckoutOrder({ status, productData, handleSubmit, userA
     } catch (e) { }
 
     var productData = []
-    var productkey=0
+    var productkey = 0
     try {
         const product = JSON.parse(localStorage.getItem('cart'))
         productData = Object.values(product)
-        productkey=Object.keys(product)
+        productkey = Object.keys(product)
     }
     catch (e) { }
 
@@ -63,8 +63,7 @@ export default function CheckoutOrder({ status, productData, handleSubmit, userA
         else
             await handleRazorPayment()
     }
-
-    var date = new Date().toISOString().split('T')[0];
+console.log('userdataaaaa',userData)
 
     let productdetailsid = productData.map(item => item.productdetailsid).join(',')
     let price = productData.map(item => item.price).join(',')
@@ -86,21 +85,44 @@ export default function CheckoutOrder({ status, productData, handleSubmit, userA
                 console.log(response);
                 const transactionid = response.razorpay_payment_id;
                 //alert("Payment Successful!");
-                var res = await postData('userinterface/userinterface_user_order_submit', { orderdate: date, mobileno: userData[0]?.mobileno, status: 'true' })
+                var d = new Date();
+                var cd = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate();
+                var ct = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+                var body={
+                    orderdate:cd,
+                    ordertime:ct,
+                    totalamount:netAmount,
+                    mobileno:userData[0]?.mobileno,
+                    emailid:userData[0]?.emailid,
+                    status:'true',
+                    paymentmode:'Online',
+                    transactionid:transactionid
+                }
+                 var res = await postData('orders/orders_submit', body)
                 if (res.status) {
-                    alert('Submit Order')
+                    var bdy={
+                        orderid:res.orderid,
+                        mobileno:userData[0]?.mobileno,
+                        deliverystatus:'Not-Delivered',
+                        address:`${userData[0].address} ${userData[0].landmark} ${userData[0].area} ${userData[0].pincode}`,
+                        city:userData[0]?.city,
+                        state:userData[0].state,
+                        paymentstatus:'true',
+                        cart:productData
+                    }
+                    var response=await postData('orders/insert_orderdetails',bdy)
                 }
                 else {
                     alert('Fail')
                 }
-                var res = await postData('userinterface/userinterface_user_orderdetails_submit', {mobileno:userData[0]?.mobileno, productdetailsid, price, offerprice, amount:membershipprice, qty, deliverystatus:'false', address:`${userData[0].address} ${userData[0].landmark} ${userData[0].area} ${userData[0].pincode}`, city:userData[0].city, state:userData[0].state, paymentstatus:'true', transactionid })
-                if (res.status) {
-                    alert('Submit Order Details')
-                }
-                else {
-                    alert('Fail')
-                }
-                navigate('/')
+                // var res = await postData('userinterface/userinterface_user_orderdetails_submit', { mobileno: userData[0]?.mobileno, productdetailsid, price, offerprice, amount: membershipprice, qty, deliverystatus: 'false', address: `${userData[0].address} ${userData[0].landmark} ${userData[0].area} ${userData[0].pincode}`, city: userData[0].city, state: userData[0].state, paymentstatus: 'true', transactionid })
+                // if (res.status) {
+                //     alert('Submit Order Details')
+                // }
+                // else {
+                //     alert('Fail')
+                // }
+                // navigate('/')
             },
             prefill: {
                 name: userData?.username,
