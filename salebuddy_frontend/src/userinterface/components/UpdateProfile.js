@@ -37,8 +37,10 @@ export default function UpdateProfile({ open, setOpen }) {
     const fetchUser = async () => {
         var res = await postData('userinterface/userinterface_fetch_user_by_mobile', { mobileno })
         setUserList(res.data)
-        setEmail(res.data.emailid)
-        var username=res.data.username.split(' ')
+        if (res.data.emailid.length > 0) {
+            setEmail(res.data.emailid || '')
+        }
+        var username = res.data.username.split(' ')
         setTitle(username[0])
         setFirstName(username[1])
         setMiddleName(username[2])
@@ -48,14 +50,12 @@ export default function UpdateProfile({ open, setOpen }) {
 
     useEffect(function () {
         fetchUser()
-    }, [])
+    }, [open == true])
 
-    const handleClick=async()=>{
-        var res=await postData('userinterface/update_user',{emailid:email, mobileno:mobile, username:`${title} ${firstName} ${middleName} ${lastName}`, gender, addressid:userList.addressid})
+    const handleClick = async () => {
+        var res = await postData('userinterface/update_user', { emailid: email, mobileno: mobile, username: `${title} ${firstName} ${middleName} ${lastName}`, gender, addressid: userList.addressid })
         setOpen(false)
     }
-
-     console.log('userrrrrrrrrrrrrrrrrrrr', userList.addressid)
 
     const [title, setTitle] = useState('')
     const [firstName, setFirstName] = useState('')
@@ -188,8 +188,8 @@ export default function UpdateProfile({ open, setOpen }) {
                                 )}
                             </div>
                         </div>
-                        <div style={{ width: '100%', height:  105, display: 'flex', justifyContent: 'center', alignItems:'center',  }}>
-                            <Button onClick={handleClick} style={{display:'flex',justifyContent:'center',alignItems:'center',height:'50%',width:'80%',color:'#000000',fontWeight:600,background:'#12DAA8'}}>Submit</Button>
+                        <div style={{ width: '100%', height: 105, display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
+                            <Button onClick={handleClick} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50%', width: '80%', color: '#000000', fontWeight: 600, background: '#12DAA8' }}>Submit</Button>
                         </div>
                     </div>
                 </div>

@@ -362,6 +362,7 @@ router.post('/userinterface_fetch_user_by_mobile', function (req, res, next) {
                 res.status(200).json({ status: false, message: "Database Error, Pls Contact Backend Team" })
             }
             else {
+                console.log(result)
                 res.status(200).json({ status: true, message: "Success...", data: result[0] })
             }
         })
@@ -385,7 +386,7 @@ router.post('/update_user', function (req, res, next) {
         })
     }
     catch (e) {
-        console.log(error);
+        console.log(e);
         res.status(200).json({ status: false, message: "Critical Error, Pls Contact Server Administrator" })
     }
 });

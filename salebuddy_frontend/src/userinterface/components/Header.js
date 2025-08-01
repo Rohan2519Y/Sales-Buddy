@@ -17,8 +17,9 @@ import { useEffect, useRef, useState } from "react";
 import UserLogin from './user/UserLogin';
 import OTPComponent from './user/OTPComponent';
 import UpdateProfile from './UpdateProfile';
+import SearchBox from './SearchBox';
 
-export default function Header({ cLogin, setCLogin, screencart }) {
+export default function Header({ cLogin, setCLogin, screencart, productList }) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'))
     const navigate = useNavigate()
@@ -60,8 +61,9 @@ export default function Header({ cLogin, setCLogin, screencart }) {
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //USER
-
+    const [text, setText] = useState('')
     const [hover, setHover] = useState(false)
+    const [search, setSearch] = useState('')
     const [loginColor, setLoginColor] = useState('#ffffff')
     const [orderColor, setOrderColor] = useState('#ffffff')
     const [profileColor, setProfileColor] = useState('#ffffff')
@@ -74,14 +76,25 @@ export default function Header({ cLogin, setCLogin, screencart }) {
             navigate('/')
         }
     }
+
     const UserHover = () => {
         return (<>
+            <style >{`                    
+                @keyframes slideDown {
+                    from { opacity: 0; transform: translateY(-10%); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                .animate-slidedown {
+                    animation: slideDown 0.3s ease-out forwards;
+                }
+            `}</style>
             {JSON.stringify(user) == '{}' ? <></> : <>
-                <div onMouseEnter={() => { setHover(true) }} onMouseLeave={() => { setHover(false) }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: 250, minHeight: 200, zIndex: 20, borderRadius: 10, background: ' #393939', fontFamily: '"Inter", sans-serif', fontSize: '100%', position: 'absolute', right: '4%', top: '9%', boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.4)' }}>
+                <div
+                    onMouseEnter={() => { setHover(true) }} onMouseLeave={() => { setHover(false) }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: 250, minHeight: 100, zIndex: 20, borderRadius: 10, background: ' #393939', fontFamily: '"Inter", sans-serif', fontSize: '100%', position: 'absolute', right: '4%', top: '9%', boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.4)' }}>
                     {/* <div onMouseEnter={() => { setLoginColor('#12DAA8') }} onMouseLeave={() => { setLoginColor('#ffffff') }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 80, cursor: 'pointer', color: loginColor }}><LoginIcon style={{ marginRight: 10, fontSize: '190%' }} /> Login</div> */}
-                    <div onClick={()=>{setUpdate(true)}} onMouseEnter={() => { setProfileColor('#12DAA8') }} onMouseLeave={() => { setProfileColor('#ffffff') }} style={{ background: profileColor == '#ffffff' ? '' : '#575757ff', borderTopLeftRadius:10,borderTopRightRadius:10,display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 80, cursor: 'pointer', color: profileColor }}><AccountCircleOutlinedIcon style={{ marginRight: 10, fontSize: '180%' }} /> Update Profile</div>
-                    <div onMouseEnter={() => { setOrderColor('#12DAA8') }} onMouseLeave={() => { setOrderColor('#ffffff') }} style={{ background: orderColor == '#ffffff' ? '' : '#575757ff', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 80, cursor: 'pointer', color: orderColor }}><InventoryIcon style={{ marginRight: 10, fontSize: '180%' }} /> Order  History</div>
-                    <div onClick={handleLogout} onMouseEnter={() => { setLogoutColor('#12DAA8') }} onMouseLeave={() => { setLogoutColor('#ffffff') }} style={{background: logoutColor == '#ffffff' ? '' : '#575757ff',borderBottomLeftRadius:10,borderBottomRightRadius:10, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 80, cursor: 'pointer', color: logoutColor }}><LogoutIcon style={{ marginRight: 10, fontSize: '180%' }} /> Logout</div>
+                    <div onClick={() => { setUpdate(true) }} onMouseEnter={() => { setProfileColor('#12DAA8') }} onMouseLeave={() => { setProfileColor('#ffffff') }} style={{ background: profileColor == '#ffffff' ? '' : '#575757ff', borderTopLeftRadius: 10, borderTopRightRadius: 10, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: profileColor }}><AccountCircleOutlinedIcon style={{ marginRight: 10, fontSize: '180%' }} /> Update Profile</div>
+                    <div onMouseEnter={() => { setOrderColor('#12DAA8') }} onMouseLeave={() => { setOrderColor('#ffffff') }} style={{ background: orderColor == '#ffffff' ? '' : '#575757ff', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: orderColor }}><InventoryIcon style={{ marginRight: 10, fontSize: '180%' }} /> Order  History</div>
+                    <div onClick={handleLogout} onMouseEnter={() => { setLogoutColor('#12DAA8') }} onMouseLeave={() => { setLogoutColor('#ffffff') }} style={{ background: logoutColor == '#ffffff' ? '' : '#575757ff', borderBottomLeftRadius: 10, borderBottomRightRadius: 10, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: logoutColor }}><LogoutIcon style={{ marginRight: 10, fontSize: '180%' }} /> Logout</div>
                 </div></>}
         </>)
     }
@@ -89,20 +102,21 @@ export default function Header({ cLogin, setCLogin, screencart }) {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // UPDATE
 
-    const [update,setUpdate]=useState(false)
+    const [update, setUpdate] = useState(false)
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     return (<>
         <UserLogin open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} mobileNo={mobileNo} setMobileNo={setMobileNo} setCLogin={setCLogin} />
         <OTPComponent screen={screen} setScreen={setScreen} screencart={screencart} open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} mobileNo={mobileNo} setMobileNo={setMobileNo} />
-        <UpdateProfile open={update} setOpen={setUpdate}/>
+        <UpdateProfile open={update} setOpen={setUpdate} />
+        {search.length != 0 && <SearchBox productList={productList} search={search} setSearch={setSearch} text={text} setText={setText}/>}
         {hover && <UserHover />}
         <div style={{ boxSizing: 'border-box', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: matches ? 90 : 75, background: '#000', boxShadow: '0 5px 15px rgba(0, 0, 0, 0.3)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', flexDirection: 'row', width: '95%', height: '100%' }}>
                 <Menu />
                 <div style={{ color: 'white', width: "15%", display: 'flex', alignItems: 'center', fontSize: 22, flexGrow: 1 }}><div style={{ marginRight: '40%', fontSize: matches ? 25 : 30, cursor: 'pointer' }} onClick={() => { navigate('/') }}>SalesBuddy</div></div>
-                {matches ? <></> : <Search />}
+                {matches ? <></> : <Search text={text} setText={setText} search={search} setSearch={setSearch} />}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '24%', height: '100%' }}>
                     {matches ? <></> : <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 2 }}>
                         <RoomIcon style={{ color: 'white', fontSize: 25, margin: 2 }} />
@@ -120,7 +134,7 @@ export default function Header({ cLogin, setCLogin, screencart }) {
                     </div>
                 </div>
             </div>
-            {matches ? <Search /> : <></>}
+            {matches ? <Search search={search} setSearch={setSearch} /> : <></>}
         </div>
     </>
     )
