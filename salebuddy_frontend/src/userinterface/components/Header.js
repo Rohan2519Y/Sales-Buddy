@@ -6,6 +6,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import InventoryIcon from '@mui/icons-material/Inventory';
+import CloseIcon from '@mui/icons-material/Close';
 import Menu from "./Menu"
 import Search from "./SearchBar"
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -20,7 +21,7 @@ import UpdateProfile from './UpdateProfile';
 import SearchBox from './SearchBox';
 import UpdateAddress from './UpdateAddress';
 
-export default function Header({ cLogin, setCLogin, screencart, productList }) {
+export default function Header({ cLogin, setCLogin, screencart, productList = [] }) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'))
     const navigate = useNavigate()
@@ -41,13 +42,13 @@ export default function Header({ cLogin, setCLogin, screencart, productList }) {
     //const product=useSelector((state)=>state.cart)
     // keys=Object.keys(product)
     ///localstorage  
-    var keys = 0
+    var keys = []
     try {
-        const product = JSON.parse(localStorage.getItem('cart'))
+        const product = JSON.parse(localStorage.getItem('cart')) || {}
         keys = Object.keys(product)
-        //alert(JSON.stringify(Object.values(product)))
+    } catch (e) {
+        keys = []
     }
-    catch (e) { }
     var user = {}
     try {
         user = JSON.parse(localStorage.getItem('user')) || {}
@@ -64,6 +65,7 @@ export default function Header({ cLogin, setCLogin, screencart, productList }) {
     //USER
     const [text, setText] = useState('')
     const [hover, setHover] = useState(false)
+    const [click, setClick] = useState(false)
     const [search, setSearch] = useState('')
     const [address, setAddress] = useState('#ffffff')
     const [orderColor, setOrderColor] = useState('#ffffff')
@@ -106,14 +108,25 @@ export default function Header({ cLogin, setCLogin, screencart, productList }) {
                     animation: slideDown 0.3s ease-out forwards;
                 }
             `}</style>
-            {JSON.stringify(user) == '{}' ? <></> : <>
-                <div
-                    onMouseEnter={() => { setHover(true) }} onMouseLeave={handleMouse} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: 250, minHeight: 100, zIndex: 20, borderRadius: 10, background: ' #393939', fontFamily: '"Inter", sans-serif', fontSize: '100%', position: 'absolute', right: '4%', top: '9%', boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.4)' }}>
-                    {/* <div onMouseEnter={() => { setLoginColor('#12DAA8') }} onMouseLeave={() => { setLoginColor('#ffffff') }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 80, cursor: 'pointer', color: loginColor }}><LoginIcon style={{ marginRight: 10, fontSize: '190%' }} /> Login</div> */}
+            {JSON.stringify(user) == '{}' ? <></> : matches ? <></> : <>
+                <div onMouseEnter={() => { setHover(true) }} onMouseLeave={handleMouse} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: 250, minHeight: 100, zIndex: 20, borderRadius: 10, background: ' #393939', fontFamily: '"Inter", sans-serif', fontSize: '100%', position: 'absolute', right: '4%', top: '9%', boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.4)' }}>
                     <div onClick={() => { setUpdate(true); setProfileColor('#ffffff') }} onMouseEnter={() => { setProfileColor('#12DAA8') }} onMouseLeave={() => { setProfileColor('#ffffff') }} style={{ background: profileColor == '#ffffff' ? '' : '#575757ff', borderTopLeftRadius: 10, borderTopRightRadius: 10, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: profileColor }}><AccountCircleOutlinedIcon style={{ marginRight: 10, fontSize: '180%' }} /> Update Profile</div>
                     <div onClick={() => { setAddressOpen(true); setAddress('#ffffff') }} onMouseEnter={() => { setAddress('#12DAA8') }} onMouseLeave={() => { setAddress('#ffffff') }} style={{ background: address == '#ffffff' ? '' : '#575757ff', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: address }}><HomeIcon style={{ marginRight: 10, fontSize: '180%' }} /> Update Address</div>
                     <div onClick={() => { navigate('/orderhistory'); setOrderColor('#ffffff') }} onMouseEnter={() => { setOrderColor('#12DAA8') }} onMouseLeave={() => { setOrderColor('#ffffff') }} style={{ background: orderColor == '#ffffff' ? '' : '#575757ff', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: orderColor }}><InventoryIcon style={{ marginRight: 10, fontSize: '180%' }} /> Order  History</div>
                     <div onClick={handleLogout} onMouseEnter={() => { setLogoutColor('#12DAA8') }} onMouseLeave={() => { setLogoutColor('#ffffff') }} style={{ background: logoutColor == '#ffffff' ? '' : '#575757ff', borderBottomLeftRadius: 10, borderBottomRightRadius: 10, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: logoutColor }}><LogoutIcon style={{ marginRight: 10, fontSize: '180%' }} /> Logout</div>
+                </div></>}
+        </>)
+    }
+
+    const UserClick = () => {
+        return (<>
+            {JSON.stringify(user) == '{}' ? <></> : !matches ? <></> : <>
+                <div style={{ width: '70%', height: '100vh', background: 'rgba(0,0,0,0.8)', position: 'fixed', top: 0, right: 0, zIndex: 20 }}>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', width: '100%', height: 30, }}><CloseIcon onClick={() => { setClick(false) }} style={{ color: '#ffffff', fontSize: '150%', marginRight: 5, marginTop: 3, cursor: 'pointer' }} /></div>
+                    <div onClick={() => { setUpdate(true); setProfileColor('#ffffff') }} onMouseEnter={() => { setProfileColor('#12DAA8') }} onMouseLeave={() => { setProfileColor('#ffffff') }} style={{ background: profileColor == '#ffffff' ? '' : '#57575785', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: profileColor }}><AccountCircleOutlinedIcon style={{ marginRight: 10, fontSize: '180%' }} /> Update Profile</div>
+                    <div onClick={() => { setAddressOpen(true); setAddress('#ffffff') }} onMouseEnter={() => { setAddress('#12DAA8') }} onMouseLeave={() => { setAddress('#ffffff') }} style={{ background: address == '#ffffff' ? '' : '#57575785', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: address }}><HomeIcon style={{ marginRight: 10, fontSize: '180%' }} /> Update Address</div>
+                    <div onClick={() => { navigate('/orderhistory'); setOrderColor('#ffffff') }} onMouseEnter={() => { setOrderColor('#12DAA8') }} onMouseLeave={() => { setOrderColor('#ffffff') }} style={{ background: orderColor == '#ffffff' ? '' : '#57575785', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: orderColor }}><InventoryIcon style={{ marginRight: 10, fontSize: '180%' }} /> Order  History</div>
+                    <div onClick={handleLogout} onMouseEnter={() => { setLogoutColor('#12DAA8') }} onMouseLeave={() => { setLogoutColor('#ffffff') }} style={{ background: logoutColor == '#ffffff' ? '' : '#57575785', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: logoutColor }}><LogoutIcon style={{ marginRight: 10, fontSize: '180%' }} /> Logout</div>
                 </div></>}
         </>)
     }
@@ -125,11 +138,12 @@ export default function Header({ cLogin, setCLogin, screencart, productList }) {
         <UpdateAddress addressOpen={addressOpen} setAddressOpen={setAddressOpen} />
         {search.length != 0 && <SearchBox productList={productList} search={search} setSearch={setSearch} text={text} setText={setText} />}
         {hover && <UserHover />}
+        {click && <UserClick />}
         <div style={{ boxSizing: 'border-box', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: matches ? 90 : 75, background: '#000', boxShadow: '0 5px 15px rgba(0, 0, 0, 0.3)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', flexDirection: 'row', width: '95%', height: '100%' }}>
                 <Menu />
                 <div style={{ color: 'white', width: "15%", display: 'flex', alignItems: 'center', fontSize: 22, flexGrow: 1 }}><div style={{ marginRight: '40%', fontSize: matches ? 25 : 30, cursor: 'pointer' }} onClick={() => { navigate('/') }}>SalesBuddy</div></div>
-                {matches ? <></> : <Search text={text} setText={setText} search={search} setSearch={setSearch} />}
+                {matches ? <></> : <Search productList={productList} text={text} setText={setText} search={search} setSearch={setSearch} />}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '24%', height: '100%' }}>
                     {matches ? <></> : <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 2 }}>
                         <RoomIcon style={{ color: 'white', fontSize: 25, margin: 2 }} />
@@ -139,6 +153,7 @@ export default function Header({ cLogin, setCLogin, screencart, productList }) {
                     <div style={{ marginLeft: matches ? 'auto' : 0, marginRight: 10, height: '100%', display: 'flex', alignItems: 'center' }}>
                         <div onClick={() => {
                             if (JSON.stringify(user) === '{}') { handleLogin() }
+                            else setClick(true)
                         }}
                             onMouseEnter={() => { setHover(true) }} onMouseLeave={() => { setHover(false) }} style={{ color: 'white', fontSize: 25, marginRight: 10, cursor: 'pointer', height: hover ? '100%' : '', display: 'flex', alignItems: 'center' }} ><PersonIcon /></div>
                         <Badge style={{ margin: '0 8 0 8' }} invisible={keys.length === 0} badgeContent={keys.length} sx={{ '& .MuiBadge-badge': { backgroundColor: '#12DAA8', color: '#000' } }}>
@@ -147,7 +162,7 @@ export default function Header({ cLogin, setCLogin, screencart, productList }) {
                     </div>
                 </div>
             </div>
-            {matches ? <Search search={search} setSearch={setSearch} /> : <></>}
+            {matches && <Search productList={productList} text={text} setText={setText} search={search} setSearch={setSearch} />}
         </div>
     </>
     )
