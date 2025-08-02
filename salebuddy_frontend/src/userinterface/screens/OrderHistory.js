@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-export default function OrderHistory({ productData, refresh, setRefresh }) {
+export default function OrderHistory() {
 
     const theme = useTheme()
     const md = useMediaQuery('(max-width:1300px)')
@@ -35,20 +35,19 @@ export default function OrderHistory({ productData, refresh, setRefresh }) {
         fetchOrderHistory()
     }, [])
 
-    var data = [{
-        productdetailid: 1, productname: 'SAMSUNG Galaxy S25 Ultra 5G', productstorage: '256GB', productcolorname: 'Titanium Blue', productram: '12GB',
-        picture: 'https://res.cloudinary.com/dio6iadsq/image/upload/v1748778565/s25_ultra_e1hcpg.png', ratings: 4, price: 78000.00,
-        delivery: 'Standard Delivery by 1 July 2025 | Free', offerapply: 'Buy & Get Rs.2010 off (Discount auto applied in cart) Offer Applied'
-    },
-    {
-        productdetailid: 1, productname: 'SAMSUNG Galaxy Z6', productstorage: '128GB', productcolorname: 'Titanium Blue', productram: '12GB',
-        picture: 'https://res.cloudinary.com/dio6iadsq/image/upload/v1748778280/sam_z6_v6ubdl.png', ratings: 3.6, price: 88000.00, offerprice: 80000.00,
-        delivery: 'Standard Delivery by 1 July 2025 | Free'
-    }]
+    // var data = [{
+    //     productdetailid: 1, productname: 'SAMSUNG Galaxy S25 Ultra 5G', productstorage: '256GB', productcolorname: 'Titanium Blue', productram: '12GB',
+    //     picture: 'https://res.cloudinary.com/dio6iadsq/image/upload/v1748778565/s25_ultra_e1hcpg.png', ratings: 4, price: 78000.00,
+    //     delivery: 'Standard Delivery by 1 July 2025 | Free', offerapply: 'Buy & Get Rs.2010 off (Discount auto applied in cart) Offer Applied'
+    // },
+    // {
+    //     productdetailid: 1, productname: 'SAMSUNG Galaxy Z6', productstorage: '128GB', productcolorname: 'Titanium Blue', productram: '12GB',
+    //     picture: 'https://res.cloudinary.com/dio6iadsq/image/upload/v1748778280/sam_z6_v6ubdl.png', ratings: 3.6, price: 88000.00, offerprice: 80000.00,
+    //     delivery: 'Standard Delivery by 1 July 2025 | Free'
+    // }]
 
     return (<>
-
-    <Header/>
+        <Header />
         <div style={{ display: 'flex', width: '100%', alignItems: 'center', flexDirection: 'column', background: '#f9f9f9', fontFamily: '"Inter", sans-serif', minHeight: '100vh' }}>
             <div style={{ display: 'flex', width: '100%', height: 70, fontWeight: 700, fontSize: '140%', justifyContent: 'center', alignItems: 'center' }}>Order History</div>
             {orderHistory.map((item) => (
@@ -70,6 +69,6 @@ export default function OrderHistory({ productData, refresh, setRefresh }) {
                 </div>
             ))}
         </div>
-            <Footer/>
+        <Footer />
     </>)
 }

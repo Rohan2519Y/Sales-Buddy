@@ -319,6 +319,7 @@ router.post('/userinterface_user_search', function (req, res, next) {
     }
 });
 
+
 router.post('/userinterface_fetch_user_by_mobile', function (req, res, next) {
     try {
         pool.query("select * from useraddress where mobileno=?", [req.body.mobileno], function (error, result) {
@@ -327,8 +328,25 @@ router.post('/userinterface_fetch_user_by_mobile', function (req, res, next) {
                 res.status(200).json({ status: false, message: "Database Error, Pls Contact Backend Team" })
             }
             else {
-                console.log(result)
                 res.status(200).json({ status: true, message: "Success...", data: result[0] })
+            }
+        })
+    }
+    catch (e) {
+        console.log(e);
+        res.status(200).json({ status: false, message: "Critical Error, Pls Contact Server Administrator" })
+    }
+});
+
+router.post('/update_address', function (req, res, next) {
+    try {
+        pool.query("update useraddress set  address=?,state=?, city=?, pincode=?,landmark=?,nickname=?,area=? where addressid=? ", [req.body.address, req.body.state, req.body.city, req.body.pincode, req.body.landmark, req.body.nickname, req.body.area, req.body.addressid], function (error, result) {
+            if (error) {
+                console.log(error);
+                res.status(200).json({ status: false, message: "Database Error, Pls Contact Backend Team" })
+            }
+            else {
+                res.status(200).json({ status: true, message: "Succesfull.." })
             }
         })
     }
