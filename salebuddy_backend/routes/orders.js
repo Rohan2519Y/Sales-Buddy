@@ -34,7 +34,7 @@ router.post("/insert_orderdetails", function (req, res, next) {
       item.productdetailsid,
       item.price,
       item.offerprice,
-      item.offerprice > 0 ? item.offerprice * item.qty : item.price * item.qty, // total amount
+      item.offerprice > 0 ? item.offerprice * item.qty : item.price * item.qty,
       item.qty,
       req.body.deliverystatus,
       req.body.address,

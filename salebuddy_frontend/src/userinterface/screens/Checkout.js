@@ -68,8 +68,6 @@ export default function Checkout() {
     const [state, setState] = useState('')
     const [city, setCity] = useState('')
 
-    console.log('title',title)
-
     const [errorF, setErrorF] = useState('')
     const [errorL, setErrorL] = useState('')
     const [errorM, setErrorM] = useState('')
@@ -156,6 +154,7 @@ export default function Checkout() {
         if (res.status) {
             setUserAddress(res.data)
             dispatch({ type: 'ADD_USER', payload: [mobileno, res.data] })
+            localStorage.setItem('user', JSON.stringify({ [mobileno]: res.data }))
         }
     }
 

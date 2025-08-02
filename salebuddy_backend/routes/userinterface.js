@@ -300,41 +300,6 @@ router.post('/userinterface_user_address_submit', function (req, res, next) {
     }
 });
 
-router.post('/userinterface_user_order_submit', function (req, res, next) {
-    try {
-        pool.query("insert into orders(orderdate, mobileno, status)values(?,?,?) ", [req.body.orderdate, req.body.mobileno, req.body.status], function (error, result) {
-            if (error) {
-                console.log(error)
-                res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
-            }
-            else {
-                res.status(200).json({ status: true, message: 'Success..' })
-            }
-        })
-    }
-    catch (e) {
-        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
-    }
-});
-
-router.post('/userinterface_user_orderdetails_submit', function (req, res, next) {
-    try {
-        pool.query("insert into orderdetails(mobileno, productdetailsid, price, offerprice, amount, qty, deliverystatus, address, city, state, paymentstatus, transactionid)values(?,?,?,?,?,?,?,?,?,?,?,?) ", [req.body.mobileno, req.body.productdetailsid, req.body.price, req.body.offerprice, req.body.amount, req.body.qty, req.body.deliverystatus, req.body.address, req.body.city, req.body.state, req.body.paymentstatus, req.body.transactionid], function (error, result) {
-            if (error) {
-                console.log(error)
-                res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
-            }
-            else {
-                res.status(200).json({ status: true, message: 'Success..' })
-            }
-        })
-    }
-    catch (e) {
-        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
-    }
-});
-
-
 router.post('/userinterface_user_search', function (req, res, next) {
     try {
         const text = `%${req.body.searchtext}%`
@@ -390,4 +355,23 @@ router.post('/update_user', function (req, res, next) {
         res.status(200).json({ status: false, message: "Critical Error, Pls Contact Server Administrator" })
     }
 });
+
+router.post('/userinterface_fetch_orders', function (req, res, next) {
+    try {
+        pool.query("SELECT P.*, B.*, S.*, PC.*, PV.*, PD.*, O.*, D.* FROM products P, brands B, services S, productcolors PC, productvarients PV, productdetails PD,orders O, orderdetails D where P.productid=PD.productid and B.brandid=PD.brandId and S.serviceid=PD.serviceid and PC.productcolorid=Pd.productcolorid  and PV.productvarientid=pd.productvarientid and O.orderid=D.orderid and PD.productdetailsid=D.productdetailsid and O.mobileno=?", [req.body.mobileno], function (error, result) {
+            if (error) {
+                console.log(error)
+                res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
+            }
+            else {
+
+                res.status(200).json({ status: true, message: 'Success..', data: result })
+            }
+        })
+    }
+    catch (e) {
+        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
+    }
+});
+
 module.exports = router;

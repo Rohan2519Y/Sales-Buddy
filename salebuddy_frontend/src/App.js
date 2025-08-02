@@ -7,8 +7,8 @@ import MainProductInfoComponent from "./userinterface/screens/MainProductInfoCom
 import Cart from "./userinterface/screens/Cart";
 import UserLogin from "./userinterface/components/user/UserLogin"
 import OTPComponent from "./userinterface/components/user/OTPComponent";
-import Profile from "./userinterface/screens/Profile";
 import Checkout from "./userinterface/screens/Checkout"
+import OrderHistory from "./userinterface/screens/OrderHistory";
 function App() {
   return (
     <div style={{ fontFamily: 'Quicksand' }}>
@@ -21,7 +21,7 @@ function App() {
           <Route element={<Cart />} path="/cart" />
           <Route element={<Home />} path="/" />
           <Route element={<Checkout />} path="/checkout" />
-          <Route element={<OTPComponent />} path="/otp" />
+          <Route element={<OrderHistory />} path="/orderhistory" />
         </Routes>
       </Router>
     </div>
