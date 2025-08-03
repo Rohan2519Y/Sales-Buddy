@@ -12,7 +12,7 @@ import Search from "./SearchBar"
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { Badge, fabClasses } from '@mui/material';
+import { Badge, Dialog, fabClasses } from '@mui/material';
 import { useNavigate } from 'react-router'
 import { useEffect, useRef, useState } from "react";
 import UserLogin from './user/UserLogin';
@@ -20,6 +20,7 @@ import OTPComponent from './user/OTPComponent';
 import UpdateProfile from './UpdateProfile';
 import SearchBox from './SearchBox';
 import UpdateAddress from './UpdateAddress';
+import { postData } from '../../backendservices/FetchNodeServices';
 
 export default function Header({ cLogin, setCLogin, screencart, productList = [] }) {
     const theme = useTheme();
@@ -74,8 +75,10 @@ export default function Header({ cLogin, setCLogin, screencart, productList = []
 
     const [update, setUpdate] = useState(false)
     const [addressOpen, setAddressOpen] = useState(false)
-    const [chooseAddress,setChooseAddress]=useState(null)
-    
+    const [chooseOpen, setChooseOpen] = useState(false)
+    const [userAddress, setUserAddress] = useState([])
+    const [addressId,setAddressId]=useState(null)
+
     const handleLogout = () => {
         if (JSON.stringify(user) != '{}') {
             dispatch({ type: "LOGOUT" })
@@ -92,7 +95,37 @@ export default function Header({ cLogin, setCLogin, screencart, productList = []
         setOrderColor('#ffffff')
         setLogoutColor('#ffffff')
     }
-    
+
+    var user = {}
+    try {
+        user = JSON.parse(localStorage.getItem('user')) || {}
+    } catch (e) {
+        user = {}
+    }
+    var mobileno = Object.keys(user)[0] || ''
+
+    var productData = []
+    try {
+        const product = JSON.parse(localStorage.getItem('cart'))
+        productData = Object.values(product)
+    }
+    catch (e) { }
+
+    const fetchUserAddress = async () => {
+        var res = await postData('userinterface/userinterface_chk_address', { mobileno })
+        if (res.status) {
+            setUserAddress(res.data)
+            dispatch({ type: 'ADD_USER', payload: [mobileno, res.data] })
+            localStorage.setItem('user', JSON.stringify({ [mobileno]: res.data }))
+        }
+    }
+
+    useEffect(function () {
+        fetchUserAddress()
+    }, [addressOpen,chooseOpen])
+
+    console.log('userrrrrrrrrrrr', userAddress)
+
     const UserHover = () => {
         return (<>
             <style >{`                    
@@ -107,7 +140,7 @@ export default function Header({ cLogin, setCLogin, screencart, productList = []
             {JSON.stringify(user) == '{}' ? <></> : matches ? <></> : <>
                 <div onMouseEnter={() => { setHover(true) }} onMouseLeave={handleMouse} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: 250, minHeight: 100, zIndex: 20, borderRadius: 10, background: ' #393939', fontFamily: '"Inter", sans-serif', fontSize: '100%', position: 'absolute', right: '4%', top: '9%', boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.4)' }}>
                     <div onClick={() => { setUpdate(true); setProfileColor('#ffffff') }} onMouseEnter={() => { setProfileColor('#12DAA8') }} onMouseLeave={() => { setProfileColor('#ffffff') }} style={{ background: profileColor == '#ffffff' ? '' : '#575757ff', borderTopLeftRadius: 10, borderTopRightRadius: 10, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: profileColor }}><AccountCircleOutlinedIcon style={{ marginRight: 10, fontSize: '180%' }} /> Update Profile</div>
-                    <div onClick={() => { setAddressOpen(true); setAddress('#ffffff') }} onMouseEnter={() => { setAddress('#12DAA8') }} onMouseLeave={() => { setAddress('#ffffff') }} style={{ background: address == '#ffffff' ? '' : '#575757ff', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: address }}><HomeIcon style={{ marginRight: 10, fontSize: '180%' }} /> Update Address</div>
+                    <div onClick={() => { setChooseOpen(true); setAddress('#ffffff') }} onMouseEnter={() => { setAddress('#12DAA8') }} onMouseLeave={() => { setAddress('#ffffff') }} style={{ background: address == '#ffffff' ? '' : '#575757ff', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: address }}><HomeIcon style={{ marginRight: 10, fontSize: '180%' }} /> Update Address</div>
                     <div onClick={() => { navigate('/orderhistory'); setOrderColor('#ffffff') }} onMouseEnter={() => { setOrderColor('#12DAA8') }} onMouseLeave={() => { setOrderColor('#ffffff') }} style={{ background: orderColor == '#ffffff' ? '' : '#575757ff', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: orderColor }}><InventoryIcon style={{ marginRight: 10, fontSize: '180%' }} /> Order  History</div>
                     <div onClick={handleLogout} onMouseEnter={() => { setLogoutColor('#12DAA8') }} onMouseLeave={() => { setLogoutColor('#ffffff') }} style={{ background: logoutColor == '#ffffff' ? '' : '#575757ff', borderBottomLeftRadius: 10, borderBottomRightRadius: 10, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: logoutColor }}><LogoutIcon style={{ marginRight: 10, fontSize: '180%' }} /> Logout</div>
                 </div></>}
@@ -120,17 +153,33 @@ export default function Header({ cLogin, setCLogin, screencart, productList = []
                 <div style={{ width: '70%', height: '100vh', background: 'rgba(0,0,0,0.8)', position: 'fixed', top: 0, right: 0, zIndex: 20 }}>
                     <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', width: '100%', height: 30, }}><CloseIcon onClick={() => { setClick(false) }} style={{ color: '#ffffff', fontSize: '150%', marginRight: 5, marginTop: 3, cursor: 'pointer' }} /></div>
                     <div onClick={() => { setUpdate(true); setProfileColor('#ffffff') }} onMouseEnter={() => { setProfileColor('#12DAA8') }} onMouseLeave={() => { setProfileColor('#ffffff') }} style={{ background: profileColor == '#ffffff' ? '' : '#57575785', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: profileColor }}><AccountCircleOutlinedIcon style={{ marginRight: 10, fontSize: '180%' }} /> Update Profile</div>
-                    <div onClick={() => { setAddressOpen(true); setAddress('#ffffff') }} onMouseEnter={() => { setAddress('#12DAA8') }} onMouseLeave={() => { setAddress('#ffffff') }} style={{ background: address == '#ffffff' ? '' : '#57575785', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: address }}><HomeIcon style={{ marginRight: 10, fontSize: '180%' }} /> Update Address</div>
+                    <div onClick={() => { setChooseOpen(true); setAddress('#ffffff') }} onMouseEnter={() => { setAddress('#12DAA8') }} onMouseLeave={() => { setAddress('#ffffff') }} style={{ background: address == '#ffffff' ? '' : '#57575785', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: address }}><HomeIcon style={{ marginRight: 10, fontSize: '180%' }} /> Update Address</div>
                     <div onClick={() => { navigate('/orderhistory'); setOrderColor('#ffffff') }} onMouseEnter={() => { setOrderColor('#12DAA8') }} onMouseLeave={() => { setOrderColor('#ffffff') }} style={{ background: orderColor == '#ffffff' ? '' : '#57575785', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: orderColor }}><InventoryIcon style={{ marginRight: 10, fontSize: '180%' }} /> Order  History</div>
                     <div onClick={handleLogout} onMouseEnter={() => { setLogoutColor('#12DAA8') }} onMouseLeave={() => { setLogoutColor('#ffffff') }} style={{ background: logoutColor == '#ffffff' ? '' : '#57575785', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: logoutColor }}><LogoutIcon style={{ marginRight: 10, fontSize: '180%' }} /> Logout</div>
                 </div></>}
         </>)
     }
 
-    const Addresses =()=>{
-        return(<>
-            
-        </>)
+    const MultipleAddresses = () => {
+        return (
+            <Dialog
+                open={chooseOpen}
+                PaperProps={{ sx: { width: '800px', minHeight: '100px', background: '#191919', borderRadius: 2, fontFamily: '"Inter", sans-serif' } }}>
+                <CloseIcon onClick={() => { setChooseOpen(false) }} style={{ right: 6, position: 'absolute', top: 3, cursor: 'pointer', color: '#ffffff' }} />
+                <div style={{ display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+                    <div style={{ width: '90%', marginTop: 30, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                        <div style={{ width: '100%', height: 40, display: 'flex', justifyContent: 'center', alignItems: 'center',color:'#ffffff',fontWeight:700 }}>Choose Address</div>
+                        {userAddress.map((item, i) => (<>
+                            <div onClick={()=>{setAddressId(item.addressid);setAddressOpen(true);setChooseOpen(false)}} style={{cursor:'pointer', display: 'flex', padding: 5, boxSizing: 'border-box', alignItems: 'center', flexDirection: 'column', height: 80, width: '100%', marginBottom: 30, borderRadius: 5, background: '#ffffff' }}>
+                                <div style={{ width: '100%', height: '25%', display: 'flex', justifyContent: 'center', alignItems: 'center', fontWeight: 700 }}>Address {i + 1}</div>
+                                <div style={{ width: '100%', height: '37.5%', display: 'flex', alignItems: 'center' }}>{item?.address}, {item.area}, Near {item?.landmark},{item.pincode}</div>
+                                <div style={{ width: '100%', height: '37.5%', display: 'flex', alignItems: 'center' }}>{item.city} {item.state}</div>
+                            </div>
+                        </>))}
+                    </div>
+                </div>
+            </Dialog>
+        )
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -138,10 +187,11 @@ export default function Header({ cLogin, setCLogin, screencart, productList = []
         <UserLogin open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} mobileNo={mobileNo} setMobileNo={setMobileNo} setCLogin={setCLogin} />
         <OTPComponent screen={screen} setScreen={setScreen} screencart={screencart} open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} mobileNo={mobileNo} setMobileNo={setMobileNo} />
         <UpdateProfile open={update} setOpen={setUpdate} />
-        <UpdateAddress addressOpen={addressOpen} setAddressOpen={setAddressOpen} />
+        <UpdateAddress addressOpen={addressOpen} addressId={addressId} setAddressOpen={setAddressOpen} />
         {search.length != 0 && <SearchBox productList={productList} search={search} setSearch={setSearch} text={text} setText={setText} />}
         {hover && <UserHover />}
         {click && <UserClick />}
+        {chooseOpen && <MultipleAddresses />}
         <div style={{ boxSizing: 'border-box', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: matches ? 90 : 75, background: '#000', boxShadow: '0 5px 15px rgba(0, 0, 0, 0.3)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', flexDirection: 'row', width: '95%', height: '100%' }}>
                 <Menu />

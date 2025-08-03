@@ -33,7 +33,6 @@ export default function UpdateAddress({ addressOpen, setAddressOpen, addressSub,
     console.log('id', addressId)
 
     const fetchUser = async () => {
-
         if (addressSub == 'ADD') {
             var res = await postData('userinterface/userinterface_fetch_user_by_mobile', { mobileno })
             setUserList(res.data)
@@ -47,7 +46,7 @@ export default function UpdateAddress({ addressOpen, setAddressOpen, addressSub,
             setLastName(username[3])
             setGender(res.data.gender)
         }
-        if (addressSub == 'CHANGE') {
+        else {
             var res = await postData('userinterface/userinterface_fetch_user_by_id', { addressid: addressId })
             setUserList(res.data)
             setNickName(res.data.nickname || '')
@@ -68,13 +67,12 @@ export default function UpdateAddress({ addressOpen, setAddressOpen, addressSub,
 
 
     const handleClick = async () => {
-        alert(addressSub)
-        if (addressSub == 'CHANGE') {
-            var res = await postData('userinterface/update_address', { address, state, city, pincode: pin, landmark, nickname: nickName, area, addressid: addressId })
-            setAddressOpen(false)
-        }
         if (addressSub == 'ADD') {
             var res = await postData('userinterface/userinterface_user_address_submit', { emailid: email, mobileno: mobile, address, state, city, pincode: pin, landmark, username: `${title} ${firstName} ${middleName} ${lastName}`, gender, area, nickname: nickName })
+            setAddressOpen(false)
+        }
+        else {
+            var res = await postData('userinterface/update_address', { address, state, city, pincode: pin, landmark, nickname: nickName, area, addressid: addressId })
             setAddressOpen(false)
         }
     }
