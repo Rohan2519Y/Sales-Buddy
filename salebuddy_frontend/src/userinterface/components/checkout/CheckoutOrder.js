@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useRazorpay, RazorpayOrderOptions } from "react-razorpay";
 import { postData, serverURL } from '../../../backendservices/FetchNodeServices';
 import { useNavigate } from 'react-router';
-export default function CheckoutOrder({ status, productData, handleSubmit, userAddress, userData }) {
+export default function CheckoutOrder({ status, productData, handleSubmit, userAddress, userData, index }) {
 
     const theme = useTheme();
     const md = useMediaQuery('(max-width:1200px)');
@@ -22,17 +22,23 @@ export default function CheckoutOrder({ status, productData, handleSubmit, userA
     const product = JSON.parse(localStorage.getItem('cart'))
     const navigate = useNavigate()
     // const user = useSelector((state) => state.user)
-    // var userData = Object.values(user)[0]
+    // var userData = Object.values(user)[index]
     // const keys = Object.keys(product)
 
     var keys = []
-    var userData = {}
+    var userData = {}  
     try {
         const userJson = localStorage.getItem('user')
         const user = JSON.parse(userJson)
         keys = Object.keys(user)
-        userData = Object.values(user)[0] || {}
+        const userMobile = keys[0]
+        userData = user[userMobile][index] || {}  
+
+        // console.log('Userjson',userJson)
+        // console.log('user',user)
     } catch (e) { }
+
+    // console.log('useerdata',userData)
 
     var productData = []
     var productkey = 0
@@ -87,34 +93,35 @@ export default function CheckoutOrder({ status, productData, handleSubmit, userA
                 var d = new Date();
                 var cd = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate();
                 var ct = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
-                var body={
-                    orderdate:cd,
-                    ordertime:ct,
-                    totalamount:netAmount,
-                    mobileno:userData[0]?.mobileno,
-                    emailid:userData[0]?.emailid,
-                    status:'true',
-                    paymentmode:'Online',
-                    transactionid:transactionid
+                var body = {
+                    orderdate: cd,
+                    ordertime: ct,
+                    totalamount: netAmount,
+                    mobileno: userData?.mobileno,  // Fixed this line
+                    emailid: userData?.emailid,    // Fixed this line
+                    status: 'true',
+                    paymentmode: 'Online',
+                    transactionid: transactionid
                 }
-                 var res = await postData('orders/orders_submit', body)
+                var res = await postData('orders/orders_submit', body)
+                console.log('bodyyyyyyyyyy', body)
                 if (res.status) {
-                    var bdy={
-                        orderid:res.orderid,
-                        mobileno:userData[0]?.mobileno,
-                        deliverystatus:'Not-Delivered',
-                        address:`${userData[0].address} ${userData[0].landmark} ${userData[0].area} ${userData[0].pincode}`,
-                        city:userData[0]?.city,
-                        state:userData[0].state,
-                        paymentstatus:'true',
-                        cart:productData
+                    var bdy = {
+                        orderid: res.orderid,
+                        mobileno: userData?.mobileno,  // Fixed this line
+                        deliverystatus: 'Not-Delivered',
+                        address: `${userData?.address} ${userData?.landmark} ${userData?.area} ${userData?.pincode}`,  // Fixed this line
+                        city: userData?.city,    // Fixed this line
+                        state: userData?.state,  // Fixed this line
+                        paymentstatus: 'true',
+                        cart: productData
                     }
-                    var response=await postData('orders/insert_orderdetails',bdy)
+                    var response = await postData('orders/insert_orderdetails', bdy)
                 }
                 else {
                     alert('Fail')
                 }
-                // var res = await postData('userinterface/userinterface_user_orderdetails_submit', { mobileno: userData[0]?.mobileno, productdetailsid, price, offerprice, amount: membershipprice, qty, deliverystatus: 'false', address: `${userData[0].address} ${userData[0].landmark} ${userData[0].area} ${userData[0].pincode}`, city: userData[0].city, state: userData[0].state, paymentstatus: 'true', transactionid })
+                // var res = await postData('userinterface/userinterface_user_orderdetails_submit', { mobileno: userData[index]?.mobileno, productdetailsid, price, offerprice, amount: membershipprice, qty, deliverystatus: 'false', address: `${userData[index].address} ${userData[index].landmark} ${userData[index].area} ${userData[index].pincode}`, city: userData[index].city, state: userData[index].state, paymentstatus: 'true', transactionid })
                 // if (res.status) {
                 //     alert('Submit Order Details')
                 // }
