@@ -17,7 +17,6 @@ export default function RootReducer(state = initialState, action) {
                      return { cart: state.cart, user: state.user }
               case "ADD_USER":
                      state.user[action.payload[0]] = action.payload[1]
-                     console.log("USSERR", state.user)
                      localStorage.setItem('user', JSON.stringify(state.user))
                      return { cart: state.cart, user: state.user }
               case "CLEAR_CART":

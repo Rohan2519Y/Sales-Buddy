@@ -10,7 +10,7 @@ import Radio from '@mui/material/Radio'
 import CloseIcon from '@mui/icons-material/Close';
 import { getData, postData } from "../../backendservices/FetchNodeServices";
 
-export default function UpdateAddress({ addressOpen, setAddressOpen }) {
+export default function UpdateAddress({ addressOpen, setAddressOpen, addressSub, addressId }) {
     const theme = useTheme()
     const md = useMediaQuery('(max-width:1300px)')
     const sm = useMediaQuery('(max-width:790px)')
@@ -29,26 +29,54 @@ export default function UpdateAddress({ addressOpen, setAddressOpen }) {
     var mobileno = Object.keys(user)[0] || ''
 
     const [userList, setUserList] = useState({})
+    console.log('adresssssss', userList)
+    console.log('id', addressId)
 
     const fetchUser = async () => {
-        var res = await postData('userinterface/userinterface_fetch_user_by_mobile', { mobileno })
-        setUserList(res.data)
-        setNickName(res.data.nickname || '')
-        setPin(res.data.pincode || '')
-        setAddress(res.data.address || '')
-        setLandmark(res.data.landmark || '')
-        setArea(res.data.area || '')
-        setState(res.data.state || '')
-        setCity(res.data.city || '')
+
+        if (addressSub == 'ADD') {
+            var res = await postData('userinterface/userinterface_fetch_user_by_mobile', { mobileno })
+            setUserList(res.data)
+            if (res.data.emailid.length > 0) {
+                setEmail(res.data.emailid || '')
+            }
+            var username = res.data.username.split(' ')
+            setTitle(username[0])
+            setFirstName(username[1])
+            setMiddleName(username[2])
+            setLastName(username[3])
+            setGender(res.data.gender)
+        }
+        if (addressSub == 'CHANGE') {
+            var res = await postData('userinterface/userinterface_fetch_user_by_id', { addressid: addressId })
+            setUserList(res.data)
+            setNickName(res.data.nickname || '')
+            setPin(res.data.pincode || '')
+            setAddress(res.data.address || '')
+            setLandmark(res.data.landmark || '')
+            setArea(res.data.area || '')
+            setState(res.data.state || '')
+            setCity(res.data.city || '')
+        }
     }
 
-    useEffect(function () {
-        fetchUser()
-    }, [addressOpen == true])
+    useEffect(() => {
+        if (addressOpen) {
+            fetchUser()
+        }
+    }, [addressOpen, addressSub])
+
 
     const handleClick = async () => {
-        var res = await postData('userinterface/update_address', { address, state, city, pincode: pin, landmark, nickname: nickName, area, addressid: userList.addressid })
-        setAddressOpen(false)
+        alert(addressSub)
+        if (addressSub == 'CHANGE') {
+            var res = await postData('userinterface/update_address', { address, state, city, pincode: pin, landmark, nickname: nickName, area, addressid: addressId })
+            setAddressOpen(false)
+        }
+        if (addressSub == 'ADD') {
+            var res = await postData('userinterface/userinterface_user_address_submit', { emailid: email, mobileno: mobile, address, state, city, pincode: pin, landmark, username: `${title} ${firstName} ${middleName} ${lastName}`, gender, area, nickname: nickName })
+            setAddressOpen(false)
+        }
     }
 
     const [nickName, setNickName] = useState('')
@@ -58,6 +86,13 @@ export default function UpdateAddress({ addressOpen, setAddressOpen }) {
     const [area, setArea] = useState('')
     const [state, setState] = useState('')
     const [city, setCity] = useState('')
+    const [title, setTitle] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const [middleName, setMiddleName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [mobile, setMobile] = useState(mobileno)
+    const [email, setEmail] = useState('')
+    const [gender, setGender] = useState(null)
 
     const [errorN, setErrorN] = useState('')
     const [errorC, setErrorC] = useState('')
@@ -112,15 +147,25 @@ export default function UpdateAddress({ addressOpen, setAddressOpen }) {
         }
     }, [nickName, pin, address, landmark, area, state, city, touchedP, touchedN, touchedA, touchedLa, touchedAr, touchedS, touchedC])
 
+    const handleReset = () => {
+        setNickName('')
+        setPin('')
+        setAddress('')
+        setLandmark('')
+        setArea('')
+        setState('')
+        setCity('')
+    }
+
     return (<>
         <Dialog
             open={addressOpen}
             PaperProps={{ sx: { width: '800px', height: 'auto', background: '#191919', borderRadius: 2, } }}>
-            <CloseIcon onClick={() => { setAddressOpen(false) }} style={{ right: 6, position: 'absolute', top: 3, cursor: 'pointer', color: '#ffffff' }} />
+            <CloseIcon onClick={() => { setAddressOpen(false);handleReset() }} style={{ right: 6, position: 'absolute', top: 3, cursor: 'pointer', color: '#ffffff' }} />
             <div style={{ display: 'flex', width: '100%', alignItems: 'center', flexDirection: 'column' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', }}>
                     <div style={{ display: 'flex', width: '95%', height: '100%', flexDirection: 'column' }}>
-                        <div style={{ display: 'flex', width: '100%', height: 40, alignItems: 'center', fontWeight: 700, fontSize: '100%', color: '#ffffff' }}>Update Address</div>
+                        <div style={{ display: 'flex', width: '100%', height: 40, alignItems: 'center', fontWeight: 700, fontSize: '100%', color: '#ffffff' }}>{addressSub}</div>
                         <div style={{ width: '100%', height: sm ? 200 : 105, display: 'flex', justifyContent: 'space-between', flexDirection: sm ? 'column' : '', marginTop: sm ? '' : 15 }}>
                             <div style={{ display: 'flex', flexDirection: 'column', width: sm ? '100%' : '50%', height: errorN ? 112 : 90 }}>
                                 <div style={{ width: sm ? '100%' : '97%', fontSize: '100%', height: 38, marginBottom: 'auto', color: ' #ffffff', display: 'flex', alignItems: 'center' }}>Address Nick Name*</div>

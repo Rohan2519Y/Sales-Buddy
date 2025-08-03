@@ -81,7 +81,6 @@ router.post('/delete_productColors', function (req, res, next) {
 
 router.post('/update_productColors', function (req, res, next) {
     try {
-        console.log(req.body)
         pool.query("update productColors set  serviceid=?, brandid=?, productid=?, productcolor=?,productcolorname=? where productcolorid=? ", [req.body.serviceid, req.body.brandid, req.body.productid, req.body.productcolor, req.body.productcolorname, req.body.productcolorid], function (error, result) {
             if (error) {
                 console.log(error);

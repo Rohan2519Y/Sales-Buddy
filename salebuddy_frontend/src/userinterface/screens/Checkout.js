@@ -50,9 +50,6 @@ export default function Checkout() {
     }
     catch (e) { }
 
-    console.log('data', productData)
-    console.log('user', JSON.stringify(user))
-
     const [title, setTitle] = useState('')
     const [firstName, setFirstName] = useState('')
     const [middleName, setMiddleName] = useState('')
@@ -175,7 +172,7 @@ export default function Checkout() {
                         <Address nickName={nickName} setNickName={setNickName} pin={pin} setPin={setPin} address={address} setAddress={setAddress} landmark={landmark} setLandmark={setLandmark} area={area} setArea={setArea} state={state} setState={setState} city={city} setCity={setCity}
                             errorN={errorN} setErrorN={setErrorN} touchedN={touchedN} setTouchedN={setTouchedN} errorP={errorP} setErrorP={setErrorP} touchedP={touchedP} setTouchedP={setTouchedP} errorA={errorA} setErrorA={setErrorA} touchedA={touchedA} setTouchedA={setTouchedA} errorLa={errorLa} setErrorLa={setErrorLa} touchedLa={touchedLa} setTouchedLa={setTouchedLa} errorAr={errorAr} setErrorAr={setErrorAr} touchedAr={touchedAr} setTouchedAr={setTouchedAr} errorS={errorS} setErrorS={setErrorS} touchedS={touchedS} setTouchedS={setTouchedS} errorC={errorC} setErrorC={setErrorC} touchedC={touchedC} setTouchedC={setTouchedC} />
                         <Contact /></> :
-                        <SubmittedAddress userAddress={userAddress} />}
+                        <SubmittedAddress userAddress={userAddress} fetchUserAddress={fetchUserAddress}/>}
                     <Delivery refresh={refresh} setRefresh={setRefresh} productData={productData} />
                     <GST />
                 </div>

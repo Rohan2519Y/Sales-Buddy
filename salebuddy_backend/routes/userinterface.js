@@ -337,6 +337,23 @@ router.post('/userinterface_fetch_user_by_mobile', function (req, res, next) {
         res.status(200).json({ status: false, message: "Critical Error, Pls Contact Server Administrator" })
     }
 });
+router.post('/userinterface_fetch_user_by_id', function (req, res, next) {
+    try {
+        pool.query("select * from useraddress where addressid=?", [req.body.addressid], function (error, result) {
+            if (error) {
+                console.log(error);
+                res.status(200).json({ status: false, message: "Database Error, Pls Contact Backend Team" })
+            }
+            else {
+                res.status(200).json({ status: true, message: "Success...", data: result[0] })
+            }
+        })
+    }
+    catch (e) {
+        console.log(e);
+        res.status(200).json({ status: false, message: "Critical Error, Pls Contact Server Administrator" })
+    }
+});
 
 router.post('/update_address', function (req, res, next) {
     try {

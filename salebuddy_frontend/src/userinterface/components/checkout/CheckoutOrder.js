@@ -63,7 +63,6 @@ export default function CheckoutOrder({ status, productData, handleSubmit, userA
         else
             await handleRazorPayment()
     }
-console.log('userdataaaaa',userData)
 
     // let productdetailsid = productData.map(item => item.productdetailsid).join(',')
     // let price = productData.map(item => item.price).join(',')
