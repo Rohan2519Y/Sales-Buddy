@@ -83,6 +83,8 @@ export default function Header({ cLogin, setCLogin, screencart, productList = []
         if (JSON.stringify(user) != '{}') {
             dispatch({ type: "LOGOUT" })
             dispatch({ type: "CLEAR_CART" })
+            localStorage.removeItem('user');
+            localStorage.removeItem('cart');
             navigate('/')
             setLogoutColor('#ffffff')
         }
@@ -112,6 +114,7 @@ export default function Header({ cLogin, setCLogin, screencart, productList = []
     catch (e) { }
 
     const fetchUserAddress = async () => {
+        if (!mobileno) return
         var res = await postData('userinterface/userinterface_chk_address', { mobileno })
         if (res.status) {
             setUserAddress(res.data)

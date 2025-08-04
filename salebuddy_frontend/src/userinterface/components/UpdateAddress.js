@@ -163,7 +163,7 @@ export default function UpdateAddress({ addressOpen, setAddressOpen, addressSub,
             <div style={{ display: 'flex', width: '100%', alignItems: 'center', flexDirection: 'column' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', }}>
                     <div style={{ display: 'flex', width: '95%', height: '100%', flexDirection: 'column' }}>
-                        <div style={{ display: 'flex', width: '100%', height: 40, alignItems: 'center', fontWeight: 700, fontSize: '100%', color: '#ffffff' }}>{addressSub}</div>
+                        <div style={{ display: 'flex', width: '100%', height: 40, alignItems: 'center', fontWeight: 700, fontSize: '100%', color: '#ffffff' }}>{addressSub} ADDRESS</div>
                         <div style={{ width: '100%', height: sm ? 200 : 105, display: 'flex', justifyContent: 'space-between', flexDirection: sm ? 'column' : '', marginTop: sm ? '' : 15 }}>
                             <div style={{ display: 'flex', flexDirection: 'column', width: sm ? '100%' : '50%', height: errorN ? 112 : 90 }}>
                                 <div style={{ width: sm ? '100%' : '97%', fontSize: '100%', height: 38, marginBottom: 'auto', color: ' #ffffff', display: 'flex', alignItems: 'center' }}>Address Nick Name*</div>
