@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import { serverURL } from "../../backendservices/FetchNodeServices";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import { useNavigate } from "react-router";
 
 export default function ServiceSlider({data}) {
 
@@ -13,6 +14,8 @@ export default function ServiceSlider({data}) {
     const matches = useMediaQuery(theme.breakpoints.down('md'));
     const smatches = useMediaQuery(theme.breakpoints.down('sm'));
     const landscape = useMediaQuery('(max-height: 500px) and (min-width: 600px)');
+
+    const navigate=useNavigate()
 
     // const data = [
     //     {
@@ -42,7 +45,7 @@ export default function ServiceSlider({data}) {
 
     const showImages = () => {
         return data.map((item, i) => (<>
-            <div style={{ width: '100%', height: '90%', display: 'flex',  alignItems: 'center', flexDirection: 'column',cursor:'pointer' }}>
+            <div onClick={()=>{navigate(`/productlist/${item.servicename}`)}} style={{ width: '100%', height: '90%', display: 'flex',  alignItems: 'center', flexDirection: 'column',cursor:'pointer' }}>
                 <img style={{ maxHeight: '45%', maxWidth: '45%' }} src={`${serverURL}/images/${item.icon}`} />
                 <div style={{marginTop:10,fontSize:'120%',color:'#ffffff'}} >{item.servicetype} {item.servicename}</div>
             </div>

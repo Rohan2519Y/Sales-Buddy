@@ -57,7 +57,7 @@ router.post('/userinterface_fetch_productdetails', function (req, res, next) {
 
 router.post('/userinterface_fetch_ads', function (req, res, next) {
     try {
-        pool.query("select * from ads where imgno=?", [req.body.imgno], function (error, result) {
+        pool.query("select A.*, P.* from ads A, products P where A.productid=P.productid and A.imgno=?", [req.body.imgno], function (error, result) {
             if (error) {
                 console.log(error);
                 res.status(200).json({ status: false, message: "Database Error, Pls Contact Backend Team" })
@@ -309,7 +309,7 @@ router.post('/userinterface_user_search', function (req, res, next) {
                 res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
             }
             else {
-                console.log(result)
+                // console.log(result)
                 res.status(200).json({ status: true, message: 'Success..', data: result })
             }
         })

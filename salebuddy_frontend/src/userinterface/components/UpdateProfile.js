@@ -24,30 +24,34 @@ export default function UpdateProfile({ open, setOpen }) {
         setGender(value)
     }
 
-    var user = {}
-    try {
-        user = JSON.parse(localStorage.getItem('user')) || {}
-    } catch (e) {
-        user = {}
-    }
-    var mobileno = Object.keys(user)[0] || ''
-
     const [userList, setUserList] = useState({})
-
     const fetchUser = async () => {
-        var res = await postData('userinterface/userinterface_fetch_user_by_mobile', { mobileno })
-        setUserList(res.data)
-        if (res.data.emailid.length > 0) {
-            setEmail(res.data.emailid || '')
+        var user = {}
+        try {
+            user = JSON.parse(localStorage.getItem('user')) || {}
+        } catch (e) {
+            user = {}
         }
-        var username = res.data.username.split(' ')
-        setTitle(username[0])
-        setFirstName(username[1])
-        setMiddleName(username[2])
-        setLastName(username[3])
-        setGender(res.data.gender)
-    }
 
+        const mobileNo = Object.keys(user)[0] || ''
+        setMobile(mobileNo)
+
+        if (open) {
+            var res = await postData('userinterface/userinterface_fetch_user_by_mobile', { mobileno: mobileNo })
+            setUserList(res.data)
+
+            if (res.data.emailid?.length > 0) {
+                setEmail(res.data.emailid)
+            }
+
+            var username = res.data.username?.split(' ') || []
+            setTitle(username[0] || '')
+            setFirstName(username[1] || '')
+            setMiddleName(username[2] || '')
+            setLastName(username[3] || '')
+            setGender(res.data.gender)
+        }
+    }
     useEffect(function () {
         fetchUser()
     }, [open == true])
@@ -61,7 +65,7 @@ export default function UpdateProfile({ open, setOpen }) {
     const [firstName, setFirstName] = useState('')
     const [middleName, setMiddleName] = useState('')
     const [lastName, setLastName] = useState('')
-    const [mobile, setMobile] = useState(mobileno)
+    const [mobile, setMobile] = useState('')
     const [email, setEmail] = useState('')
     const [gender, setGender] = useState(null)
 

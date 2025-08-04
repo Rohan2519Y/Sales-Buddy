@@ -5,6 +5,7 @@ import { useTheme } from '@mui/material/styles';
 import ProductScrollerBack from "./ProductScrollerBack";
 import ProductScrollerFront from "./ProductScrollerFront";
 import { useRef } from "react";
+import { useNavigate } from "react-router";
 export default function BrandSlider({data}) {
     const theme = useTheme();
     const ref = useRef()
@@ -18,11 +19,13 @@ export default function BrandSlider({data}) {
         autoPlay:false,
         arrows: false 
     };
+
+    const navigate=useNavigate()
     
     const showImages = () => {
         return data.map((item, i) => {
             return <div style={{ width: '100%', height: '100%', display: "flex", justifyContent: 'center', alignItems: 'center' }}>
-                <div style={{ background: '#393939', width: 'auto', height: '100%', display: "flex", justifyContent: 'center', alignItems: 'center', margin: '7%', borderRadius: 5, cursor: 'pointer' }}>
+                <div onClick={()=>{navigate(`/productlist/${item.brandname}`)}} style={{ background: '#393939', width: 'auto', height: '100%', display: "flex", justifyContent: 'center', alignItems: 'center', margin: '7%', borderRadius: 5, cursor: 'pointer' }}>
                     <img src={`${serverURL}/images/${item.brandlogo}`} style={{ width: '95%', margin: 10 }} />
                 </div>
             </div >
