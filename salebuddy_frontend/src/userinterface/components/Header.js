@@ -12,7 +12,7 @@ import Search from "./SearchBar"
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { Badge, Dialog, fabClasses } from '@mui/material';
+import { Badge, Button, Dialog, fabClasses } from '@mui/material';
 import { useNavigate } from 'react-router'
 import { useEffect, useRef, useState } from "react";
 import UserLogin from './user/UserLogin';
@@ -20,7 +20,7 @@ import OTPComponent from './user/OTPComponent';
 import UpdateProfile from './UpdateProfile';
 import SearchBox from './SearchBox';
 import UpdateAddress from './UpdateAddress';
-import { postData } from '../../backendservices/FetchNodeServices';
+import { generateOtp, postData } from '../../backendservices/FetchNodeServices';
 
 export default function Header({ cLogin, setCLogin, screencart, productList = [] }) {
     const theme = useTheme();
@@ -64,20 +64,22 @@ export default function Header({ cLogin, setCLogin, screencart, productList = []
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //USER
-    const [text, setText] = useState('')
     const [hover, setHover] = useState(false)
     const [click, setClick] = useState(false)
+    const [update, setUpdate] = useState(false)
+    const [addressOpen, setAddressOpen] = useState(false)
+    const [chooseOpen, setChooseOpen] = useState(false)
+    const [openMobile, setOpenMobile] = useState(false)
+
+    const [text, setText] = useState('')
     const [search, setSearch] = useState('')
     const [address, setAddress] = useState('#ffffff')
     const [orderColor, setOrderColor] = useState('#ffffff')
     const [profileColor, setProfileColor] = useState('#ffffff')
     const [logoutColor, setLogoutColor] = useState('#ffffff')
 
-    const [update, setUpdate] = useState(false)
-    const [addressOpen, setAddressOpen] = useState(false)
-    const [chooseOpen, setChooseOpen] = useState(false)
     const [userAddress, setUserAddress] = useState([])
-    const [addressId,setAddressId]=useState(null)
+    const [addressId, setAddressId] = useState(null)
 
     const handleLogout = () => {
         if (JSON.stringify(user) != '{}') {
@@ -122,12 +124,11 @@ export default function Header({ cLogin, setCLogin, screencart, productList = []
             localStorage.setItem('user', JSON.stringify({ [mobileno]: res.data }))
         }
     }
+    console.log('useradressssssssss',userAddress)
 
     useEffect(function () {
         fetchUserAddress()
-    }, [addressOpen,chooseOpen])
-
-    console.log('userrrrrrrrrrrr', userAddress)
+    }, [addressOpen, chooseOpen])
 
     const UserHover = () => {
         return (<>
@@ -142,7 +143,7 @@ export default function Header({ cLogin, setCLogin, screencart, productList = []
             `}</style>
             {JSON.stringify(user) == '{}' ? <></> : matches ? <></> : <>
                 <div onMouseEnter={() => { setHover(true) }} onMouseLeave={handleMouse} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: 250, minHeight: 100, zIndex: 20, borderRadius: 10, background: ' #393939', fontFamily: '"Inter", sans-serif', fontSize: '100%', position: 'absolute', right: '4%', top: '9%', boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.4)' }}>
-                    <div onClick={() => { setUpdate(true); setProfileColor('#ffffff') }} onMouseEnter={() => { setProfileColor('#12DAA8') }} onMouseLeave={() => { setProfileColor('#ffffff') }} style={{ background: profileColor == '#ffffff' ? '' : '#575757ff', borderTopLeftRadius: 10, borderTopRightRadius: 10, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: profileColor }}><AccountCircleOutlinedIcon style={{ marginRight: 10, fontSize: '180%' }} /> Update Profile</div>
+                    {userAddress.length==0?<></>:<div onClick={() => { setUpdate(true); setProfileColor('#ffffff') }} onMouseEnter={() => { setProfileColor('#12DAA8') }} onMouseLeave={() => { setProfileColor('#ffffff') }} style={{ background: profileColor == '#ffffff' ? '' : '#575757ff', borderTopLeftRadius: 10, borderTopRightRadius: 10, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: profileColor }}><AccountCircleOutlinedIcon style={{ marginRight: 10, fontSize: '180%' }} /> Update Profile</div>}
                     <div onClick={() => { setChooseOpen(true); setAddress('#ffffff') }} onMouseEnter={() => { setAddress('#12DAA8') }} onMouseLeave={() => { setAddress('#ffffff') }} style={{ background: address == '#ffffff' ? '' : '#575757ff', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: address }}><HomeIcon style={{ marginRight: 10, fontSize: '180%' }} /> Update Address</div>
                     <div onClick={() => { navigate('/orderhistory'); setOrderColor('#ffffff') }} onMouseEnter={() => { setOrderColor('#12DAA8') }} onMouseLeave={() => { setOrderColor('#ffffff') }} style={{ background: orderColor == '#ffffff' ? '' : '#575757ff', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: orderColor }}><InventoryIcon style={{ marginRight: 10, fontSize: '180%' }} /> Order  History</div>
                     <div onClick={handleLogout} onMouseEnter={() => { setLogoutColor('#12DAA8') }} onMouseLeave={() => { setLogoutColor('#ffffff') }} style={{ background: logoutColor == '#ffffff' ? '' : '#575757ff', borderBottomLeftRadius: 10, borderBottomRightRadius: 10, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 70, cursor: 'pointer', color: logoutColor }}><LogoutIcon style={{ marginRight: 10, fontSize: '180%' }} /> Logout</div>
@@ -171,9 +172,9 @@ export default function Header({ cLogin, setCLogin, screencart, productList = []
                 <CloseIcon onClick={() => { setChooseOpen(false) }} style={{ right: 6, position: 'absolute', top: 3, cursor: 'pointer', color: '#ffffff' }} />
                 <div style={{ display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
                     <div style={{ width: '90%', marginTop: 30, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                        <div style={{ width: '100%', height: 40, display: 'flex', justifyContent: 'center', alignItems: 'center',color:'#ffffff',fontWeight:700 }}>Choose Address</div>
+                        <div style={{ width: '100%', height: 40, display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#ffffff', fontWeight: 700 }}>Choose Address</div>
                         {userAddress.map((item, i) => (<>
-                            <div onClick={()=>{setAddressId(item.addressid);setAddressOpen(true);setChooseOpen(false)}} style={{cursor:'pointer', display: 'flex', padding: 5, boxSizing: 'border-box', alignItems: 'center', flexDirection: 'column', height: 80, width: '100%', marginBottom: 30, borderRadius: 5, background: '#ffffff' }}>
+                            <div onClick={() => { setAddressId(item.addressid); setAddressOpen(true); setChooseOpen(false) }} style={{ cursor: 'pointer', display: 'flex', padding: 5, boxSizing: 'border-box', alignItems: 'center', flexDirection: 'column', height: 80, width: '100%', marginBottom: 30, borderRadius: 5, background: '#ffffff' }}>
                                 <div style={{ width: '100%', height: '25%', display: 'flex', justifyContent: 'center', alignItems: 'center', fontWeight: 700 }}>Address {i + 1}</div>
                                 <div style={{ width: '100%', height: '37.5%', display: 'flex', alignItems: 'center' }}>{item?.address}, {item.area}, Near {item?.landmark},{item.pincode}</div>
                                 <div style={{ width: '100%', height: '37.5%', display: 'flex', alignItems: 'center' }}>{item.city} {item.state}</div>
@@ -184,17 +185,39 @@ export default function Header({ cLogin, setCLogin, screencart, productList = []
             </Dialog>
         )
     }
+
+    const ChangeMobile = () => {
+        const [temporary,setTemporary]=useState('')
+        var otp=generateOtp()
+        return (<>
+            <Dialog
+                open={openMobile}
+                PaperProps={{ sx: { width: '800px', background: '#191919', borderRadius: 2, fontFamily: '"Inter", sans-serif' } }}>
+                <CloseIcon onClick={() => { setOpenMobile(false) }} style={{ right: 6, position: 'absolute', top: 3, cursor: 'pointer', color: '#ffffff' }} />
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', flexDirection: 'column' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#ffffff', fontWeight: 650, height: 50 }}>Update Mobile Number</div>
+                    <div style={{ width: '90%', height: 50, background: ' #f6f6f6', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 8, border: '1px solid #f6f6f6', position: 'relative' }}>
+                        <input onChange={(e)=>setTemporary(e.target.value)} type="text" placeholder="Enter Mobile Number" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '105%', background: ' #f6f6f6' }} />
+                    </div>
+                    <div style={{ width: '100%', height: 85, display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
+                        <Button onClick={() => {setOpenOtp(true);setMobileNo(temporary);setOpenMobile(false);setOtpValue(otp);alert(otp)}} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50%', width: '80%', color: '#000000', fontWeight: 600, background: '#12DAA8' }}>Submit</Button>
+                    </div>
+                </div>
+            </Dialog></>
+        )
+    }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     return (<>
         <UserLogin open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} mobileNo={mobileNo} setMobileNo={setMobileNo} setCLogin={setCLogin} />
         <OTPComponent screen={screen} setScreen={setScreen} screencart={screencart} open={open} setOpenDialog={setOpenDialog} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} mobileNo={mobileNo} setMobileNo={setMobileNo} />
-        <UpdateProfile open={update} setOpen={setUpdate} />
+        <UpdateProfile open={update} setOpen={setUpdate} openOtp={openOtp} setOpenOtp={setOpenOtp} otpValue={otpValue} setOtpValue={setOtpValue} mobileNum={mobileNo} setMobileNum={setMobileNo} setOpenMobile={setOpenMobile} openMobile={openMobile}/>
         <UpdateAddress addressOpen={addressOpen} addressId={addressId} setAddressOpen={setAddressOpen} />
         {search.length != 0 && <SearchBox productList={productList} search={search} setSearch={setSearch} text={text} setText={setText} />}
         {hover && <UserHover />}
         {click && <UserClick />}
         {chooseOpen && <MultipleAddresses />}
+        {openMobile && <ChangeMobile />}
         <div style={{ boxSizing: 'border-box', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: matches ? 90 : 75, background: '#000', boxShadow: '0 5px 15px rgba(0, 0, 0, 0.3)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', flexDirection: 'row', width: '95%', height: '100%' }}>
                 <Menu />

@@ -8,9 +8,9 @@ import { useState, useEffect } from 'react'
 import { Typography } from '@mui/material'
 import Radio from '@mui/material/Radio'
 import CloseIcon from '@mui/icons-material/Close';
-import { getData, postData } from "../../backendservices/FetchNodeServices";
+import { getData, postData, generateOtp } from "../../backendservices/FetchNodeServices";
 
-export default function UpdateProfile({ open, setOpen }) {
+export default function UpdateProfile({ open, setOpen, openOtp, setOpenOtp, otpValue, setOtpValue, setMobileNum, setOpenMobile, openMobile, mobileNum }) {
     const theme = useTheme()
     const md = useMediaQuery('(max-width:1300px)')
     const sm = useMediaQuery('(max-width:790px)')
@@ -36,25 +36,30 @@ export default function UpdateProfile({ open, setOpen }) {
         const mobileNo = Object.keys(user)[0] || ''
         setMobile(mobileNo)
 
+        if (mobileNum.length != 0) {
+            setMobile(mobileNum)
+        }
+
         if (open) {
             var res = await postData('userinterface/userinterface_fetch_user_by_mobile', { mobileno: mobileNo })
             setUserList(res.data)
+            if (res.result) {
+                if (res.data.emailid?.length > 0) {
+                    setEmail(res.data.emailid)
+                }
 
-            if (res.data.emailid?.length > 0) {
-                setEmail(res.data.emailid)
+                var username = res.data.username?.split(' ') || []
+                setTitle(username[0] || '')
+                setFirstName(username[1] || '')
+                setMiddleName(username[2] || '')
+                setLastName(username[3] || '')
+                setGender(res.data.gender)
             }
-
-            var username = res.data.username?.split(' ') || []
-            setTitle(username[0] || '')
-            setFirstName(username[1] || '')
-            setMiddleName(username[2] || '')
-            setLastName(username[3] || '')
-            setGender(res.data.gender)
         }
     }
     useEffect(function () {
         fetchUser()
-    }, [open == true])
+    }, [open == true, openMobile])
 
     const handleClick = async () => {
         var res = await postData('userinterface/update_user', { emailid: email, mobileno: mobile, username: `${title} ${firstName} ${middleName} ${lastName}`, gender, addressid: userList.addressid })
@@ -170,8 +175,8 @@ export default function UpdateProfile({ open, setOpen }) {
                             <div style={{ display: 'flex', flexDirection: 'column', width: sm ? '100%' : '50%', height: errorM ? 112 : 90 }}>
                                 <div style={{ width: sm ? '100%' : '97%', fontSize: '100%', height: 38, marginBottom: 'auto', color: ' #ffffff', display: 'flex', alignItems: 'center' }}>Mobile Number *</div>
                                 <div style={{ width: sm ? '100%' : '97%', height: 55, background: ' #f6f6f6', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 8, border: errorM ? '1px solid red' : '1px solid #f6f6f6', position: 'relative' }}>
-                                    <input onBlur={() => setTouchedM(true)} onChange={(e) => setMobile(e.target.value)} value={mobile} className="placeholdercolor" type="text" placeholder="Enter Mobile Number" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '105%', background: ' #f6f6f6' }} />
-                                    <EditOutlinedIcon style={{ position: 'absolute', right: '3%', top: '25%', fontSize: '150%', cursor: 'pointer' }} />
+                                    <input disabled onBlur={() => setTouchedM(true)} onChange={(e) => setMobile(e.target.value)} value={mobile} className="placeholdercolor" type="text" placeholder="Enter Mobile Number" style={{ width: '90%', height: '90%', border: '0px solid transparent', outline: 'none', fontSize: '105%', background: ' #f6f6f6' }} />
+                                    <EditOutlinedIcon onClick={() => { setOpenMobile(true) }} style={{ position: 'absolute', right: '3%', top: '25%', fontSize: '150%', cursor: 'pointer' }} />
                                 </div>
                                 {errorM && (
                                     <Typography sx={{ width: sm ? '100%' : '97%', fontSize: '90%', color: '#f44336', fontWeight: 600 }} >

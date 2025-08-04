@@ -23,7 +23,7 @@ export default function OTPComponent({ mobileNo, setMobileNo, openOtp, setOpenOt
     const handleCheckOtp = async () => {
         alert(otpValue, currentOtp)
         if (otpValue == currentOtp) {
-            var response = await postData('userinterface/userinterface_chk_mobile_email', { mobileno:mobileNo })
+            var response = await postData('userinterface/userinterface_chk_mobile_email', { mobileno: mobileNo })
             if (response.status) {
                 dispatch({ type: 'ADD_USER', payload: [mobileNo, response.data] })
             }
