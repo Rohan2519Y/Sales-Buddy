@@ -16,6 +16,7 @@ import CheckOutHeader from "../components/checkout/CheckOutHeader";
 import SubmittedAddress from "../components/checkout/SubmittedAddress";
 import { postData } from "../../backendservices/FetchNodeServices";
 import { useDispatch } from "react-redux";
+import SelectedAddress from "../components/checkout/SelectedAddress";
 
 export default function Checkout() {
 
@@ -29,7 +30,8 @@ export default function Checkout() {
     var dispatch = useDispatch()
     const [refresh, setRefresh] = useState('')
     const [userAddress, setUserAddress] = useState([])
-    const [index,setIndex]=useState(0)
+    const [index, setIndex] = useState(0)
+    const [addressId, setAddressId] = useState(null)
     // var user = useSelector((state) => state.user)
     // var mobileno = Object.keys(user)[0]
 
@@ -160,6 +162,7 @@ export default function Checkout() {
         fetchUserAddress()
     }, [])
 
+    console.log('adressid',addressId)
     return (<>
         <div style={{ width: '100%', height: '100%', background: ' #f9f9f9', fontFamily: '"Inter", sans-serif' }}>
             <div>
@@ -173,12 +176,13 @@ export default function Checkout() {
                         <Address nickName={nickName} setNickName={setNickName} pin={pin} setPin={setPin} address={address} setAddress={setAddress} landmark={landmark} setLandmark={setLandmark} area={area} setArea={setArea} state={state} setState={setState} city={city} setCity={setCity}
                             errorN={errorN} setErrorN={setErrorN} touchedN={touchedN} setTouchedN={setTouchedN} errorP={errorP} setErrorP={setErrorP} touchedP={touchedP} setTouchedP={setTouchedP} errorA={errorA} setErrorA={setErrorA} touchedA={touchedA} setTouchedA={setTouchedA} errorLa={errorLa} setErrorLa={setErrorLa} touchedLa={touchedLa} setTouchedLa={setTouchedLa} errorAr={errorAr} setErrorAr={setErrorAr} touchedAr={touchedAr} setTouchedAr={setTouchedAr} errorS={errorS} setErrorS={setErrorS} touchedS={touchedS} setTouchedS={setTouchedS} errorC={errorC} setErrorC={setErrorC} touchedC={touchedC} setTouchedC={setTouchedC} />
                         <Contact /></> :
-                        <SubmittedAddress index={index} setIndex={setIndex} userAddress={userAddress} fetchUserAddress={fetchUserAddress}/>}
+                        <SubmittedAddress addressId={addressId} setAddressId={setAddressId} index={index} setIndex={setIndex} userAddress={userAddress} fetchUserAddress={fetchUserAddress} />}
                     <Delivery refresh={refresh} setRefresh={setRefresh} productData={productData} />
                     <GST />
                 </div>
                 <div style={{ width: md ? '100%' : '35%', }}>
                     <CheckoutOrder index={index} userAddress={userAddress} status={userAddress.length >= 1 ? true : false} handleSubmit={handleSubmit} userStatus={userAddress?.length} productData={productData} />
+                    <SelectedAddress addressId={addressId} setAddressId={setAddressId} />
                 </div>
             </div>
             <div>

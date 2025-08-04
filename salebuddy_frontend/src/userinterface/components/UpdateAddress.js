@@ -29,8 +29,6 @@ export default function UpdateAddress({ addressOpen, setAddressOpen, addressSub,
     var mobileno = Object.keys(user)[0] || ''
 
     const [userList, setUserList] = useState({})
-    console.log('adresssssss', userList)
-    console.log('id', addressId)
 
     const fetchUser = async () => {
         if (addressSub == 'ADD') {

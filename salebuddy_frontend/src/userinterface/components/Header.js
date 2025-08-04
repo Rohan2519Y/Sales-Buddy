@@ -124,7 +124,6 @@ export default function Header({ cLogin, setCLogin, screencart, productList = []
             localStorage.setItem('user', JSON.stringify({ [mobileno]: res.data }))
         }
     }
-    console.log('useradressssssssss',userAddress)
 
     useEffect(function () {
         fetchUserAddress()

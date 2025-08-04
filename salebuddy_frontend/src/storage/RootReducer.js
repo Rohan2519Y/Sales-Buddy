@@ -9,7 +9,6 @@ export default function RootReducer(state = initialState, action) {
               case "ADD_CART":
                      state.cart[action.payload[0]] = action.payload[1]
                      localStorage.setItem('cart', JSON.stringify(state.cart))
-                     console.log(state)
                      return { cart: state.cart, user: state.user }
               case "DEL_CART":
                      delete state.cart[action.payload[0]]

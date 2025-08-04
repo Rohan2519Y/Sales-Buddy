@@ -10,8 +10,6 @@ export default function ProductList() {
 
     const params = useParams()
     const [productList, setProductList] = useState([])
-    // console.log(params.searchtext)
-    console.log('productttttt',productList)
 
     const fetchProductList = async () => {
         var res = await postData('userinterface/userinterface_user_search', { searchtext: params.searchtext })

@@ -26,7 +26,6 @@ export default function ShowTwoAds() {
     useEffect(function () {
         fetchAds()
     }, [])
-    console.log('adds',ads)
 
     // const ads=[{images:'s.webp'},{images:'v.webp'}]
 

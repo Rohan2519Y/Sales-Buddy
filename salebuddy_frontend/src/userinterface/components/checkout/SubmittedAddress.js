@@ -3,7 +3,7 @@ import { useTheme } from '@mui/material/styles'
 import { useEffect, useState } from 'react'
 import UpdateAddress from '../UpdateAddress'
 import { useParams } from 'react-router'
-export default function SubmittedAddress({ userAddress, fetchUserAddress, setIndex, index }) {
+export default function SubmittedAddress({ userAddress, fetchUserAddress, setIndex, index,addressId,setAddressId }) {
 
     const theme = useTheme()
     const md = useMediaQuery('(max-width:1300px)')
@@ -14,7 +14,6 @@ export default function SubmittedAddress({ userAddress, fetchUserAddress, setInd
 
     const [addressOpen, setAddressOpen] = useState(false)
     const [addressSub, setAddressSub] = useState('')
-    const [addressId, setAddressId] = useState(null)
     const params = useParams()
 
     const handleChangeAddress = (item) => {
@@ -25,6 +24,7 @@ export default function SubmittedAddress({ userAddress, fetchUserAddress, setInd
 
     useEffect(function () {
         fetchUserAddress()
+        setAddressId(userAddress[index].addressid)
     }, [addressOpen,index])
 
     return (<>

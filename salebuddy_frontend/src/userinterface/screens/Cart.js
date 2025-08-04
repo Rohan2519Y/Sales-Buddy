@@ -31,7 +31,6 @@ export default function Cart() {
     try {
         const product = JSON.parse(localStorage.getItem('cart'))
         productData = Object.values(product)
-        console.log('productdata',productData)
     }
     catch (e) { }
     return (<>

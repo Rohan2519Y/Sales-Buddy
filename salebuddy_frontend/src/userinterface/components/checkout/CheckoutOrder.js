@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useRazorpay, RazorpayOrderOptions } from "react-razorpay";
 import { postData, serverURL } from '../../../backendservices/FetchNodeServices';
 import { useNavigate } from 'react-router';
+import zIndex from '@mui/material/styles/zIndex';
 export default function CheckoutOrder({ status, productData, handleSubmit, userAddress, userData, index }) {
 
     const theme = useTheme();
@@ -34,11 +35,7 @@ export default function CheckoutOrder({ status, productData, handleSubmit, userA
         const userMobile = keys[0]
         userData = user[userMobile][index] || {}  
 
-        // console.log('Userjson',userJson)
-        // console.log('user',user)
     } catch (e) { }
-
-    // console.log('useerdata',userData)
 
     var productData = []
     var productkey = 0
@@ -87,7 +84,7 @@ export default function CheckoutOrder({ status, productData, handleSubmit, userA
             description: "Test Transaction",
             //order_id: "order_9A33XWu170gUtm", // Generate order_id on server
             handler: async (response) => {
-                console.log(response);
+                // console.log(response);
                 const transactionid = response.razorpay_payment_id;
                 //alert("Payment Successful!");
                 var d = new Date();
@@ -104,7 +101,6 @@ export default function CheckoutOrder({ status, productData, handleSubmit, userA
                     transactionid: transactionid
                 }
                 var res = await postData('orders/orders_submit', body)
-                console.log('bodyyyyyyyyyy', body)
                 if (res.status) {
                     var bdy = {
                         orderid: res.orderid,
@@ -144,7 +140,7 @@ export default function CheckoutOrder({ status, productData, handleSubmit, userA
         razorpayInstance.open();
     }
     return (<>
-        <div style={{ width: '100%', position: md ? '' : 'sticky', top: md ? '' : 50, display: 'flex', justifyContent: md ? 'center' : '', marginBottom: md ? 30 : '' }}>
+        <div style={{ width: '100%',  display: 'flex', justifyContent: md ? 'center' : '',zIndex:20 }}>
             <div style={{ width: md ? '95%' : '65%', background: ' #ffffff', minHeight: discount ? 315 : 260, marginLeft: md ? '' : 15, borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 30, marginTop: matches ? 30 : '' }}>
                 <div style={{ width: '90%', height: '85%', }}>
                     <div style={{ width: '100%', height: 35, fontSize: md ? '110%' : '120%', fontWeight: 700, }}>
