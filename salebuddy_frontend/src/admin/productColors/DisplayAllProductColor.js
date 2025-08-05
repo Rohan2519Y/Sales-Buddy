@@ -1,12 +1,12 @@
 import { Button, FormControl, Grid2, InputLabel, MenuItem, Select, TextField, FormHelperText } from "@mui/material"
 import { postData } from "../../backendservices/FetchNodeServices"
 import MaterialTable from "@material-table/core";
+import { useStyles } from "./DisplayProductColorCss";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import { getData, serverURL } from "../../backendservices/FetchNodeServices";
-import { useStyles } from "./DisplayProductColorCss";
 
 export default function DisplayAllColours() {
 

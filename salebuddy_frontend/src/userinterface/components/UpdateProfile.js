@@ -43,7 +43,7 @@ export default function UpdateProfile({ open, setOpen, openOtp, setOpenOtp, otpV
         if (open) {
             var res = await postData('userinterface/userinterface_fetch_user_by_mobile', { mobileno: mobileNo })
             setUserList(res.data)
-            if (res.result) {
+            if (res.data) {
                 if (res.data.emailid?.length > 0) {
                     setEmail(res.data.emailid)
                 }

@@ -391,7 +391,7 @@ router.post('/update_user', function (req, res, next) {
     }
 });
 
-router.post('/userinterface_fetch_orders', function (req, res, next) {
+router.post('/userinterface_fetch_orders_by_mobile', function (req, res, next) {
     try {
         pool.query("SELECT P.*, B.*, S.*, PC.*, PV.*, PD.*, O.*, D.* FROM products P, brands B, services S, productcolors PC, productvarients PV, productdetails PD,orders O, orderdetails D where P.productid=PD.productid and B.brandid=PD.brandId and S.serviceid=PD.serviceid and PC.productcolorid=Pd.productcolorid  and PV.productvarientid=pd.productvarientid and O.orderid=D.orderid and PD.productdetailsid=D.productdetailsid and O.mobileno=?", [req.body.mobileno], function (error, result) {
             if (error) {
@@ -408,5 +408,57 @@ router.post('/userinterface_fetch_orders', function (req, res, next) {
         res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
     }
 });
+
+router.get('/userinterface_fetch_orders', function (req, res, next) {
+    try {
+        pool.query("SELECT P.*, B.*, S.*, PC.*, PV.*, PD.*, O.*, D.* FROM products P, brands B, services S, productcolors PC, productvarients PV, productdetails PD,orders O, orderdetails D where P.productid=PD.productid and B.brandid=PD.brandId and S.serviceid=PD.serviceid and PC.productcolorid=Pd.productcolorid  and PV.productvarientid=pd.productvarientid and O.orderid=D.orderid and PD.productdetailsid=D.productdetailsid", function (error, result) {
+            if (error) {
+                console.log(error)
+                res.status(200).json({ status: false, message: 'Database Error,Pls Contact Backend Team' })
+            }
+            else {
+                res.status(200).json({ status: true, message: 'Success..', data: result })
+            }
+        })
+    }
+    catch (e) {
+        res.status(200).json({ status: false, message: 'Critical Error,Pls Contact Server Administrator' })
+    }
+});
+
+router.post('/userinterface_fetch_orders_by_date', function (req, res, next) {
+    console.log(req.body.startdate, req.body.enddate)
+    try {
+        pool.query(
+            `SELECT P.*, B.*, S.*, PC.*, PV.*, PD.*, O.*, D.*
+             FROM products P, brands B, services S, productcolors PC, productvarients PV, productdetails PD, orders O, orderdetails D
+             WHERE P.productid = PD.productid
+               AND B.brandid = PD.brandId
+               AND S.serviceid = PD.serviceid
+               AND PC.productcolorid = PD.productcolorid
+               AND PV.productvarientid = PD.productvarientid
+               AND O.orderid = D.orderid
+               AND PD.productdetailsid = D.productdetailsid
+               AND O.orderdate ${req.body.orderdate ? '= ?' : 'BETWEEN ? AND ?'}
+            `,
+            req.body.orderdate
+                ? [req.body.orderdate]
+                : [req.body.startdate, req.body.enddate],
+            function (error, result) {
+                if (error) {
+                    console.log(error);
+                    res.status(200).json({ status: false, message: 'Database Error' });
+                } else {
+                    console.log(result)
+                    res.status(202).json({ status: true, message: 'Success', data: result });
+                }
+            }
+        );
+    } catch (e) {
+        console.log(e);
+        res.status(203).json({ status: false, message: 'Critical Error' });
+    }
+});
+
 
 module.exports = router;

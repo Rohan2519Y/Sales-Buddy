@@ -31,6 +31,7 @@ import DisplayAllMorePicture from "../../admin/morepictures/DisplayAllMorePictur
 import DisplayAllAds from '../ads/DisplayAllAds';
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 import { useNavigate } from 'react-router';
+import DisplayAllOrders from '../orders/DisplayAllOrders';
 export default function Dashboard() {
 
     const navigate = useNavigate()
@@ -67,6 +68,15 @@ export default function Dashboard() {
                                                 <img src='/dashboard.png' style={{ height: 30 }} />
                                             </ListItemIcon>
                                             <ListItemText primary='Dashboard' />
+                                        </ListItemButton>
+                                    </ListItem>
+
+                                    <ListItem disablePadding>
+                                        <ListItemButton onClick={() => navigate('/dashboard/displayallorders')}>
+                                            <ListItemIcon>
+                                                <img src='/package.png' style={{ height: 30 }} />
+                                            </ListItemIcon>
+                                            <ListItemText primary='Orders' />
                                         </ListItemButton>
                                     </ListItem>
                                    
@@ -165,6 +175,7 @@ export default function Dashboard() {
                         <Route element={<ProductDetailsInterface />} path="/productdetailsinterface" />
                         <Route element={<MorePictureInterface />} path="/morepictureinterface" />
                         <Route element={<AdsInterface />} path="/adsinterface" />
+                        <Route element={<DisplayAllOrders />} path="/displayallorders" />
                         <Route element={<DisplayAllServices />} path="/displayallservices" />
                         <Route element={<DisplayAllProducts />} path="/displayallproducts" />
                         <Route element={<DisplayAllBrands />} path="/displayallbrands" />

@@ -27,7 +27,7 @@ export default function OrderHistory() {
 
     const [orderHistory, setOrderHistory] = useState([])
     const fetchOrderHistory = async () => {
-        var res = await postData('userinterface/userinterface_fetch_orders', { mobileno })
+        var res = await postData('userinterface/userinterface_fetch_orders_by_mobile', { mobileno })
         setOrderHistory(res.data)
     }
 
