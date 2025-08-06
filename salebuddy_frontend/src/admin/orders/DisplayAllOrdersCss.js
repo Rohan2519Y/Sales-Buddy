@@ -21,7 +21,8 @@ const useStyles = makeStyles(() => ({
         borderRadius: 5,
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-evenly'
+        justifyContent: 'space-evenly',
+        marginBottom:20
     },
     datebox: {
         width:'45%',

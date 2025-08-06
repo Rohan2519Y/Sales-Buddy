@@ -56,15 +56,15 @@ export default function DisplayAllOrders() {
         <div className={classes.root}>
             <div className={classes.buttonbox}>
                 <Button onClick={() => { setClickDate(''); setStart(''); setEnd(''); setOrderDate([]); fetchAllOrders() }}
-                    style={{ width: '15%', height: '100%', background: '#12daa8', border: '1px solid #000000', color: '#000000', fontWeight: 600 }}>
+                    style={{ width: '15%', height: '100%', background: '#3498db', border: '1px solid #000000', color: '#ffffff', fontWeight: 550,textShadow: '1px 1px 3px rgba(0, 0, 0, 0.5)',boxShadow:'2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
                     All
                 </Button>
                 <Button onClick={() => { setClickDate(today); setStart(''); setEnd('') }}
-                    style={{ width: '15%', height: '100%', background: '#12daa8', border: '1px solid #000000', color: '#000000', fontWeight: 600 }}>
+                    style={{ width: '15%', height: '100%', background: '#3498db', border: '1px solid #000000', color: '#ffffff', fontWeight: 550,textShadow: '1px 1px 3px rgba(0, 0, 0, 0.5)',boxShadow:'2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
                     Today
                 </Button>
                 <Button onClick={() => { setClickDate(yesterday); setStart(''); setEnd('') }}
-                    style={{ width: '15%', height: '100%', background: '#12daa8', border: '1px solid #000000', color: '#000000', fontWeight: 600 }}>
+                    style={{ width: '15%', height: '100%', background: '#3498db', border: '1px solid #000000', color: '#ffffff', fontWeight: 550,textShadow: '1px 1px 3px rgba(0, 0, 0, 0.5)',boxShadow:'2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
                     Yesterday
                 </Button>
                 <div className={classes.datebox}>
@@ -84,8 +84,8 @@ export default function DisplayAllOrders() {
                         setClickDate('')
                         setOrderDate([])
                         setSearchClicked(true)
-                    }} style={{ width: '10%', height: '95%', color: '#000000', fontWeight: 650, display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '120%', background: '#12daa8', border: '1px solid #000000', borderRadius: 10, cursor: 'pointer' }}>
-                        <SearchIcon />
+                    }} style={{ width: '10%', height: '95%', color: '#000000', fontWeight: 650, display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '120%', background: '#3498db', border: '1px solid #000000', borderRadius: 10, cursor: 'pointer',boxShadow:'2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
+                        <SearchIcon style={{color:'#ffffff'}}/>
                     </div>
                 </div>
             </div>
@@ -103,8 +103,7 @@ export default function DisplayAllOrders() {
                         { title: 'Payment', field: 'paymentstatus', cellStyle: { maxWidth: 30 }, headerStyle: { maxWidth: 30 } },
                         { title: 'Product', field: 'productname', cellStyle: { minWidth: 300 }, headerStyle: { minWidth: 300 } },
                     ]}
-                    data={orderDate.length === 0 ? orderList : orderDate}
-                />
+                    data={orderDate.length === 0 ? orderList : orderDate} />
             </div>
         </div>
     )

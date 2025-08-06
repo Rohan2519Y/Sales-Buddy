@@ -1,7 +1,7 @@
 const initialState = {
        cart: {},
-       user: {}
-
+       user: {},
+       admin: {}
 }
 
 export default function RootReducer(state = initialState, action) {
@@ -26,8 +26,16 @@ export default function RootReducer(state = initialState, action) {
                      state.user = {}
                      localStorage.removeItem('user')
                      return { cart: state.cart, user: state.user }
+              case "ADMIN_LOGIN":
+                     state.admin[action.payload[0]] = action.payload[1]
+                     localStorage.setItem('admin', JSON.stringify(state.admin))
+                     return { cart: state.cart, user: state.user, admin: state.admin }
+              case "ADMIN_LOGOUT":
+                     state.admin = {}
+                     localStorage.removeItem('admin')
+                     return { cart: state.cart, user: state.user, admin: state.admin }
               default:
-                     return { cart: state.cart, user: state.user }
+                     return { cart: state.cart, user: state.user, admin: state.admin }
        }
 
 }
