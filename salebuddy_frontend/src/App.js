@@ -5,8 +5,6 @@ import ProductList from "./userinterface/screens/ProductList";
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 import MainProductInfoComponent from "./userinterface/screens/MainProductInfoComponent";
 import Cart from "./userinterface/screens/Cart";
-import UserLogin from "./userinterface/components/user/UserLogin"
-import OTPComponent from "./userinterface/components/user/OTPComponent";
 import Checkout from "./userinterface/screens/Checkout"
 import OrderHistory from "./userinterface/screens/OrderHistory";
 function App() {

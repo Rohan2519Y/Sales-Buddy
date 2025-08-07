@@ -32,161 +32,196 @@ import DisplayAllAds from '../ads/DisplayAllAds';
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 import { useNavigate } from 'react-router';
 import DisplayAllOrders from '../orders/DisplayAllOrders';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 export default function Dashboard() {
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
-    return (
-        <div>
-            <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="static">
-                    <Toolbar variant="dense">
-                        <Typography variant="h6" color="inherit" component="div">
-                            Sales Buddy
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
-            </Box>
-            <Grid2 container spacing={2} style={{ marginTop: 10 }}>
-                <Grid2 size={2}>
-                    <Paper style={{ width: "80%", height: 'auto', margin: 20 }}>
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
-                                <img src={`${serverURL}/images/varun.jpeg`} style={{ width: 90, height: 90, borderRadius: 45 }} />
-                            </div>
-                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 10, flexDirection: 'column' }}>
-                                <div style={{ fontSize: 14, fontWeight: 'bold' }}>Varun Dhawan</div>
-                                <div style={{ fontSize: 12, fontWeight: 700, marginTop: 4 }}>varundhawan@gmail.com</div>
-                                <div style={{ fontSize: 10, fontWeight: 700, marginTop: 4 }}>9300003085</div>
-                            </div>
-                            <Divider ></Divider>
-                            <div style={{ padding: 5 }}>
-                                <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                                    <ListItem disablePadding>
-                                        <ListItemButton onClick={() => navigate('/dashboard/displayallservices')}>
-                                            <ListItemIcon>
-                                                <img src='/dashboard.png' style={{ height: 30 }} />
-                                            </ListItemIcon>
-                                            <ListItemText primary='Dashboard' />
-                                        </ListItemButton>
-                                    </ListItem>
+    useEffect(() => {
+        const admin = JSON.parse(localStorage.getItem('admin'))
+        if (!admin || !admin.emailid) {
+            navigate('/signin')
+        }
+    }, [])
 
-                                    <ListItem disablePadding>
-                                        <ListItemButton onClick={() => navigate('/dashboard/displayallorders')}>
-                                            <ListItemIcon>
-                                                <img src='/package.png' style={{ height: 30 }} />
-                                            </ListItemIcon>
-                                            <ListItemText primary='Orders' />
-                                        </ListItemButton>
-                                    </ListItem>
-                                   
-                                    <ListItem disablePadding>
-                                        <ListItemButton onClick={() => navigate('/dashboard/displayallservices')}>
-                                            <ListItemIcon>
-                                                <img src='/ticket.png' style={{ height: 30 }} />
-                                            </ListItemIcon>
-                                            <ListItemText primary='Services' />
-                                        </ListItemButton>
-                                    </ListItem>
-                                    
-                                    <ListItem disablePadding>
-                                        <ListItemButton onClick={() => navigate('/dashboard/displayallbrands')}>
-                                            <ListItemIcon>
-                                                <img src='/brands.png' style={{ height: 30 }} />
-                                            </ListItemIcon>
-                                            <ListItemText primary='Brands' />
-                                        </ListItemButton>
-                                    </ListItem>
-                                    
-                                    <ListItem disablePadding>
-                                        <ListItemButton onClick={() => navigate('/dashboard/displayallproducts')}>
-                                            <ListItemIcon>
-                                                <img src='/user-interface.png' style={{ height: 30 }} />
-                                            </ListItemIcon>
-                                            <ListItemText primary='Products' />
-                                        </ListItemButton>
-                                    </ListItem>
-                                    
-                                    <ListItem disablePadding>
-                                        <ListItemButton onClick={() => navigate('/dashboard/displayallproductcolor')}>
-                                            <ListItemIcon>
-                                                <img src='/colors.png' style={{ height: 30 }} />
-                                            </ListItemIcon>
-                                            <ListItemText primary='Colors' />
-                                        </ListItemButton>
-                                    </ListItem>
-                                   
-                                    <ListItem disablePadding>
-                                        <ListItemButton onClick={() => navigate('/dashboard/displayallproductvarient')}>
-                                            <ListItemIcon>
-                                                <img src='/variants.png' style={{ height: 30 }} />
-                                            </ListItemIcon>
-                                            <ListItemText primary='Variants' />
-                                        </ListItemButton>
-                                    </ListItem>
-                                  
-                                    <ListItem disablePadding>
-                                        <ListItemButton onClick={() => navigate('/dashboard/displayallproductdetails')}>
-                                            <ListItemIcon>
-                                                <img src='/products-details.png' style={{ height: 30 }} />
-                                            </ListItemIcon>
-                                            <ListItemText primary='Details' />
-                                        </ListItemButton>
-                                    </ListItem>
-                                    
-                                    <ListItem disablePadding>
-                                        <ListItemButton onClick={() => navigate('/dashboard/morepictureinterface')}>
-                                            <ListItemIcon>
-                                                <img src='/images.png' style={{ height: 30 }} />
-                                            </ListItemIcon>
-                                            <ListItemText primary='More Picture' />
-                                        </ListItemButton>
-                                    </ListItem>
-                                    
-                                    <ListItem disablePadding>
-                                        <ListItemButton onClick={() => navigate('/dashboard/adsinterface')}>
-                                            <ListItemIcon>
-                                                <img src='/slideshow.png' style={{ height: 30 }} />
-                                            </ListItemIcon>
-                                            <ListItemText primary='Ads' />
-                                        </ListItemButton>
-                                    </ListItem>
-                                   
-                                    <ListItem disablePadding>
-                                        <ListItemButton>
-                                            <ListItemIcon>
-                                                <img src='/switch.png' style={{ height: 30 }} />
-                                            </ListItemIcon>
-                                            <ListItemText primary='Logout' />
-                                        </ListItemButton>
-                                    </ListItem>
-                                </List>
+    const handleLogout = () => {
+        localStorage.removeItem('admin')
+        dispatch({ type: 'ADMIN_LOGOUT' })
+        navigate('/signin')
+    };
+
+    const admin = localStorage.getItem('admin')
+    let adminData
+    let adminInfo
+    try {
+        if (admin) {
+            adminData = JSON.parse(admin)
+            adminInfo = adminData.emailid[0]
+            console.log(adminInfo)
+        }
+    }
+    catch (e) { }
+
+    const showDashboard = () => {
+        return (
+            <div>
+                <Box sx={{ flexGrow: 1 }}>
+                    <AppBar position="static">
+                        <Toolbar variant="dense">
+                            <Typography variant="h6" color="inherit" component="div">
+                                Sales Buddy
+                            </Typography>
+                        </Toolbar>
+                    </AppBar>
+                </Box>
+                <Grid2 container spacing={2} style={{ marginTop: 10 }}>
+                    <Grid2 size={2}>
+                        <Paper style={{ width: "80%", height: 'auto', margin: 20 }}>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
+                                    <img src={`${serverURL}/images/${adminInfo.picture}`} style={{ width: 90, height: 90, borderRadius: 45 }} />
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 10, flexDirection: 'column' }}>
+                                    <div style={{ fontSize: 14, fontWeight: 'bold' }}>{adminInfo?.adminname}</div>
+                                    <div style={{ fontSize: 12, fontWeight: 700, marginTop: 4 }}>{adminInfo?.emailid}</div>
+                                    <div style={{ fontSize: 10, fontWeight: 700, marginTop: 4 }}>{adminInfo?.mobileno}</div>
+                                </div>
+                                <Divider ></Divider>
+                                <div style={{ padding: 5 }}>
+                                    <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                                        <ListItem disablePadding>
+                                            <ListItemButton onClick={() => navigate('/dashboard/displayallservices')}>
+                                                <ListItemIcon>
+                                                    <img src='/dashboard.png' style={{ height: 30 }} />
+                                                </ListItemIcon>
+                                                <ListItemText primary='Dashboard' />
+                                            </ListItemButton>
+                                        </ListItem>
+
+                                        <ListItem disablePadding>
+                                            <ListItemButton onClick={() => navigate('/dashboard/displayallorders')}>
+                                                <ListItemIcon>
+                                                    <img src='/package.png' style={{ height: 30 }} />
+                                                </ListItemIcon>
+                                                <ListItemText primary='Orders' />
+                                            </ListItemButton>
+                                        </ListItem>
+
+                                        <ListItem disablePadding>
+                                            <ListItemButton onClick={() => navigate('/dashboard/displayallservices')}>
+                                                <ListItemIcon>
+                                                    <img src='/ticket.png' style={{ height: 30 }} />
+                                                </ListItemIcon>
+                                                <ListItemText primary='Services' />
+                                            </ListItemButton>
+                                        </ListItem>
+
+                                        <ListItem disablePadding>
+                                            <ListItemButton onClick={() => navigate('/dashboard/displayallbrands')}>
+                                                <ListItemIcon>
+                                                    <img src='/brands.png' style={{ height: 30 }} />
+                                                </ListItemIcon>
+                                                <ListItemText primary='Brands' />
+                                            </ListItemButton>
+                                        </ListItem>
+
+                                        <ListItem disablePadding>
+                                            <ListItemButton onClick={() => navigate('/dashboard/displayallproducts')}>
+                                                <ListItemIcon>
+                                                    <img src='/user-interface.png' style={{ height: 30 }} />
+                                                </ListItemIcon>
+                                                <ListItemText primary='Products' />
+                                            </ListItemButton>
+                                        </ListItem>
+
+                                        <ListItem disablePadding>
+                                            <ListItemButton onClick={() => navigate('/dashboard/displayallproductcolor')}>
+                                                <ListItemIcon>
+                                                    <img src='/colors.png' style={{ height: 30 }} />
+                                                </ListItemIcon>
+                                                <ListItemText primary='Colors' />
+                                            </ListItemButton>
+                                        </ListItem>
+
+                                        <ListItem disablePadding>
+                                            <ListItemButton onClick={() => navigate('/dashboard/displayallproductvarient')}>
+                                                <ListItemIcon>
+                                                    <img src='/variants.png' style={{ height: 30 }} />
+                                                </ListItemIcon>
+                                                <ListItemText primary='Variants' />
+                                            </ListItemButton>
+                                        </ListItem>
+
+                                        <ListItem disablePadding>
+                                            <ListItemButton onClick={() => navigate('/dashboard/displayallproductdetails')}>
+                                                <ListItemIcon>
+                                                    <img src='/products-details.png' style={{ height: 30 }} />
+                                                </ListItemIcon>
+                                                <ListItemText primary='Details' />
+                                            </ListItemButton>
+                                        </ListItem>
+
+                                        <ListItem disablePadding>
+                                            <ListItemButton onClick={() => navigate('/dashboard/morepictureinterface')}>
+                                                <ListItemIcon>
+                                                    <img src='/images.png' style={{ height: 30 }} />
+                                                </ListItemIcon>
+                                                <ListItemText primary='More Picture' />
+                                            </ListItemButton>
+                                        </ListItem>
+
+                                        <ListItem disablePadding>
+                                            <ListItemButton onClick={() => navigate('/dashboard/adsinterface')}>
+                                                <ListItemIcon>
+                                                    <img src='/slideshow.png' style={{ height: 30 }} />
+                                                </ListItemIcon>
+                                                <ListItemText primary='Ads' />
+                                            </ListItemButton>
+                                        </ListItem>
+
+                                        <ListItem disablePadding>
+                                            <ListItemButton onClick={handleLogout}>
+                                                <ListItemIcon>
+                                                    <img src='/switch.png' style={{ height: 30 }} />
+                                                </ListItemIcon>
+                                                <ListItemText primary='Logout' />
+                                            </ListItemButton>
+                                        </ListItem>
+                                    </List>
+                                </div>
                             </div>
-                        </div>
-                    </Paper>
+                        </Paper>
+                    </Grid2>
+                    <Grid2 size={10}>
+                        <Routes>
+                            <Route element={<ServicesInterface />} path="/serviceinterface" />
+                            <Route element={<BrandInterface />} path="/brandinterface" />
+                            <Route element={<ProductInterface />} path="/productinterface" />
+                            <Route element={<ProductColorInterface />} path="/productcolorinterface" />
+                            <Route element={<ProductVarientInterface />} path="/productvarientinterface" />
+                            <Route element={<ProductDetailsInterface />} path="/productdetailsinterface" />
+                            <Route element={<MorePictureInterface />} path="/morepictureinterface" />
+                            <Route element={<AdsInterface />} path="/adsinterface" />
+                            <Route element={<DisplayAllOrders />} path="/displayallorders" />
+                            <Route element={<DisplayAllServices />} path="/displayallservices" />
+                            <Route element={<DisplayAllProducts />} path="/displayallproducts" />
+                            <Route element={<DisplayAllBrands />} path="/displayallbrands" />
+                            <Route element={<DisplayAllProductColor />} path="/displayallproductcolor" />
+                            <Route element={<DisplayAllProductVarient />} path="/displayallproductvarient" />
+                            <Route element={<DisplayAllProductDetails />} path="/displayallproductdetails" />
+                            <Route element={<DisplayAllMorePicture />} path="/displayallmorepicture" />
+                            <Route element={<DisplayAllAds />} path="/displayallads" />
+                        </Routes>
+                    </Grid2>
                 </Grid2>
-                <Grid2 size={10}>
-                    <Routes>
-                        <Route element={<ServicesInterface />} path="/serviceinterface" />
-                        <Route element={<BrandInterface />} path="/brandinterface" />
-                        <Route element={<ProductInterface />} path="/productinterface" />
-                        <Route element={<ProductColorInterface />} path="/productcolorinterface" />
-                        <Route element={<ProductVarientInterface />} path="/productvarientinterface" />
-                        <Route element={<ProductDetailsInterface />} path="/productdetailsinterface" />
-                        <Route element={<MorePictureInterface />} path="/morepictureinterface" />
-                        <Route element={<AdsInterface />} path="/adsinterface" />
-                        <Route element={<DisplayAllOrders />} path="/displayallorders" />
-                        <Route element={<DisplayAllServices />} path="/displayallservices" />
-                        <Route element={<DisplayAllProducts />} path="/displayallproducts" />
-                        <Route element={<DisplayAllBrands />} path="/displayallbrands" />
-                        <Route element={<DisplayAllProductColor />} path="/displayallproductcolor" />
-                        <Route element={<DisplayAllProductVarient />} path="/displayallproductvarient" />
-                        <Route element={<DisplayAllProductDetails />} path="/displayallproductdetails" />
-                        <Route element={<DisplayAllMorePicture />} path="/displayallmorepicture" />
-                        <Route element={<DisplayAllAds />} path="/displayallads" />
-                    </Routes>
-                </Grid2>
-            </Grid2>
-        </div>
-    );
+            </div>
+        );
+    }
+
+    return (<>
+        {showDashboard()}
+    </>)
+
 }

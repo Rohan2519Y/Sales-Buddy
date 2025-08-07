@@ -10,6 +10,8 @@ import { useState } from 'react';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import { postData } from '../../backendservices/FetchNodeServices';
+import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -36,51 +38,47 @@ export default function SignIn(props) {
   const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
-  const [emailId,setEmailId]=useState('')
-  const [password,setPassword]=useState('')
-  
-
-  
-  const handleSubmit = async() => {
-    var body={emailid:emailId,password}
-    var res=await postData('admin/chk_admin_login',body)
-    if(res.status)
-    {
-      alert('dashboard')
+  const [emailId, setEmailId] = useState('')
+  const [password, setPassword] = useState('')
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const handleSubmit = async () => {
+    var body = { emailid: emailId, password }
+    var res = await postData('admin/chk_admin_login', body)
+    console.log('result',res.data)
+    if (res.status) {
+      // alert('dashboard')
+      dispatch({ type: 'ADMIN_LOGIN', payload: ['emailid', emailId] })
+      localStorage.setItem('admin', JSON.stringify({ emailid: res.data }))
+      navigate('/dashboard/displayallorders')
     }
-    else
-    {alert(res.message)}
-
-   
-
-    
+    else { alert(res.message) }
   };
 
-  
 
   return (
-    <div style={{height:'100vh',display:'flex',width:'100vw',justifyContent:'center',alignItem:'center'}}>
-    <div style={{display:'flex',justifyContent:'center',alignItems:'center',width:'40%'}}>
+    <div style={{ height: '100vh', display: 'flex', width: '100vw', justifyContent: 'center', alignItem: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '40%' }}>
 
-     
-       
-         
+
+
+
         <Card variant="outlined">
-           <div>
-                    <img src="/logo.png"  style={{width:'30%'}} />
-                </div>
-           
+          <div>
+            <img src="/logo.png" style={{ width: '30%' }} />
+          </div>
+
           <Typography
             component="h1"
             variant="h4"
             sx={{ width: '100%', fontSize: '1.6vw' }}
           >
-          Admin Login
+            Admin Login
           </Typography>
           <Box
-  
-  
-  
+
+
+
             sx={{
               display: 'flex',
               flexDirection: 'column',
@@ -91,48 +89,48 @@ export default function SignIn(props) {
             <FormControl>
               <FormLabel htmlFor="email">Email</FormLabel>
               <TextField
-                onChange={(e)=>setEmailId(e.target.value)}
+                onChange={(e) => setEmailId(e.target.value)}
                 placeholder="your@email.com/9301123085"
-                
+
                 autoFocus
-                
+
                 fullWidth
                 variant="outlined"
-                
+
               />
             </FormControl>
             <FormControl>
               <FormLabel htmlFor="password">Password</FormLabel>
               <TextField
-               
-               onChange={(e)=>setPassword(e.target.value)}
-               
+
+                onChange={(e) => setPassword(e.target.value)}
+
                 placeholder="••••••"
                 type="password"
-               
+
                 autoComplete="current-password"
                 autoFocus
-                
+
                 fullWidth
                 variant="outlined"
-                
+
               />
             </FormControl>
-           
+
             <Button
-              
+
               fullWidth
               variant="contained"
               onClick={handleSubmit}
             >
               Sign in
             </Button>
-            
+
           </Box>
-         
+
         </Card>
-        </div>
- 
+      </div>
+
     </div>
   );
 }
