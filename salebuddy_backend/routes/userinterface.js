@@ -427,29 +427,42 @@ router.get('/userinterface_fetch_orders', function (req, res, next) {
 });
 
 router.post('/userinterface_fetch_orders_by_date', function (req, res, next) {
-    console.log(req.body.startdate, req.body.enddate)
     try {
+        // Helper to convert YYYY/M/D -> YYYY-MM-DD
+        const formatDate = (dateStr) => {
+            if (!dateStr) return null;
+            const d = new Date(dateStr);
+            const yyyy = d.getFullYear();
+            const mm = String(d.getMonth() + 1).padStart(2, '0');
+            const dd = String(d.getDate()).padStart(2, '0');
+            return `${yyyy}-${mm}-${dd}`;
+        };
+
+        let orderdate = formatDate(req.body.orderdate);
+        let startdate = formatDate(req.body.startdate);
+        let enddate = formatDate(req.body.enddate);
+
+        const sql = `
+            SELECT P.*, B.*, S.*, PC.*, PV.*, PD.*, O.*, D.*
+            FROM products P
+            JOIN productdetails PD ON P.productid = PD.productid
+            JOIN brands B ON B.brandid = PD.brandId
+            JOIN services S ON S.serviceid = PD.serviceid
+            JOIN productcolors PC ON PC.productcolorid = PD.productcolorid
+            JOIN productvarients PV ON PV.productvarientid = PD.productvarientid
+            JOIN orderdetails D ON PD.productdetailsid = D.productdetailsid
+            JOIN orders O ON O.orderid = D.orderid
+            WHERE ${orderdate ? 'DATE(O.orderdate) = ?' : 'DATE(O.orderdate) BETWEEN ? AND ?'}
+        `;
+
         pool.query(
-            `SELECT P.*, B.*, S.*, PC.*, PV.*, PD.*, O.*, D.*
-             FROM products P, brands B, services S, productcolors PC, productvarients PV, productdetails PD, orders O, orderdetails D
-             WHERE P.productid = PD.productid
-               AND B.brandid = PD.brandId
-               AND S.serviceid = PD.serviceid
-               AND PC.productcolorid = PD.productcolorid
-               AND PV.productvarientid = PD.productvarientid
-               AND O.orderid = D.orderid
-               AND PD.productdetailsid = D.productdetailsid
-               AND O.orderdate ${req.body.orderdate ? '= ?' : 'BETWEEN ? AND ?'}
-            `,
-            req.body.orderdate
-                ? [req.body.orderdate]
-                : [req.body.startdate, req.body.enddate],
+            sql,
+            orderdate ? [orderdate] : [startdate, enddate],
             function (error, result) {
                 if (error) {
                     console.log(error);
                     res.status(200).json({ status: false, message: 'Database Error' });
                 } else {
-                    console.log(result)
                     res.status(202).json({ status: true, message: 'Success', data: result });
                 }
             }
@@ -459,6 +472,7 @@ router.post('/userinterface_fetch_orders_by_date', function (req, res, next) {
         res.status(203).json({ status: false, message: 'Critical Error' });
     }
 });
+
 
 
 module.exports = router;

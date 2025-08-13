@@ -12,7 +12,6 @@ export default function DisplayAllOrders() {
     const [start, setStart] = useState('')
     const [end, setEnd] = useState('')
     const [clickDate, setClickDate] = useState('')
-    const [searchClicked, setSearchClicked] = useState(false)
 
     const fetchAllOrders = async () => {
         const res = await getData('userinterface/userinterface_fetch_orders')
@@ -38,13 +37,6 @@ export default function DisplayAllOrders() {
         if (clickDate) fetchAllOrdersDate()
     }, [clickDate])
 
-    useEffect(() => {
-        if (searchClicked) {
-            fetchAllOrdersDate(true)
-            setSearchClicked(false)
-        }
-    }, [searchClicked])
-
     const date = new Date()
     const today = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
 
@@ -56,15 +48,15 @@ export default function DisplayAllOrders() {
         <div className={classes.root}>
             <div className={classes.buttonbox}>
                 <Button onClick={() => { setClickDate(''); setStart(''); setEnd(''); setOrderDate([]); fetchAllOrders() }}
-                    style={{ width: '15%', height: '100%', background: '#3498db', border: '1px solid #000000', color: '#ffffff', fontWeight: 550,textShadow: '1px 1px 3px rgba(0, 0, 0, 0.5)',boxShadow:'2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
+                    style={{ width: '15%', height: '100%', background: '#3498db', border: '1px solid #000000', color: '#ffffff', fontWeight: 550, textShadow: '1px 1px 3px rgba(0, 0, 0, 0.5)', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
                     All
                 </Button>
                 <Button onClick={() => { setClickDate(today); setStart(''); setEnd('') }}
-                    style={{ width: '15%', height: '100%', background: '#3498db', border: '1px solid #000000', color: '#ffffff', fontWeight: 550,textShadow: '1px 1px 3px rgba(0, 0, 0, 0.5)',boxShadow:'2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
+                    style={{ width: '15%', height: '100%', background: '#3498db', border: '1px solid #000000', color: '#ffffff', fontWeight: 550, textShadow: '1px 1px 3px rgba(0, 0, 0, 0.5)', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
                     Today
                 </Button>
                 <Button onClick={() => { setClickDate(yesterday); setStart(''); setEnd('') }}
-                    style={{ width: '15%', height: '100%', background: '#3498db', border: '1px solid #000000', color: '#ffffff', fontWeight: 550,textShadow: '1px 1px 3px rgba(0, 0, 0, 0.5)',boxShadow:'2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
+                    style={{ width: '15%', height: '100%', background: '#3498db', border: '1px solid #000000', color: '#ffffff', fontWeight: 550, textShadow: '1px 1px 3px rgba(0, 0, 0, 0.5)', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
                     Yesterday
                 </Button>
                 <div className={classes.datebox}>
@@ -81,11 +73,11 @@ export default function DisplayAllOrders() {
                         setEnd(format)
                     }} type="date" style={{ width: '35%', height: '95%', border: '1px solid #000000', borderRadius: 5, fontWeight: 650 }} />
                     <div onClick={() => {
-                        setClickDate('')
-                        setOrderDate([])
-                        setSearchClicked(true)
-                    }} style={{ width: '10%', height: '95%', color: '#000000', fontWeight: 650, display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '120%', background: '#3498db', border: '1px solid #000000', borderRadius: 10, cursor: 'pointer',boxShadow:'2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
-                        <SearchIcon style={{color:'#ffffff'}}/>
+                        if (start && end) {
+                            fetchAllOrdersDate(true)
+                        }
+                    }} style={{ width: '10%', height: '95%', color: '#000000', fontWeight: 650, display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '120%', background: '#3498db', border: '1px solid #000000', borderRadius: 10, cursor: 'pointer', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
+                        <SearchIcon style={{ color: '#ffffff' }} />
                     </div>
                 </div>
             </div>
