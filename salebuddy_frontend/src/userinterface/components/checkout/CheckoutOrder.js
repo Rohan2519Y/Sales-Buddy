@@ -71,7 +71,6 @@ export default function CheckoutOrder({ status, productData, handleSubmit, userA
     // let price = productData.map(item => item.price).join(',')
     // let offerprice = productData.map(item => item.offerprice).join(',')
     // let membershipprice = productData.map(item => item.membershipprice).join(',')
-    // let qty = productData.map(item => item.qty).join(',')
 
     const handleRazorPayment = async () => {
         const options = {
