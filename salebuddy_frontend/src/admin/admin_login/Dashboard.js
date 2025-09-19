@@ -81,7 +81,7 @@ export default function Dashboard() {
                         <Paper style={{ width: "80%", height: 'auto', margin: 20 }}>
                             <div style={{ display: 'flex', flexDirection: 'column' }}>
                                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
-                                    <img src={`${serverURL}/images/${adminInfo.picture}`} style={{ width: 90, height: 90, borderRadius: 45 }} />
+                                    <img src={`${serverURL}/images/${adminInfo?.picture}`} style={{ width: 90, height: 90, borderRadius: 45 }} />
                                 </div>
                                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 10, flexDirection: 'column' }}>
                                     <div style={{ fontSize: 14, fontWeight: 'bold' }}>{adminInfo?.adminname}</div>
