@@ -36,7 +36,7 @@ export default function ProductRamComponent({ productid,ram, defaultRam }) {
             <div style={{ width: matches ? '90%' : md ? '95%' : '80%', height: 'auto', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ color: ' #ffffff', fontSize: '90%', marginBottom: 15 }}>RAM</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', }}>
-                    {ram.map((item) => (
+                    {ram?.map((item) => (
                         <div
                             onClick={() => handleClick(item.productstorage, item.productvarientid)}
                             onMouseEnter={(e) => {

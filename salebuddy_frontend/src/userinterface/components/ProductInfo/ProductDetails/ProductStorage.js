@@ -36,7 +36,7 @@ export default function ProductStorageComponent({ productid,storage, defaultStor
             <div style={{ width:matches?'90%':md?'95%': '80%', height: 'auto', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ color: ' #ffffff', fontSize: '90%', marginBottom: 15 }}>Internal Storage</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', }}>
-                    {storage.map((item) => (
+                    {storage?.map((item) => (
                         <div
                             onClick={() => handleClick(item.productstorage, item.productvarientid)}
                             onMouseEnter={(e) => {
